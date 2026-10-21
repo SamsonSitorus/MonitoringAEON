@@ -18,14 +18,10 @@ export const App: React.FC = () => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [activeTab, setActiveTab] = useState<string>('dashboard');
   const [initLoading, setInitLoading] = useState<boolean>(true);
-  const [taskNavParams, setTaskNavParams] = useState<{
-    initialCameraId?: string;
-    initialDate?: string;
-    autoOpenBatchModal?: boolean;
-  } | null>(null);
+  const [taskSearchParam, setTaskSearchParam] = useState<string>('');
 
-  const handleNavigateToTasks = (params?: { initialCameraId?: string; initialDate?: string; autoOpenBatchModal?: boolean }) => {
-    setTaskNavParams(params || null);
+  const handleNavigateToTasks = (cameraName?: string) => {
+    setTaskSearchParam(cameraName || '');
     setActiveTab('task-management');
   };
 
@@ -117,12 +113,7 @@ export const App: React.FC = () => {
               {activeTab === 'cameras' && <CameraManagementView />}
               {activeTab === 'form-builder' && <FormBuilderView />}
               {activeTab === 'task-management' && (
-                <TaskManagementView
-                  initialCameraId={taskNavParams?.initialCameraId}
-                  initialDate={taskNavParams?.initialDate}
-                  autoOpenBatchModal={taskNavParams?.autoOpenBatchModal}
-                  onClearNavParams={() => setTaskNavParams(null)}
-                />
+                <TaskManagementView initialSearch={taskSearchParam} />
               )}
               {activeTab === 'reports' && <ReportsView />}
             </>

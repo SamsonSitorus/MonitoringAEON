@@ -31,7 +31,7 @@ import { Camera, CameraSystem, InspectionRecord, InspectionTask, User } from '..
 
 interface WeeklyProgressMatrixViewProps {
   currentUser: User;
-  onNavigateToTasks?: (params?: { initialCameraId?: string; initialDate?: string; autoOpenBatchModal?: boolean }) => void;
+  onNavigateToTasks?: (cameraName?: string) => void;
 }
 
 interface DayInfo {
@@ -1021,16 +1021,13 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
                     className="btn btn-primary"
                     style={{ padding: '0.4rem 0.85rem', fontSize: '0.78rem', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
                     onClick={() => {
+                      setSelectedCell(null);
                       if (onNavigateToTasks) {
-                        onNavigateToTasks({
-                          initialCameraId: selectedCell.camera.id,
-                          initialDate: selectedCell.day.dateStr,
-                          autoOpenBatchModal: true,
-                        });
+                        onNavigateToTasks(selectedCell.camera.name);
                       }
                     }}
                   >
-                    <Plus size={14} /> Jadwalkan di Manajemen Tugas
+                    <Plus size={14} /> Ke Manajemen Tugas
                   </button>
                 )}
               </div>
@@ -1042,7 +1039,7 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
                   </div>
                   <div style={{ fontWeight: 700, color: '#ffffff', fontSize: '0.98rem' }}>Belum Dilakukan Pengecekan (Belum Ada Jadwal)</div>
                   <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginTop: '6px', maxWidth: '380px', margin: '6px auto 0', lineHeight: 1.5 }}>
-                    Kamera ini belum memiliki penugasan observasi untuk tanggal <strong>{selectedCell.day.fullDateLabel}</strong>. Buka Manajemen Penugasan untuk menjadwalkan tugas dan memilih template formulir.
+                    Kamera ini belum memiliki penugasan observasi untuk tanggal <strong>{selectedCell.day.fullDateLabel}</strong>. Buka Manajemen Penugasan untuk menjadwalkan tugas.
                   </p>
                   {currentUser.role === 'admin' && (
                     <button
@@ -1050,16 +1047,13 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
                       className="btn btn-primary"
                       style={{ marginTop: '1.25rem', padding: '0.55rem 1.25rem', fontSize: '0.84rem', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
                       onClick={() => {
+                        setSelectedCell(null);
                         if (onNavigateToTasks) {
-                          onNavigateToTasks({
-                            initialCameraId: selectedCell.camera.id,
-                            initialDate: selectedCell.day.dateStr,
-                            autoOpenBatchModal: true,
-                          });
+                          onNavigateToTasks(selectedCell.camera.name);
                         }
                       }}
                     >
-                      <Plus size={15} /> Jadwalkan Tugas Sekarang (Buka Manajemen Tugas)
+                      <Plus size={15} /> Buka Halaman Manajemen Tugas
                     </button>
                   )}
                 </div>
@@ -1374,11 +1368,8 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
                       padding: 0,
                     }}
                     onClick={() => {
-                      onNavigateToTasks({
-                        initialCameraId: selectedCell.camera.id,
-                        initialDate: selectedCell.day.dateStr,
-                        autoOpenBatchModal: false,
-                      });
+                      setSelectedCell(null);
+                      onNavigateToTasks(selectedCell.camera.name);
                     }}
                   >
                     Buka di Manajemen Tugas →

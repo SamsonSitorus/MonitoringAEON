@@ -39,17 +39,11 @@ const STANDARD_TIME_SLOTS = [
 ];
 
 interface TaskManagementViewProps {
-  initialCameraId?: string;
-  initialDate?: string;
-  autoOpenBatchModal?: boolean;
-  onClearNavParams?: () => void;
+  initialSearch?: string;
 }
 
 export const TaskManagementView: React.FC<TaskManagementViewProps> = ({
-  initialCameraId,
-  initialDate,
-  autoOpenBatchModal,
-  onClearNavParams,
+  initialSearch,
 }) => {
   const [tasks, setTasks] = useState<InspectionTask[]>([]);
   const [cameras, setCameras] = useState<CameraType[]>([]);
@@ -78,7 +72,7 @@ export const TaskManagementView: React.FC<TaskManagementViewProps> = ({
   const [datePreset, setDatePreset] = useState<'ALL' | 'TODAY' | 'THIS_WEEK' | 'THIS_MONTH' | 'CUSTOM'>('ALL');
   const [customDate, setCustomDate] = useState<string>('');
   const [statusFilter, setStatusFilter] = useState<string>('ALL');
-  const [search, setSearch] = useState<string>('');
+  const [search, setSearch] = useState<string>(initialSearch || '');
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(10);
   const [modalSystemFilter, setModalSystemFilter] = useState<'ALL' | 'InaAI' | 'AEON'>('ALL');
@@ -86,20 +80,6 @@ export const TaskManagementView: React.FC<TaskManagementViewProps> = ({
   useEffect(() => {
     loadAllData();
   }, []);
-
-  useEffect(() => {
-    if (initialCameraId) {
-      setSelectedCamIds([initialCameraId]);
-    }
-    if (initialDate) {
-      setTargetDate(initialDate);
-      setDatePreset('CUSTOM');
-      setCustomDate(initialDate);
-    }
-    if (autoOpenBatchModal) {
-      setShowBatchModal(true);
-    }
-  }, [initialCameraId, initialDate, autoOpenBatchModal]);
 
   const loadAllData = async () => {
     try {
@@ -119,16 +99,6 @@ export const TaskManagementView: React.FC<TaskManagementViewProps> = ({
       if (tmplData.length > 0) {
         setSelectedTemplateId(tmplData[0].id);
         loadTemplateVersions(tmplData[0].id);
-      }
-
-      if (initialCameraId && cData.length > 0) {
-        const cam = cData.find((c) => c.id === initialCameraId);
-        if (cam) {
-          setSearch(cam.name);
-          if (cam.system === 'InaAI' || cam.system === 'AEON') {
-            setModalSystemFilter(cam.system);
-          }
-        }
       }
     } catch (err: any) {
       setMessage({ text: err.message || 'Gagal memuat data penugasan', type: 'error' });
@@ -226,7 +196,6 @@ export const TaskManagementView: React.FC<TaskManagementViewProps> = ({
       });
       setShowBatchModal(false);
       setSelectedCamIds([]);
-      if (onClearNavParams) onClearNavParams();
       await loadAllData();
     } catch (err: any) {
       setMessage({ text: err.message || 'Gagal menugaskan tugas', type: 'error' });
@@ -237,7 +206,6 @@ export const TaskManagementView: React.FC<TaskManagementViewProps> = ({
 
   const handleCloseModal = () => {
     setShowBatchModal(false);
-    if (onClearNavParams) onClearNavParams();
   };
 
   // Date computation helpers
