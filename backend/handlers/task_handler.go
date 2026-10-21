@@ -199,6 +199,19 @@ func (h *TaskHandler) CreateTask(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusInternalServerError, "Failed to create task: "+err.Error())
 	}
 
+	adminID := ""
+	if claims := middleware.GetUserFromContext(c); claims != nil {
+		adminID = claims.UserID
+	}
+	db.LogAudit(context.Background(), adminID, "ASSIGN_TASK", "TASK", t.ID, map[string]any{
+		"task_id":          t.ID,
+		"camera_id":        req.CameraID,
+		"assigned_user_id": req.AssignedUserID,
+		"template_version": req.TemplateVersionID,
+		"target_date":      targetDate,
+		"target_time_slot": req.TargetTimeSlot,
+	})
+
 	return c.JSON(http.StatusCreated, t)
 }
 
@@ -258,6 +271,18 @@ func (h *TaskHandler) BatchCreateTasks(c echo.Context) error {
 	if err := tx.Commit(context.Background()); err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
 	}
+
+	adminID := ""
+	if claims := middleware.GetUserFromContext(c); claims != nil {
+		adminID = claims.UserID
+	}
+	db.LogAudit(context.Background(), adminID, "BATCH_ASSIGN_TASK", "TASK", fmt.Sprintf("%d tasks", len(createdTasks)), map[string]any{
+		"total_created":    len(createdTasks),
+		"camera_count":     len(req.CameraIDs),
+		"slots":            slots,
+		"assigned_user_id": req.AssignedUserID,
+		"target_date":      targetDate,
+	})
 
 	return c.JSON(http.StatusCreated, map[string]any{
 		"message":       fmt.Sprintf("%d tasks successfully assigned", len(createdTasks)),
@@ -400,12 +425,14 @@ func (h *TaskHandler) SubmitTask(c echo.Context) error {
 	}
 
 	// Log audit trail
-	auditID := "aud-" + uuid.New().String()[:8]
-	_, _ = tx.Exec(context.Background(),
-		`INSERT INTO audit_logs (id, user_id, action, target_type, target_id, details)
-		 VALUES ($1, $2, 'INSPECTION_SUBMIT', 'TASK', $3, $4)`,
-		auditID, inspectorID, taskID, req.Payload,
-	)
+	db.LogAudit(context.Background(), inspectorID, "SUBMIT_INSPECTION", "RECORD", recordID, map[string]any{
+		"task_id":          taskID,
+		"camera_id":        task.CameraID,
+		"camera_name":      task.CameraName,
+		"notes":            req.Notes,
+		"target_date":      targetDate,
+		"target_time_slot": task.TargetTimeSlot,
+	})
 
 	if err := tx.Commit(context.Background()); err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError, "Failed to commit submission: "+err.Error())
@@ -439,6 +466,15 @@ func (h *TaskHandler) ReassignTask(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusInternalServerError, "Failed to reassign task: "+err.Error())
 	}
 
+	adminID := ""
+	if claims := middleware.GetUserFromContext(c); claims != nil {
+		adminID = claims.UserID
+	}
+	db.LogAudit(context.Background(), adminID, "REASSIGN_TASK", "TASK", id, map[string]any{
+		"task_id":              id,
+		"new_assigned_user_id": req.AssignedUserID,
+	})
+
 	return c.JSON(http.StatusOK, map[string]string{"message": "Task reassigned successfully"})
 }
 
@@ -448,6 +484,15 @@ func (h *TaskHandler) DeleteTask(c echo.Context) error {
 	if err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError, "Failed to delete task: "+err.Error())
 	}
+
+	adminID := ""
+	if claims := middleware.GetUserFromContext(c); claims != nil {
+		adminID = claims.UserID
+	}
+	db.LogAudit(context.Background(), adminID, "DELETE_TASK", "TASK", id, map[string]any{
+		"task_id": id,
+	})
+
 	return c.NoContent(http.StatusNoContent)
 }
 

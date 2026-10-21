@@ -18,11 +18,13 @@ import {
   FileCode,
   FileText,
   X,
-  Filter
+  Filter,
+  ShieldCheck
 } from 'lucide-react';
 import { api } from '../services/api';
 import { InspectionRecord } from '../types';
 import { Pagination } from './Pagination';
+import { AuditTrailView } from './AuditTrailView';
 
 type DatePreset = 'ALL' | 'TODAY' | 'THIS_WEEK' | 'THIS_MONTH' | 'CUSTOM';
 
@@ -34,6 +36,9 @@ export const ReportsView: React.FC = () => {
   const [datePreset, setDatePreset] = useState<DatePreset>('ALL');
   const [customDate, setCustomDate] = useState('');
   const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
+
+  // Tab selector: Inspections vs Full Audit Trail
+  const [activeReportTab, setActiveReportTab] = useState<'inspections' | 'audit_trail'>('inspections');
 
   // Pagination states
   const [currentPage, setCurrentPage] = useState(1);
@@ -357,23 +362,28 @@ export const ReportsView: React.FC = () => {
     <div className="page-wrapper">
       <div className="page-header">
         <div className="page-title-group">
-          <h2>Laporan Pengecekan & Jejak Audit (Reports & Audit Trail)</h2>
-          <p>Rekapitulasi seluruh riwayat observasi kamera, versi form yang digunakan, dan rincian data hasil pengerjaan.</p>
+          <h2>{activeReportTab === 'inspections' ? 'Laporan Pengecekan Observasi Kamera' : 'Jejak Audit Aktivitas Sistem (Audit Trail)'}</h2>
+          <p>
+            {activeReportTab === 'inspections' 
+              ? 'Rekapitulasi seluruh riwayat observasi kamera, versi form yang digunakan, dan rincian data hasil pengerjaan.'
+              : 'Pencatatan jejak audit komprehensif seluruh aktivitas sistem: Login, Master Kamera, Penugasan Jadwal, Inspeksi, Review Supervisor, Manajemen Pengguna, dan Template Form.'}
+          </p>
         </div>
-        <div className="header-actions">
-          <button className="btn btn-secondary" onClick={loadRecords}>
-            <RefreshCw size={16} /> Perbarui
-          </button>
-
-          {/* MULTI-FORMAT DOWNLOAD DROPDOWN */}
-          <div style={{ position: 'relative' }} ref={exportMenuRef}>
-            <button 
-              className="btn btn-primary" 
-              onClick={() => setShowExportMenu(!showExportMenu)}
-              style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
-            >
-              <Download size={16} /> Unduh Laporan <ChevronDown size={14} />
+        {activeReportTab === 'inspections' && (
+          <div className="header-actions">
+            <button className="btn btn-secondary" onClick={loadRecords}>
+              <RefreshCw size={16} /> Perbarui
             </button>
+
+            {/* MULTI-FORMAT DOWNLOAD DROPDOWN */}
+            <div style={{ position: 'relative' }} ref={exportMenuRef}>
+              <button 
+                className="btn btn-primary" 
+                onClick={() => setShowExportMenu(!showExportMenu)}
+                style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+              >
+                <Download size={16} /> Unduh Laporan <ChevronDown size={14} />
+              </button>
 
             {showExportMenu && (
               <div 
@@ -484,7 +494,60 @@ export const ReportsView: React.FC = () => {
             )}
           </div>
         </div>
+        )}
       </div>
+
+      {/* TOP NAVIGATION TABS */}
+      <div style={{ display: 'flex', gap: '10px', marginBottom: '1.5rem', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '0.75rem', flexWrap: 'wrap' }}>
+        <button
+          type="button"
+          onClick={() => setActiveReportTab('inspections')}
+          style={{
+            background: activeReportTab === 'inspections' ? 'rgba(56, 189, 248, 0.15)' : 'transparent',
+            border: `1px solid ${activeReportTab === 'inspections' ? '#0ea5e9' : 'transparent'}`,
+            color: activeReportTab === 'inspections' ? '#ffffff' : 'var(--text-muted)',
+            padding: '8px 16px',
+            borderRadius: '6px',
+            fontSize: '0.85rem',
+            fontWeight: 700,
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            transition: 'all 0.15s ease',
+          }}
+        >
+          <FileSpreadsheet size={16} color={activeReportTab === 'inspections' ? '#38bdf8' : 'var(--text-dim)'} />
+          Laporan Observasi Kamera ({records.length})
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setActiveReportTab('audit_trail')}
+          style={{
+            background: activeReportTab === 'audit_trail' ? 'rgba(139, 92, 246, 0.15)' : 'transparent',
+            border: `1px solid ${activeReportTab === 'audit_trail' ? '#8b5cf6' : 'transparent'}`,
+            color: activeReportTab === 'audit_trail' ? '#ffffff' : 'var(--text-muted)',
+            padding: '8px 16px',
+            borderRadius: '6px',
+            fontSize: '0.85rem',
+            fontWeight: 700,
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            transition: 'all 0.15s ease',
+          }}
+        >
+          <ShieldCheck size={16} color={activeReportTab === 'audit_trail' ? '#c084fc' : 'var(--text-dim)'} />
+          Jejak Audit Aktivitas Sistem (Semua Fitur)
+        </button>
+      </div>
+
+      {activeReportTab === 'audit_trail' ? (
+        <AuditTrailView />
+      ) : (
+        <>
 
       {/* FILTER & DATE PRESETS CARD */}
       <div className="card" style={{ padding: '1rem', marginBottom: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
@@ -908,6 +971,8 @@ export const ReportsView: React.FC = () => {
           pageSizeOptions={[5, 10, 25, 50]}
         />
       </div>
+      </>
+      )}
     </div>
   );
 };

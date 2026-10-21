@@ -46,6 +46,7 @@ func main() {
 	recordHandler := handlers.NewRecordHandler()
 	dashHandler := handlers.NewDashboardHandler()
 	reportHandler := handlers.NewReportHandler()
+	auditHandler := handlers.NewAuditHandler()
 
 	// Root Info
 	e.GET("/", func(c echo.Context) error {
@@ -117,6 +118,11 @@ func main() {
 	protected.GET("/dashboard/stats", dashHandler.GetStats)
 	protected.GET("/dashboard/results-summary", dashHandler.GetResultsSummary)
 	protected.GET("/reports/export-csv", reportHandler.ExportCSV)
+
+	// Audit Trail
+	protected.GET("/audit-logs", auditHandler.ListAuditLogs, appMiddleware.RequireRole(models.RoleAdmin, models.RoleSupervisor))
+	protected.GET("/audit-logs/stats", auditHandler.GetAuditStats, appMiddleware.RequireRole(models.RoleAdmin, models.RoleSupervisor))
+	protected.GET("/audit-logs/export", auditHandler.ExportAuditLogs, appMiddleware.RequireRole(models.RoleAdmin, models.RoleSupervisor))
 
 	log.Printf("[SERVER] CamTrack backend listening on :%s", cfg.Port)
 	if err := e.Start(":" + cfg.Port); err != nil && err != http.ErrServerClosed {

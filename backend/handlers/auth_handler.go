@@ -80,6 +80,14 @@ func (h *AuthHandler) Login(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusInternalServerError, "Gagal menghasilkan token autentikasi")
 	}
 
+	db.LogAudit(context.Background(), user.ID, "LOGIN", "AUTH", user.ID, map[string]any{
+		"email":      user.Email,
+		"name":       user.Name,
+		"role":       user.Role,
+		"ip":         c.RealIP(),
+		"user_agent": c.Request().UserAgent(),
+	})
+
 	return c.JSON(http.StatusOK, AuthResponse{
 		Token: token,
 		User:  user,
@@ -117,6 +125,12 @@ func (h *AuthHandler) DemoLogin(c echo.Context) error {
 	if err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError, "Failed to generate token")
 	}
+
+	db.LogAudit(context.Background(), user.ID, "DEMO_LOGIN", "AUTH", user.ID, map[string]any{
+		"email": user.Email,
+		"name":  user.Name,
+		"role":  user.Role,
+	})
 
 	return c.JSON(http.StatusOK, AuthResponse{
 		Token: token,
@@ -209,6 +223,16 @@ func (h *AuthHandler) CreateUser(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusInternalServerError, "Gagal membuat pengguna: "+err.Error())
 	}
 
+	adminID := ""
+	if claims := middleware.GetUserFromContext(c); claims != nil {
+		adminID = claims.UserID
+	}
+	db.LogAudit(context.Background(), adminID, "CREATE_USER", "USER", user.ID, map[string]any{
+		"name":  user.Name,
+		"email": user.Email,
+		"role":  user.Role,
+	})
+
 	return c.JSON(http.StatusCreated, user)
 }
 
@@ -259,6 +283,16 @@ func (h *AuthHandler) UpdateUser(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusInternalServerError, "Gagal memperbarui user: "+err.Error())
 	}
 
+	adminID := ""
+	if claims := middleware.GetUserFromContext(c); claims != nil {
+		adminID = claims.UserID
+	}
+	db.LogAudit(context.Background(), adminID, "UPDATE_USER", "USER", user.ID, map[string]any{
+		"name":  user.Name,
+		"email": user.Email,
+		"role":  user.Role,
+	})
+
 	return c.JSON(http.StatusOK, user)
 }
 
@@ -274,6 +308,14 @@ func (h *AuthHandler) DeleteUser(c echo.Context) error {
 	if err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError, "Gagal menghapus pengguna: "+err.Error())
 	}
+
+	adminID := ""
+	if claims != nil {
+		adminID = claims.UserID
+	}
+	db.LogAudit(context.Background(), adminID, "DELETE_USER", "USER", id, map[string]any{
+		"deleted_user_id": id,
+	})
 
 	return c.NoContent(http.StatusNoContent)
 }

@@ -165,3 +165,23 @@ export interface ResultsSummary {
   total_issues_found: number;
   category_breakdown: Record<string, number>;
 }
+
+export interface AuditLog {
+  id: string;
+  user_id: string;
+  user_name?: string;
+  user_email?: string;
+  user_role?: string;
+  action: string;
+  target_type: string;
+  target_id?: string;
+  details?: Record<string, any>;
+  created_at: string;
+}
+
+export interface AuditStats {
+  total_logs: number;
+  today_logs: number;
+  action_breakdown: Record<string, number>;
+  category_breakdown: Record<string, number>;
+}

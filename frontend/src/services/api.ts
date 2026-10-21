@@ -8,7 +8,9 @@ import {
   InspectionRecord,
   DashboardStats,
   ResultsSummary,
-  UserRole
+  UserRole,
+  AuditLog,
+  AuditStats
 } from '../types';
 
 const rawApiUrl = (import.meta.env.VITE_API_URL || '').replace(/\/+$/, '');
@@ -291,6 +293,58 @@ class ApiService {
 
   getExportCSVUrl(): string {
     return `${API_BASE}/reports/export-csv`;
+  }
+
+  // Audit Trail
+  async getAuditLogs(params?: {
+    action?: string;
+    target_type?: string;
+    user_id?: string;
+    search?: string;
+    start_date?: string;
+    end_date?: string;
+    page?: number;
+    page_size?: number;
+  }): Promise<{ data: AuditLog[]; total: number; page: number; page_size: number; total_pages: number }> {
+    const sp = new URLSearchParams();
+    if (params?.action && params.action !== 'ALL') sp.append('action', params.action);
+    if (params?.target_type && params.target_type !== 'ALL') sp.append('target_type', params.target_type);
+    if (params?.user_id && params.user_id !== 'ALL') sp.append('user_id', params.user_id);
+    if (params?.search) sp.append('search', params.search);
+    if (params?.start_date) sp.append('start_date', params.start_date);
+    if (params?.end_date) sp.append('end_date', params.end_date);
+    if (params?.page) sp.append('page', String(params.page));
+    if (params?.page_size) sp.append('page_size', String(params.page_size));
+    const qs = sp.toString() ? `?${sp.toString()}` : '';
+    return this.request<{ data: AuditLog[]; total: number; page: number; page_size: number; total_pages: number }>(`/audit-logs${qs}`);
+  }
+
+  async getAuditStats(): Promise<AuditStats> {
+    return this.request<AuditStats>('/audit-logs/stats');
+  }
+
+  async downloadAuditLogsCSV(params?: { action?: string; target_type?: string; search?: string }): Promise<void> {
+    const sp = new URLSearchParams();
+    if (params?.action && params.action !== 'ALL') sp.append('action', params.action);
+    if (params?.target_type && params.target_type !== 'ALL') sp.append('target_type', params.target_type);
+    if (params?.search) sp.append('search', params.search);
+    const qs = sp.toString() ? `?${sp.toString()}` : '';
+
+    const headers: Record<string, string> = {};
+    if (this.token) {
+      headers['Authorization'] = `Bearer ${this.token}`;
+    }
+    const res = await fetch(`${API_BASE}/audit-logs/export${qs}`, { headers });
+    if (!res.ok) throw new Error('Gagal mengunduh data Audit Trail CSV');
+    const blob = await res.blob();
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `Jejak_Audit_${new Date().toISOString().slice(0, 10)}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
   }
 }
 
