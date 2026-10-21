@@ -31,6 +31,7 @@ import { Camera, CameraSystem, InspectionRecord, InspectionTask, User } from '..
 
 interface WeeklyProgressMatrixViewProps {
   currentUser: User;
+  onNavigateToTasks?: (params?: { initialCameraId?: string; initialDate?: string; autoOpenBatchModal?: boolean }) => void;
 }
 
 interface DayInfo {
@@ -41,7 +42,7 @@ interface DayInfo {
   isToday: boolean;
 }
 
-export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> = ({ currentUser }) => {
+export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> = ({ currentUser, onNavigateToTasks }) => {
   const [cameras, setCameras] = useState<Camera[]>([]);
   const [tasks, setTasks] = useState<InspectionTask[]>([]);
   const [records, setRecords] = useState<InspectionRecord[]>([]);
@@ -83,12 +84,6 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
   const [reassigningTaskId, setReassigningTaskId] = useState<string | null>(null);
   const [newInspectorId, setNewInspectorId] = useState('');
 
-  // Quick Add Slot Inline State (for Admin)
-  const [showAddSlotModal, setShowAddSlotModal] = useState(false);
-  const [newSlotTime, setNewSlotTime] = useState('08:00 - 09:00 WIB');
-  const [newSlotInspectorId, setNewSlotInspectorId] = useState('');
-  const [submittingSlot, setSubmittingSlot] = useState(false);
-
   // Toast / feedback message
   const [toast, setToast] = useState<{ text: string; type: 'success' | 'error' } | null>(null);
 
@@ -109,9 +104,6 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
       setTasks(ts);
       setRecords(recs);
       setInspectors(usrs);
-      if (usrs.length > 0 && !newSlotInspectorId) {
-        setNewSlotInspectorId(usrs[0].id);
-      }
       // Keep open drawer synchronized with latest tasks
       setSelectedCell((prev) => {
         if (!prev) return null;
@@ -325,29 +317,6 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
       await loadAllData();
     } catch (err: any) {
       setToast({ text: err.message || 'Gagal menghapus tugas', type: 'error' });
-    }
-  };
-
-  // Admin Quick Add Slot on this camera & date
-  const handleQuickAddSlot = async () => {
-    if (!selectedCell || !newSlotInspectorId) return;
-    try {
-      setSubmittingSlot(true);
-      // Find template version (default to people counting ver-e-01-v3)
-      await api.createTask({
-        camera_id: selectedCell.camera.id,
-        assigned_user_id: newSlotInspectorId,
-        template_version_id: 'ver-e-01-v3',
-        target_date: selectedCell.day.dateStr,
-        target_time_slot: newSlotTime,
-      });
-      setToast({ text: `Slot jam ${newSlotTime} berhasil ditambahkan!`, type: 'success' });
-      setShowAddSlotModal(false);
-      await loadAllData();
-    } catch (err: any) {
-      setToast({ text: err.message || 'Gagal menambahkan slot', type: 'error' });
-    } finally {
-      setSubmittingSlot(false);
     }
   };
 
@@ -930,10 +899,7 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
             display: 'flex',
             justifyContent: 'flex-end',
           }}
-          onClick={() => {
-            setSelectedCell(null);
-            setShowAddSlotModal(false);
-          }}
+          onClick={() => setSelectedCell(null)}
         >
           <div
             style={{
@@ -995,10 +961,7 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
 
               <button
                 type="button"
-                onClick={() => {
-                  setSelectedCell(null);
-                  setShowAddSlotModal(false);
-                }}
+                onClick={() => setSelectedCell(null)}
                 style={{
                   background: 'rgba(255, 255, 255, 0.05)',
                   border: 'none',
@@ -1055,179 +1018,22 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
                 {currentUser.role === 'admin' && (
                   <button
                     type="button"
-                    className={showAddSlotModal ? 'btn btn-secondary' : 'btn btn-primary'}
-                    style={{ padding: '0.35rem 0.75rem', fontSize: '0.78rem' }}
-                    onClick={() => setShowAddSlotModal(!showAddSlotModal)}
+                    className="btn btn-primary"
+                    style={{ padding: '0.4rem 0.85rem', fontSize: '0.78rem', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+                    onClick={() => {
+                      if (onNavigateToTasks) {
+                        onNavigateToTasks({
+                          initialCameraId: selectedCell.camera.id,
+                          initialDate: selectedCell.day.dateStr,
+                          autoOpenBatchModal: true,
+                        });
+                      }
+                    }}
                   >
-                    {showAddSlotModal ? (
-                      <><X size={14} /> Tutup Form</>
-                    ) : (
-                      <><Plus size={14} /> Tambah Slot Jam</>
-                    )}
+                    <Plus size={14} /> Jadwalkan di Manajemen Tugas
                   </button>
                 )}
               </div>
-
-              {/* INLINE ADD SLOT FORM CARD (ADMIN) */}
-              {showAddSlotModal && currentUser.role === 'admin' && (
-                <div
-                  style={{
-                    background: 'linear-gradient(180deg, rgba(14, 165, 233, 0.15) 0%, rgba(15, 23, 42, 0.98) 100%)',
-                    border: '1px solid rgba(56, 189, 248, 0.45)',
-                    borderRadius: '10px',
-                    padding: '1.2rem',
-                    marginBottom: '1.25rem',
-                    boxShadow: '0 8px 24px rgba(0, 0, 0, 0.4), 0 0 16px rgba(14, 165, 233, 0.15)',
-                  }}
-                >
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.85rem' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      <div
-                        style={{
-                          width: '28px',
-                          height: '28px',
-                          borderRadius: '6px',
-                          background: 'rgba(56, 189, 248, 0.2)',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          border: '1px solid rgba(56, 189, 248, 0.4)',
-                        }}
-                      >
-                        <Plus size={16} color="#38bdf8" />
-                      </div>
-                      <div>
-                        <h5 style={{ fontSize: '0.92rem', fontWeight: 700, color: '#ffffff', margin: 0 }}>
-                          Tambah Slot Jam Observasi
-                        </h5>
-                        <p style={{ fontSize: '0.74rem', color: '#94a3b8', margin: 0 }}>
-                          Jadwalkan slot tugas baru untuk kamera ini
-                        </p>
-                      </div>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => setShowAddSlotModal(false)}
-                      style={{
-                        background: 'rgba(255, 255, 255, 0.05)',
-                        border: 'none',
-                        color: '#94a3b8',
-                        cursor: 'pointer',
-                        padding: '4px',
-                        borderRadius: '4px',
-                        display: 'flex',
-                        alignItems: 'center',
-                      }}
-                      title="Tutup Form"
-                    >
-                      <X size={15} />
-                    </button>
-                  </div>
-
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
-                    {/* Time Slot Select */}
-                    <div>
-                      <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 600, color: '#e2e8f0', marginBottom: '5px' }}>
-                        Pilih Slot Jam Pengamatan <span style={{ color: '#f43f5e' }}>*</span>
-                      </label>
-                      <select
-                        className="form-select"
-                        value={newSlotTime}
-                        onChange={(e) => setNewSlotTime(e.target.value)}
-                        style={{
-                          width: '100%',
-                          background: '#090d16',
-                          color: '#ffffff',
-                          border: '1px solid rgba(56, 189, 248, 0.4)',
-                          borderRadius: '6px',
-                          padding: '0.6rem 0.8rem',
-                          fontSize: '0.85rem',
-                          outline: 'none',
-                        }}
-                      >
-                        {[
-                          '07:00 - 08:00 WIB',
-                          '08:00 - 09:00 WIB',
-                          '09:00 - 10:00 WIB',
-                          '10:00 - 11:00 WIB',
-                          '11:00 - 12:00 WIB',
-                          '12:00 - 13:00 WIB',
-                          '13:00 - 14:00 WIB',
-                          '14:00 - 15:00 WIB',
-                          '15:00 - 16:00 WIB',
-                          '16:00 - 17:00 WIB',
-                          '17:00 - 18:00 WIB',
-                        ].map((s) => (
-                          <option key={s} value={s}>
-                            {s}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-
-                    {/* Inspector Select */}
-                    <div>
-                      <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 600, color: '#e2e8f0', marginBottom: '5px' }}>
-                        Tugaskan Kepada Petugas (Inspector) <span style={{ color: '#f43f5e' }}>*</span>
-                      </label>
-                      <select
-                        className="form-select"
-                        value={newSlotInspectorId}
-                        onChange={(e) => setNewSlotInspectorId(e.target.value)}
-                        style={{
-                          width: '100%',
-                          background: '#090d16',
-                          color: '#ffffff',
-                          border: '1px solid rgba(56, 189, 248, 0.4)',
-                          borderRadius: '6px',
-                          padding: '0.6rem 0.8rem',
-                          fontSize: '0.85rem',
-                          outline: 'none',
-                        }}
-                      >
-                        {inspectors.map((ins) => (
-                          <option key={ins.id} value={ins.id}>
-                            {ins.name} ({ins.email})
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-
-                    {/* Form Action Buttons */}
-                    <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '8px', marginTop: '0.25rem', paddingTop: '0.75rem', borderTop: '1px solid rgba(255, 255, 255, 0.08)' }}>
-                      <button
-                        type="button"
-                        className="btn btn-secondary"
-                        style={{ padding: '0.45rem 0.85rem', fontSize: '0.8rem' }}
-                        onClick={() => setShowAddSlotModal(false)}
-                        disabled={submittingSlot}
-                      >
-                        Batal
-                      </button>
-                      <button
-                        type="button"
-                        className="btn btn-primary"
-                        style={{
-                          padding: '0.45rem 1rem',
-                          fontSize: '0.8rem',
-                          background: 'linear-gradient(135deg, #0ea5e9, #6366f1)',
-                          borderColor: '#38bdf8',
-                          fontWeight: 600,
-                          boxShadow: '0 2px 10px rgba(14, 165, 233, 0.35)',
-                        }}
-                        onClick={handleQuickAddSlot}
-                        disabled={submittingSlot}
-                      >
-                        {submittingSlot ? (
-                          <>Menyimpan...</>
-                        ) : (
-                          <><Check size={14} /> Simpan & Jadwalkan Slot</>
-                        )}
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              )}
 
               {selectedCell.tasks.length === 0 ? (
                 <div style={{ textAlign: 'center', padding: '2.5rem 1.5rem', background: 'rgba(255, 255, 255, 0.02)', border: '1px dashed rgba(244, 63, 94, 0.35)', borderRadius: '10px' }}>
@@ -1235,17 +1041,25 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
                     <EyeOff size={26} color="#fb7185" />
                   </div>
                   <div style={{ fontWeight: 700, color: '#ffffff', fontSize: '0.98rem' }}>Belum Dilakukan Pengecekan (Belum Ada Jadwal)</div>
-                  <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginTop: '6px', maxWidth: '360px', margin: '6px auto 0', lineHeight: 1.5 }}>
-                    Kamera ini belum memiliki penugasan observasi untuk tanggal <strong>{selectedCell.day.fullDateLabel}</strong>. Segera jadwalkan slot tugas agar tidak terjadi kekosongan pengawasan.
+                  <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginTop: '6px', maxWidth: '380px', margin: '6px auto 0', lineHeight: 1.5 }}>
+                    Kamera ini belum memiliki penugasan observasi untuk tanggal <strong>{selectedCell.day.fullDateLabel}</strong>. Buka Manajemen Penugasan untuk menjadwalkan tugas dan memilih template formulir.
                   </p>
-                  {currentUser.role === 'admin' && !showAddSlotModal && (
+                  {currentUser.role === 'admin' && (
                     <button
                       type="button"
                       className="btn btn-primary"
-                      style={{ marginTop: '1rem', padding: '0.45rem 1rem', fontSize: '0.8rem' }}
-                      onClick={() => setShowAddSlotModal(true)}
+                      style={{ marginTop: '1.25rem', padding: '0.55rem 1.25rem', fontSize: '0.84rem', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+                      onClick={() => {
+                        if (onNavigateToTasks) {
+                          onNavigateToTasks({
+                            initialCameraId: selectedCell.camera.id,
+                            initialDate: selectedCell.day.dateStr,
+                            autoOpenBatchModal: true,
+                          });
+                        }
+                      }}
                     >
-                      <Plus size={14} /> Jadwalkan Tugas Sekarang
+                      <Plus size={15} /> Jadwalkan Tugas Sekarang (Buka Manajemen Tugas)
                     </button>
                   )}
                 </div>
@@ -1540,16 +1354,41 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
 
             {/* Drawer Footer */}
             <div style={{ padding: '1rem 1.5rem', borderTop: '1px solid var(--border-subtle)', background: 'rgba(255, 255, 255, 0.02)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ fontSize: '0.75rem', color: 'var(--text-dim)' }}>
-                {selectedCell.camera.code} · {selectedCell.day.dateStr}
-              </span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <span style={{ fontSize: '0.75rem', color: 'var(--text-dim)' }}>
+                  {selectedCell.camera.code} · {selectedCell.day.dateStr}
+                </span>
+                {currentUser.role === 'admin' && onNavigateToTasks && (
+                  <button
+                    type="button"
+                    style={{
+                      background: 'transparent',
+                      border: 'none',
+                      color: '#38bdf8',
+                      fontSize: '0.76rem',
+                      cursor: 'pointer',
+                      textDecoration: 'underline',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                      padding: 0,
+                    }}
+                    onClick={() => {
+                      onNavigateToTasks({
+                        initialCameraId: selectedCell.camera.id,
+                        initialDate: selectedCell.day.dateStr,
+                        autoOpenBatchModal: false,
+                      });
+                    }}
+                  >
+                    Buka di Manajemen Tugas →
+                  </button>
+                )}
+              </div>
               <button
                 type="button"
                 className="btn btn-secondary"
-                onClick={() => {
-                  setSelectedCell(null);
-                  setShowAddSlotModal(false);
-                }}
+                onClick={() => setSelectedCell(null)}
               >
                 Tutup
               </button>

@@ -18,6 +18,16 @@ export const App: React.FC = () => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [activeTab, setActiveTab] = useState<string>('dashboard');
   const [initLoading, setInitLoading] = useState<boolean>(true);
+  const [taskNavParams, setTaskNavParams] = useState<{
+    initialCameraId?: string;
+    initialDate?: string;
+    autoOpenBatchModal?: boolean;
+  } | null>(null);
+
+  const handleNavigateToTasks = (params?: { initialCameraId?: string; initialDate?: string; autoOpenBatchModal?: boolean }) => {
+    setTaskNavParams(params || null);
+    setActiveTab('task-management');
+  };
 
   // Check existing token or show login screen
   useEffect(() => {
@@ -97,11 +107,23 @@ export const App: React.FC = () => {
           {currentUser.role === 'admin' && (
             <>
               {activeTab === 'dashboard' && <DashboardView />}
-              {activeTab === 'progress-matrix' && <WeeklyProgressMatrixView currentUser={currentUser} />}
+              {activeTab === 'progress-matrix' && (
+                <WeeklyProgressMatrixView
+                  currentUser={currentUser}
+                  onNavigateToTasks={handleNavigateToTasks}
+                />
+              )}
               {activeTab === 'users' && <UserManagementView />}
               {activeTab === 'cameras' && <CameraManagementView />}
               {activeTab === 'form-builder' && <FormBuilderView />}
-              {activeTab === 'task-management' && <TaskManagementView />}
+              {activeTab === 'task-management' && (
+                <TaskManagementView
+                  initialCameraId={taskNavParams?.initialCameraId}
+                  initialDate={taskNavParams?.initialDate}
+                  autoOpenBatchModal={taskNavParams?.autoOpenBatchModal}
+                  onClearNavParams={() => setTaskNavParams(null)}
+                />
+              )}
               {activeTab === 'reports' && <ReportsView />}
             </>
           )}

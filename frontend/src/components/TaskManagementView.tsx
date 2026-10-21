@@ -38,7 +38,19 @@ const STANDARD_TIME_SLOTS = [
   '17:00 - 18:00 WIB',
 ];
 
-export const TaskManagementView: React.FC = () => {
+interface TaskManagementViewProps {
+  initialCameraId?: string;
+  initialDate?: string;
+  autoOpenBatchModal?: boolean;
+  onClearNavParams?: () => void;
+}
+
+export const TaskManagementView: React.FC<TaskManagementViewProps> = ({
+  initialCameraId,
+  initialDate,
+  autoOpenBatchModal,
+  onClearNavParams,
+}) => {
   const [tasks, setTasks] = useState<InspectionTask[]>([]);
   const [cameras, setCameras] = useState<CameraType[]>([]);
   const [inspectors, setInspectors] = useState<User[]>([]);
@@ -75,6 +87,20 @@ export const TaskManagementView: React.FC = () => {
     loadAllData();
   }, []);
 
+  useEffect(() => {
+    if (initialCameraId) {
+      setSelectedCamIds([initialCameraId]);
+    }
+    if (initialDate) {
+      setTargetDate(initialDate);
+      setDatePreset('CUSTOM');
+      setCustomDate(initialDate);
+    }
+    if (autoOpenBatchModal) {
+      setShowBatchModal(true);
+    }
+  }, [initialCameraId, initialDate, autoOpenBatchModal]);
+
   const loadAllData = async () => {
     try {
       setLoading(true);
@@ -93,6 +119,16 @@ export const TaskManagementView: React.FC = () => {
       if (tmplData.length > 0) {
         setSelectedTemplateId(tmplData[0].id);
         loadTemplateVersions(tmplData[0].id);
+      }
+
+      if (initialCameraId && cData.length > 0) {
+        const cam = cData.find((c) => c.id === initialCameraId);
+        if (cam) {
+          setSearch(cam.name);
+          if (cam.system === 'InaAI' || cam.system === 'AEON') {
+            setModalSystemFilter(cam.system);
+          }
+        }
       }
     } catch (err: any) {
       setMessage({ text: err.message || 'Gagal memuat data penugasan', type: 'error' });
@@ -190,12 +226,18 @@ export const TaskManagementView: React.FC = () => {
       });
       setShowBatchModal(false);
       setSelectedCamIds([]);
+      if (onClearNavParams) onClearNavParams();
       await loadAllData();
     } catch (err: any) {
       setMessage({ text: err.message || 'Gagal menugaskan tugas', type: 'error' });
     } finally {
       setSubmitting(false);
     }
+  };
+
+  const handleCloseModal = () => {
+    setShowBatchModal(false);
+    if (onClearNavParams) onClearNavParams();
   };
 
   // Date computation helpers
@@ -668,7 +710,7 @@ export const TaskManagementView: React.FC = () => {
                 <Plus size={18} color="#38bdf8" />
                 Penugasan Inspeksi Terjadwal (Scheduled Task Assignment)
               </h3>
-              <button onClick={() => setShowBatchModal(false)} style={{ background: 'transparent', border: 'none', color: 'var(--text-dim)', cursor: 'pointer' }}>
+              <button onClick={handleCloseModal} style={{ background: 'transparent', border: 'none', color: 'var(--text-dim)', cursor: 'pointer' }}>
                 ✕
               </button>
             </div>
@@ -955,7 +997,7 @@ export const TaskManagementView: React.FC = () => {
               </div>
 
               <div style={{ display: 'flex', gap: '8px' }}>
-                <button className="btn btn-secondary" onClick={() => setShowBatchModal(false)}>
+                <button className="btn btn-secondary" onClick={handleCloseModal}>
                   Batal
                 </button>
                 <button 
