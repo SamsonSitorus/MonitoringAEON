@@ -13,7 +13,9 @@ import {
   EyeOff, 
   AlertTriangle, 
   X, 
-  CheckCircle2 
+  CheckCircle2,
+  List,
+  LayoutGrid
 } from 'lucide-react';
 import { api } from '../services/api';
 import { Camera as CameraType, CameraSystem } from '../types';
@@ -33,9 +35,10 @@ export const CameraManagementView: React.FC = () => {
   const [nvrFilter, setNvrFilter] = useState<string>('ALL');
   const [search, setSearch] = useState<string>('');
 
-  // Pagination states
+  // View mode & Pagination states
+  const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [pageSize, setPageSize] = useState<number>(6);
+  const [pageSize, setPageSize] = useState<number>(15);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -404,8 +407,8 @@ export const CameraManagementView: React.FC = () => {
             </div>
           </div>
 
-          {/* Results Counter & Reset */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          {/* Results Counter, Reset & View Toggle */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
             <span style={{ fontSize: '0.8rem', color: 'var(--text-dim)' }}>
               Menampilkan <strong style={{ color: '#ffffff' }}>{filteredCameras.length}</strong> dari{' '}
               <strong>{cameras.length}</strong> titik kamera
@@ -421,11 +424,57 @@ export const CameraManagementView: React.FC = () => {
                 <X size={13} /> Reset Filter
               </button>
             )}
+
+            {/* View Mode Toggle: List vs Grid */}
+            <div style={{ display: 'inline-flex', background: 'rgba(255, 255, 255, 0.04)', padding: '2px', borderRadius: '6px', border: '1px solid var(--border-subtle)' }}>
+              <button
+                type="button"
+                onClick={() => setViewMode('list')}
+                style={{
+                  background: viewMode === 'list' ? 'var(--primary)' : 'transparent',
+                  color: viewMode === 'list' ? '#ffffff' : 'var(--text-muted)',
+                  border: 'none',
+                  borderRadius: '4px',
+                  padding: '4px 10px',
+                  fontSize: '0.78rem',
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '5px',
+                  transition: 'all 0.15s ease',
+                }}
+                title="Tampilan Tabel / List Kamera"
+              >
+                <List size={14} /> List
+              </button>
+              <button
+                type="button"
+                onClick={() => setViewMode('grid')}
+                style={{
+                  background: viewMode === 'grid' ? 'var(--primary)' : 'transparent',
+                  color: viewMode === 'grid' ? '#ffffff' : 'var(--text-muted)',
+                  border: 'none',
+                  borderRadius: '4px',
+                  padding: '4px 10px',
+                  fontSize: '0.78rem',
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '5px',
+                  transition: 'all 0.15s ease',
+                }}
+                title="Tampilan Kartu / Grid"
+              >
+                <LayoutGrid size={14} /> Grid
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* CAMERAS GRID - PURE TECHNICAL INFO WITHOUT IMAGE */}
+      {/* CAMERAS LIST / GRID DISPLAY */}
       {loading ? (
         <div style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-dim)' }}>Memuat daftar kamera...</div>
       ) : filteredCameras.length === 0 ? (
@@ -434,7 +483,198 @@ export const CameraManagementView: React.FC = () => {
           <h3>Tidak ada kamera yang cocok</h3>
           <p style={{ color: 'var(--text-dim)', fontSize: '0.85rem' }}>Silakan sesuaikan filter atau tambahkan titik kamera baru.</p>
         </div>
+      ) : viewMode === 'list' ? (
+        /* LIST / TABLE VIEW */
+        <div className="card" style={{ padding: 0, overflow: 'hidden', border: '1px solid var(--border-subtle)', boxShadow: '0 4px 20px rgba(0, 0, 0, 0.25)' }}>
+          <div style={{ overflowX: 'auto' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.88rem' }}>
+              <thead>
+                <tr style={{ background: 'rgba(255, 255, 255, 0.03)', borderBottom: '1px solid var(--border-subtle)', color: 'var(--text-dim)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                  <th style={{ padding: '0.85rem 1rem', width: '90px', textAlign: 'center' }}>CHANNEL</th>
+                  <th style={{ padding: '0.85rem 1.25rem' }}>NAMA TITIK KAMERA</th>
+                  <th style={{ padding: '0.85rem 1rem', width: '150px' }}>KODE KAMERA</th>
+                  <th style={{ padding: '0.85rem 1rem', width: '220px' }}>SISTEM & NVR</th>
+                  <th style={{ padding: '0.85rem 1rem', width: '170px' }}>STATUS</th>
+                  <th style={{ padding: '0.85rem 1.25rem', textAlign: 'right', width: '90px' }}>AKSI</th>
+                </tr>
+              </thead>
+              <tbody>
+                {paginatedCameras.map((cam, idx) => (
+                  <tr
+                    key={cam.id}
+                    style={{
+                      borderBottom: '1px solid var(--border-subtle)',
+                      background: idx % 2 === 0 ? 'transparent' : 'rgba(255, 255, 255, 0.012)',
+                      transition: 'background 0.15s ease',
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255, 255, 255, 0.04)')}
+                    onMouseLeave={(e) => (e.currentTarget.style.background = idx % 2 === 0 ? 'transparent' : 'rgba(255, 255, 255, 0.012)')}
+                  >
+                    {/* Channel */}
+                    <td style={{ padding: '0.9rem 1rem', textAlign: 'center' }}>
+                      <span
+                        style={{
+                          padding: '4px 9px',
+                          borderRadius: '5px',
+                          fontSize: '0.78rem',
+                          fontWeight: 700,
+                          fontFamily: 'var(--font-mono)',
+                          background: cam.system === 'InaAI' ? 'rgba(14, 165, 233, 0.12)' : 'rgba(139, 92, 246, 0.12)',
+                          border: `1px solid ${cam.system === 'InaAI' ? 'rgba(14, 165, 233, 0.3)' : 'rgba(139, 92, 246, 0.3)'}`,
+                          color: cam.system === 'InaAI' ? '#38bdf8' : '#c084fc',
+                          display: 'inline-block',
+                          minWidth: '58px',
+                        }}
+                      >
+                        CH {String(cam.channel_no || 1).padStart(2, '0')}
+                      </span>
+                    </td>
+
+                    {/* Camera Name (Large & Bold) */}
+                    <td style={{ padding: '0.9rem 1.25rem' }}>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
+                        <span style={{ fontSize: '1.1rem', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.01em', lineHeight: 1.3 }}>
+                          {cam.name}
+                        </span>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                          <span style={{ fontSize: '0.72rem', color: 'var(--text-dim)', fontFamily: 'var(--font-mono)' }}>
+                            ID: {cam.id}
+                          </span>
+                          {cam.status === 'offline' && (
+                            <span style={{ fontSize: '0.7rem', color: '#fb7185', background: 'rgba(244, 63, 94, 0.14)', padding: '1px 6px', borderRadius: '4px', fontWeight: 600 }}>
+                              Blindspot Aktif
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    </td>
+
+                    {/* Camera Code */}
+                    <td style={{ padding: '0.9rem 1rem' }}>
+                      <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.84rem', color: '#38bdf8', fontWeight: 600 }}>
+                        {cam.code}
+                      </span>
+                    </td>
+
+                    {/* System & NVR */}
+                    <td style={{ padding: '0.9rem 1rem' }}>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                        <div>
+                          <span
+                            style={{
+                              padding: '2px 7px',
+                              borderRadius: '4px',
+                              fontSize: '0.72rem',
+                              fontWeight: 700,
+                              background: cam.system === 'InaAI' ? 'rgba(14, 165, 233, 0.15)' : 'rgba(139, 92, 246, 0.15)',
+                              border: `1px solid ${cam.system === 'InaAI' ? 'rgba(14, 165, 233, 0.3)' : 'rgba(139, 92, 246, 0.3)'}`,
+                              color: cam.system === 'InaAI' ? '#38bdf8' : '#c084fc',
+                            }}
+                          >
+                            {cam.system || 'InaAI'}
+                          </span>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '0.78rem', color: 'var(--text-muted)' }}>
+                          <Server size={12} color="#818cf8" />
+                          <span>{cam.nvr || '-'}</span>
+                        </div>
+                      </div>
+                    </td>
+
+                    {/* Status */}
+                    <td style={{ padding: '0.9rem 1rem' }}>
+                      {cam.status === 'online' ? (
+                        <span
+                          style={{
+                            padding: '3px 8px',
+                            borderRadius: '4px',
+                            fontSize: '0.72rem',
+                            fontWeight: 700,
+                            background: 'rgba(16, 185, 129, 0.15)',
+                            border: '1px solid rgba(16, 185, 129, 0.35)',
+                            color: '#34d399',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '5px',
+                          }}
+                        >
+                          <Wifi size={11} color="#34d399" />
+                          ONLINE
+                        </span>
+                      ) : cam.status === 'offline' ? (
+                        <span
+                          style={{
+                            padding: '3px 8px',
+                            borderRadius: '4px',
+                            fontSize: '0.72rem',
+                            fontWeight: 700,
+                            background: 'rgba(244, 63, 94, 0.18)',
+                            border: '1px solid rgba(244, 63, 94, 0.45)',
+                            color: '#fb7185',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '5px',
+                            boxShadow: '0 0 10px rgba(244, 63, 94, 0.2)',
+                          }}
+                          title="Titik buta (Offline)"
+                        >
+                          <EyeOff size={11} color="#fb7185" />
+                          BLINDSPOT
+                        </span>
+                      ) : (
+                        <span
+                          style={{
+                            padding: '3px 8px',
+                            borderRadius: '4px',
+                            fontSize: '0.72rem',
+                            fontWeight: 700,
+                            background: 'rgba(245, 158, 11, 0.18)',
+                            border: '1px solid rgba(245, 158, 11, 0.4)',
+                            color: '#fbbf24',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '5px',
+                          }}
+                        >
+                          <AlertTriangle size={11} color="#fbbf24" />
+                          MAINTENANCE
+                        </span>
+                      )}
+                    </td>
+
+                    {/* Action */}
+                    <td style={{ padding: '0.9rem 1.25rem', textAlign: 'right' }}>
+                      <button
+                        onClick={() => handleDelete(cam.id)}
+                        style={{
+                          background: 'transparent',
+                          border: 'none',
+                          color: '#fb7185',
+                          cursor: 'pointer',
+                          padding: '4px 8px',
+                          borderRadius: '4px',
+                          fontSize: '0.78rem',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '4px',
+                          transition: 'background 0.15s ease',
+                        }}
+                        onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(244, 63, 94, 0.15)')}
+                        onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+                        title="Hapus Kamera"
+                      >
+                        <Trash2 size={13} />
+                        <span>Hapus</span>
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
       ) : (
+        /* GRID VIEW (CARDS) */
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: '1.25rem' }}>
           {paginatedCameras.map((cam) => (
             <div
@@ -646,7 +886,7 @@ export const CameraManagementView: React.FC = () => {
             setPageSize(size);
             setCurrentPage(1);
           }}
-          pageSizeOptions={[6, 12, 24, 48]}
+          pageSizeOptions={[10, 15, 25, 50, 100]}
         />
       )}
 
