@@ -290,3 +290,22 @@ type HeatmapManifest struct {
 	LastUpdated    string               `json:"last_updated"`
 }
 
+type AuditLog struct {
+	ID         string          `json:"id"`
+	UserID     string          `json:"user_id"`
+	UserName   string          `json:"user_name,omitempty"`
+	UserEmail  string          `json:"user_email,omitempty"`
+	UserRole   string          `json:"user_role,omitempty"`
+	Action     string          `json:"action"`
+	TargetType string          `json:"target_type"`
+	TargetID   string          `json:"target_id,omitempty"`
+	Details    json.RawMessage `json:"details,omitempty"`
+	CreatedAt  time.Time       `json:"created_at"`
+}
+
+type AuditStats struct {
+	TotalLogs        int            `json:"total_logs"`
+	TodayLogs        int            `json:"today_logs"`
+	ActionBreakdown  map[string]int `json:"action_breakdown"`
+	CategoryBreakdown map[string]int `json:"category_breakdown"`
+}

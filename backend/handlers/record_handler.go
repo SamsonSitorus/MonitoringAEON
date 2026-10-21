@@ -186,6 +186,17 @@ func (h *RecordHandler) ReviewRecord(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusInternalServerError, "Commit failed: "+err.Error())
 	}
 
+	action := "APPROVE_INSPECTION"
+	if req.Status == "REVISION_REQUESTED" {
+		action = "REQUEST_REVISION"
+	}
+	db.LogAudit(context.Background(), reviewerID, action, "RECORD", recordID, map[string]any{
+		"record_id":     recordID,
+		"task_id":       taskID,
+		"review_status": req.Status,
+		"notes":         req.Notes,
+	})
+
 	return c.JSON(http.StatusOK, map[string]any{
 		"message":       "Review submitted successfully",
 		"record_id":     recordID,

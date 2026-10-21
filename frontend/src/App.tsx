@@ -19,6 +19,12 @@ export const App: React.FC = () => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [activeTab, setActiveTab] = useState<string>('dashboard');
   const [initLoading, setInitLoading] = useState<boolean>(true);
+  const [taskSearchParam, setTaskSearchParam] = useState<string>('');
+
+  const handleNavigateToTasks = (cameraName?: string) => {
+    setTaskSearchParam(cameraName || '');
+    setActiveTab('task-management');
+  };
 
   // Check existing token or show login screen
   useEffect(() => {
@@ -98,12 +104,19 @@ export const App: React.FC = () => {
           {currentUser.role === 'admin' && (
             <>
               {activeTab === 'dashboard' && <DashboardView />}
-              {activeTab === 'progress-matrix' && <WeeklyProgressMatrixView currentUser={currentUser} />}
+              {activeTab === 'progress-matrix' && (
+                <WeeklyProgressMatrixView
+                  currentUser={currentUser}
+                  onNavigateToTasks={handleNavigateToTasks}
+                />
+              )}
               {activeTab === 'map-heatmap' && <MapHeatmapView currentUser={currentUser} />}
               {activeTab === 'users' && <UserManagementView />}
               {activeTab === 'cameras' && <CameraManagementView />}
               {activeTab === 'form-builder' && <FormBuilderView />}
-              {activeTab === 'task-management' && <TaskManagementView />}
+              {activeTab === 'task-management' && (
+                <TaskManagementView initialSearch={taskSearchParam} />
+              )}
               {activeTab === 'reports' && <ReportsView />}
             </>
           )}

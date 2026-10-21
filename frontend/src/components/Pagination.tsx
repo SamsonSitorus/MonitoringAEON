@@ -79,18 +79,30 @@ export const Pagination: React.FC<PaginationProps> = ({
               value={pageSize}
               onChange={(e) => onPageSizeChange(Number(e.target.value))}
               style={{
-                padding: '0.25rem 0.6rem',
-                fontSize: '0.8rem',
+                padding: '0.3rem 0.65rem',
+                fontSize: '0.82rem',
+                fontWeight: 600,
                 width: 'auto',
-                background: 'rgba(255, 255, 255, 0.04)',
-                border: '1px solid var(--border-subtle)',
+                backgroundColor: '#0f172a',
+                border: '1px solid rgba(56, 189, 248, 0.4)',
                 borderRadius: '6px',
-                color: 'var(--text-main)',
+                color: '#ffffff',
                 cursor: 'pointer',
+                colorScheme: 'dark',
+                outline: 'none',
               }}
             >
               {pageSizeOptions.map((opt) => (
-                <option key={opt} value={opt}>
+                <option
+                  key={opt}
+                  value={opt}
+                  style={{
+                    backgroundColor: '#0f172a',
+                    color: '#ffffff',
+                    padding: '8px 12px',
+                    fontWeight: 500,
+                  }}
+                >
                   {opt} / hal
                 </option>
               ))}

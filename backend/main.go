@@ -47,6 +47,18 @@ func main() {
 	dashHandler := handlers.NewDashboardHandler()
 	reportHandler := handlers.NewReportHandler()
 	heatmapHandler := handlers.NewHeatmapHandler("data")
+	auditHandler := handlers.NewAuditHandler()
+
+	// Root Info
+	e.GET("/", func(c echo.Context) error {
+		return c.JSON(http.StatusOK, map[string]string{
+			"status":  "running",
+			"system":  "CamTrack Monitoring API Backend",
+			"version": "1.0.0",
+			"health":  "/health",
+			"message": "Backend API aktif! Untuk tampilan visual antarmuka web, silakan buka link Frontend.",
+		})
+	})
 
 	// Healthcheck
 	e.GET("/health", func(c echo.Context) error {
@@ -112,6 +124,11 @@ func main() {
 	protected.GET("/map-heatmap/layout", heatmapHandler.GetLayout, appMiddleware.RequireRole(models.RoleSupervisor, models.RoleAdmin))
 	protected.GET("/map-heatmap/manifest", heatmapHandler.GetManifest, appMiddleware.RequireRole(models.RoleSupervisor, models.RoleAdmin))
 	protected.GET("/map-heatmap/daily", heatmapHandler.GetDailyData, appMiddleware.RequireRole(models.RoleSupervisor, models.RoleAdmin))
+
+	// Audit Trail
+	protected.GET("/audit-logs", auditHandler.ListAuditLogs, appMiddleware.RequireRole(models.RoleAdmin, models.RoleSupervisor))
+	protected.GET("/audit-logs/stats", auditHandler.GetAuditStats, appMiddleware.RequireRole(models.RoleAdmin, models.RoleSupervisor))
+	protected.GET("/audit-logs/export", auditHandler.ExportAuditLogs, appMiddleware.RequireRole(models.RoleAdmin, models.RoleSupervisor))
 
 	log.Printf("[SERVER] CamTrack backend listening on :%s", cfg.Port)
 	if err := e.Start(":" + cfg.Port); err != nil && err != http.ErrServerClosed {

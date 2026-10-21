@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"camtrack-backend/db"
+	"camtrack-backend/middleware"
 	"camtrack-backend/models"
 
 	"github.com/google/uuid"
@@ -143,6 +144,19 @@ func (h *CameraHandler) CreateCamera(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusInternalServerError, "Failed to create camera: "+err.Error())
 	}
 
+	adminID := ""
+	if claims := middleware.GetUserFromContext(c); claims != nil {
+		adminID = claims.UserID
+	}
+	db.LogAudit(context.Background(), adminID, "CREATE_CAMERA", "CAMERA", cam.ID, map[string]any{
+		"code":       cam.Code,
+		"name":       cam.Name,
+		"system":     cam.System,
+		"nvr":        cam.NVR,
+		"channel_no": cam.ChannelNo,
+		"status":     cam.Status,
+	})
+
 	return c.JSON(http.StatusCreated, cam)
 }
 
@@ -175,6 +189,19 @@ func (h *CameraHandler) UpdateCamera(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusInternalServerError, "Failed to update camera: "+err.Error())
 	}
 
+	adminID := ""
+	if claims := middleware.GetUserFromContext(c); claims != nil {
+		adminID = claims.UserID
+	}
+	db.LogAudit(context.Background(), adminID, "UPDATE_CAMERA", "CAMERA", cam.ID, map[string]any{
+		"code":       cam.Code,
+		"name":       cam.Name,
+		"system":     cam.System,
+		"nvr":        cam.NVR,
+		"channel_no": cam.ChannelNo,
+		"status":     cam.Status,
+	})
+
 	return c.JSON(http.StatusOK, cam)
 }
 
@@ -184,5 +211,14 @@ func (h *CameraHandler) DeleteCamera(c echo.Context) error {
 	if err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError, "Failed to delete camera: "+err.Error())
 	}
+
+	adminID := ""
+	if claims := middleware.GetUserFromContext(c); claims != nil {
+		adminID = claims.UserID
+	}
+	db.LogAudit(context.Background(), adminID, "DELETE_CAMERA", "CAMERA", id, map[string]any{
+		"camera_id": id,
+	})
+
 	return c.NoContent(http.StatusNoContent)
 }

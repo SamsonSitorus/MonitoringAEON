@@ -38,7 +38,13 @@ const STANDARD_TIME_SLOTS = [
   '17:00 - 18:00 WIB',
 ];
 
-export const TaskManagementView: React.FC = () => {
+interface TaskManagementViewProps {
+  initialSearch?: string;
+}
+
+export const TaskManagementView: React.FC<TaskManagementViewProps> = ({
+  initialSearch,
+}) => {
   const [tasks, setTasks] = useState<InspectionTask[]>([]);
   const [cameras, setCameras] = useState<CameraType[]>([]);
   const [inspectors, setInspectors] = useState<User[]>([]);
@@ -66,7 +72,7 @@ export const TaskManagementView: React.FC = () => {
   const [datePreset, setDatePreset] = useState<'ALL' | 'TODAY' | 'THIS_WEEK' | 'THIS_MONTH' | 'CUSTOM'>('ALL');
   const [customDate, setCustomDate] = useState<string>('');
   const [statusFilter, setStatusFilter] = useState<string>('ALL');
-  const [search, setSearch] = useState<string>('');
+  const [search, setSearch] = useState<string>(initialSearch || '');
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(10);
   const [modalSystemFilter, setModalSystemFilter] = useState<'ALL' | 'InaAI' | 'AEON'>('ALL');
@@ -196,6 +202,10 @@ export const TaskManagementView: React.FC = () => {
     } finally {
       setSubmitting(false);
     }
+  };
+
+  const handleCloseModal = () => {
+    setShowBatchModal(false);
   };
 
   // Date computation helpers
@@ -668,7 +678,7 @@ export const TaskManagementView: React.FC = () => {
                 <Plus size={18} color="#38bdf8" />
                 Penugasan Inspeksi Terjadwal (Scheduled Task Assignment)
               </h3>
-              <button onClick={() => setShowBatchModal(false)} style={{ background: 'transparent', border: 'none', color: 'var(--text-dim)', cursor: 'pointer' }}>
+              <button onClick={handleCloseModal} style={{ background: 'transparent', border: 'none', color: 'var(--text-dim)', cursor: 'pointer' }}>
                 ✕
               </button>
             </div>
@@ -913,30 +923,35 @@ export const TaskManagementView: React.FC = () => {
                           checked={selectedCamIds.includes(c.id)}
                           onChange={() => toggleSelectCamera(c.id)}
                         />
-                        <div style={{ flex: 1 }}>
-                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <span style={{ fontWeight: 600 }}>{c.code}</span>
+                        <div style={{ flex: 1, minWidth: 0 }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '6px' }}>
+                            <span style={{ fontWeight: 700, fontSize: '0.92rem', color: '#ffffff', lineHeight: 1.3 }}>
+                              {c.name}
+                            </span>
                             <span
                               style={{
                                 fontSize: '0.65rem',
-                                padding: '1px 5px',
-                                borderRadius: '3px',
+                                padding: '2px 6px',
+                                borderRadius: '4px',
                                 fontWeight: 700,
                                 background: c.system === 'InaAI' ? 'rgba(14, 165, 233, 0.2)' : 'rgba(139, 92, 246, 0.2)',
                                 color: c.system === 'InaAI' ? '#38bdf8' : '#c084fc',
+                                flexShrink: 0,
                               }}
                             >
                               {c.system || 'InaAI'}
                             </span>
                           </div>
-                          <div style={{ fontSize: '0.72rem', color: 'var(--text-dim)', marginTop: '2px' }}>
-                            {c.name}
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '4px', flexWrap: 'wrap' }}>
+                            <span style={{ fontSize: '0.74rem', color: '#94a3b8', fontFamily: 'var(--font-mono)', fontWeight: 600 }}>
+                              {c.code}
+                            </span>
+                            {c.nvr && (
+                              <span style={{ fontSize: '0.7rem', color: '#818cf8', fontFamily: 'var(--font-mono)' }}>
+                                {c.nvr} (Ch {c.channel_no || 1})
+                              </span>
+                            )}
                           </div>
-                          {c.nvr && (
-                            <div style={{ fontSize: '0.68rem', color: '#a5b4fc', fontFamily: 'var(--font-mono)', marginTop: '2px' }}>
-                              {c.nvr} (Ch {c.channel_no || 1})
-                            </div>
-                          )}
                         </div>
                       </label>
                     ))}
@@ -950,7 +965,7 @@ export const TaskManagementView: React.FC = () => {
               </div>
 
               <div style={{ display: 'flex', gap: '8px' }}>
-                <button className="btn btn-secondary" onClick={() => setShowBatchModal(false)}>
+                <button className="btn btn-secondary" onClick={handleCloseModal}>
                   Batal
                 </button>
                 <button 

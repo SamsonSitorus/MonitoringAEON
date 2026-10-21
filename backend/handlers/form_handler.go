@@ -150,6 +150,12 @@ func (h *FormHandler) CreateTemplate(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusInternalServerError, "Failed to commit")
 	}
 
+	db.LogAudit(context.Background(), creatorID, "CREATE_TEMPLATE", "TEMPLATE", templateID, map[string]any{
+		"name":    req.Name,
+		"code":    req.Code,
+		"version": 1,
+	})
+
 	return c.JSON(http.StatusCreated, map[string]any{
 		"template_id": templateID,
 		"version_id":  versionID,
@@ -202,6 +208,12 @@ func (h *FormHandler) CreateVersion(c echo.Context) error {
 	if err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError, "Failed to create new version: "+err.Error())
 	}
+
+	db.LogAudit(context.Background(), creatorID, "UPDATE_TEMPLATE", "TEMPLATE", templateID, map[string]any{
+		"template_id":    templateID,
+		"version_id":     versionID,
+		"version_number": newVersion,
+	})
 
 	return c.JSON(http.StatusCreated, map[string]any{
 		"id":             versionID,
