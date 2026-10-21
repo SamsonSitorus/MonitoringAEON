@@ -913,30 +913,35 @@ export const TaskManagementView: React.FC = () => {
                           checked={selectedCamIds.includes(c.id)}
                           onChange={() => toggleSelectCamera(c.id)}
                         />
-                        <div style={{ flex: 1 }}>
-                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <span style={{ fontWeight: 600 }}>{c.code}</span>
+                        <div style={{ flex: 1, minWidth: 0 }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '6px' }}>
+                            <span style={{ fontWeight: 700, fontSize: '0.92rem', color: '#ffffff', lineHeight: 1.3 }}>
+                              {c.name}
+                            </span>
                             <span
                               style={{
                                 fontSize: '0.65rem',
-                                padding: '1px 5px',
-                                borderRadius: '3px',
+                                padding: '2px 6px',
+                                borderRadius: '4px',
                                 fontWeight: 700,
                                 background: c.system === 'InaAI' ? 'rgba(14, 165, 233, 0.2)' : 'rgba(139, 92, 246, 0.2)',
                                 color: c.system === 'InaAI' ? '#38bdf8' : '#c084fc',
+                                flexShrink: 0,
                               }}
                             >
                               {c.system || 'InaAI'}
                             </span>
                           </div>
-                          <div style={{ fontSize: '0.72rem', color: 'var(--text-dim)', marginTop: '2px' }}>
-                            {c.name}
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '4px', flexWrap: 'wrap' }}>
+                            <span style={{ fontSize: '0.74rem', color: '#94a3b8', fontFamily: 'var(--font-mono)', fontWeight: 600 }}>
+                              {c.code}
+                            </span>
+                            {c.nvr && (
+                              <span style={{ fontSize: '0.7rem', color: '#818cf8', fontFamily: 'var(--font-mono)' }}>
+                                {c.nvr} (Ch {c.channel_no || 1})
+                              </span>
+                            )}
                           </div>
-                          {c.nvr && (
-                            <div style={{ fontSize: '0.68rem', color: '#a5b4fc', fontFamily: 'var(--font-mono)', marginTop: '2px' }}>
-                              {c.nvr} (Ch {c.channel_no || 1})
-                            </div>
-                          )}
                         </div>
                       </label>
                     ))}

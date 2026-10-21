@@ -543,11 +543,13 @@ export const CameraManagementView: React.FC = () => {
                   )}
                 </div>
 
-                {/* Camera Code & Name */}
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: '#38bdf8', fontWeight: 700, marginBottom: '2px' }}>
+                {/* Camera Name & Code */}
+                <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.01em', marginBottom: '4px', lineHeight: 1.25 }}>
+                  {cam.name}
+                </h3>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: '#38bdf8', fontWeight: 600, marginBottom: '0.75rem' }}>
                   {cam.code}
                 </div>
-                <h3 style={{ fontSize: '1.05rem', fontWeight: 700, marginBottom: '0.75rem', color: '#ffffff' }}>{cam.name}</h3>
 
                 {/* Blindspot Alert banner if offline */}
                 {cam.status === 'offline' && (
