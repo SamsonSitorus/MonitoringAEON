@@ -8,7 +8,10 @@ import {
   InspectionRecord,
   DashboardStats,
   ResultsSummary,
-  UserRole
+  UserRole,
+  MapLayout,
+  DailyHeatmap,
+  HeatmapManifest
 } from '../types';
 
 const rawApiUrl = (import.meta.env.VITE_API_URL || '').replace(/\/+$/, '');
@@ -292,6 +295,20 @@ class ApiService {
   getExportCSVUrl(): string {
     return `${API_BASE}/reports/export-csv`;
   }
+
+  // Map Heatmap API
+  async getMapLayout(): Promise<MapLayout> {
+    return this.request<MapLayout>('/map-heatmap/layout');
+  }
+
+  async getHeatmapManifest(): Promise<HeatmapManifest> {
+    return this.request<HeatmapManifest>('/map-heatmap/manifest');
+  }
+
+  async getDailyHeatmap(date: string): Promise<DailyHeatmap> {
+    return this.request<DailyHeatmap>(`/map-heatmap/daily?date=${encodeURIComponent(date)}`);
+  }
 }
 
 export const api = new ApiService();
+

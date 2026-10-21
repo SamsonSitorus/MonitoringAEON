@@ -1,0 +1,178 @@
+{
+  "available_dates": [
+    "2026-10-01",
+    "2026-10-02",
+    "2026-10-03",
+    "2026-10-04",
+    "2026-10-05",
+    "2026-10-06",
+    "2026-10-07",
+    "2026-10-08",
+    "2026-10-09",
+    "2026-10-10",
+    "2026-10-11",
+    "2026-10-12",
+    "2026-10-13",
+    "2026-10-14",
+    "2026-10-15",
+    "2026-10-16",
+    "2026-10-17"
+  ],
+  "total_days": 17,
+  "dates_summary": [
+    {
+      "date": "2026-10-01",
+      "total_events": 459704,
+      "mapped_events": 353750,
+      "unmapped_events": 105954,
+      "top_shelf_name": "Rice",
+      "top_shelf_count": 5505,
+      "shelves_with_events": 893
+    },
+    {
+      "date": "2026-10-02",
+      "total_events": 389459,
+      "mapped_events": 299275,
+      "unmapped_events": 90184,
+      "top_shelf_name": "Rice",
+      "top_shelf_count": 4366,
+      "shelves_with_events": 883
+    },
+    {
+      "date": "2026-10-03",
+      "total_events": 706735,
+      "mapped_events": 535723,
+      "unmapped_events": 171012,
+      "top_shelf_name": "Rice",
+      "top_shelf_count": 8571,
+      "shelves_with_events": 903
+    },
+    {
+      "date": "2026-10-04",
+      "total_events": 722595,
+      "mapped_events": 545190,
+      "unmapped_events": 177405,
+      "top_shelf_name": "Rice",
+      "top_shelf_count": 9211,
+      "shelves_with_events": 902
+    },
+    {
+      "date": "2026-10-05",
+      "total_events": 906189,
+      "mapped_events": 673890,
+      "unmapped_events": 232299,
+      "top_shelf_name": "Beer Corner",
+      "top_shelf_count": 11870,
+      "shelves_with_events": 892
+    },
+    {
+      "date": "2026-10-06",
+      "total_events": 863457,
+      "mapped_events": 644975,
+      "unmapped_events": 218482,
+      "top_shelf_name": "Beer Corner",
+      "top_shelf_count": 10016,
+      "shelves_with_events": 890
+    },
+    {
+      "date": "2026-10-07",
+      "total_events": 699177,
+      "mapped_events": 527230,
+      "unmapped_events": 171947,
+      "top_shelf_name": "Beer Corner",
+      "top_shelf_count": 8122,
+      "shelves_with_events": 900
+    },
+    {
+      "date": "2026-10-08",
+      "total_events": 997030,
+      "mapped_events": 754039,
+      "unmapped_events": 242991,
+      "top_shelf_name": "Beer Corner",
+      "top_shelf_count": 11062,
+      "shelves_with_events": 899
+    },
+    {
+      "date": "2026-10-09",
+      "total_events": 1054507,
+      "mapped_events": 793978,
+      "unmapped_events": 260529,
+      "top_shelf_name": "Cashier Shelf 7",
+      "top_shelf_count": 12323,
+      "shelves_with_events": 896
+    },
+    {
+      "date": "2026-10-10",
+      "total_events": 1323122,
+      "mapped_events": 1004002,
+      "unmapped_events": 319120,
+      "top_shelf_name": "Rice",
+      "top_shelf_count": 21163,
+      "shelves_with_events": 894
+    },
+    {
+      "date": "2026-10-11",
+      "total_events": 1392451,
+      "mapped_events": 1054116,
+      "unmapped_events": 338335,
+      "top_shelf_name": "Rice",
+      "top_shelf_count": 21332,
+      "shelves_with_events": 882
+    },
+    {
+      "date": "2026-10-12",
+      "total_events": 836260,
+      "mapped_events": 629412,
+      "unmapped_events": 206848,
+      "top_shelf_name": "Rice",
+      "top_shelf_count": 11871,
+      "shelves_with_events": 875
+    },
+    {
+      "date": "2026-10-13",
+      "total_events": 1040953,
+      "mapped_events": 780514,
+      "unmapped_events": 260439,
+      "top_shelf_name": "Ubi Cilembu",
+      "top_shelf_count": 20060,
+      "shelves_with_events": 901
+    },
+    {
+      "date": "2026-10-14",
+      "total_events": 884936,
+      "mapped_events": 646016,
+      "unmapped_events": 238920,
+      "top_shelf_name": "Ubi Cilembu",
+      "top_shelf_count": 13713,
+      "shelves_with_events": 893
+    },
+    {
+      "date": "2026-10-15",
+      "total_events": 601136,
+      "mapped_events": 437498,
+      "unmapped_events": 163638,
+      "top_shelf_name": "Rice",
+      "top_shelf_count": 8797,
+      "shelves_with_events": 884
+    },
+    {
+      "date": "2026-10-16",
+      "total_events": 1002450,
+      "mapped_events": 730584,
+      "unmapped_events": 271866,
+      "top_shelf_name": "Rice",
+      "top_shelf_count": 14244,
+      "shelves_with_events": 890
+    },
+    {
+      "date": "2026-10-17",
+      "total_events": 816399,
+      "mapped_events": 604603,
+      "unmapped_events": 211796,
+      "top_shelf_name": "Rice",
+      "top_shelf_count": 12402,
+      "shelves_with_events": 890
+    }
+  ],
+  "last_updated": "2026-10-21T09:52:56Z"
+}

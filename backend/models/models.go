@@ -174,3 +174,119 @@ type ResultsSummary struct {
 	TotalIssuesFound   int            `json:"total_issues_found"`
 	CategoryBreakdown  map[string]int `json:"category_breakdown"`
 }
+
+// Map Heatmap Models
+type ShelfMetadata struct {
+	ID          string    `json:"id"`
+	Name        string    `json:"name"`
+	Isle        string    `json:"isle"`
+	Area        string    `json:"area"`
+	CADCentroid []float64 `json:"cad_centroid"`
+	SVGCentroid []float64 `json:"svg_centroid"`
+	SVGPoints   string    `json:"svg_points"`
+	BoundsSVG   []float64 `json:"bounds_svg"`
+}
+
+type MajorLabel struct {
+	Text   string    `json:"text"`
+	PosSVG []float64 `json:"pos_svg"`
+	Area   string    `json:"area"`
+	Type   string    `json:"type"`
+	Size   float64   `json:"size"`
+}
+
+type StoreAreaInfo struct {
+	ID          string `json:"id"`
+	Name        string `json:"name"`
+	Description string `json:"description"`
+	ShelfCount  int    `json:"shelf_count"`
+	ZoneCount   int    `json:"zone_count"`
+	Color       string `json:"color"`
+}
+
+type ZoneMetadata struct {
+	ID          string    `json:"id"`
+	Name        string    `json:"name"`
+	Area        float64   `json:"area"`
+	ParentArea  string    `json:"parent_area,omitempty"`
+	AreaID      string    `json:"area_id,omitempty"`
+	IsDelica    bool      `json:"is_delica,omitempty"`
+	IsEntrance  bool      `json:"is_entrance,omitempty"`
+	SVGPoints   string    `json:"svg_points"`
+	CentroidSVG []float64 `json:"centroid_svg"`
+	CadCentroid []float64 `json:"cad_centroid,omitempty"`
+}
+
+type MapLayout struct {
+	ViewboxFull    string          `json:"viewbox_full"`
+	ViewboxFocused string          `json:"viewbox_focused"`
+	ViewboxDelica  string          `json:"viewbox_delica,omitempty"`
+	StoreBoundary  string          `json:"store_boundary,omitempty"`
+	Areas          []StoreAreaInfo `json:"areas,omitempty"`
+	MajorLabels    []MajorLabel    `json:"major_labels,omitempty"`
+	TotalShelves   int             `json:"total_shelves"`
+	TotalZones     int             `json:"total_zones"`
+	Shelves        []ShelfMetadata `json:"shelves"`
+	Zones          []ZoneMetadata  `json:"zones"`
+}
+
+type TopShelfInfo struct {
+	ID         string  `json:"id"`
+	Name       string  `json:"name"`
+	Isle       string  `json:"isle"`
+	Area       string  `json:"area"`
+	Count      int     `json:"count"`
+	Percentage float64 `json:"percentage"`
+}
+
+type AreaStat struct {
+	TotalEvents       int    `json:"total_events"`
+	ShelvesWithEvents int    `json:"shelves_with_events"`
+	TotalShelves      int    `json:"total_shelves"`
+	Description       string `json:"description,omitempty"`
+	Status            string `json:"status,omitempty"`
+}
+
+type IsleStat struct {
+	TotalEvents        int    `json:"total_events"`
+	ShelvesWithEvents  int    `json:"shelves_with_events"`
+	TotalShelves       int    `json:"total_shelves"`
+	Area               string `json:"area"`
+}
+
+type DailyHeatmap struct {
+	Date              string              `json:"date"`
+	TotalEvents       int                 `json:"total_events"`
+	MappedEvents      int                 `json:"mapped_events"`
+	UnmappedEvents    int                 `json:"unmapped_events"`
+	MappedPercentage  float64             `json:"mapped_percentage"`
+	ShelvesTotal      int                 `json:"shelves_total"`
+	ShelvesWithEvents int                 `json:"shelves_with_events"`
+	IslesCount        int                 `json:"isles_count"`
+	AreasCount        int                 `json:"areas_count"`
+	TopShelf          *TopShelfInfo       `json:"top_shelf"`
+	ActionBreakdown   map[string]int      `json:"action_breakdown"`
+	ShelfCounts       map[string]int      `json:"shelf_counts"`
+	AreaSummary       map[string]AreaStat `json:"area_summary"`
+	IsleSummary       map[string]IsleStat `json:"isle_summary"`
+	ProcessedAt       string              `json:"processed_at,omitempty"`
+	DurationSeconds   float64             `json:"duration_seconds,omitempty"`
+}
+
+type HeatmapDateSummary struct {
+	Date              string `json:"date"`
+	TotalEvents       int    `json:"total_events"`
+	MappedEvents      int    `json:"mapped_events"`
+	UnmappedEvents    int    `json:"unmapped_events"`
+	TopShelfName      string `json:"top_shelf_name"`
+	TopShelfCount     int    `json:"top_shelf_count"`
+	ShelvesWithEvents int    `json:"shelves_with_events"`
+}
+
+type HeatmapManifest struct {
+	AvailableDates []string             `json:"available_dates"`
+	TotalDays      int                  `json:"total_days"`
+	DatesSummary   []HeatmapDateSummary `json:"dates_summary"`
+	LastUpdated    string               `json:"last_updated"`
+}
+

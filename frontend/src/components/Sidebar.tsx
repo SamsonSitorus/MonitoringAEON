@@ -9,7 +9,8 @@ import {
   FileText,
   Users,
   LogOut,
-  CalendarDays
+  CalendarDays,
+  MapPin
 } from 'lucide-react';
 import { User } from '../types';
 
@@ -59,6 +60,13 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentUser, activeTab, onSele
               >
                 <CalendarDays size={18} />
                 <span>Matriks Progres CCTV</span>
+              </button>
+              <button
+                className={`nav-item ${activeTab === 'map-heatmap' ? 'active' : ''}`}
+                onClick={() => onSelectTab('map-heatmap')}
+              >
+                <MapPin size={18} />
+                <span>Map Heatmap</span>
               </button>
               <button
                 className={`nav-item ${activeTab === 'users' ? 'active' : ''}`}
@@ -140,6 +148,13 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentUser, activeTab, onSele
               >
                 <CalendarDays size={18} />
                 <span>Matriks Progres CCTV</span>
+              </button>
+              <button
+                className={`nav-item ${activeTab === 'map-heatmap' ? 'active' : ''}`}
+                onClick={() => onSelectTab('map-heatmap')}
+              >
+                <MapPin size={18} />
+                <span>Map Heatmap</span>
               </button>
               <button
                 className={`nav-item ${activeTab === 'supervisor-reviews' ? 'active' : ''}`}

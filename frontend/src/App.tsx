@@ -10,6 +10,7 @@ import { SupervisorReviewView } from './components/SupervisorReviewView';
 import { ReportsView } from './components/ReportsView';
 import { UserManagementView } from './components/UserManagementView';
 import { WeeklyProgressMatrixView } from './components/WeeklyProgressMatrixView';
+import { MapHeatmapView } from './components/MapHeatmapView';
 import { LoginView } from './components/LoginView';
 import { api } from './services/api';
 import { User } from './types';
@@ -98,6 +99,7 @@ export const App: React.FC = () => {
             <>
               {activeTab === 'dashboard' && <DashboardView />}
               {activeTab === 'progress-matrix' && <WeeklyProgressMatrixView currentUser={currentUser} />}
+              {activeTab === 'map-heatmap' && <MapHeatmapView currentUser={currentUser} />}
               {activeTab === 'users' && <UserManagementView />}
               {activeTab === 'cameras' && <CameraManagementView />}
               {activeTab === 'form-builder' && <FormBuilderView />}
@@ -119,6 +121,7 @@ export const App: React.FC = () => {
             <>
               {activeTab === 'dashboard' && <DashboardView />}
               {activeTab === 'progress-matrix' && <WeeklyProgressMatrixView currentUser={currentUser} />}
+              {activeTab === 'map-heatmap' && <MapHeatmapView currentUser={currentUser} />}
               {activeTab === 'supervisor-reviews' && <SupervisorReviewView currentUser={currentUser} />}
               {activeTab === 'reports' && <ReportsView />}
             </>

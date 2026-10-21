@@ -46,6 +46,7 @@ func main() {
 	recordHandler := handlers.NewRecordHandler()
 	dashHandler := handlers.NewDashboardHandler()
 	reportHandler := handlers.NewReportHandler()
+	heatmapHandler := handlers.NewHeatmapHandler("data")
 
 	// Healthcheck
 	e.GET("/health", func(c echo.Context) error {
@@ -106,6 +107,11 @@ func main() {
 	protected.GET("/dashboard/stats", dashHandler.GetStats)
 	protected.GET("/dashboard/results-summary", dashHandler.GetResultsSummary)
 	protected.GET("/reports/export-csv", reportHandler.ExportCSV)
+
+	// Map Heatmap (Supervisor & Admin)
+	protected.GET("/map-heatmap/layout", heatmapHandler.GetLayout, appMiddleware.RequireRole(models.RoleSupervisor, models.RoleAdmin))
+	protected.GET("/map-heatmap/manifest", heatmapHandler.GetManifest, appMiddleware.RequireRole(models.RoleSupervisor, models.RoleAdmin))
+	protected.GET("/map-heatmap/daily", heatmapHandler.GetDailyData, appMiddleware.RequireRole(models.RoleSupervisor, models.RoleAdmin))
 
 	log.Printf("[SERVER] CamTrack backend listening on :%s", cfg.Port)
 	if err := e.Start(":" + cfg.Port); err != nil && err != http.ErrServerClosed {

@@ -165,3 +165,119 @@ export interface ResultsSummary {
   total_issues_found: number;
   category_breakdown: Record<string, number>;
 }
+
+// Map Heatmap Types
+export interface ShelfMetadata {
+  id: string;
+  name: string;
+  isle: string;
+  area: string;
+  cad_centroid: [number, number];
+  svg_centroid: [number, number];
+  svg_points: string;
+  bounds_svg: [number, number, number, number];
+}
+
+export interface MajorLabel {
+  text: string;
+  pos_svg: [number, number];
+  area: string;
+  type: string;
+  size: number;
+}
+
+export interface StoreAreaInfo {
+  id: string;
+  name: string;
+  description: string;
+  shelf_count: number;
+  zone_count: number;
+  color: string;
+}
+
+export interface ZoneMetadata {
+  id: string;
+  name: string;
+  area: number;
+  parent_area?: string;
+  area_id?: string;
+  is_delica?: boolean;
+  is_entrance?: boolean;
+  svg_points: string;
+  centroid_svg: [number, number];
+  cad_centroid?: [number, number];
+}
+
+export interface MapLayout {
+  viewbox_full: string;
+  viewbox_focused: string;
+  viewbox_delica?: string;
+  store_boundary?: string;
+  areas?: StoreAreaInfo[];
+  major_labels?: MajorLabel[];
+  total_shelves: number;
+  total_zones: number;
+  shelves: ShelfMetadata[];
+  zones: ZoneMetadata[];
+}
+
+export interface TopShelfInfo {
+  id: string;
+  name: string;
+  isle: string;
+  area: string;
+  count: number;
+  percentage: number;
+}
+
+export interface AreaStat {
+  total_events: number;
+  shelves_with_events: number;
+  total_shelves: number;
+  description?: string;
+  status?: string;
+}
+
+export interface IsleStat {
+  total_events: number;
+  shelves_with_events: number;
+  total_shelves: number;
+  area: string;
+}
+
+export interface DailyHeatmap {
+  date: string;
+  total_events: number;
+  mapped_events: number;
+  unmapped_events: number;
+  mapped_percentage: number;
+  shelves_total: number;
+  shelves_with_events: number;
+  isles_count: number;
+  areas_count: number;
+  top_shelf: TopShelfInfo | null;
+  action_breakdown?: Record<string, number>;
+  shelf_counts: Record<string, number>;
+  area_summary: Record<string, AreaStat>;
+  isle_summary: Record<string, IsleStat>;
+  processed_at?: string;
+  duration_seconds?: number;
+}
+
+export interface HeatmapDateSummary {
+  date: string;
+  total_events: number;
+  mapped_events: number;
+  unmapped_events: number;
+  top_shelf_name: string;
+  top_shelf_count: number;
+  shelves_with_events: number;
+}
+
+export interface HeatmapManifest {
+  available_dates: string[];
+  total_days: number;
+  dates_summary: HeatmapDateSummary[];
+  last_updated: string;
+}
+
