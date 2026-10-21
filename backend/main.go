@@ -47,6 +47,17 @@ func main() {
 	dashHandler := handlers.NewDashboardHandler()
 	reportHandler := handlers.NewReportHandler()
 
+	// Root Info
+	e.GET("/", func(c echo.Context) error {
+		return c.JSON(http.StatusOK, map[string]string{
+			"status":  "running",
+			"system":  "CamTrack Monitoring API Backend",
+			"version": "1.0.0",
+			"health":  "/health",
+			"message": "Backend API aktif! Untuk tampilan visual antarmuka web, silakan buka link Frontend.",
+		})
+	})
+
 	// Healthcheck
 	e.GET("/health", func(c echo.Context) error {
 		return c.JSON(http.StatusOK, map[string]string{
