@@ -254,23 +254,29 @@ type IsleStat struct {
 	Area               string `json:"area"`
 }
 
+type ShelfActionBreakdown struct {
+	Actions   map[string]int `json:"actions"`
+	AIActions map[string]int `json:"ai_actions,omitempty"`
+}
+
 type DailyHeatmap struct {
-	Date              string              `json:"date"`
-	TotalEvents       int                 `json:"total_events"`
-	MappedEvents      int                 `json:"mapped_events"`
-	UnmappedEvents    int                 `json:"unmapped_events"`
-	MappedPercentage  float64             `json:"mapped_percentage"`
-	ShelvesTotal      int                 `json:"shelves_total"`
-	ShelvesWithEvents int                 `json:"shelves_with_events"`
-	IslesCount        int                 `json:"isles_count"`
-	AreasCount        int                 `json:"areas_count"`
-	TopShelf          *TopShelfInfo       `json:"top_shelf"`
-	ActionBreakdown   map[string]int      `json:"action_breakdown"`
-	ShelfCounts       map[string]int      `json:"shelf_counts"`
-	AreaSummary       map[string]AreaStat `json:"area_summary"`
-	IsleSummary       map[string]IsleStat `json:"isle_summary"`
-	ProcessedAt       string              `json:"processed_at,omitempty"`
-	DurationSeconds   float64             `json:"duration_seconds,omitempty"`
+	Date              string                          `json:"date"`
+	TotalEvents       int                             `json:"total_events"`
+	MappedEvents      int                             `json:"mapped_events"`
+	UnmappedEvents    int                             `json:"unmapped_events"`
+	MappedPercentage  float64                         `json:"mapped_percentage"`
+	ShelvesTotal      int                             `json:"shelves_total"`
+	ShelvesWithEvents int                             `json:"shelves_with_events"`
+	IslesCount        int                             `json:"isles_count"`
+	AreasCount        int                             `json:"areas_count"`
+	TopShelf          *TopShelfInfo                   `json:"top_shelf"`
+	ActionBreakdown   map[string]int                  `json:"action_breakdown"`
+	ShelfCounts       map[string]int                  `json:"shelf_counts"`
+	ShelfActions      map[string]ShelfActionBreakdown `json:"shelf_actions,omitempty"`
+	AreaSummary       map[string]AreaStat             `json:"area_summary"`
+	IsleSummary       map[string]IsleStat             `json:"isle_summary"`
+	ProcessedAt       string                          `json:"processed_at,omitempty"`
+	DurationSeconds   float64                         `json:"duration_seconds,omitempty"`
 }
 
 type HeatmapDateSummary struct {

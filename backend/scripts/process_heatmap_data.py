@@ -263,7 +263,7 @@ def process_daily_parquet(parquet_file, shelf_meta_list, shelf_geoms, tree, outp
     t0 = time.time()
 
     # Read parquet
-    table = pq.read_table(parquet_file, columns=['x_coordinate', 'y_coordinate', 'action_code'])
+    table = pq.read_table(parquet_file, columns=['x_coordinate', 'y_coordinate', 'action_code', 'action_ai'])
     df = table.to_pandas()
     total_events = len(df)
 
@@ -284,13 +284,26 @@ def process_daily_parquet(parquet_file, shelf_meta_list, shelf_geoms, tree, outp
     nearest_indices = tree.nearest(pts)
 
     shelf_counts = {}
+    shelf_actions = {}
     unmapped_count = 0
 
-    for p, s_idx in zip(pts, nearest_indices):
+    act_codes = df['action_code'].values
+    act_ais = df['action_ai'].values if 'action_ai' in df.columns else None
+
+    for idx, (p, s_idx) in enumerate(zip(pts, nearest_indices)):
         s_geom = shelf_geoms[s_idx]
         if s_geom.distance(p) <= MAX_INTERACTION_DISTANCE:
             sh_id = shelf_meta_list[s_idx]['id']
             shelf_counts[sh_id] = shelf_counts.get(sh_id, 0) + 1
+            if sh_id not in shelf_actions:
+                shelf_actions[sh_id] = {'actions': {}, 'ai_actions': {}}
+            ac = str(act_codes[idx])
+            shelf_actions[sh_id]['actions'][ac] = shelf_actions[sh_id]['actions'].get(ac, 0) + 1
+            if act_ais is not None:
+                ai = act_ais[idx]
+                if pd.notna(ai):
+                    ai_str = str(ai)
+                    shelf_actions[sh_id]['ai_actions'][ai_str] = shelf_actions[sh_id]['ai_actions'].get(ai_str, 0) + 1
         else:
             unmapped_count += 1
 
@@ -380,6 +393,7 @@ def process_daily_parquet(parquet_file, shelf_meta_list, shelf_geoms, tree, outp
         'top_shelf': top_shelf,
         'action_breakdown': action_counts,
         'shelf_counts': shelf_counts,
+        'shelf_actions': shelf_actions,
         'area_summary': area_stats,
         'isle_summary': isle_stats,
         'processed_at': time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),

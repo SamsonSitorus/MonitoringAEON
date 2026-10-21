@@ -899,6 +899,11099 @@
     "22E": 1,
     "276": 1
   },
+  "shelf_actions": {
+    "19C": {
+      "actions": {
+        "take": 1055,
+        "pass": 1015,
+        "excluded": 118,
+        "stop": 183
+      },
+      "ai_actions": {
+        "take": 2180,
+        "pass": 49,
+        "stop": 23,
+        "touch": 1
+      }
+    },
+    "4A3": {
+      "actions": {
+        "take": 513,
+        "pass": 366,
+        "stop": 48,
+        "excluded": 68
+      },
+      "ai_actions": {
+        "take": 769,
+        "touch": 37,
+        "pass": 140,
+        "stop": 4
+      }
+    },
+    "1CF": {
+      "actions": {
+        "pass": 1651,
+        "excluded": 777,
+        "take": 343,
+        "stop": 242
+      },
+      "ai_actions": {
+        "pass": 807,
+        "take": 1349,
+        "stop": 52,
+        "touch": 12
+      }
+    },
+    "26F": {
+      "actions": {
+        "excluded": 1261,
+        "pass": 3474,
+        "take": 356,
+        "stop": 244
+      },
+      "ai_actions": {
+        "take": 1408,
+        "pass": 2520,
+        "stop": 134,
+        "touch": 11
+      }
+    },
+    "3FB": {
+      "actions": {
+        "take": 78,
+        "pass": 49,
+        "stop": 27,
+        "excluded": 8
+      },
+      "ai_actions": {
+        "take": 141,
+        "touch": 4,
+        "pass": 12,
+        "not_engage": 2,
+        "stop": 2
+      }
+    },
+    "1E5": {
+      "actions": {
+        "pass": 659,
+        "take": 248,
+        "stop": 128,
+        "excluded": 31
+      },
+      "ai_actions": {
+        "pass": 298,
+        "take": 700,
+        "touch": 11,
+        "stop": 26
+      }
+    },
+    "1C9": {
+      "actions": {
+        "take": 132,
+        "pass": 796,
+        "excluded": 47,
+        "stop": 63
+      },
+      "ai_actions": {
+        "take": 377,
+        "pass": 534,
+        "stop": 80,
+        "touch": 23
+      }
+    },
+    "2DE": {
+      "actions": {
+        "pass": 593,
+        "excluded": 80,
+        "take": 195,
+        "stop": 57
+      },
+      "ai_actions": {
+        "take": 724,
+        "touch": 8,
+        "stop": 53,
+        "pass": 60
+      }
+    },
+    "314": {
+      "actions": {
+        "take": 228,
+        "pass": 908,
+        "excluded": 202,
+        "stop": 52
+      },
+      "ai_actions": {
+        "take": 861,
+        "pass": 197,
+        "touch": 14,
+        "stop": 148
+      }
+    },
+    "514": {
+      "actions": {
+        "pass": 894,
+        "take": 405,
+        "stop": 140,
+        "excluded": 5
+      },
+      "ai_actions": {
+        "take": 1168,
+        "pass": 262,
+        "stop": 7,
+        "touch": 2
+      }
+    },
+    "42D": {
+      "actions": {
+        "take": 178,
+        "pass": 600,
+        "stop": 100
+      },
+      "ai_actions": {
+        "take": 645,
+        "pass": 213,
+        "stop": 15,
+        "touch": 5
+      }
+    },
+    "19A": {
+      "actions": {
+        "take": 1451,
+        "pass": 1484,
+        "excluded": 171,
+        "stop": 107
+      },
+      "ai_actions": {
+        "take": 2929,
+        "pass": 44,
+        "stop": 62,
+        "touch": 1
+      }
+    },
+    "430": {
+      "actions": {
+        "pass": 375,
+        "take": 159,
+        "stop": 29,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "pass": 93,
+        "take": 461,
+        "stop": 6,
+        "touch": 3
+      }
+    },
+    "35A": {
+      "actions": {
+        "take": 975,
+        "pass": 1834,
+        "stop": 163,
+        "excluded": 13
+      },
+      "ai_actions": {
+        "take": 2500,
+        "stop": 180,
+        "pass": 288,
+        "touch": 4
+      }
+    },
+    "1BE": {
+      "actions": {
+        "pass": 621,
+        "excluded": 210,
+        "take": 291,
+        "stop": 227
+      },
+      "ai_actions": {
+        "take": 1075,
+        "pass": 40,
+        "stop": 17,
+        "touch": 2
+      }
+    },
+    "2FE": {
+      "actions": {
+        "take": 74,
+        "pass": 182,
+        "stop": 10,
+        "excluded": 87
+      },
+      "ai_actions": {
+        "take": 204,
+        "touch": 12,
+        "pass": 46,
+        "stop": 4
+      }
+    },
+    "26C": {
+      "actions": {
+        "pass": 1128,
+        "excluded": 626,
+        "stop": 67,
+        "take": 82
+      },
+      "ai_actions": {
+        "pass": 873,
+        "take": 411,
+        "touch": 7,
+        "stop": 14
+      }
+    },
+    "312": {
+      "actions": {
+        "take": 92,
+        "pass": 173,
+        "excluded": 393,
+        "stop": 53
+      },
+      "ai_actions": {
+        "take": 314,
+        "stop": 3,
+        "touch": 1
+      }
+    },
+    "4FB": {
+      "actions": {
+        "pass": 4999,
+        "stop": 1742,
+        "excluded": 1586,
+        "take": 564
+      },
+      "ai_actions": {
+        "take": 4543,
+        "pass": 2823,
+        "touch": 137,
+        "stop": 132,
+        "not_engage": 1
+      }
+    },
+    "19E": {
+      "actions": {
+        "pass": 1796,
+        "excluded": 2920,
+        "stop": 364,
+        "take": 258
+      },
+      "ai_actions": {
+        "take": 1042,
+        "pass": 1551,
+        "touch": 116,
+        "stop": 21,
+        "not_engage": 10
+      }
+    },
+    "460": {
+      "actions": {
+        "excluded": 518,
+        "stop": 14,
+        "pass": 210,
+        "take": 112
+      },
+      "ai_actions": {
+        "stop": 8,
+        "take": 276,
+        "pass": 51,
+        "touch": 1
+      }
+    },
+    "3F8": {
+      "actions": {
+        "take": 311,
+        "pass": 401,
+        "excluded": 86,
+        "stop": 65
+      },
+      "ai_actions": {
+        "take": 637,
+        "pass": 132,
+        "stop": 3,
+        "touch": 3
+      }
+    },
+    "461": {
+      "actions": {
+        "pass": 835,
+        "excluded": 363,
+        "take": 770,
+        "stop": 13
+      },
+      "ai_actions": {
+        "take": 1401,
+        "pass": 179,
+        "stop": 24,
+        "touch": 4
+      }
+    },
+    "4C7": {
+      "actions": {
+        "excluded": 818,
+        "pass": 194,
+        "take": 33,
+        "stop": 16
+      },
+      "ai_actions": {
+        "take": 165,
+        "pass": 67,
+        "stop": 10
+      }
+    },
+    "1EC": {
+      "actions": {
+        "stop": 130,
+        "excluded": 256,
+        "pass": 400,
+        "take": 88
+      },
+      "ai_actions": {
+        "take": 257,
+        "pass": 221,
+        "stop": 134,
+        "touch": 8
+      }
+    },
+    "54C": {
+      "actions": {
+        "excluded": 727,
+        "pass": 195,
+        "take": 147,
+        "stop": 3
+      },
+      "ai_actions": {
+        "pass": 94,
+        "take": 247,
+        "stop": 3
+      }
+    },
+    "2D3": {
+      "actions": {
+        "pass": 620,
+        "take": 244,
+        "stop": 33,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 798,
+        "pass": 72,
+        "stop": 12,
+        "touch": 15
+      }
+    },
+    "485": {
+      "actions": {
+        "pass": 443,
+        "take": 134,
+        "stop": 29,
+        "excluded": 3
+      },
+      "ai_actions": {
+        "pass": 142,
+        "take": 448,
+        "touch": 5,
+        "stop": 14
+      }
+    },
+    "1D8": {
+      "actions": {
+        "pass": 1215,
+        "excluded": 869,
+        "take": 168,
+        "stop": 57
+      },
+      "ai_actions": {
+        "pass": 823,
+        "take": 591,
+        "stop": 19,
+        "touch": 11
+      }
+    },
+    "19D": {
+      "actions": {
+        "pass": 757,
+        "take": 401,
+        "stop": 26,
+        "excluded": 2
+      },
+      "ai_actions": {
+        "take": 1004,
+        "pass": 146,
+        "stop": 33,
+        "touch": 1
+      }
+    },
+    "44E": {
+      "actions": {
+        "pass": 559,
+        "excluded": 422,
+        "take": 151,
+        "stop": 19
+      },
+      "ai_actions": {
+        "pass": 331,
+        "take": 378,
+        "stop": 13,
+        "touch": 3
+      }
+    },
+    "1BB": {
+      "actions": {
+        "stop": 312,
+        "pass": 1781,
+        "excluded": 175,
+        "take": 302
+      },
+      "ai_actions": {
+        "take": 1304,
+        "pass": 1204,
+        "touch": 15,
+        "stop": 23
+      }
+    },
+    "3F9": {
+      "actions": {
+        "excluded": 247,
+        "take": 71,
+        "pass": 87,
+        "stop": 22
+      },
+      "ai_actions": {
+        "take": 143,
+        "pass": 5,
+        "stop": 31,
+        "touch": 1
+      }
+    },
+    "35D": {
+      "actions": {
+        "pass": 392,
+        "take": 282,
+        "stop": 41,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 622,
+        "stop": 51,
+        "pass": 40
+      }
+    },
+    "2D6": {
+      "actions": {
+        "pass": 510,
+        "take": 577,
+        "excluded": 2,
+        "stop": 74
+      },
+      "ai_actions": {
+        "take": 946,
+        "pass": 210,
+        "stop": 2,
+        "touch": 1
+      }
+    },
+    "543": {
+      "actions": {
+        "pass": 1606,
+        "stop": 20,
+        "take": 134,
+        "excluded": 67
+      },
+      "ai_actions": {
+        "pass": 1392,
+        "take": 383,
+        "touch": 16,
+        "stop": 11
+      }
+    },
+    "2A8": {
+      "actions": {
+        "pass": 722,
+        "take": 317,
+        "stop": 141,
+        "excluded": 6
+      },
+      "ai_actions": {
+        "take": 991,
+        "pass": 177,
+        "stop": 9,
+        "touch": 3
+      }
+    },
+    "3DD": {
+      "actions": {
+        "pass": 134,
+        "stop": 50,
+        "take": 48,
+        "excluded": 2
+      },
+      "ai_actions": {
+        "take": 179,
+        "pass": 49,
+        "touch": 2,
+        "stop": 1
+      }
+    },
+    "1C0": {
+      "actions": {
+        "pass": 2917,
+        "excluded": 170,
+        "take": 415,
+        "stop": 91
+      },
+      "ai_actions": {
+        "pass": 1819,
+        "take": 1499,
+        "touch": 12,
+        "stop": 87
+      }
+    },
+    "19B": {
+      "actions": {
+        "pass": 779,
+        "take": 655,
+        "excluded": 23,
+        "stop": 17
+      },
+      "ai_actions": {
+        "take": 1238,
+        "pass": 181,
+        "stop": 30,
+        "touch": 2
+      }
+    },
+    "450": {
+      "actions": {
+        "excluded": 211,
+        "pass": 274,
+        "take": 164,
+        "stop": 36
+      },
+      "ai_actions": {
+        "take": 374,
+        "pass": 58,
+        "touch": 4,
+        "stop": 38
+      }
+    },
+    "1A9": {
+      "actions": {
+        "excluded": 542,
+        "pass": 2010,
+        "stop": 166,
+        "take": 212
+      },
+      "ai_actions": {
+        "pass": 1364,
+        "take": 1129,
+        "touch": 18,
+        "stop": 29,
+        "not_engage": 1
+      }
+    },
+    "3F1": {
+      "actions": {
+        "pass": 181,
+        "take": 131,
+        "stop": 33,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 266,
+        "pass": 17,
+        "stop": 63
+      }
+    },
+    "458": {
+      "actions": {
+        "pass": 1384,
+        "excluded": 384,
+        "take": 1021,
+        "stop": 23
+      },
+      "ai_actions": {
+        "take": 2356,
+        "pass": 121,
+        "stop": 17,
+        "touch": 2
+      }
+    },
+    "19F": {
+      "actions": {
+        "pass": 2355,
+        "excluded": 740,
+        "take": 483,
+        "stop": 261
+      },
+      "ai_actions": {
+        "pass": 1804,
+        "touch": 133,
+        "take": 1217,
+        "not_engage": 12,
+        "stop": 23
+      }
+    },
+    "33C": {
+      "actions": {
+        "pass": 77,
+        "stop": 4,
+        "take": 49,
+        "excluded": 45
+      },
+      "ai_actions": {
+        "pass": 16,
+        "stop": 5,
+        "take": 108,
+        "touch": 1
+      }
+    },
+    "197": {
+      "actions": {
+        "pass": 3459,
+        "excluded": 1478,
+        "take": 291,
+        "stop": 187
+      },
+      "ai_actions": {
+        "pass": 2487,
+        "take": 1344,
+        "touch": 21,
+        "stop": 69
+      }
+    },
+    "1A6": {
+      "actions": {
+        "stop": 310,
+        "pass": 1602,
+        "take": 468,
+        "excluded": 636
+      },
+      "ai_actions": {
+        "take": 1361,
+        "pass": 999,
+        "stop": 8,
+        "touch": 7
+      }
+    },
+    "40F": {
+      "actions": {
+        "take": 196,
+        "excluded": 1748,
+        "pass": 501,
+        "stop": 42
+      },
+      "ai_actions": {
+        "take": 417,
+        "pass": 298,
+        "stop": 17,
+        "touch": 2
+      }
+    },
+    "2D1": {
+      "actions": {
+        "pass": 1023,
+        "excluded": 636,
+        "take": 538,
+        "stop": 205
+      },
+      "ai_actions": {
+        "take": 1332,
+        "pass": 420,
+        "stop": 7,
+        "touch": 7
+      }
+    },
+    "3F0": {
+      "actions": {
+        "take": 292,
+        "pass": 330,
+        "stop": 11,
+        "excluded": 9
+      },
+      "ai_actions": {
+        "take": 498,
+        "pass": 129,
+        "touch": 3,
+        "stop": 3
+      }
+    },
+    "3FE": {
+      "actions": {
+        "pass": 657,
+        "take": 451,
+        "stop": 141,
+        "excluded": 49
+      },
+      "ai_actions": {
+        "pass": 221,
+        "take": 987,
+        "touch": 14,
+        "stop": 29
+      }
+    },
+    "42A": {
+      "actions": {
+        "pass": 107,
+        "stop": 43,
+        "take": 40,
+        "excluded": 14
+      },
+      "ai_actions": {
+        "take": 166,
+        "touch": 2,
+        "pass": 17,
+        "stop": 5
+      }
+    },
+    "466": {
+      "actions": {
+        "pass": 191,
+        "excluded": 634,
+        "take": 108,
+        "stop": 2
+      },
+      "ai_actions": {
+        "take": 198,
+        "pass": 95,
+        "stop": 6,
+        "touch": 2
+      }
+    },
+    "41D": {
+      "actions": {
+        "take": 224,
+        "stop": 55,
+        "pass": 499,
+        "excluded": 60
+      },
+      "ai_actions": {
+        "take": 498,
+        "stop": 21,
+        "pass": 234,
+        "touch": 20
+      }
+    },
+    "423": {
+      "actions": {
+        "pass": 192,
+        "take": 108,
+        "stop": 28
+      },
+      "ai_actions": {
+        "take": 304,
+        "pass": 6,
+        "stop": 14,
+        "touch": 4
+      }
+    },
+    "3D9": {
+      "actions": {
+        "excluded": 344,
+        "pass": 162,
+        "take": 69,
+        "stop": 8
+      },
+      "ai_actions": {
+        "pass": 102,
+        "take": 135,
+        "stop": 1
+      }
+    },
+    "18D": {
+      "actions": {
+        "stop": 972,
+        "take": 435,
+        "excluded": 382,
+        "pass": 703
+      },
+      "ai_actions": {
+        "touch": 1023,
+        "take": 813,
+        "pass": 261,
+        "stop": 10
+      }
+    },
+    "497": {
+      "actions": {
+        "pass": 944,
+        "excluded": 893,
+        "stop": 507,
+        "take": 435
+      },
+      "ai_actions": {
+        "take": 1500,
+        "pass": 221,
+        "touch": 237,
+        "not_engage": 4,
+        "stop": 3
+      }
+    },
+    "437": {
+      "actions": {
+        "excluded": 305,
+        "pass": 431,
+        "take": 49,
+        "stop": 37
+      },
+      "ai_actions": {
+        "pass": 248,
+        "take": 258,
+        "touch": 4,
+        "stop": 4
+      }
+    },
+    "1DE": {
+      "actions": {
+        "pass": 470,
+        "excluded": 585,
+        "stop": 62,
+        "take": 187
+      },
+      "ai_actions": {
+        "pass": 246,
+        "take": 456,
+        "stop": 7,
+        "touch": 2
+      }
+    },
+    "419": {
+      "actions": {
+        "take": 311,
+        "pass": 181,
+        "excluded": 185,
+        "stop": 18
+      },
+      "ai_actions": {
+        "take": 424,
+        "pass": 72,
+        "stop": 8
+      }
+    },
+    "50A": {
+      "actions": {
+        "pass": 1515,
+        "take": 139,
+        "excluded": 191,
+        "stop": 80
+      },
+      "ai_actions": {
+        "pass": 1240,
+        "take": 474,
+        "stop": 20,
+        "touch": 7
+      }
+    },
+    "467": {
+      "actions": {
+        "excluded": 403,
+        "pass": 28,
+        "take": 5
+      },
+      "ai_actions": {
+        "take": 33
+      }
+    },
+    "1C8": {
+      "actions": {
+        "excluded": 524,
+        "pass": 367,
+        "take": 91,
+        "stop": 13
+      },
+      "ai_actions": {
+        "take": 201,
+        "pass": 244,
+        "touch": 7,
+        "stop": 19
+      }
+    },
+    "1A3": {
+      "actions": {
+        "take": 486,
+        "pass": 4010,
+        "stop": 145,
+        "excluded": 119
+      },
+      "ai_actions": {
+        "take": 1373,
+        "pass": 3257,
+        "stop": 39,
+        "touch": 22
+      }
+    },
+    "3EE": {
+      "actions": {
+        "take": 167,
+        "pass": 289,
+        "stop": 4
+      },
+      "ai_actions": {
+        "take": 357,
+        "pass": 97,
+        "touch": 2,
+        "stop": 4
+      }
+    },
+    "40E": {
+      "actions": {
+        "pass": 4318,
+        "stop": 70,
+        "take": 589,
+        "excluded": 64
+      },
+      "ai_actions": {
+        "pass": 4004,
+        "take": 915,
+        "touch": 4,
+        "stop": 25
+      }
+    },
+    "4B0": {
+      "actions": {
+        "excluded": 253,
+        "take": 109,
+        "pass": 295,
+        "stop": 58
+      },
+      "ai_actions": {
+        "take": 349,
+        "pass": 85,
+        "stop": 21,
+        "touch": 6
+      }
+    },
+    "468": {
+      "actions": {
+        "take": 655,
+        "stop": 131,
+        "pass": 744,
+        "excluded": 20
+      },
+      "ai_actions": {
+        "take": 1417,
+        "stop": 59,
+        "pass": 68
+      }
+    },
+    "451": {
+      "actions": {
+        "pass": 325,
+        "take": 144,
+        "stop": 70,
+        "excluded": 3
+      },
+      "ai_actions": {
+        "take": 378,
+        "pass": 77,
+        "stop": 82,
+        "touch": 2
+      }
+    },
+    "2AA": {
+      "actions": {
+        "excluded": 430,
+        "take": 74,
+        "pass": 125
+      },
+      "ai_actions": {
+        "take": 186,
+        "pass": 15,
+        "stop": 2
+      }
+    },
+    "3DF": {
+      "actions": {
+        "take": 74,
+        "pass": 78,
+        "stop": 4
+      },
+      "ai_actions": {
+        "take": 135,
+        "pass": 18,
+        "stop": 3
+      }
+    },
+    "1E2": {
+      "actions": {
+        "excluded": 2161,
+        "take": 255,
+        "pass": 638,
+        "stop": 94
+      },
+      "ai_actions": {
+        "take": 660,
+        "touch": 23,
+        "pass": 250,
+        "stop": 19
+      }
+    },
+    "471": {
+      "actions": {
+        "take": 226,
+        "pass": 319,
+        "stop": 21,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 472,
+        "pass": 64,
+        "stop": 19,
+        "touch": 11
+      }
+    },
+    "42F": {
+      "actions": {
+        "pass": 409,
+        "stop": 34,
+        "take": 166
+      },
+      "ai_actions": {
+        "pass": 121,
+        "take": 477,
+        "stop": 7,
+        "touch": 4
+      }
+    },
+    "3FF": {
+      "actions": {
+        "pass": 682,
+        "take": 607,
+        "stop": 134,
+        "excluded": 41
+      },
+      "ai_actions": {
+        "pass": 222,
+        "take": 1158,
+        "touch": 27,
+        "stop": 20
+      }
+    },
+    "3F5": {
+      "actions": {
+        "pass": 179,
+        "stop": 73,
+        "take": 99,
+        "excluded": 2
+      },
+      "ai_actions": {
+        "take": 330,
+        "pass": 12,
+        "stop": 7,
+        "touch": 1
+      }
+    },
+    "1D7": {
+      "actions": {
+        "excluded": 160,
+        "pass": 215,
+        "take": 78,
+        "stop": 13
+      },
+      "ai_actions": {
+        "take": 230,
+        "pass": 61,
+        "touch": 2,
+        "stop": 12
+      }
+    },
+    "378": {
+      "actions": {
+        "excluded": 436,
+        "take": 37,
+        "pass": 54,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 87,
+        "pass": 4,
+        "touch": 1
+      }
+    },
+    "1B2": {
+      "actions": {
+        "pass": 713,
+        "excluded": 2317,
+        "take": 96,
+        "stop": 28
+      },
+      "ai_actions": {
+        "pass": 396,
+        "take": 416,
+        "stop": 11,
+        "touch": 4
+      }
+    },
+    "34B": {
+      "actions": {
+        "excluded": 285,
+        "take": 12,
+        "pass": 29
+      },
+      "ai_actions": {
+        "take": 37,
+        "pass": 4
+      }
+    },
+    "33A": {
+      "actions": {
+        "take": 106,
+        "pass": 99,
+        "excluded": 257
+      },
+      "ai_actions": {
+        "take": 187,
+        "pass": 13
+      }
+    },
+    "515": {
+      "actions": {
+        "pass": 808,
+        "stop": 191,
+        "excluded": 25,
+        "take": 646
+      },
+      "ai_actions": {
+        "take": 1313,
+        "pass": 323,
+        "stop": 7,
+        "touch": 2
+      }
+    },
+    "1E1": {
+      "actions": {
+        "take": 511,
+        "pass": 1143,
+        "stop": 77,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 1323,
+        "pass": 359,
+        "stop": 41,
+        "touch": 8
+      }
+    },
+    "29A": {
+      "actions": {
+        "take": 2,
+        "pass": 43
+      },
+      "ai_actions": {
+        "take": 44,
+        "pass": 1
+      }
+    },
+    "49D": {
+      "actions": {
+        "excluded": 236,
+        "stop": 1
+      },
+      "ai_actions": {
+        "pass": 1,
+        "take": 1
+      }
+    },
+    "36D": {
+      "actions": {
+        "pass": 808,
+        "excluded": 125,
+        "take": 53,
+        "stop": 15
+      },
+      "ai_actions": {
+        "pass": 524,
+        "take": 330,
+        "stop": 10,
+        "touch": 1
+      }
+    },
+    "452": {
+      "actions": {
+        "pass": 196,
+        "take": 118,
+        "stop": 16,
+        "excluded": 3
+      },
+      "ai_actions": {
+        "take": 253,
+        "pass": 45,
+        "touch": 1,
+        "stop": 31
+      }
+    },
+    "1C3": {
+      "actions": {
+        "pass": 926,
+        "excluded": 66,
+        "take": 239,
+        "stop": 87
+      },
+      "ai_actions": {
+        "pass": 741,
+        "take": 563,
+        "touch": 4,
+        "stop": 6
+      }
+    },
+    "1A4": {
+      "actions": {
+        "excluded": 3277,
+        "pass": 4524,
+        "stop": 708,
+        "take": 871
+      },
+      "ai_actions": {
+        "pass": 4493,
+        "take": 2800,
+        "stop": 78,
+        "touch": 216,
+        "not_engage": 27
+      }
+    },
+    "476": {
+      "actions": {
+        "excluded": 585,
+        "pass": 433,
+        "take": 58,
+        "stop": 21
+      },
+      "ai_actions": {
+        "pass": 244,
+        "take": 239,
+        "stop": 6,
+        "touch": 2
+      }
+    },
+    "4CE": {
+      "actions": {
+        "pass": 492,
+        "excluded": 188,
+        "take": 320,
+        "stop": 69
+      },
+      "ai_actions": {
+        "pass": 256,
+        "take": 608,
+        "touch": 34,
+        "stop": 4
+      }
+    },
+    "470": {
+      "actions": {
+        "pass": 233,
+        "take": 184,
+        "stop": 4,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 366,
+        "pass": 47,
+        "stop": 8
+      }
+    },
+    "481": {
+      "actions": {
+        "pass": 67,
+        "take": 60,
+        "stop": 1
+      },
+      "ai_actions": {
+        "pass": 20,
+        "take": 107,
+        "stop": 1
+      }
+    },
+    "3EF": {
+      "actions": {
+        "pass": 305,
+        "take": 266,
+        "stop": 2,
+        "excluded": 2
+      },
+      "ai_actions": {
+        "pass": 77,
+        "take": 494,
+        "stop": 2
+      }
+    },
+    "401": {
+      "actions": {
+        "pass": 651,
+        "take": 572,
+        "stop": 124,
+        "excluded": 15
+      },
+      "ai_actions": {
+        "pass": 217,
+        "take": 1082,
+        "touch": 24,
+        "stop": 25
+      }
+    },
+    "492": {
+      "actions": {
+        "pass": 2037,
+        "take": 134,
+        "excluded": 1595,
+        "stop": 72
+      },
+      "ai_actions": {
+        "pass": 1298,
+        "take": 915,
+        "touch": 6,
+        "stop": 21
+      }
+    },
+    "406": {
+      "actions": {
+        "excluded": 76,
+        "take": 85,
+        "pass": 74
+      },
+      "ai_actions": {
+        "take": 130,
+        "pass": 28,
+        "touch": 1
+      }
+    },
+    "409": {
+      "actions": {
+        "pass": 576,
+        "take": 444,
+        "excluded": 303,
+        "stop": 115
+      },
+      "ai_actions": {
+        "pass": 237,
+        "stop": 10,
+        "take": 836,
+        "touch": 48,
+        "not_engage": 1
+      }
+    },
+    "29E": {
+      "actions": {
+        "pass": 487,
+        "stop": 66,
+        "take": 211,
+        "excluded": 13
+      },
+      "ai_actions": {
+        "take": 554,
+        "pass": 190,
+        "stop": 15,
+        "touch": 5
+      }
+    },
+    "18B": {
+      "actions": {
+        "excluded": 2261,
+        "pass": 1133,
+        "take": 95,
+        "stop": 231
+      },
+      "ai_actions": {
+        "pass": 362,
+        "take": 1135,
+        "touch": 95,
+        "not_engage": 6,
+        "stop": 4
+      }
+    },
+    "4A0": {
+      "actions": {
+        "take": 181,
+        "pass": 353,
+        "stop": 34,
+        "excluded": 123
+      },
+      "ai_actions": {
+        "take": 307,
+        "pass": 253,
+        "touch": 5,
+        "stop": 3
+      }
+    },
+    "4A2": {
+      "actions": {
+        "take": 154,
+        "pass": 398,
+        "stop": 14,
+        "excluded": 29
+      },
+      "ai_actions": {
+        "take": 357,
+        "pass": 218,
+        "stop": 3,
+        "touch": 6
+      }
+    },
+    "30C": {
+      "actions": {
+        "pass": 318,
+        "take": 108,
+        "stop": 30,
+        "excluded": 3
+      },
+      "ai_actions": {
+        "take": 276,
+        "pass": 123,
+        "touch": 45,
+        "stop": 6
+      }
+    },
+    "307": {
+      "actions": {
+        "take": 106,
+        "pass": 217,
+        "stop": 17
+      },
+      "ai_actions": {
+        "take": 245,
+        "pass": 70,
+        "touch": 24,
+        "stop": 1
+      }
+    },
+    "50D": {
+      "actions": {
+        "pass": 595,
+        "take": 176,
+        "excluded": 38,
+        "stop": 22
+      },
+      "ai_actions": {
+        "pass": 215,
+        "take": 558,
+        "touch": 10,
+        "stop": 6
+      }
+    },
+    "1A5": {
+      "actions": {
+        "take": 384,
+        "pass": 3818,
+        "excluded": 1150,
+        "stop": 598
+      },
+      "ai_actions": {
+        "take": 1820,
+        "pass": 2934,
+        "not_engage": 3,
+        "stop": 55,
+        "touch": 201
+      }
+    },
+    "28D": {
+      "actions": {
+        "pass": 1702,
+        "excluded": 293,
+        "take": 217,
+        "stop": 39
+      },
+      "ai_actions": {
+        "take": 777,
+        "pass": 1141,
+        "stop": 34,
+        "touch": 9
+      }
+    },
+    "1D4": {
+      "actions": {
+        "pass": 6558,
+        "excluded": 4455,
+        "stop": 296,
+        "take": 562
+      },
+      "ai_actions": {
+        "pass": 4958,
+        "take": 2340,
+        "touch": 32,
+        "stop": 53
+      }
+    },
+    "328": {
+      "actions": {
+        "excluded": 749,
+        "pass": 774,
+        "take": 88,
+        "stop": 10
+      },
+      "ai_actions": {
+        "pass": 572,
+        "take": 289,
+        "stop": 6,
+        "touch": 4,
+        "not_engage": 1
+      }
+    },
+    "522": {
+      "actions": {
+        "excluded": 56,
+        "take": 456,
+        "pass": 671,
+        "stop": 46
+      },
+      "ai_actions": {
+        "take": 959,
+        "pass": 127,
+        "stop": 76,
+        "touch": 12
+      }
+    },
+    "1D3": {
+      "actions": {
+        "pass": 970,
+        "stop": 121,
+        "take": 433,
+        "excluded": 9
+      },
+      "ai_actions": {
+        "pass": 411,
+        "stop": 8,
+        "take": 1097,
+        "touch": 6
+      }
+    },
+    "40D": {
+      "actions": {
+        "excluded": 1162,
+        "pass": 154,
+        "take": 174,
+        "stop": 3
+      },
+      "ai_actions": {
+        "take": 273,
+        "pass": 49,
+        "stop": 5,
+        "touch": 1
+      }
+    },
+    "1A1": {
+      "actions": {
+        "take": 1661,
+        "excluded": 617,
+        "pass": 1649,
+        "stop": 167
+      },
+      "ai_actions": {
+        "take": 2278,
+        "pass": 1211,
+        "stop": 7,
+        "touch": 18,
+        "not_engage": 5
+      }
+    },
+    "42C": {
+      "actions": {
+        "stop": 154,
+        "take": 262,
+        "pass": 842,
+        "excluded": 2
+      },
+      "ai_actions": {
+        "take": 960,
+        "pass": 267,
+        "stop": 24,
+        "touch": 4
+      }
+    },
+    "1DB": {
+      "actions": {
+        "pass": 2156,
+        "excluded": 581,
+        "stop": 70,
+        "take": 80
+      },
+      "ai_actions": {
+        "take": 765,
+        "pass": 1501,
+        "stop": 10,
+        "touch": 8
+      }
+    },
+    "1DF": {
+      "actions": {
+        "stop": 40,
+        "take": 211,
+        "pass": 524,
+        "excluded": 3
+      },
+      "ai_actions": {
+        "take": 466,
+        "pass": 291,
+        "touch": 12,
+        "stop": 7
+      }
+    },
+    "455": {
+      "actions": {
+        "pass": 647,
+        "take": 276,
+        "excluded": 159,
+        "stop": 148
+      },
+      "ai_actions": {
+        "take": 927,
+        "stop": 42,
+        "pass": 101,
+        "touch": 1
+      }
+    },
+    "26B": {
+      "actions": {
+        "pass": 1316,
+        "excluded": 395,
+        "take": 192,
+        "stop": 111
+      },
+      "ai_actions": {
+        "take": 594,
+        "pass": 939,
+        "stop": 71,
+        "touch": 3
+      }
+    },
+    "53E": {
+      "actions": {
+        "pass": 121,
+        "take": 27,
+        "excluded": 3
+      },
+      "ai_actions": {
+        "pass": 15,
+        "take": 131
+      }
+    },
+    "501": {
+      "actions": {
+        "excluded": 116,
+        "pass": 12,
+        "take": 2
+      },
+      "ai_actions": {
+        "take": 14
+      }
+    },
+    "18C": {
+      "actions": {
+        "excluded": 3063,
+        "pass": 1890,
+        "take": 1187,
+        "stop": 1096
+      },
+      "ai_actions": {
+        "take": 3559,
+        "pass": 349,
+        "stop": 57,
+        "touch": 246
+      }
+    },
+    "1D1": {
+      "actions": {
+        "pass": 1080,
+        "take": 157,
+        "stop": 128,
+        "excluded": 146
+      },
+      "ai_actions": {
+        "take": 947,
+        "pass": 197,
+        "stop": 173,
+        "touch": 33
+      }
+    },
+    "44F": {
+      "actions": {
+        "take": 798,
+        "pass": 794,
+        "stop": 116,
+        "excluded": 140
+      },
+      "ai_actions": {
+        "take": 1552,
+        "stop": 87,
+        "pass": 69
+      }
+    },
+    "1A0": {
+      "actions": {
+        "pass": 1094,
+        "excluded": 695,
+        "stop": 171,
+        "take": 362
+      },
+      "ai_actions": {
+        "take": 845,
+        "pass": 822,
+        "stop": 8,
+        "touch": 11,
+        "not_engage": 5
+      }
+    },
+    "1D5": {
+      "actions": {
+        "pass": 3812,
+        "excluded": 1315,
+        "take": 325,
+        "stop": 73
+      },
+      "ai_actions": {
+        "pass": 2749,
+        "take": 1405,
+        "touch": 22,
+        "stop": 21
+      }
+    },
+    "4E7": {
+      "actions": {
+        "pass": 3418,
+        "excluded": 837,
+        "stop": 403,
+        "take": 632
+      },
+      "ai_actions": {
+        "pass": 2646,
+        "take": 1826,
+        "not_engage": 1,
+        "touch": 10,
+        "stop": 9
+      }
+    },
+    "4D7": {
+      "actions": {
+        "stop": 110,
+        "pass": 1655,
+        "excluded": 130,
+        "take": 797
+      },
+      "ai_actions": {
+        "stop": 16,
+        "pass": 1276,
+        "take": 1314,
+        "touch": 3
+      }
+    },
+    "193": {
+      "actions": {
+        "take": 431,
+        "pass": 861,
+        "stop": 81,
+        "excluded": 10
+      },
+      "ai_actions": {
+        "take": 740,
+        "pass": 611,
+        "touch": 11,
+        "stop": 3
+      }
+    },
+    "3E9": {
+      "actions": {
+        "take": 258,
+        "pass": 920,
+        "stop": 60,
+        "excluded": 59
+      },
+      "ai_actions": {
+        "take": 423,
+        "pass": 766,
+        "stop": 31,
+        "touch": 4
+      }
+    },
+    "18F": {
+      "actions": {
+        "take": 496,
+        "pass": 891,
+        "stop": 97,
+        "excluded": 63
+      },
+      "ai_actions": {
+        "take": 1147,
+        "pass": 238,
+        "stop": 85,
+        "touch": 3
+      }
+    },
+    "4C9": {
+      "actions": {
+        "stop": 759,
+        "pass": 1463,
+        "excluded": 174,
+        "take": 147
+      },
+      "ai_actions": {
+        "take": 1398,
+        "pass": 1003,
+        "not_engage": 1,
+        "touch": 6,
+        "stop": 31
+      }
+    },
+    "3C3": {
+      "actions": {
+        "excluded": 827,
+        "pass": 75,
+        "take": 29
+      },
+      "ai_actions": {
+        "take": 56,
+        "pass": 45
+      }
+    },
+    "1BA": {
+      "actions": {
+        "pass": 1460,
+        "excluded": 381,
+        "stop": 107,
+        "take": 94
+      },
+      "ai_actions": {
+        "pass": 1260,
+        "take": 531,
+        "touch": 12,
+        "stop": 16
+      }
+    },
+    "4B1": {
+      "actions": {
+        "take": 67,
+        "pass": 130,
+        "stop": 18,
+        "excluded": 2
+      },
+      "ai_actions": {
+        "take": 149,
+        "pass": 47,
+        "touch": 2,
+        "stop": 10
+      }
+    },
+    "190": {
+      "actions": {
+        "pass": 952,
+        "take": 46,
+        "excluded": 17,
+        "stop": 26
+      },
+      "ai_actions": {
+        "take": 263,
+        "pass": 764,
+        "stop": 3,
+        "touch": 4
+      }
+    },
+    "47A": {
+      "actions": {
+        "take": 346,
+        "pass": 263,
+        "stop": 47,
+        "excluded": 4
+      },
+      "ai_actions": {
+        "take": 594,
+        "pass": 40,
+        "stop": 20,
+        "touch": 2
+      }
+    },
+    "1C2": {
+      "actions": {
+        "take": 253,
+        "pass": 1408,
+        "excluded": 203,
+        "stop": 115
+      },
+      "ai_actions": {
+        "take": 1118,
+        "pass": 618,
+        "touch": 34,
+        "stop": 19
+      }
+    },
+    "1B9": {
+      "actions": {
+        "pass": 1279,
+        "stop": 86,
+        "excluded": 204,
+        "take": 248
+      },
+      "ai_actions": {
+        "take": 892,
+        "pass": 812,
+        "touch": 13,
+        "stop": 23
+      }
+    },
+    "479": {
+      "actions": {
+        "take": 673,
+        "stop": 32,
+        "pass": 1386,
+        "excluded": 87
+      },
+      "ai_actions": {
+        "take": 1781,
+        "pass": 250,
+        "touch": 2,
+        "stop": 53
+      }
+    },
+    "227": {
+      "actions": {
+        "excluded": 1237,
+        "pass": 1127,
+        "take": 105,
+        "stop": 57
+      },
+      "ai_actions": {
+        "pass": 711,
+        "take": 537,
+        "stop": 13,
+        "touch": 7
+      }
+    },
+    "496": {
+      "actions": {
+        "pass": 877,
+        "take": 620,
+        "stop": 478,
+        "excluded": 256
+      },
+      "ai_actions": {
+        "take": 1274,
+        "pass": 268,
+        "stop": 40,
+        "touch": 432,
+        "not_engage": 1
+      }
+    },
+    "2AD": {
+      "actions": {
+        "excluded": 2526,
+        "stop": 185,
+        "take": 195,
+        "pass": 425
+      },
+      "ai_actions": {
+        "take": 650,
+        "pass": 116,
+        "stop": 26,
+        "touch": 15
+      }
+    },
+    "542": {
+      "actions": {
+        "excluded": 319,
+        "take": 270,
+        "pass": 1166,
+        "stop": 40
+      },
+      "ai_actions": {
+        "take": 843,
+        "pass": 596,
+        "touch": 14,
+        "stop": 25
+      }
+    },
+    "49B": {
+      "actions": {
+        "pass": 210,
+        "stop": 33,
+        "take": 47,
+        "excluded": 48
+      },
+      "ai_actions": {
+        "take": 281,
+        "pass": 25,
+        "touch": 1
+      }
+    },
+    "516": {
+      "actions": {
+        "take": 697,
+        "pass": 1554,
+        "stop": 31,
+        "excluded": 25
+      },
+      "ai_actions": {
+        "take": 1357,
+        "pass": 892,
+        "stop": 4,
+        "touch": 3
+      }
+    },
+    "43B": {
+      "actions": {
+        "take": 109,
+        "pass": 118,
+        "stop": 12
+      },
+      "ai_actions": {
+        "take": 193,
+        "pass": 38,
+        "stop": 6,
+        "touch": 2
+      }
+    },
+    "4D8": {
+      "actions": {
+        "stop": 78,
+        "take": 252,
+        "pass": 852,
+        "excluded": 213
+      },
+      "ai_actions": {
+        "take": 410,
+        "pass": 798,
+        "touch": 4,
+        "stop": 3
+      }
+    },
+    "4A1": {
+      "actions": {
+        "take": 136,
+        "pass": 485,
+        "excluded": 56,
+        "stop": 56
+      },
+      "ai_actions": {
+        "take": 381,
+        "pass": 320,
+        "stop": 4,
+        "touch": 8,
+        "not_engage": 4
+      }
+    },
+    "3ED": {
+      "actions": {
+        "pass": 185,
+        "take": 111,
+        "stop": 20
+      },
+      "ai_actions": {
+        "pass": 66,
+        "take": 220,
+        "stop": 26,
+        "touch": 4
+      }
+    },
+    "4E5": {
+      "actions": {
+        "pass": 346,
+        "take": 339,
+        "stop": 153,
+        "excluded": 78
+      },
+      "ai_actions": {
+        "take": 728,
+        "stop": 65,
+        "pass": 43,
+        "touch": 1
+      }
+    },
+    "4E6": {
+      "actions": {
+        "pass": 870,
+        "take": 387,
+        "stop": 63,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "pass": 480,
+        "take": 815,
+        "touch": 14,
+        "stop": 9
+      }
+    },
+    "208": {
+      "actions": {
+        "take": 219,
+        "pass": 430,
+        "stop": 150,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 573,
+        "pass": 154,
+        "stop": 69,
+        "touch": 3
+      }
+    },
+    "47C": {
+      "actions": {
+        "take": 596,
+        "pass": 481,
+        "stop": 58,
+        "excluded": 7
+      },
+      "ai_actions": {
+        "take": 1040,
+        "stop": 29,
+        "pass": 64,
+        "touch": 2
+      }
+    },
+    "364": {
+      "actions": {
+        "pass": 718,
+        "excluded": 382,
+        "stop": 33,
+        "take": 68
+      },
+      "ai_actions": {
+        "pass": 490,
+        "stop": 18,
+        "take": 312,
+        "touch": 2
+      }
+    },
+    "529": {
+      "actions": {
+        "excluded": 833,
+        "pass": 2451,
+        "take": 280,
+        "stop": 67
+      },
+      "ai_actions": {
+        "pass": 1949,
+        "take": 744,
+        "stop": 80,
+        "touch": 19
+      }
+    },
+    "493": {
+      "actions": {
+        "pass": 264,
+        "excluded": 263,
+        "take": 14,
+        "stop": 53
+      },
+      "ai_actions": {
+        "pass": 157,
+        "take": 194
+      }
+    },
+    "535": {
+      "actions": {
+        "pass": 2520,
+        "take": 434,
+        "excluded": 327,
+        "stop": 105
+      },
+      "ai_actions": {
+        "take": 1250,
+        "pass": 1708,
+        "stop": 70,
+        "touch": 11
+      }
+    },
+    "1BF": {
+      "actions": {
+        "excluded": 217,
+        "pass": 1425,
+        "take": 53,
+        "stop": 84
+      },
+      "ai_actions": {
+        "pass": 1134,
+        "take": 516,
+        "stop": 8,
+        "touch": 11,
+        "not_engage": 2
+      }
+    },
+    "469": {
+      "actions": {
+        "pass": 429,
+        "take": 98,
+        "excluded": 6,
+        "stop": 4
+      },
+      "ai_actions": {
+        "take": 513,
+        "stop": 14,
+        "touch": 1,
+        "pass": 3
+      }
+    },
+    "433": {
+      "actions": {
+        "take": 110,
+        "pass": 122,
+        "stop": 45
+      },
+      "ai_actions": {
+        "take": 243,
+        "pass": 25,
+        "stop": 9
+      }
+    },
+    "490": {
+      "actions": {
+        "stop": 41,
+        "pass": 898,
+        "excluded": 278,
+        "take": 68
+      },
+      "ai_actions": {
+        "stop": 19,
+        "take": 355,
+        "pass": 634,
+        "touch": 2
+      }
+    },
+    "187": {
+      "actions": {
+        "stop": 712,
+        "take": 1239,
+        "excluded": 3909,
+        "pass": 2931
+      },
+      "ai_actions": {
+        "take": 2574,
+        "pass": 2417,
+        "touch": 156,
+        "stop": 53,
+        "not_engage": 12
+      }
+    },
+    "209": {
+      "actions": {
+        "pass": 369,
+        "take": 219,
+        "stop": 173,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 444,
+        "pass": 138,
+        "stop": 178,
+        "touch": 1
+      }
+    },
+    "46C": {
+      "actions": {
+        "take": 87,
+        "pass": 380,
+        "stop": 41
+      },
+      "ai_actions": {
+        "take": 484,
+        "pass": 3,
+        "stop": 21
+      }
+    },
+    "494": {
+      "actions": {
+        "excluded": 838,
+        "take": 281,
+        "pass": 321,
+        "stop": 87
+      },
+      "ai_actions": {
+        "take": 479,
+        "touch": 130,
+        "pass": 77
+      }
+    },
+    "2C4": {
+      "actions": {
+        "stop": 107,
+        "take": 97,
+        "pass": 267,
+        "excluded": 301
+      },
+      "ai_actions": {
+        "take": 370,
+        "pass": 90,
+        "touch": 4,
+        "stop": 7
+      }
+    },
+    "1ED": {
+      "actions": {
+        "excluded": 1444,
+        "pass": 1,
+        "stop": 1
+      },
+      "ai_actions": {
+        "stop": 2
+      }
+    },
+    "1A2": {
+      "actions": {
+        "pass": 829,
+        "excluded": 170,
+        "take": 300,
+        "stop": 79
+      },
+      "ai_actions": {
+        "take": 960,
+        "touch": 20,
+        "pass": 151,
+        "stop": 77
+      }
+    },
+    "53F": {
+      "actions": {
+        "excluded": 11,
+        "pass": 102,
+        "take": 18
+      },
+      "ai_actions": {
+        "pass": 64,
+        "take": 56
+      }
+    },
+    "4B7": {
+      "actions": {
+        "pass": 197,
+        "take": 106,
+        "stop": 55,
+        "excluded": 4
+      },
+      "ai_actions": {
+        "take": 212,
+        "pass": 136,
+        "touch": 8,
+        "stop": 6
+      }
+    },
+    "4B2": {
+      "actions": {
+        "pass": 156,
+        "take": 114,
+        "stop": 24
+      },
+      "ai_actions": {
+        "pass": 74,
+        "take": 205,
+        "stop": 10,
+        "touch": 5
+      }
+    },
+    "4F8": {
+      "actions": {
+        "pass": 152,
+        "take": 64,
+        "stop": 27
+      },
+      "ai_actions": {
+        "take": 219,
+        "pass": 17,
+        "stop": 6,
+        "touch": 1
+      }
+    },
+    "232": {
+      "actions": {
+        "stop": 21,
+        "pass": 384,
+        "take": 243,
+        "excluded": 2
+      },
+      "ai_actions": {
+        "take": 435,
+        "pass": 188,
+        "stop": 20,
+        "touch": 1
+      }
+    },
+    "20C": {
+      "actions": {
+        "pass": 600,
+        "take": 456,
+        "excluded": 194,
+        "stop": 102
+      },
+      "ai_actions": {
+        "take": 701,
+        "pass": 403,
+        "stop": 38
+      }
+    },
+    "1B4": {
+      "actions": {
+        "stop": 109,
+        "take": 561,
+        "excluded": 452,
+        "pass": 1146
+      },
+      "ai_actions": {
+        "touch": 21,
+        "take": 1231,
+        "pass": 537,
+        "stop": 28
+      }
+    },
+    "1B1": {
+      "actions": {
+        "pass": 392,
+        "take": 61,
+        "excluded": 98,
+        "stop": 69
+      },
+      "ai_actions": {
+        "take": 455,
+        "pass": 44,
+        "touch": 1,
+        "stop": 22
+      }
+    },
+    "1B8": {
+      "actions": {
+        "take": 42,
+        "pass": 441,
+        "excluded": 92,
+        "stop": 58
+      },
+      "ai_actions": {
+        "take": 392,
+        "touch": 11,
+        "stop": 49,
+        "pass": 89
+      }
+    },
+    "49A": {
+      "actions": {
+        "pass": 311,
+        "take": 104,
+        "excluded": 62,
+        "stop": 111
+      },
+      "ai_actions": {
+        "take": 501,
+        "pass": 38,
+        "touch": 6,
+        "not_engage": 2,
+        "stop": 12
+      }
+    },
+    "194": {
+      "actions": {
+        "take": 96,
+        "pass": 116,
+        "stop": 119,
+        "excluded": 5
+      },
+      "ai_actions": {
+        "take": 320,
+        "pass": 7,
+        "stop": 2,
+        "touch": 2
+      }
+    },
+    "400": {
+      "actions": {
+        "pass": 715,
+        "stop": 130,
+        "take": 641,
+        "excluded": 22
+      },
+      "ai_actions": {
+        "take": 1230,
+        "pass": 210,
+        "stop": 30,
+        "touch": 26
+      }
+    },
+    "4B8": {
+      "actions": {
+        "take": 53,
+        "pass": 237,
+        "excluded": 18,
+        "stop": 41
+      },
+      "ai_actions": {
+        "take": 184,
+        "pass": 157,
+        "touch": 6,
+        "stop": 1,
+        "not_engage": 1
+      }
+    },
+    "4BE": {
+      "actions": {
+        "pass": 1782,
+        "excluded": 490,
+        "take": 167,
+        "stop": 79
+      },
+      "ai_actions": {
+        "pass": 1482,
+        "take": 669,
+        "stop": 13,
+        "touch": 6,
+        "not_engage": 1
+      }
+    },
+    "4FA": {
+      "actions": {
+        "pass": 289,
+        "take": 89,
+        "stop": 91,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 395,
+        "pass": 34,
+        "stop": 40
+      }
+    },
+    "51D": {
+      "actions": {
+        "pass": 188,
+        "take": 92,
+        "excluded": 178,
+        "stop": 71
+      },
+      "ai_actions": {
+        "take": 274,
+        "pass": 62,
+        "stop": 9
+      }
+    },
+    "1B3": {
+      "actions": {
+        "take": 545,
+        "pass": 1325,
+        "excluded": 885,
+        "stop": 128
+      },
+      "ai_actions": {
+        "take": 1258,
+        "pass": 671,
+        "stop": 36,
+        "touch": 25
+      }
+    },
+    "41C": {
+      "actions": {
+        "stop": 26,
+        "take": 97,
+        "excluded": 71,
+        "pass": 205
+      },
+      "ai_actions": {
+        "take": 217,
+        "pass": 96,
+        "stop": 6,
+        "touch": 3
+      }
+    },
+    "40A": {
+      "actions": {
+        "take": 415,
+        "pass": 548,
+        "excluded": 29,
+        "stop": 118
+      },
+      "ai_actions": {
+        "take": 734,
+        "pass": 268,
+        "touch": 53,
+        "stop": 22
+      }
+    },
+    "20E": {
+      "actions": {
+        "pass": 383,
+        "take": 283,
+        "stop": 29,
+        "excluded": 22
+      },
+      "ai_actions": {
+        "take": 454,
+        "pass": 213,
+        "stop": 27
+      }
+    },
+    "205": {
+      "actions": {
+        "pass": 836,
+        "take": 383,
+        "stop": 290
+      },
+      "ai_actions": {
+        "take": 1077,
+        "pass": 312,
+        "stop": 115,
+        "touch": 5
+      }
+    },
+    "35E": {
+      "actions": {
+        "take": 105,
+        "stop": 62,
+        "pass": 279,
+        "excluded": 3
+      },
+      "ai_actions": {
+        "take": 352,
+        "pass": 70,
+        "stop": 22,
+        "touch": 2
+      }
+    },
+    "472": {
+      "actions": {
+        "stop": 30,
+        "pass": 444,
+        "take": 258,
+        "excluded": 276
+      },
+      "ai_actions": {
+        "take": 616,
+        "pass": 82,
+        "stop": 23,
+        "touch": 11
+      }
+    },
+    "180": {
+      "actions": {
+        "excluded": 111,
+        "pass": 623,
+        "take": 90,
+        "stop": 11
+      },
+      "ai_actions": {
+        "pass": 407,
+        "take": 307,
+        "touch": 1,
+        "stop": 1
+      }
+    },
+    "223": {
+      "actions": {
+        "excluded": 590,
+        "pass": 575,
+        "take": 164,
+        "stop": 279
+      },
+      "ai_actions": {
+        "stop": 349,
+        "take": 453,
+        "pass": 160,
+        "touch": 43
+      }
+    },
+    "46D": {
+      "actions": {
+        "pass": 445,
+        "take": 127,
+        "stop": 16
+      },
+      "ai_actions": {
+        "take": 565,
+        "stop": 14,
+        "pass": 7,
+        "touch": 2
+      }
+    },
+    "3DE": {
+      "actions": {
+        "pass": 225,
+        "take": 195,
+        "excluded": 4,
+        "stop": 16
+      },
+      "ai_actions": {
+        "pass": 59,
+        "take": 369,
+        "stop": 7,
+        "touch": 1
+      }
+    },
+    "39A": {
+      "actions": {
+        "pass": 745,
+        "excluded": 87,
+        "take": 30,
+        "stop": 6
+      },
+      "ai_actions": {
+        "pass": 394,
+        "take": 383,
+        "stop": 3,
+        "touch": 1
+      }
+    },
+    "4C4": {
+      "actions": {
+        "excluded": 754,
+        "pass": 52,
+        "take": 10,
+        "stop": 1
+      },
+      "ai_actions": {
+        "pass": 26,
+        "take": 36,
+        "stop": 1
+      }
+    },
+    "35F": {
+      "actions": {
+        "take": 330,
+        "stop": 36,
+        "pass": 322
+      },
+      "ai_actions": {
+        "take": 620,
+        "pass": 30,
+        "stop": 37,
+        "touch": 1
+      }
+    },
+    "512": {
+      "actions": {
+        "take": 156,
+        "stop": 12,
+        "pass": 178
+      },
+      "ai_actions": {
+        "take": 306,
+        "stop": 20,
+        "pass": 19,
+        "touch": 1
+      }
+    },
+    "1AD": {
+      "actions": {
+        "pass": 1145,
+        "take": 561,
+        "excluded": 826,
+        "stop": 251
+      },
+      "ai_actions": {
+        "take": 1588,
+        "touch": 21,
+        "stop": 227,
+        "pass": 123,
+        "not_engage": 1
+      }
+    },
+    "4D0": {
+      "actions": {
+        "stop": 239,
+        "pass": 1603,
+        "take": 191,
+        "excluded": 46
+      },
+      "ai_actions": {
+        "take": 1038,
+        "pass": 978,
+        "touch": 10,
+        "stop": 5
+      }
+    },
+    "498": {
+      "actions": {
+        "pass": 531,
+        "excluded": 174,
+        "stop": 252,
+        "take": 72
+      },
+      "ai_actions": {
+        "pass": 110,
+        "take": 822,
+        "stop": 13,
+        "touch": 15,
+        "not_engage": 3
+      }
+    },
+    "246": {
+      "actions": {
+        "take": 214,
+        "pass": 598,
+        "excluded": 412,
+        "stop": 20
+      },
+      "ai_actions": {
+        "take": 430,
+        "pass": 378,
+        "stop": 14,
+        "touch": 1
+      }
+    },
+    "420": {
+      "actions": {
+        "pass": 125,
+        "excluded": 443,
+        "take": 35,
+        "stop": 117
+      },
+      "ai_actions": {
+        "take": 320,
+        "touch": 1,
+        "pass": 18,
+        "stop": 8
+      }
+    },
+    "3F4": {
+      "actions": {
+        "stop": 146,
+        "pass": 242,
+        "take": 81,
+        "excluded": 8
+      },
+      "ai_actions": {
+        "take": 340,
+        "stop": 125,
+        "pass": 11
+      }
+    },
+    "3F2": {
+      "actions": {
+        "pass": 198,
+        "take": 155,
+        "stop": 22
+      },
+      "ai_actions": {
+        "take": 238,
+        "stop": 132,
+        "pass": 5
+      }
+    },
+    "4F2": {
+      "actions": {
+        "excluded": 801,
+        "pass": 1560,
+        "take": 533,
+        "stop": 224
+      },
+      "ai_actions": {
+        "pass": 1339,
+        "take": 1183,
+        "stop": 19,
+        "touch": 22,
+        "not_engage": 9
+      }
+    },
+    "4BB": {
+      "actions": {
+        "take": 65,
+        "excluded": 625,
+        "pass": 492,
+        "stop": 82
+      },
+      "ai_actions": {
+        "take": 247,
+        "pass": 409,
+        "stop": 7,
+        "touch": 5
+      }
+    },
+    "38F": {
+      "actions": {
+        "pass": 205,
+        "take": 151,
+        "stop": 1
+      },
+      "ai_actions": {
+        "pass": 41,
+        "take": 313,
+        "stop": 2,
+        "touch": 1
+      }
+    },
+    "4BA": {
+      "actions": {
+        "excluded": 436,
+        "take": 14,
+        "pass": 51,
+        "stop": 5
+      },
+      "ai_actions": {
+        "take": 60,
+        "pass": 11
+      }
+    },
+    "2C2": {
+      "actions": {
+        "take": 131,
+        "pass": 239,
+        "stop": 66
+      },
+      "ai_actions": {
+        "take": 339,
+        "pass": 89,
+        "touch": 7,
+        "stop": 1
+      }
+    },
+    "26E": {
+      "actions": {
+        "pass": 1043,
+        "take": 532,
+        "stop": 433,
+        "excluded": 733
+      },
+      "ai_actions": {
+        "take": 1610,
+        "pass": 349,
+        "stop": 34,
+        "touch": 5
+      }
+    },
+    "189": {
+      "actions": {
+        "pass": 4003,
+        "take": 603,
+        "excluded": 1004,
+        "stop": 202
+      },
+      "ai_actions": {
+        "pass": 3020,
+        "take": 1831,
+        "touch": 28,
+        "stop": 45
+      }
+    },
+    "4E3": {
+      "actions": {
+        "pass": 785,
+        "excluded": 557,
+        "take": 958,
+        "stop": 125
+      },
+      "ai_actions": {
+        "take": 1654,
+        "pass": 167,
+        "touch": 26,
+        "stop": 12
+      }
+    },
+    "199": {
+      "actions": {
+        "take": 1282,
+        "pass": 1229,
+        "stop": 89,
+        "excluded": 12
+      },
+      "ai_actions": {
+        "take": 2302,
+        "pass": 226,
+        "stop": 49,
+        "touch": 5
+      }
+    },
+    "495": {
+      "actions": {
+        "pass": 1101,
+        "take": 495,
+        "stop": 431,
+        "excluded": 137
+      },
+      "ai_actions": {
+        "take": 892,
+        "pass": 437,
+        "touch": 665,
+        "stop": 16
+      }
+    },
+    "48A": {
+      "actions": {
+        "take": 260,
+        "stop": 196,
+        "pass": 484,
+        "excluded": 213
+      },
+      "ai_actions": {
+        "take": 526,
+        "stop": 211,
+        "pass": 192,
+        "touch": 11
+      }
+    },
+    "3EC": {
+      "actions": {
+        "stop": 13,
+        "pass": 112,
+        "take": 109
+      },
+      "ai_actions": {
+        "stop": 4,
+        "take": 185,
+        "pass": 44,
+        "touch": 1
+      }
+    },
+    "398": {
+      "actions": {
+        "pass": 272,
+        "take": 41,
+        "excluded": 3
+      },
+      "ai_actions": {
+        "pass": 125,
+        "take": 187,
+        "touch": 1
+      }
+    },
+    "30B": {
+      "actions": {
+        "pass": 143,
+        "take": 68,
+        "stop": 8
+      },
+      "ai_actions": {
+        "take": 201,
+        "pass": 6,
+        "stop": 12
+      }
+    },
+    "4FC": {
+      "actions": {
+        "take": 83,
+        "pass": 425,
+        "stop": 63,
+        "excluded": 12
+      },
+      "ai_actions": {
+        "take": 316,
+        "pass": 241,
+        "touch": 6,
+        "stop": 8
+      }
+    },
+    "4C8": {
+      "actions": {
+        "pass": 2507,
+        "excluded": 1658,
+        "stop": 565,
+        "take": 405
+      },
+      "ai_actions": {
+        "pass": 1287,
+        "take": 2289,
+        "touch": 14,
+        "stop": 50,
+        "not_engage": 4
+      }
+    },
+    "4C5": {
+      "actions": {
+        "pass": 673,
+        "excluded": 405,
+        "take": 116,
+        "stop": 15
+      },
+      "ai_actions": {
+        "pass": 502,
+        "take": 280,
+        "touch": 3,
+        "stop": 5
+      }
+    },
+    "45E": {
+      "actions": {
+        "pass": 336,
+        "take": 458,
+        "stop": 24,
+        "excluded": 258
+      },
+      "ai_actions": {
+        "take": 739,
+        "stop": 29,
+        "pass": 50
+      }
+    },
+    "2F8": {
+      "actions": {
+        "excluded": 146,
+        "pass": 835,
+        "take": 306,
+        "stop": 28
+      },
+      "ai_actions": {
+        "take": 979,
+        "pass": 160,
+        "stop": 24,
+        "touch": 6
+      }
+    },
+    "2D4": {
+      "actions": {
+        "pass": 514,
+        "stop": 90,
+        "take": 136,
+        "excluded": 3
+      },
+      "ai_actions": {
+        "take": 481,
+        "pass": 223,
+        "touch": 20,
+        "stop": 15
+      }
+    },
+    "1CB": {
+      "actions": {
+        "take": 571,
+        "pass": 1006,
+        "stop": 69,
+        "excluded": 7
+      },
+      "ai_actions": {
+        "take": 1204,
+        "pass": 324,
+        "stop": 108,
+        "touch": 3
+      }
+    },
+    "2E8": {
+      "actions": {
+        "take": 521,
+        "pass": 660,
+        "excluded": 2221,
+        "stop": 163
+      },
+      "ai_actions": {
+        "take": 1073,
+        "pass": 209,
+        "touch": 2,
+        "stop": 60
+      }
+    },
+    "41B": {
+      "actions": {
+        "stop": 101,
+        "take": 104,
+        "pass": 218,
+        "excluded": 4
+      },
+      "ai_actions": {
+        "stop": 76,
+        "take": 209,
+        "pass": 136,
+        "touch": 2
+      }
+    },
+    "4A5": {
+      "actions": {
+        "excluded": 450,
+        "pass": 183,
+        "take": 52,
+        "stop": 16
+      },
+      "ai_actions": {
+        "take": 130,
+        "pass": 112,
+        "stop": 1,
+        "touch": 1
+      }
+    },
+    "2CF": {
+      "actions": {
+        "take": 165,
+        "stop": 11,
+        "pass": 191,
+        "excluded": 4
+      },
+      "ai_actions": {
+        "take": 288,
+        "stop": 10,
+        "pass": 71,
+        "touch": 2
+      }
+    },
+    "30A": {
+      "actions": {
+        "pass": 350,
+        "take": 142,
+        "excluded": 4,
+        "stop": 12
+      },
+      "ai_actions": {
+        "pass": 116,
+        "take": 377,
+        "stop": 7,
+        "touch": 4
+      }
+    },
+    "53D": {
+      "actions": {
+        "pass": 403,
+        "stop": 164,
+        "take": 202,
+        "excluded": 2
+      },
+      "ai_actions": {
+        "take": 660,
+        "pass": 101,
+        "stop": 3,
+        "touch": 7
+      }
+    },
+    "23F": {
+      "actions": {
+        "take": 242,
+        "pass": 1417,
+        "stop": 57,
+        "excluded": 45
+      },
+      "ai_actions": {
+        "take": 734,
+        "pass": 937,
+        "touch": 5,
+        "stop": 34
+      }
+    },
+    "35B": {
+      "actions": {
+        "pass": 221,
+        "take": 109,
+        "stop": 31,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 294,
+        "pass": 55,
+        "stop": 12
+      }
+    },
+    "3F3": {
+      "actions": {
+        "pass": 128,
+        "take": 96,
+        "stop": 38,
+        "excluded": 3
+      },
+      "ai_actions": {
+        "take": 195,
+        "stop": 67,
+        "pass": 2,
+        "not_engage": 1
+      }
+    },
+    "1DD": {
+      "actions": {
+        "take": 740,
+        "pass": 931,
+        "excluded": 18,
+        "stop": 115
+      },
+      "ai_actions": {
+        "take": 1208,
+        "pass": 428,
+        "stop": 122
+      }
+    },
+    "362": {
+      "actions": {
+        "take": 68,
+        "pass": 140,
+        "stop": 17,
+        "excluded": 14
+      },
+      "ai_actions": {
+        "take": 137,
+        "stop": 14,
+        "pass": 70,
+        "touch": 4
+      }
+    },
+    "483": {
+      "actions": {
+        "take": 153,
+        "pass": 245,
+        "stop": 35
+      },
+      "ai_actions": {
+        "take": 365,
+        "pass": 60,
+        "stop": 6,
+        "touch": 2
+      }
+    },
+    "4D9": {
+      "actions": {
+        "pass": 154,
+        "take": 59,
+        "excluded": 260,
+        "stop": 13
+      },
+      "ai_actions": {
+        "pass": 62,
+        "take": 163,
+        "touch": 2
+      }
+    },
+    "1C4": {
+      "actions": {
+        "excluded": 75
+      },
+      "ai_actions": {}
+    },
+    "410": {
+      "actions": {
+        "excluded": 147,
+        "pass": 381,
+        "take": 162,
+        "stop": 37
+      },
+      "ai_actions": {
+        "pass": 145,
+        "take": 413,
+        "touch": 8,
+        "stop": 11
+      }
+    },
+    "399": {
+      "actions": {
+        "pass": 357,
+        "take": 203,
+        "stop": 2
+      },
+      "ai_actions": {
+        "pass": 89,
+        "take": 472,
+        "touch": 1
+      }
+    },
+    "3D8": {
+      "actions": {
+        "excluded": 337,
+        "take": 61,
+        "pass": 139,
+        "stop": 19
+      },
+      "ai_actions": {
+        "take": 143,
+        "pass": 68,
+        "touch": 3,
+        "stop": 2
+      }
+    },
+    "3EB": {
+      "actions": {
+        "pass": 103,
+        "take": 93,
+        "stop": 8,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 167,
+        "pass": 30,
+        "stop": 4,
+        "touch": 3
+      }
+    },
+    "46E": {
+      "actions": {
+        "pass": 231,
+        "take": 43,
+        "stop": 11
+      },
+      "ai_actions": {
+        "take": 273,
+        "stop": 8,
+        "touch": 1,
+        "pass": 3
+      }
+    },
+    "1C5": {
+      "actions": {
+        "pass": 14,
+        "take": 9,
+        "excluded": 1,
+        "stop": 2
+      },
+      "ai_actions": {
+        "take": 20,
+        "pass": 2,
+        "touch": 1,
+        "stop": 2
+      }
+    },
+    "435": {
+      "actions": {
+        "pass": 74,
+        "take": 57,
+        "stop": 4,
+        "excluded": 4
+      },
+      "ai_actions": {
+        "pass": 32,
+        "take": 96,
+        "stop": 6,
+        "touch": 1
+      }
+    },
+    "4DF": {
+      "actions": {
+        "pass": 152,
+        "excluded": 74,
+        "take": 61
+      },
+      "ai_actions": {
+        "take": 138,
+        "pass": 73,
+        "touch": 1
+      }
+    },
+    "294": {
+      "actions": {
+        "take": 56,
+        "pass": 96,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 87,
+        "pass": 65,
+        "touch": 1
+      }
+    },
+    "316": {
+      "actions": {
+        "excluded": 281,
+        "pass": 19,
+        "take": 9
+      },
+      "ai_actions": {
+        "take": 22,
+        "pass": 4,
+        "stop": 2
+      }
+    },
+    "502": {
+      "actions": {
+        "pass": 562,
+        "excluded": 360,
+        "take": 41,
+        "stop": 24
+      },
+      "ai_actions": {
+        "pass": 375,
+        "take": 238,
+        "touch": 6,
+        "stop": 2
+      }
+    },
+    "1BD": {
+      "actions": {
+        "excluded": 403,
+        "pass": 367,
+        "stop": 71,
+        "take": 213
+      },
+      "ai_actions": {
+        "touch": 6,
+        "take": 461,
+        "stop": 22,
+        "pass": 157
+      }
+    },
+    "1D0": {
+      "actions": {
+        "pass": 834,
+        "excluded": 2168,
+        "take": 420,
+        "stop": 315
+      },
+      "ai_actions": {
+        "take": 860,
+        "pass": 507,
+        "touch": 221,
+        "stop": 23,
+        "not_engage": 1
+      }
+    },
+    "1CC": {
+      "actions": {
+        "take": 20,
+        "stop": 37,
+        "pass": 179,
+        "excluded": 41
+      },
+      "ai_actions": {
+        "take": 179,
+        "pass": 53,
+        "stop": 4
+      }
+    },
+    "233": {
+      "actions": {
+        "pass": 69,
+        "take": 12
+      },
+      "ai_actions": {
+        "pass": 17,
+        "take": 63,
+        "touch": 1
+      }
+    },
+    "36B": {
+      "actions": {
+        "pass": 82,
+        "excluded": 47,
+        "take": 17
+      },
+      "ai_actions": {
+        "pass": 48,
+        "take": 50,
+        "stop": 1
+      }
+    },
+    "411": {
+      "actions": {
+        "take": 153,
+        "stop": 112,
+        "excluded": 175,
+        "pass": 465
+      },
+      "ai_actions": {
+        "take": 515,
+        "touch": 17,
+        "pass": 174,
+        "stop": 24
+      }
+    },
+    "40B": {
+      "actions": {
+        "take": 259,
+        "pass": 272,
+        "stop": 30,
+        "excluded": 17
+      },
+      "ai_actions": {
+        "take": 441,
+        "pass": 111,
+        "stop": 4,
+        "touch": 4
+      }
+    },
+    "4E4": {
+      "actions": {
+        "excluded": 288,
+        "take": 173,
+        "pass": 45,
+        "stop": 15
+      },
+      "ai_actions": {
+        "take": 213,
+        "touch": 17,
+        "pass": 3
+      }
+    },
+    "3FD": {
+      "actions": {
+        "pass": 556,
+        "take": 279,
+        "stop": 130,
+        "excluded": 130
+      },
+      "ai_actions": {
+        "take": 689,
+        "stop": 48,
+        "pass": 217,
+        "touch": 9
+      }
+    },
+    "4B3": {
+      "actions": {
+        "pass": 114,
+        "take": 60,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 113,
+        "pass": 59,
+        "stop": 2,
+        "touch": 1
+      }
+    },
+    "4E0": {
+      "actions": {
+        "pass": 1141,
+        "stop": 154,
+        "take": 372
+      },
+      "ai_actions": {
+        "pass": 690,
+        "take": 954,
+        "touch": 5,
+        "stop": 17
+      }
+    },
+    "257": {
+      "actions": {
+        "pass": 43,
+        "take": 18,
+        "stop": 6
+      },
+      "ai_actions": {
+        "pass": 12,
+        "take": 54,
+        "stop": 1
+      }
+    },
+    "191": {
+      "actions": {
+        "take": 540,
+        "pass": 1262,
+        "excluded": 420,
+        "stop": 119
+      },
+      "ai_actions": {
+        "take": 1412,
+        "pass": 457,
+        "touch": 5,
+        "stop": 40
+      }
+    },
+    "1B0": {
+      "actions": {
+        "pass": 588,
+        "take": 222,
+        "excluded": 333,
+        "stop": 44
+      },
+      "ai_actions": {
+        "pass": 213,
+        "take": 613,
+        "stop": 23,
+        "touch": 4
+      }
+    },
+    "1D9": {
+      "actions": {
+        "pass": 2188,
+        "take": 396,
+        "excluded": 1160,
+        "stop": 78
+      },
+      "ai_actions": {
+        "pass": 1508,
+        "take": 1128,
+        "stop": 22,
+        "touch": 9
+      }
+    },
+    "3CB": {
+      "actions": {
+        "pass": 29,
+        "take": 22,
+        "stop": 9
+      },
+      "ai_actions": {
+        "take": 48,
+        "pass": 7,
+        "touch": 1,
+        "stop": 4
+      }
+    },
+    "32A": {
+      "actions": {
+        "pass": 576,
+        "take": 191,
+        "excluded": 22,
+        "stop": 48
+      },
+      "ai_actions": {
+        "take": 497,
+        "pass": 277,
+        "touch": 16,
+        "stop": 25
+      }
+    },
+    "311": {
+      "actions": {
+        "excluded": 639,
+        "take": 20,
+        "pass": 115,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 64,
+        "pass": 83,
+        "stop": 6
+      }
+    },
+    "2E3": {
+      "actions": {
+        "pass": 427,
+        "stop": 86,
+        "excluded": 23,
+        "take": 187
+      },
+      "ai_actions": {
+        "take": 469,
+        "pass": 124,
+        "stop": 101,
+        "touch": 6
+      }
+    },
+    "2F9": {
+      "actions": {
+        "pass": 959,
+        "excluded": 9,
+        "take": 231,
+        "stop": 33
+      },
+      "ai_actions": {
+        "pass": 285,
+        "take": 904,
+        "touch": 14,
+        "stop": 18
+      }
+    },
+    "31E": {
+      "actions": {
+        "excluded": 576,
+        "pass": 734,
+        "take": 634,
+        "stop": 34
+      },
+      "ai_actions": {
+        "take": 1181,
+        "pass": 161,
+        "stop": 54,
+        "touch": 10
+      }
+    },
+    "27B": {
+      "actions": {
+        "pass": 23,
+        "take": 13,
+        "stop": 4
+      },
+      "ai_actions": {
+        "take": 32,
+        "pass": 7,
+        "stop": 1
+      }
+    },
+    "1AC": {
+      "actions": {
+        "take": 193,
+        "pass": 771,
+        "stop": 190,
+        "excluded": 8
+      },
+      "ai_actions": {
+        "take": 833,
+        "pass": 311,
+        "stop": 4,
+        "touch": 6
+      }
+    },
+    "302": {
+      "actions": {
+        "pass": 118,
+        "take": 114,
+        "excluded": 133
+      },
+      "ai_actions": {
+        "take": 231,
+        "pass": 1
+      }
+    },
+    "2EB": {
+      "actions": {
+        "pass": 528,
+        "take": 300,
+        "stop": 24,
+        "excluded": 5
+      },
+      "ai_actions": {
+        "pass": 232,
+        "take": 603,
+        "touch": 5,
+        "stop": 5
+      }
+    },
+    "4C6": {
+      "actions": {
+        "pass": 225,
+        "take": 6,
+        "excluded": 10,
+        "stop": 10
+      },
+      "ai_actions": {
+        "pass": 112,
+        "take": 128,
+        "stop": 1
+      }
+    },
+    "2EA": {
+      "actions": {
+        "pass": 546,
+        "take": 401,
+        "stop": 41,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "pass": 238,
+        "take": 740,
+        "stop": 6,
+        "touch": 3
+      }
+    },
+    "238": {
+      "actions": {
+        "pass": 132,
+        "take": 43,
+        "stop": 138
+      },
+      "ai_actions": {
+        "take": 95,
+        "stop": 205,
+        "pass": 10,
+        "touch": 3
+      }
+    },
+    "1E0": {
+      "actions": {
+        "excluded": 561,
+        "pass": 175,
+        "take": 44,
+        "stop": 7
+      },
+      "ai_actions": {
+        "take": 139,
+        "pass": 71,
+        "stop": 10,
+        "touch": 2
+      }
+    },
+    "1E3": {
+      "actions": {
+        "pass": 1295,
+        "take": 119,
+        "stop": 23,
+        "excluded": 654
+      },
+      "ai_actions": {
+        "take": 564,
+        "pass": 857,
+        "touch": 4,
+        "stop": 10
+      }
+    },
+    "259": {
+      "actions": {
+        "pass": 53,
+        "take": 11,
+        "stop": 8
+      },
+      "ai_actions": {
+        "take": 57,
+        "pass": 13,
+        "touch": 2
+      }
+    },
+    "264": {
+      "actions": {
+        "pass": 117,
+        "take": 59,
+        "stop": 3
+      },
+      "ai_actions": {
+        "take": 138,
+        "pass": 39,
+        "stop": 1,
+        "touch": 1
+      }
+    },
+    "1AA": {
+      "actions": {
+        "excluded": 528,
+        "pass": 251,
+        "take": 144,
+        "stop": 17
+      },
+      "ai_actions": {
+        "stop": 8,
+        "take": 344,
+        "pass": 59,
+        "touch": 10,
+        "not_engage": 1
+      }
+    },
+    "2E5": {
+      "actions": {
+        "take": 320,
+        "pass": 337,
+        "stop": 7,
+        "excluded": 6
+      },
+      "ai_actions": {
+        "take": 532,
+        "pass": 128,
+        "touch": 2,
+        "stop": 2
+      }
+    },
+    "35C": {
+      "actions": {
+        "take": 147,
+        "pass": 846,
+        "excluded": 9,
+        "stop": 43
+      },
+      "ai_actions": {
+        "take": 603,
+        "pass": 395,
+        "touch": 16,
+        "stop": 20
+      }
+    },
+    "3FA": {
+      "actions": {
+        "stop": 50,
+        "pass": 121,
+        "excluded": 44,
+        "take": 45
+      },
+      "ai_actions": {
+        "take": 110,
+        "pass": 32,
+        "stop": 74
+      }
+    },
+    "4AB": {
+      "actions": {
+        "pass": 353,
+        "stop": 64,
+        "excluded": 6,
+        "take": 53
+      },
+      "ai_actions": {
+        "take": 323,
+        "pass": 147,
+        "stop": 5,
+        "touch": 1
+      }
+    },
+    "517": {
+      "actions": {
+        "pass": 844,
+        "take": 161,
+        "stop": 74,
+        "excluded": 4
+      },
+      "ai_actions": {
+        "take": 620,
+        "pass": 411,
+        "touch": 22,
+        "stop": 26
+      }
+    },
+    "357": {
+      "actions": {
+        "pass": 675,
+        "take": 490,
+        "stop": 23,
+        "excluded": 3
+      },
+      "ai_actions": {
+        "take": 1045,
+        "pass": 132,
+        "stop": 8,
+        "touch": 3
+      }
+    },
+    "268": {
+      "actions": {
+        "pass": 168,
+        "take": 68,
+        "excluded": 22,
+        "stop": 8
+      },
+      "ai_actions": {
+        "take": 171,
+        "pass": 70,
+        "stop": 2,
+        "touch": 1
+      }
+    },
+    "42B": {
+      "actions": {
+        "take": 370,
+        "pass": 1084,
+        "stop": 96,
+        "excluded": 2
+      },
+      "ai_actions": {
+        "take": 1088,
+        "stop": 21,
+        "pass": 429,
+        "touch": 11
+      }
+    },
+    "533": {
+      "actions": {
+        "pass": 630,
+        "take": 166,
+        "stop": 58,
+        "excluded": 4
+      },
+      "ai_actions": {
+        "take": 537,
+        "pass": 273,
+        "stop": 18,
+        "touch": 26
+      }
+    },
+    "363": {
+      "actions": {
+        "excluded": 455,
+        "pass": 235,
+        "take": 109,
+        "stop": 23
+      },
+      "ai_actions": {
+        "pass": 124,
+        "take": 215,
+        "stop": 24,
+        "touch": 2
+      }
+    },
+    "222": {
+      "actions": {
+        "pass": 344,
+        "excluded": 281,
+        "stop": 12,
+        "take": 12
+      },
+      "ai_actions": {
+        "pass": 218,
+        "take": 144,
+        "touch": 2,
+        "stop": 5
+      }
+    },
+    "29C": {
+      "actions": {
+        "pass": 145,
+        "excluded": 75,
+        "take": 34
+      },
+      "ai_actions": {
+        "take": 177,
+        "pass": 2
+      }
+    },
+    "1E7": {
+      "actions": {
+        "excluded": 72,
+        "pass": 396,
+        "take": 114,
+        "stop": 9
+      },
+      "ai_actions": {
+        "take": 286,
+        "pass": 220,
+        "touch": 3,
+        "stop": 9
+      }
+    },
+    "4D6": {
+      "actions": {
+        "pass": 2429,
+        "excluded": 2053,
+        "stop": 495,
+        "take": 126
+      },
+      "ai_actions": {
+        "take": 1082,
+        "pass": 2054,
+        "stop": 5,
+        "touch": 8,
+        "not_engage": 2
+      }
+    },
+    "337": {
+      "actions": {
+        "pass": 258,
+        "stop": 136,
+        "take": 194,
+        "excluded": 2
+      },
+      "ai_actions": {
+        "take": 558,
+        "pass": 25,
+        "stop": 4
+      }
+    },
+    "421": {
+      "actions": {
+        "pass": 54,
+        "stop": 9,
+        "excluded": 29,
+        "take": 25
+      },
+      "ai_actions": {
+        "take": 76,
+        "stop": 6,
+        "pass": 6
+      }
+    },
+    "4E1": {
+      "actions": {
+        "excluded": 10,
+        "take": 49,
+        "pass": 54,
+        "stop": 3
+      },
+      "ai_actions": {
+        "take": 102,
+        "stop": 2,
+        "pass": 2
+      }
+    },
+    "26A": {
+      "actions": {
+        "pass": 284,
+        "excluded": 163,
+        "take": 153,
+        "stop": 14
+      },
+      "ai_actions": {
+        "take": 316,
+        "pass": 125,
+        "stop": 10
+      }
+    },
+    "28E": {
+      "actions": {
+        "excluded": 181
+      },
+      "ai_actions": {}
+    },
+    "29D": {
+      "actions": {
+        "excluded": 295,
+        "take": 3,
+        "pass": 7,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 11
+      }
+    },
+    "2E7": {
+      "actions": {
+        "excluded": 334,
+        "pass": 227,
+        "stop": 14,
+        "take": 93
+      },
+      "ai_actions": {
+        "pass": 67,
+        "touch": 14,
+        "take": 251,
+        "stop": 2
+      }
+    },
+    "475": {
+      "actions": {
+        "excluded": 53,
+        "pass": 12,
+        "take": 23,
+        "stop": 1
+      },
+      "ai_actions": {
+        "pass": 4,
+        "take": 30,
+        "stop": 2
+      }
+    },
+    "21B": {
+      "actions": {
+        "pass": 42,
+        "take": 9,
+        "stop": 6,
+        "excluded": 9
+      },
+      "ai_actions": {
+        "take": 37,
+        "pass": 13,
+        "stop": 6
+      }
+    },
+    "359": {
+      "actions": {
+        "take": 242,
+        "excluded": 247,
+        "stop": 43,
+        "pass": 409
+      },
+      "ai_actions": {
+        "take": 536,
+        "pass": 103,
+        "stop": 48,
+        "touch": 6
+      }
+    },
+    "336": {
+      "actions": {
+        "take": 784,
+        "pass": 1159,
+        "stop": 38,
+        "excluded": 8
+      },
+      "ai_actions": {
+        "take": 1445,
+        "pass": 526,
+        "stop": 5
+      }
+    },
+    "1F0": {
+      "actions": {
+        "excluded": 1106
+      },
+      "ai_actions": {}
+    },
+    "3CF": {
+      "actions": {
+        "pass": 139,
+        "take": 60,
+        "stop": 7
+      },
+      "ai_actions": {
+        "take": 135,
+        "pass": 60,
+        "touch": 6,
+        "stop": 5
+      }
+    },
+    "3DB": {
+      "actions": {
+        "take": 38,
+        "pass": 92,
+        "excluded": 35,
+        "stop": 4
+      },
+      "ai_actions": {
+        "take": 92,
+        "pass": 34,
+        "touch": 2,
+        "stop": 4
+      }
+    },
+    "21E": {
+      "actions": {
+        "stop": 150,
+        "pass": 412,
+        "excluded": 189,
+        "take": 219
+      },
+      "ai_actions": {
+        "stop": 124,
+        "take": 505,
+        "pass": 129,
+        "touch": 21
+      }
+    },
+    "53A": {
+      "actions": {
+        "pass": 189,
+        "take": 77,
+        "excluded": 78,
+        "stop": 8
+      },
+      "ai_actions": {
+        "take": 197,
+        "pass": 74,
+        "stop": 2
+      }
+    },
+    "320": {
+      "actions": {
+        "take": 392,
+        "pass": 683,
+        "stop": 27,
+        "excluded": 5
+      },
+      "ai_actions": {
+        "take": 907,
+        "pass": 133,
+        "touch": 14,
+        "stop": 39
+      }
+    },
+    "25D": {
+      "actions": {
+        "excluded": 31,
+        "pass": 114,
+        "take": 34
+      },
+      "ai_actions": {
+        "pass": 8,
+        "take": 135,
+        "stop": 5
+      }
+    },
+    "269": {
+      "actions": {
+        "excluded": 436,
+        "pass": 339,
+        "take": 158,
+        "stop": 120
+      },
+      "ai_actions": {
+        "take": 421,
+        "pass": 112,
+        "stop": 79,
+        "touch": 2
+      }
+    },
+    "20D": {
+      "actions": {
+        "pass": 643,
+        "excluded": 218,
+        "take": 476,
+        "stop": 49
+      },
+      "ai_actions": {
+        "take": 692,
+        "pass": 442,
+        "stop": 23
+      }
+    },
+    "20A": {
+      "actions": {
+        "pass": 234,
+        "take": 73,
+        "excluded": 92,
+        "stop": 149
+      },
+      "ai_actions": {
+        "take": 313,
+        "pass": 68,
+        "stop": 69
+      }
+    },
+    "487": {
+      "actions": {
+        "pass": 937,
+        "stop": 243,
+        "take": 555,
+        "excluded": 105
+      },
+      "ai_actions": {
+        "take": 1156,
+        "stop": 273,
+        "pass": 289,
+        "touch": 16
+      }
+    },
+    "482": {
+      "actions": {
+        "pass": 237,
+        "take": 188,
+        "stop": 81,
+        "excluded": 16
+      },
+      "ai_actions": {
+        "take": 397,
+        "stop": 62,
+        "pass": 62
+      }
+    },
+    "50C": {
+      "actions": {
+        "pass": 297,
+        "take": 191,
+        "stop": 31,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 371,
+        "pass": 114,
+        "stop": 32,
+        "touch": 2
+      }
+    },
+    "23D": {
+      "actions": {
+        "pass": 1573,
+        "stop": 115,
+        "take": 120,
+        "excluded": 30
+      },
+      "ai_actions": {
+        "take": 558,
+        "pass": 1207,
+        "stop": 34,
+        "touch": 7
+      }
+    },
+    "456": {
+      "actions": {
+        "pass": 147,
+        "take": 91,
+        "stop": 11,
+        "excluded": 2
+      },
+      "ai_actions": {
+        "take": 235,
+        "pass": 9,
+        "stop": 5
+      }
+    },
+    "4DE": {
+      "actions": {
+        "excluded": 601,
+        "pass": 766,
+        "take": 64,
+        "stop": 12
+      },
+      "ai_actions": {
+        "pass": 611,
+        "take": 197,
+        "touch": 3,
+        "stop": 5
+      }
+    },
+    "2C5": {
+      "actions": {
+        "pass": 253,
+        "take": 134,
+        "stop": 106
+      },
+      "ai_actions": {
+        "take": 395,
+        "pass": 93,
+        "touch": 1,
+        "stop": 4
+      }
+    },
+    "519": {
+      "actions": {
+        "take": 206,
+        "stop": 35,
+        "excluded": 82,
+        "pass": 221
+      },
+      "ai_actions": {
+        "take": 360,
+        "touch": 3,
+        "stop": 39,
+        "pass": 57
+      }
+    },
+    "2B4": {
+      "actions": {
+        "take": 229,
+        "pass": 539,
+        "excluded": 12,
+        "stop": 45
+      },
+      "ai_actions": {
+        "take": 730,
+        "pass": 67,
+        "stop": 13,
+        "touch": 15
+      }
+    },
+    "2BE": {
+      "actions": {
+        "stop": 76,
+        "pass": 213,
+        "take": 80
+      },
+      "ai_actions": {
+        "take": 343,
+        "pass": 22,
+        "touch": 2
+      }
+    },
+    "1F1": {
+      "actions": {
+        "excluded": 78
+      },
+      "ai_actions": {}
+    },
+    "4DC": {
+      "actions": {
+        "pass": 623,
+        "excluded": 107,
+        "take": 233,
+        "stop": 35
+      },
+      "ai_actions": {
+        "take": 573,
+        "touch": 3,
+        "pass": 325,
+        "stop": 2
+      }
+    },
+    "4C0": {
+      "actions": {
+        "pass": 121,
+        "take": 41,
+        "stop": 3
+      },
+      "ai_actions": {
+        "take": 144,
+        "pass": 19,
+        "stop": 2
+      }
+    },
+    "226": {
+      "actions": {
+        "excluded": 964,
+        "pass": 816,
+        "stop": 47,
+        "take": 45
+      },
+      "ai_actions": {
+        "pass": 587,
+        "touch": 5,
+        "take": 348,
+        "stop": 17
+      }
+    },
+    "321": {
+      "actions": {
+        "pass": 399,
+        "take": 141,
+        "stop": 63,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 496,
+        "pass": 82,
+        "touch": 2,
+        "stop": 22
+      }
+    },
+    "4CA": {
+      "actions": {
+        "pass": 1728,
+        "excluded": 1116,
+        "take": 252,
+        "stop": 60
+      },
+      "ai_actions": {
+        "take": 597,
+        "pass": 1369,
+        "touch": 33,
+        "stop": 40
+      }
+    },
+    "224": {
+      "actions": {
+        "pass": 560,
+        "excluded": 298,
+        "stop": 101,
+        "take": 76
+      },
+      "ai_actions": {
+        "pass": 255,
+        "take": 343,
+        "stop": 124,
+        "touch": 6
+      }
+    },
+    "44B": {
+      "actions": {
+        "pass": 155,
+        "take": 164,
+        "stop": 1,
+        "excluded": 3
+      },
+      "ai_actions": {
+        "pass": 102,
+        "take": 210,
+        "stop": 1
+      }
+    },
+    "221": {
+      "actions": {
+        "pass": 268,
+        "excluded": 396,
+        "take": 25,
+        "stop": 16
+      },
+      "ai_actions": {
+        "take": 170,
+        "pass": 132,
+        "stop": 2,
+        "touch": 3
+      }
+    },
+    "25E": {
+      "actions": {
+        "excluded": 155,
+        "pass": 113,
+        "take": 42,
+        "stop": 3
+      },
+      "ai_actions": {
+        "take": 148,
+        "pass": 5,
+        "stop": 5
+      }
+    },
+    "484": {
+      "actions": {
+        "pass": 261,
+        "take": 229,
+        "stop": 52,
+        "excluded": 9
+      },
+      "ai_actions": {
+        "touch": 2,
+        "take": 430,
+        "stop": 54,
+        "pass": 57
+      }
+    },
+    "453": {
+      "actions": {
+        "pass": 133,
+        "take": 63,
+        "stop": 17,
+        "excluded": 5
+      },
+      "ai_actions": {
+        "take": 149,
+        "pass": 46,
+        "stop": 18
+      }
+    },
+    "2A9": {
+      "actions": {
+        "take": 184,
+        "pass": 181,
+        "stop": 10,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 338,
+        "stop": 19,
+        "pass": 17,
+        "touch": 1
+      }
+    },
+    "457": {
+      "actions": {
+        "take": 130,
+        "pass": 189,
+        "excluded": 1,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 234,
+        "pass": 84,
+        "stop": 2
+      }
+    },
+    "2C3": {
+      "actions": {
+        "take": 223,
+        "pass": 335,
+        "stop": 17
+      },
+      "ai_actions": {
+        "take": 478,
+        "stop": 30,
+        "pass": 64,
+        "touch": 3
+      }
+    },
+    "32C": {
+      "actions": {
+        "take": 94,
+        "pass": 314,
+        "stop": 24,
+        "excluded": 3
+      },
+      "ai_actions": {
+        "take": 306,
+        "stop": 57,
+        "pass": 67,
+        "touch": 2
+      }
+    },
+    "244": {
+      "actions": {
+        "pass": 291,
+        "take": 206,
+        "stop": 25
+      },
+      "ai_actions": {
+        "take": 458,
+        "pass": 23,
+        "stop": 41
+      }
+    },
+    "2E2": {
+      "actions": {
+        "take": 301,
+        "pass": 300,
+        "stop": 4
+      },
+      "ai_actions": {
+        "take": 493,
+        "pass": 104,
+        "stop": 5,
+        "touch": 3
+      }
+    },
+    "3FC": {
+      "actions": {
+        "pass": 452,
+        "stop": 109,
+        "take": 263,
+        "excluded": 34
+      },
+      "ai_actions": {
+        "pass": 204,
+        "take": 596,
+        "stop": 12,
+        "touch": 11
+      }
+    },
+    "2B0": {
+      "actions": {
+        "pass": 322,
+        "take": 111,
+        "stop": 63,
+        "excluded": 34
+      },
+      "ai_actions": {
+        "pass": 82,
+        "take": 390,
+        "touch": 15,
+        "stop": 11
+      }
+    },
+    "295": {
+      "actions": {
+        "pass": 679,
+        "take": 253,
+        "stop": 27
+      },
+      "ai_actions": {
+        "take": 828,
+        "stop": 127,
+        "pass": 4
+      }
+    },
+    "243": {
+      "actions": {
+        "pass": 86,
+        "take": 67,
+        "stop": 9,
+        "excluded": 5
+      },
+      "ai_actions": {
+        "pass": 9,
+        "take": 136,
+        "stop": 17
+      }
+    },
+    "235": {
+      "actions": {
+        "pass": 84,
+        "take": 39,
+        "stop": 74,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "stop": 97,
+        "take": 82,
+        "touch": 1,
+        "pass": 17
+      }
+    },
+    "4A6": {
+      "actions": {
+        "pass": 109,
+        "excluded": 61,
+        "take": 9,
+        "stop": 9
+      },
+      "ai_actions": {
+        "pass": 57,
+        "take": 67,
+        "touch": 3
+      }
+    },
+    "315": {
+      "actions": {
+        "pass": 1410,
+        "take": 584,
+        "stop": 101,
+        "excluded": 457
+      },
+      "ai_actions": {
+        "take": 1502,
+        "pass": 535,
+        "stop": 28,
+        "touch": 18
+      }
+    },
+    "229": {
+      "actions": {
+        "pass": 299,
+        "take": 112,
+        "stop": 10,
+        "excluded": 6
+      },
+      "ai_actions": {
+        "pass": 225,
+        "take": 176,
+        "stop": 14
+      }
+    },
+    "296": {
+      "actions": {
+        "pass": 1522,
+        "take": 406
+      },
+      "ai_actions": {
+        "take": 1903,
+        "stop": 23,
+        "pass": 2
+      }
+    },
+    "49F": {
+      "actions": {
+        "take": 16,
+        "excluded": 1164,
+        "pass": 104,
+        "stop": 204
+      },
+      "ai_actions": {
+        "take": 322,
+        "pass": 2
+      }
+    },
+    "43A": {
+      "actions": {
+        "stop": 71,
+        "take": 132,
+        "pass": 214,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 379,
+        "pass": 7,
+        "touch": 8,
+        "stop": 21
+      }
+    },
+    "282": {
+      "actions": {
+        "pass": 21,
+        "stop": 9,
+        "excluded": 1,
+        "take": 5
+      },
+      "ai_actions": {
+        "pass": 6,
+        "take": 29
+      }
+    },
+    "33E": {
+      "actions": {
+        "excluded": 202,
+        "pass": 218,
+        "take": 108,
+        "stop": 2
+      },
+      "ai_actions": {
+        "take": 257,
+        "stop": 6,
+        "pass": 64,
+        "touch": 1
+      }
+    },
+    "260": {
+      "actions": {
+        "pass": 51,
+        "take": 23,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 67,
+        "pass": 7
+      }
+    },
+    "1AF": {
+      "actions": {
+        "take": 206,
+        "pass": 235,
+        "stop": 2
+      },
+      "ai_actions": {
+        "take": 401,
+        "pass": 18,
+        "touch": 3,
+        "stop": 21
+      }
+    },
+    "31F": {
+      "actions": {
+        "take": 532,
+        "pass": 775,
+        "stop": 46,
+        "excluded": 7
+      },
+      "ai_actions": {
+        "take": 1044,
+        "pass": 203,
+        "stop": 83,
+        "touch": 23
+      }
+    },
+    "252": {
+      "actions": {
+        "pass": 143,
+        "take": 78
+      },
+      "ai_actions": {
+        "take": 215,
+        "pass": 5,
+        "touch": 1
+      }
+    },
+    "258": {
+      "actions": {
+        "pass": 49,
+        "take": 26
+      },
+      "ai_actions": {
+        "take": 64,
+        "pass": 11
+      }
+    },
+    "3E7": {
+      "actions": {
+        "pass": 54,
+        "stop": 62,
+        "take": 23,
+        "excluded": 121
+      },
+      "ai_actions": {
+        "take": 137,
+        "stop": 2
+      }
+    },
+    "262": {
+      "actions": {
+        "take": 27,
+        "pass": 71
+      },
+      "ai_actions": {
+        "take": 80,
+        "pass": 18
+      }
+    },
+    "21A": {
+      "actions": {
+        "pass": 37,
+        "take": 7,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 32,
+        "pass": 9
+      }
+    },
+    "520": {
+      "actions": {
+        "take": 620,
+        "excluded": 147,
+        "pass": 777,
+        "stop": 146
+      },
+      "ai_actions": {
+        "take": 1269,
+        "pass": 238,
+        "stop": 21,
+        "touch": 20,
+        "not_engage": 2
+      }
+    },
+    "358": {
+      "actions": {
+        "pass": 277,
+        "take": 159,
+        "excluded": 164,
+        "stop": 23
+      },
+      "ai_actions": {
+        "take": 331,
+        "pass": 108,
+        "stop": 18,
+        "touch": 1
+      }
+    },
+    "1EA": {
+      "actions": {
+        "pass": 38,
+        "take": 23,
+        "stop": 3
+      },
+      "ai_actions": {
+        "take": 46,
+        "pass": 16,
+        "stop": 1,
+        "touch": 1
+      }
+    },
+    "217": {
+      "actions": {
+        "excluded": 36,
+        "pass": 1
+      },
+      "ai_actions": {
+        "take": 1
+      }
+    },
+    "1E4": {
+      "actions": {
+        "pass": 342,
+        "excluded": 173,
+        "stop": 13,
+        "take": 150
+      },
+      "ai_actions": {
+        "take": 407,
+        "pass": 94,
+        "touch": 1,
+        "stop": 4
+      }
+    },
+    "195": {
+      "actions": {
+        "pass": 877,
+        "excluded": 84,
+        "take": 91,
+        "stop": 27
+      },
+      "ai_actions": {
+        "pass": 617,
+        "touch": 3,
+        "take": 362,
+        "stop": 7
+      }
+    },
+    "266": {
+      "actions": {
+        "pass": 189,
+        "take": 74,
+        "stop": 7
+      },
+      "ai_actions": {
+        "take": 200,
+        "pass": 66,
+        "stop": 3,
+        "touch": 1
+      }
+    },
+    "52D": {
+      "actions": {
+        "take": 303,
+        "pass": 663,
+        "excluded": 198,
+        "stop": 59
+      },
+      "ai_actions": {
+        "take": 701,
+        "pass": 262,
+        "stop": 47,
+        "touch": 9
+      }
+    },
+    "4AE": {
+      "actions": {
+        "pass": 288,
+        "take": 25,
+        "stop": 160,
+        "excluded": 6
+      },
+      "ai_actions": {
+        "take": 406,
+        "pass": 64,
+        "stop": 7,
+        "touch": 2
+      }
+    },
+    "1DC": {
+      "actions": {
+        "pass": 1072,
+        "take": 363,
+        "excluded": 208,
+        "stop": 167
+      },
+      "ai_actions": {
+        "pass": 618,
+        "take": 916,
+        "stop": 40,
+        "touch": 13
+      }
+    },
+    "23B": {
+      "actions": {
+        "pass": 33,
+        "take": 126,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 156,
+        "pass": 2,
+        "stop": 2
+      }
+    },
+    "418": {
+      "actions": {
+        "excluded": 415,
+        "pass": 113,
+        "take": 104,
+        "stop": 20
+      },
+      "ai_actions": {
+        "pass": 31,
+        "take": 202,
+        "stop": 3
+      }
+    },
+    "462": {
+      "actions": {
+        "take": 59,
+        "pass": 204,
+        "excluded": 120
+      },
+      "ai_actions": {
+        "take": 243,
+        "pass": 22
+      }
+    },
+    "29F": {
+      "actions": {
+        "pass": 371,
+        "stop": 42,
+        "excluded": 3,
+        "take": 53
+      },
+      "ai_actions": {
+        "stop": 26,
+        "pass": 79,
+        "take": 360,
+        "touch": 1
+      }
+    },
+    "360": {
+      "actions": {
+        "pass": 319,
+        "take": 181,
+        "excluded": 11,
+        "stop": 24
+      },
+      "ai_actions": {
+        "take": 414,
+        "pass": 85,
+        "stop": 3,
+        "touch": 22
+      }
+    },
+    "422": {
+      "actions": {
+        "pass": 144,
+        "stop": 11,
+        "take": 74,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 213,
+        "stop": 8,
+        "pass": 8
+      }
+    },
+    "428": {
+      "actions": {
+        "excluded": 237,
+        "take": 49,
+        "pass": 114,
+        "stop": 9
+      },
+      "ai_actions": {
+        "take": 158,
+        "pass": 11,
+        "stop": 3
+      }
+    },
+    "2D9": {
+      "actions": {
+        "take": 82,
+        "pass": 75,
+        "excluded": 229
+      },
+      "ai_actions": {
+        "take": 133,
+        "pass": 23,
+        "stop": 1
+      }
+    },
+    "2E9": {
+      "actions": {
+        "pass": 460,
+        "take": 377,
+        "stop": 27,
+        "excluded": 3
+      },
+      "ai_actions": {
+        "take": 629,
+        "pass": 228,
+        "stop": 5,
+        "touch": 2
+      }
+    },
+    "297": {
+      "actions": {
+        "excluded": 3,
+        "take": 1
+      },
+      "ai_actions": {
+        "take": 1
+      }
+    },
+    "415": {
+      "actions": {
+        "pass": 138,
+        "take": 104,
+        "stop": 64,
+        "excluded": 24
+      },
+      "ai_actions": {
+        "pass": 39,
+        "take": 276,
+        "touch": 2,
+        "stop": 13
+      }
+    },
+    "45D": {
+      "actions": {
+        "take": 284,
+        "pass": 164,
+        "excluded": 1,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 402,
+        "pass": 42
+      }
+    },
+    "2CE": {
+      "actions": {
+        "take": 214,
+        "pass": 507,
+        "stop": 26,
+        "excluded": 10
+      },
+      "ai_actions": {
+        "take": 618,
+        "pass": 97,
+        "touch": 6,
+        "stop": 26
+      }
+    },
+    "2E6": {
+      "actions": {
+        "take": 371,
+        "pass": 340,
+        "excluded": 32,
+        "stop": 19
+      },
+      "ai_actions": {
+        "take": 564,
+        "pass": 152,
+        "touch": 4,
+        "stop": 12
+      }
+    },
+    "413": {
+      "actions": {
+        "pass": 242,
+        "take": 140,
+        "stop": 40
+      },
+      "ai_actions": {
+        "pass": 76,
+        "take": 326,
+        "stop": 6,
+        "touch": 14
+      }
+    },
+    "2A7": {
+      "actions": {
+        "take": 124,
+        "excluded": 131,
+        "pass": 393,
+        "stop": 7
+      },
+      "ai_actions": {
+        "take": 540,
+        "pass": 18,
+        "stop": 49
+      }
+    },
+    "4DD": {
+      "actions": {
+        "pass": 206,
+        "excluded": 1076,
+        "take": 31,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 116,
+        "pass": 117,
+        "touch": 2,
+        "stop": 2
+      }
+    },
+    "43F": {
+      "actions": {
+        "pass": 155,
+        "take": 138,
+        "stop": 2
+      },
+      "ai_actions": {
+        "take": 260,
+        "pass": 32,
+        "stop": 3
+      }
+    },
+    "2F4": {
+      "actions": {
+        "excluded": 14,
+        "pass": 21,
+        "take": 2
+      },
+      "ai_actions": {
+        "take": 29,
+        "pass": 1,
+        "stop": 6,
+        "touch": 1
+      }
+    },
+    "2CC": {
+      "actions": {
+        "pass": 148,
+        "take": 72,
+        "excluded": 5,
+        "stop": 40
+      },
+      "ai_actions": {
+        "take": 190,
+        "touch": 7,
+        "pass": 62,
+        "not_engage": 2,
+        "stop": 4
+      }
+    },
+    "2CA": {
+      "actions": {
+        "pass": 302,
+        "take": 178,
+        "stop": 122,
+        "excluded": 3
+      },
+      "ai_actions": {
+        "take": 485,
+        "pass": 105,
+        "stop": 6,
+        "touch": 2
+      }
+    },
+    "491": {
+      "actions": {
+        "excluded": 793,
+        "pass": 1021,
+        "stop": 69,
+        "take": 96
+      },
+      "ai_actions": {
+        "pass": 676,
+        "take": 486,
+        "stop": 16,
+        "touch": 3
+      }
+    },
+    "488": {
+      "actions": {
+        "pass": 546,
+        "take": 187,
+        "stop": 8
+      },
+      "ai_actions": {
+        "take": 535,
+        "touch": 2,
+        "pass": 190,
+        "stop": 14
+      }
+    },
+    "424": {
+      "actions": {
+        "pass": 184,
+        "take": 162,
+        "stop": 26
+      },
+      "ai_actions": {
+        "take": 333,
+        "stop": 32,
+        "pass": 6,
+        "touch": 1
+      }
+    },
+    "1AE": {
+      "actions": {
+        "pass": 721,
+        "stop": 74,
+        "take": 366,
+        "excluded": 17
+      },
+      "ai_actions": {
+        "take": 947,
+        "stop": 64,
+        "pass": 138,
+        "touch": 14,
+        "not_engage": 1
+      }
+    },
+    "43E": {
+      "actions": {
+        "pass": 91,
+        "take": 59,
+        "stop": 2
+      },
+      "ai_actions": {
+        "take": 125,
+        "pass": 24,
+        "stop": 3
+      }
+    },
+    "454": {
+      "actions": {
+        "stop": 25,
+        "pass": 166,
+        "excluded": 85,
+        "take": 45
+      },
+      "ai_actions": {
+        "take": 160,
+        "pass": 36,
+        "stop": 38,
+        "touch": 2
+      }
+    },
+    "361": {
+      "actions": {
+        "pass": 320,
+        "take": 164,
+        "stop": 52,
+        "excluded": 12
+      },
+      "ai_actions": {
+        "pass": 91,
+        "take": 396,
+        "touch": 44,
+        "stop": 5
+      }
+    },
+    "480": {
+      "actions": {
+        "take": 260,
+        "stop": 177,
+        "pass": 319,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 575,
+        "touch": 6,
+        "stop": 113,
+        "pass": 63
+      }
+    },
+    "544": {
+      "actions": {
+        "pass": 212,
+        "stop": 21,
+        "take": 76,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "pass": 128,
+        "take": 180,
+        "stop": 1
+      }
+    },
+    "47E": {
+      "actions": {
+        "take": 448,
+        "excluded": 8,
+        "pass": 415,
+        "stop": 215
+      },
+      "ai_actions": {
+        "take": 939,
+        "pass": 81,
+        "stop": 50,
+        "touch": 8
+      }
+    },
+    "43D": {
+      "actions": {
+        "take": 120,
+        "pass": 137,
+        "excluded": 1,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 173,
+        "pass": 84,
+        "stop": 2
+      }
+    },
+    "4CF": {
+      "actions": {
+        "pass": 961,
+        "excluded": 118,
+        "stop": 196,
+        "take": 170
+      },
+      "ai_actions": {
+        "pass": 536,
+        "take": 784,
+        "touch": 4,
+        "stop": 1
+      }
+    },
+    "174": {
+      "actions": {
+        "take": 539,
+        "pass": 731,
+        "excluded": 14,
+        "stop": 38
+      },
+      "ai_actions": {
+        "take": 1041,
+        "pass": 173,
+        "stop": 74,
+        "touch": 31
+      }
+    },
+    "198": {
+      "actions": {
+        "excluded": 952,
+        "pass": 771,
+        "stop": 95,
+        "take": 387
+      },
+      "ai_actions": {
+        "take": 840,
+        "stop": 57,
+        "pass": 348,
+        "touch": 4
+      }
+    },
+    "301": {
+      "actions": {
+        "excluded": 185,
+        "pass": 39,
+        "take": 25
+      },
+      "ai_actions": {
+        "take": 59,
+        "pass": 4,
+        "stop": 1
+      }
+    },
+    "237": {
+      "actions": {
+        "take": 22,
+        "pass": 21,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 37,
+        "pass": 6,
+        "stop": 1
+      }
+    },
+    "18A": {
+      "actions": {
+        "take": 278,
+        "pass": 364,
+        "stop": 57,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 659,
+        "stop": 12,
+        "touch": 9,
+        "pass": 19
+      }
+    },
+    "365": {
+      "actions": {
+        "pass": 1143,
+        "take": 173,
+        "excluded": 9,
+        "stop": 57
+      },
+      "ai_actions": {
+        "take": 593,
+        "pass": 635,
+        "stop": 127,
+        "touch": 14
+      }
+    },
+    "48F": {
+      "actions": {
+        "pass": 816,
+        "stop": 42,
+        "excluded": 459,
+        "take": 175
+      },
+      "ai_actions": {
+        "pass": 514,
+        "take": 479,
+        "stop": 21,
+        "touch": 10
+      }
+    },
+    "1BC": {
+      "actions": {
+        "excluded": 1267,
+        "pass": 460,
+        "take": 165,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 610,
+        "stop": 4,
+        "pass": 13,
+        "touch": 2
+      }
+    },
+    "442": {
+      "actions": {
+        "take": 111,
+        "pass": 138,
+        "stop": 26
+      },
+      "ai_actions": {
+        "take": 241,
+        "pass": 25,
+        "stop": 9
+      }
+    },
+    "32B": {
+      "actions": {
+        "pass": 601,
+        "excluded": 8,
+        "stop": 66,
+        "take": 214
+      },
+      "ai_actions": {
+        "take": 512,
+        "pass": 319,
+        "stop": 32,
+        "touch": 18
+      }
+    },
+    "2D5": {
+      "actions": {
+        "pass": 643,
+        "excluded": 10,
+        "take": 224,
+        "stop": 80
+      },
+      "ai_actions": {
+        "pass": 231,
+        "take": 642,
+        "touch": 10,
+        "stop": 64
+      }
+    },
+    "4F6": {
+      "actions": {
+        "pass": 672,
+        "take": 172,
+        "stop": 68,
+        "excluded": 82
+      },
+      "ai_actions": {
+        "pass": 354,
+        "take": 516,
+        "stop": 28,
+        "touch": 9
+      }
+    },
+    "499": {
+      "actions": {
+        "excluded": 386,
+        "pass": 293,
+        "stop": 156,
+        "take": 37
+      },
+      "ai_actions": {
+        "take": 446,
+        "pass": 58,
+        "stop": 10,
+        "touch": 9
+      }
+    },
+    "366": {
+      "actions": {
+        "pass": 581,
+        "take": 210,
+        "stop": 50,
+        "excluded": 10
+      },
+      "ai_actions": {
+        "take": 479,
+        "pass": 215,
+        "stop": 127,
+        "touch": 19
+      }
+    },
+    "4AC": {
+      "actions": {
+        "pass": 203,
+        "take": 100,
+        "stop": 19
+      },
+      "ai_actions": {
+        "take": 215,
+        "pass": 99,
+        "stop": 5,
+        "touch": 3
+      }
+    },
+    "441": {
+      "actions": {
+        "pass": 125,
+        "take": 149,
+        "stop": 6
+      },
+      "ai_actions": {
+        "take": 245,
+        "pass": 28,
+        "stop": 7
+      }
+    },
+    "427": {
+      "actions": {
+        "pass": 97,
+        "stop": 27,
+        "take": 31,
+        "excluded": 3
+      },
+      "ai_actions": {
+        "take": 114,
+        "stop": 30,
+        "pass": 11
+      }
+    },
+    "192": {
+      "actions": {
+        "take": 190,
+        "pass": 643,
+        "excluded": 6,
+        "stop": 17
+      },
+      "ai_actions": {
+        "take": 595,
+        "pass": 231,
+        "touch": 5,
+        "stop": 18
+      }
+    },
+    "298": {
+      "actions": {
+        "pass": 417,
+        "take": 120
+      },
+      "ai_actions": {
+        "take": 525,
+        "stop": 11,
+        "pass": 1
+      }
+    },
+    "4D5": {
+      "actions": {
+        "excluded": 885,
+        "pass": 586,
+        "stop": 207,
+        "take": 118
+      },
+      "ai_actions": {
+        "pass": 309,
+        "take": 550,
+        "stop": 41,
+        "touch": 1
+      }
+    },
+    "1E8": {
+      "actions": {
+        "pass": 179,
+        "take": 135,
+        "stop": 23,
+        "excluded": 11
+      },
+      "ai_actions": {
+        "take": 244,
+        "pass": 79,
+        "stop": 11
+      }
+    },
+    "465": {
+      "actions": {
+        "stop": 3,
+        "take": 192,
+        "pass": 234,
+        "excluded": 8
+      },
+      "ai_actions": {
+        "stop": 5,
+        "take": 313,
+        "pass": 109
+      }
+    },
+    "18E": {
+      "actions": {
+        "pass": 853,
+        "excluded": 841,
+        "take": 342,
+        "stop": 86
+      },
+      "ai_actions": {
+        "pass": 231,
+        "take": 1020,
+        "touch": 12,
+        "stop": 18
+      }
+    },
+    "532": {
+      "actions": {
+        "pass": 216,
+        "take": 322,
+        "stop": 28,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 518,
+        "pass": 44,
+        "touch": 1,
+        "stop": 3
+      }
+    },
+    "338": {
+      "actions": {
+        "pass": 363,
+        "take": 337,
+        "stop": 42,
+        "excluded": 16
+      },
+      "ai_actions": {
+        "take": 629,
+        "pass": 92,
+        "touch": 8,
+        "stop": 13
+      }
+    },
+    "37D": {
+      "actions": {
+        "pass": 421,
+        "take": 84,
+        "excluded": 9,
+        "stop": 3
+      },
+      "ai_actions": {
+        "take": 303,
+        "pass": 200,
+        "stop": 2,
+        "touch": 3
+      }
+    },
+    "29B": {
+      "actions": {
+        "pass": 89,
+        "take": 56
+      },
+      "ai_actions": {
+        "take": 143,
+        "stop": 2
+      }
+    },
+    "1D6": {
+      "actions": {
+        "pass": 421,
+        "excluded": 451,
+        "take": 39,
+        "stop": 37
+      },
+      "ai_actions": {
+        "pass": 256,
+        "take": 218,
+        "stop": 22,
+        "not_engage": 1,
+        "touch": 6
+      }
+    },
+    "39B": {
+      "actions": {
+        "pass": 301,
+        "take": 45,
+        "stop": 13,
+        "excluded": 80
+      },
+      "ai_actions": {
+        "pass": 200,
+        "take": 147,
+        "touch": 2,
+        "stop": 2
+      }
+    },
+    "2FC": {
+      "actions": {
+        "take": 77,
+        "pass": 92,
+        "stop": 1,
+        "excluded": 4
+      },
+      "ai_actions": {
+        "take": 139,
+        "pass": 32,
+        "touch": 1,
+        "stop": 2
+      }
+    },
+    "445": {
+      "actions": {
+        "take": 203,
+        "pass": 329,
+        "stop": 27,
+        "excluded": 3
+      },
+      "ai_actions": {
+        "take": 462,
+        "pass": 89,
+        "stop": 7,
+        "touch": 1
+      }
+    },
+    "4E8": {
+      "actions": {
+        "excluded": 151,
+        "pass": 51,
+        "take": 29,
+        "stop": 3
+      },
+      "ai_actions": {
+        "take": 70,
+        "pass": 10,
+        "stop": 2,
+        "touch": 1
+      }
+    },
+    "36C": {
+      "actions": {
+        "pass": 118,
+        "take": 42,
+        "excluded": 9,
+        "stop": 2
+      },
+      "ai_actions": {
+        "take": 92,
+        "pass": 64,
+        "stop": 5
+      }
+    },
+    "37C": {
+      "actions": {
+        "excluded": 390,
+        "take": 241,
+        "pass": 345,
+        "stop": 4
+      },
+      "ai_actions": {
+        "take": 453,
+        "pass": 123,
+        "touch": 11,
+        "stop": 3
+      }
+    },
+    "4AF": {
+      "actions": {
+        "pass": 521,
+        "take": 111,
+        "stop": 29
+      },
+      "ai_actions": {
+        "take": 401,
+        "pass": 244,
+        "touch": 5,
+        "stop": 11
+      }
+    },
+    "49C": {
+      "actions": {
+        "stop": 9,
+        "take": 15,
+        "excluded": 211,
+        "pass": 66
+      },
+      "ai_actions": {
+        "take": 79,
+        "pass": 13,
+        "touch": 1,
+        "stop": 3
+      }
+    },
+    "28C": {
+      "actions": {
+        "pass": 757,
+        "take": 223,
+        "stop": 87,
+        "excluded": 16
+      },
+      "ai_actions": {
+        "take": 689,
+        "pass": 303,
+        "stop": 53,
+        "touch": 24
+      }
+    },
+    "32F": {
+      "actions": {
+        "pass": 28,
+        "take": 8,
+        "stop": 2,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 26,
+        "touch": 2,
+        "pass": 7,
+        "stop": 3
+      }
+    },
+    "322": {
+      "actions": {
+        "pass": 121,
+        "stop": 12,
+        "take": 29,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 100,
+        "pass": 48,
+        "stop": 9,
+        "touch": 2
+      }
+    },
+    "4CB": {
+      "actions": {
+        "pass": 605,
+        "take": 214,
+        "stop": 266,
+        "excluded": 21
+      },
+      "ai_actions": {
+        "pass": 383,
+        "touch": 195,
+        "stop": 163,
+        "take": 342
+      }
+    },
+    "48D": {
+      "actions": {
+        "pass": 657,
+        "excluded": 1037,
+        "take": 181,
+        "stop": 27
+      },
+      "ai_actions": {
+        "take": 509,
+        "touch": 10,
+        "pass": 338,
+        "stop": 7
+      }
+    },
+    "464": {
+      "actions": {
+        "take": 80,
+        "pass": 90,
+        "excluded": 6
+      },
+      "ai_actions": {
+        "take": 167,
+        "stop": 3
+      }
+    },
+    "412": {
+      "actions": {
+        "pass": 389,
+        "stop": 88,
+        "take": 163,
+        "excluded": 2
+      },
+      "ai_actions": {
+        "take": 498,
+        "pass": 110,
+        "stop": 19,
+        "touch": 13
+      }
+    },
+    "333": {
+      "actions": {
+        "excluded": 320,
+        "take": 115,
+        "pass": 147,
+        "stop": 3
+      },
+      "ai_actions": {
+        "take": 251,
+        "pass": 6,
+        "touch": 2,
+        "stop": 6
+      }
+    },
+    "447": {
+      "actions": {
+        "excluded": 663,
+        "take": 107,
+        "pass": 267,
+        "stop": 22
+      },
+      "ai_actions": {
+        "take": 262,
+        "pass": 128,
+        "touch": 6
+      }
+    },
+    "48C": {
+      "actions": {
+        "pass": 155,
+        "stop": 67,
+        "take": 69,
+        "excluded": 7
+      },
+      "ai_actions": {
+        "take": 189,
+        "pass": 55,
+        "stop": 45,
+        "touch": 2
+      }
+    },
+    "28B": {
+      "actions": {
+        "pass": 137,
+        "take": 60,
+        "stop": 17,
+        "excluded": 2
+      },
+      "ai_actions": {
+        "take": 158,
+        "pass": 41,
+        "stop": 13,
+        "touch": 1
+      }
+    },
+    "225": {
+      "actions": {
+        "take": 74,
+        "excluded": 449,
+        "pass": 722,
+        "stop": 65
+      },
+      "ai_actions": {
+        "take": 452,
+        "pass": 355,
+        "touch": 4,
+        "stop": 40
+      }
+    },
+    "287": {
+      "actions": {
+        "pass": 549,
+        "take": 138,
+        "stop": 20,
+        "excluded": 2
+      },
+      "ai_actions": {
+        "take": 433,
+        "pass": 234,
+        "touch": 10,
+        "stop": 29
+      }
+    },
+    "343": {
+      "actions": {
+        "excluded": 274,
+        "pass": 54,
+        "take": 11
+      },
+      "ai_actions": {
+        "take": 47,
+        "pass": 18
+      }
+    },
+    "313": {
+      "actions": {
+        "excluded": 287,
+        "pass": 74,
+        "take": 34,
+        "stop": 4
+      },
+      "ai_actions": {
+        "take": 102,
+        "stop": 5,
+        "pass": 5
+      }
+    },
+    "23E": {
+      "actions": {
+        "pass": 604,
+        "excluded": 93,
+        "take": 185,
+        "stop": 52
+      },
+      "ai_actions": {
+        "touch": 9,
+        "take": 492,
+        "pass": 326,
+        "stop": 15
+      }
+    },
+    "3B9": {
+      "actions": {
+        "pass": 245,
+        "excluded": 117,
+        "take": 68,
+        "stop": 3
+      },
+      "ai_actions": {
+        "take": 145,
+        "pass": 168,
+        "stop": 2,
+        "touch": 1
+      }
+    },
+    "54E": {
+      "actions": {
+        "pass": 538,
+        "take": 138,
+        "stop": 39,
+        "excluded": 2
+      },
+      "ai_actions": {
+        "take": 461,
+        "pass": 217,
+        "stop": 26,
+        "touch": 8
+      }
+    },
+    "3AB": {
+      "actions": {
+        "pass": 232,
+        "excluded": 25,
+        "take": 44,
+        "stop": 5
+      },
+      "ai_actions": {
+        "take": 135,
+        "pass": 137,
+        "touch": 2,
+        "stop": 1
+      }
+    },
+    "3B8": {
+      "actions": {
+        "excluded": 108,
+        "take": 24,
+        "pass": 146,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 83,
+        "pass": 85,
+        "stop": 2,
+        "touch": 1
+      }
+    },
+    "510": {
+      "actions": {
+        "take": 62,
+        "pass": 63,
+        "excluded": 4
+      },
+      "ai_actions": {
+        "take": 103,
+        "pass": 22
+      }
+    },
+    "33B": {
+      "actions": {
+        "take": 197,
+        "pass": 234,
+        "stop": 5,
+        "excluded": 2
+      },
+      "ai_actions": {
+        "take": 374,
+        "touch": 7,
+        "stop": 9,
+        "pass": 44
+      }
+    },
+    "31B": {
+      "actions": {
+        "pass": 847,
+        "take": 515,
+        "stop": 91,
+        "excluded": 22
+      },
+      "ai_actions": {
+        "take": 1208,
+        "pass": 146,
+        "touch": 17,
+        "stop": 67
+      }
+    },
+    "48E": {
+      "actions": {
+        "pass": 264,
+        "stop": 32,
+        "excluded": 7,
+        "take": 39
+      },
+      "ai_actions": {
+        "take": 191,
+        "pass": 104,
+        "touch": 6,
+        "stop": 32
+      }
+    },
+    "440": {
+      "actions": {
+        "take": 88,
+        "pass": 115,
+        "stop": 2
+      },
+      "ai_actions": {
+        "take": 171,
+        "pass": 29,
+        "stop": 5
+      }
+    },
+    "3B0": {
+      "actions": {
+        "pass": 108,
+        "take": 25,
+        "stop": 13
+      },
+      "ai_actions": {
+        "take": 95,
+        "pass": 48,
+        "touch": 2,
+        "stop": 1
+      }
+    },
+    "51F": {
+      "actions": {
+        "pass": 182,
+        "stop": 54,
+        "take": 133
+      },
+      "ai_actions": {
+        "take": 275,
+        "pass": 72,
+        "stop": 16,
+        "touch": 6
+      }
+    },
+    "32E": {
+      "actions": {
+        "pass": 166,
+        "take": 65,
+        "excluded": 137,
+        "stop": 5
+      },
+      "ai_actions": {
+        "take": 171,
+        "pass": 48,
+        "touch": 7,
+        "stop": 9
+      }
+    },
+    "3B4": {
+      "actions": {
+        "pass": 104,
+        "excluded": 66,
+        "stop": 8,
+        "take": 29
+      },
+      "ai_actions": {
+        "take": 72,
+        "pass": 68,
+        "touch": 1
+      }
+    },
+    "3C0": {
+      "actions": {
+        "excluded": 91,
+        "pass": 63,
+        "take": 36,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 65,
+        "pass": 32,
+        "touch": 2,
+        "stop": 1
+      }
+    },
+    "4C3": {
+      "actions": {
+        "pass": 20,
+        "take": 7
+      },
+      "ai_actions": {
+        "pass": 9,
+        "take": 18
+      }
+    },
+    "3F7": {
+      "actions": {
+        "stop": 65,
+        "pass": 122,
+        "take": 95,
+        "excluded": 4
+      },
+      "ai_actions": {
+        "take": 247,
+        "pass": 21,
+        "touch": 7,
+        "stop": 10,
+        "not_engage": 1
+      }
+    },
+    "3B6": {
+      "actions": {
+        "pass": 94,
+        "excluded": 26,
+        "take": 29,
+        "stop": 3
+      },
+      "ai_actions": {
+        "take": 77,
+        "pass": 49
+      }
+    },
+    "196": {
+      "actions": {
+        "pass": 1035,
+        "excluded": 1758,
+        "stop": 53,
+        "take": 399
+      },
+      "ai_actions": {
+        "pass": 625,
+        "take": 811,
+        "stop": 10,
+        "touch": 13
+      }
+    },
+    "1DA": {
+      "actions": {
+        "pass": 588,
+        "excluded": 418,
+        "take": 138,
+        "stop": 6
+      },
+      "ai_actions": {
+        "take": 248,
+        "pass": 471,
+        "stop": 11
+      }
+    },
+    "4D1": {
+      "actions": {
+        "excluded": 516,
+        "take": 183,
+        "pass": 824,
+        "stop": 78
+      },
+      "ai_actions": {
+        "take": 512,
+        "pass": 566,
+        "touch": 4,
+        "stop": 4
+      }
+    },
+    "48B": {
+      "actions": {
+        "stop": 20,
+        "pass": 482,
+        "take": 149,
+        "excluded": 50
+      },
+      "ai_actions": {
+        "touch": 8,
+        "pass": 208,
+        "take": 424,
+        "stop": 10
+      }
+    },
+    "439": {
+      "actions": {
+        "pass": 289,
+        "take": 129,
+        "excluded": 8,
+        "stop": 16
+      },
+      "ai_actions": {
+        "pass": 99,
+        "take": 326,
+        "touch": 2,
+        "stop": 7
+      }
+    },
+    "2D7": {
+      "actions": {
+        "take": 47,
+        "stop": 1,
+        "pass": 62,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 91,
+        "stop": 1,
+        "pass": 18
+      }
+    },
+    "3C2": {
+      "actions": {
+        "excluded": 306,
+        "pass": 48,
+        "take": 28
+      },
+      "ai_actions": {
+        "take": 50,
+        "pass": 26
+      }
+    },
+    "3CE": {
+      "actions": {
+        "pass": 135,
+        "excluded": 16,
+        "take": 44,
+        "stop": 12
+      },
+      "ai_actions": {
+        "pass": 53,
+        "take": 129,
+        "stop": 6,
+        "touch": 3
+      }
+    },
+    "288": {
+      "actions": {
+        "pass": 1260,
+        "take": 151,
+        "stop": 40,
+        "excluded": 49
+      },
+      "ai_actions": {
+        "take": 611,
+        "pass": 817,
+        "stop": 32,
+        "touch": 6
+      }
+    },
+    "523": {
+      "actions": {
+        "take": 428,
+        "pass": 640,
+        "stop": 35,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 879,
+        "pass": 151,
+        "stop": 53,
+        "touch": 21
+      }
+    },
+    "463": {
+      "actions": {
+        "pass": 68,
+        "excluded": 134,
+        "take": 19
+      },
+      "ai_actions": {
+        "take": 74,
+        "pass": 13
+      }
+    },
+    "42E": {
+      "actions": {
+        "take": 72,
+        "stop": 31,
+        "pass": 110
+      },
+      "ai_actions": {
+        "take": 160,
+        "pass": 45,
+        "touch": 1,
+        "stop": 7
+      }
+    },
+    "3B3": {
+      "actions": {
+        "pass": 122,
+        "take": 27,
+        "stop": 7
+      },
+      "ai_actions": {
+        "take": 87,
+        "pass": 69
+      }
+    },
+    "489": {
+      "actions": {
+        "take": 182,
+        "pass": 543,
+        "stop": 72,
+        "excluded": 12
+      },
+      "ai_actions": {
+        "take": 582,
+        "pass": 194,
+        "stop": 19,
+        "touch": 1
+      }
+    },
+    "41A": {
+      "actions": {
+        "excluded": 537,
+        "pass": 183,
+        "take": 171,
+        "stop": 27
+      },
+      "ai_actions": {
+        "pass": 90,
+        "take": 284,
+        "stop": 6
+      }
+    },
+    "486": {
+      "actions": {
+        "take": 128,
+        "pass": 508,
+        "stop": 5,
+        "excluded": 2
+      },
+      "ai_actions": {
+        "take": 459,
+        "touch": 2,
+        "pass": 173,
+        "stop": 8
+      }
+    },
+    "444": {
+      "actions": {
+        "pass": 188,
+        "stop": 46,
+        "take": 80
+      },
+      "ai_actions": {
+        "take": 255,
+        "pass": 56,
+        "stop": 3
+      }
+    },
+    "2FB": {
+      "actions": {
+        "stop": 1,
+        "pass": 79,
+        "take": 72,
+        "excluded": 32
+      },
+      "ai_actions": {
+        "stop": 1,
+        "pass": 31,
+        "take": 117,
+        "touch": 3
+      }
+    },
+    "2EC": {
+      "actions": {
+        "pass": 713,
+        "stop": 28,
+        "take": 254,
+        "excluded": 3
+      },
+      "ai_actions": {
+        "pass": 241,
+        "take": 743,
+        "stop": 5,
+        "touch": 5
+      }
+    },
+    "508": {
+      "actions": {
+        "stop": 42,
+        "pass": 42,
+        "take": 14
+      },
+      "ai_actions": {
+        "take": 81,
+        "pass": 1,
+        "stop": 16
+      }
+    },
+    "443": {
+      "actions": {
+        "take": 37,
+        "stop": 146,
+        "pass": 196
+      },
+      "ai_actions": {
+        "take": 338,
+        "pass": 24,
+        "stop": 17
+      }
+    },
+    "438": {
+      "actions": {
+        "stop": 21,
+        "pass": 161,
+        "excluded": 142,
+        "take": 83
+      },
+      "ai_actions": {
+        "take": 190,
+        "pass": 65,
+        "stop": 5,
+        "touch": 5
+      }
+    },
+    "3B2": {
+      "actions": {
+        "pass": 94,
+        "take": 38,
+        "stop": 11
+      },
+      "ai_actions": {
+        "take": 98,
+        "pass": 43,
+        "touch": 1,
+        "stop": 1
+      }
+    },
+    "3BC": {
+      "actions": {
+        "pass": 37,
+        "take": 28
+      },
+      "ai_actions": {
+        "take": 49,
+        "pass": 15,
+        "stop": 1
+      }
+    },
+    "3BE": {
+      "actions": {
+        "take": 50,
+        "pass": 34,
+        "excluded": 2
+      },
+      "ai_actions": {
+        "take": 66,
+        "pass": 18
+      }
+    },
+    "286": {
+      "actions": {
+        "take": 98,
+        "pass": 186,
+        "stop": 68
+      },
+      "ai_actions": {
+        "take": 267,
+        "stop": 31,
+        "pass": 53,
+        "touch": 1
+      }
+    },
+    "46A": {
+      "actions": {
+        "take": 105,
+        "excluded": 583,
+        "pass": 145,
+        "stop": 2
+      },
+      "ai_actions": {
+        "take": 180,
+        "pass": 69,
+        "touch": 1,
+        "stop": 2
+      }
+    },
+    "172": {
+      "actions": {
+        "take": 117,
+        "pass": 203,
+        "stop": 18
+      },
+      "ai_actions": {
+        "take": 242,
+        "pass": 87,
+        "stop": 6
+      }
+    },
+    "31D": {
+      "actions": {
+        "take": 536,
+        "pass": 693,
+        "excluded": 48,
+        "stop": 38
+      },
+      "ai_actions": {
+        "take": 1026,
+        "pass": 179,
+        "stop": 53,
+        "touch": 14
+      }
+    },
+    "26D": {
+      "actions": {
+        "take": 181,
+        "pass": 260,
+        "stop": 4
+      },
+      "ai_actions": {
+        "take": 413,
+        "pass": 27,
+        "stop": 5
+      }
+    },
+    "405": {
+      "actions": {
+        "excluded": 284,
+        "take": 241,
+        "pass": 113,
+        "stop": 5
+      },
+      "ai_actions": {
+        "take": 333,
+        "pass": 20,
+        "stop": 6
+      }
+    },
+    "2E4": {
+      "actions": {
+        "pass": 348,
+        "excluded": 15,
+        "take": 395,
+        "stop": 6
+      },
+      "ai_actions": {
+        "pass": 142,
+        "take": 602,
+        "stop": 6,
+        "touch": 1
+      }
+    },
+    "3AD": {
+      "actions": {
+        "pass": 165,
+        "take": 20,
+        "stop": 5
+      },
+      "ai_actions": {
+        "take": 88,
+        "pass": 98,
+        "stop": 3,
+        "touch": 1
+      }
+    },
+    "3B1": {
+      "actions": {
+        "pass": 124,
+        "take": 44,
+        "stop": 17
+      },
+      "ai_actions": {
+        "pass": 53,
+        "take": 131,
+        "stop": 1
+      }
+    },
+    "2DF": {
+      "actions": {
+        "take": 98,
+        "pass": 142
+      },
+      "ai_actions": {
+        "take": 197,
+        "pass": 42,
+        "stop": 1
+      }
+    },
+    "2C9": {
+      "actions": {
+        "pass": 451,
+        "take": 223,
+        "stop": 241,
+        "excluded": 2
+      },
+      "ai_actions": {
+        "take": 747,
+        "pass": 154,
+        "stop": 7,
+        "touch": 2
+      }
+    },
+    "44D": {
+      "actions": {
+        "excluded": 13,
+        "pass": 181,
+        "take": 307,
+        "stop": 9
+      },
+      "ai_actions": {
+        "pass": 112,
+        "take": 377,
+        "touch": 6,
+        "stop": 1
+      }
+    },
+    "291": {
+      "actions": {
+        "pass": 671,
+        "take": 179,
+        "stop": 96,
+        "excluded": 2
+      },
+      "ai_actions": {
+        "pass": 359,
+        "take": 499,
+        "stop": 73,
+        "touch": 14
+      }
+    },
+    "41F": {
+      "actions": {
+        "take": 91,
+        "pass": 148,
+        "stop": 19,
+        "excluded": 14
+      },
+      "ai_actions": {
+        "take": 188,
+        "pass": 64,
+        "stop": 6
+      }
+    },
+    "4A7": {
+      "actions": {
+        "pass": 87,
+        "stop": 10,
+        "take": 19,
+        "excluded": 6
+      },
+      "ai_actions": {
+        "take": 95,
+        "pass": 19,
+        "stop": 1,
+        "touch": 1
+      }
+    },
+    "33D": {
+      "actions": {
+        "excluded": 1649,
+        "pass": 520,
+        "take": 575,
+        "stop": 4
+      },
+      "ai_actions": {
+        "take": 980,
+        "pass": 108,
+        "stop": 9,
+        "touch": 2
+      }
+    },
+    "31A": {
+      "actions": {
+        "pass": 555,
+        "take": 287,
+        "stop": 92,
+        "excluded": 7
+      },
+      "ai_actions": {
+        "pass": 126,
+        "take": 747,
+        "stop": 52,
+        "touch": 8
+      }
+    },
+    "3AC": {
+      "actions": {
+        "take": 22,
+        "pass": 164,
+        "stop": 8,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 85,
+        "pass": 104,
+        "touch": 3,
+        "stop": 1
+      }
+    },
+    "546": {
+      "actions": {
+        "take": 23,
+        "stop": 8,
+        "pass": 49
+      },
+      "ai_actions": {
+        "take": 72,
+        "pass": 6,
+        "touch": 1,
+        "stop": 1
+      }
+    },
+    "4AA": {
+      "actions": {
+        "pass": 48,
+        "take": 12,
+        "excluded": 10,
+        "stop": 3
+      },
+      "ai_actions": {
+        "pass": 27,
+        "take": 36
+      }
+    },
+    "4D4": {
+      "actions": {
+        "take": 32,
+        "pass": 622,
+        "stop": 25,
+        "excluded": 2
+      },
+      "ai_actions": {
+        "take": 204,
+        "pass": 458,
+        "touch": 9,
+        "stop": 8
+      }
+    },
+    "3DA": {
+      "actions": {
+        "excluded": 68,
+        "pass": 248,
+        "take": 88,
+        "stop": 30
+      },
+      "ai_actions": {
+        "take": 268,
+        "pass": 85,
+        "stop": 8,
+        "touch": 2
+      }
+    },
+    "285": {
+      "actions": {
+        "stop": 52,
+        "pass": 61,
+        "take": 29
+      },
+      "ai_actions": {
+        "stop": 39,
+        "take": 98,
+        "pass": 5
+      }
+    },
+    "3CD": {
+      "actions": {
+        "pass": 164,
+        "take": 52,
+        "excluded": 55,
+        "stop": 10
+      },
+      "ai_actions": {
+        "take": 162,
+        "pass": 58,
+        "stop": 3,
+        "touch": 3
+      }
+    },
+    "347": {
+      "actions": {
+        "pass": 10,
+        "take": 2,
+        "stop": 1
+      },
+      "ai_actions": {
+        "pass": 3,
+        "take": 9,
+        "stop": 1
+      }
+    },
+    "2DB": {
+      "actions": {
+        "take": 53,
+        "excluded": 42,
+        "pass": 165,
+        "stop": 27
+      },
+      "ai_actions": {
+        "take": 156,
+        "pass": 76,
+        "touch": 3,
+        "stop": 6
+      }
+    },
+    "2A1": {
+      "actions": {
+        "pass": 188,
+        "take": 72,
+        "stop": 10
+      },
+      "ai_actions": {
+        "take": 222,
+        "stop": 20,
+        "pass": 28
+      }
+    },
+    "4C2": {
+      "actions": {
+        "excluded": 794,
+        "pass": 456,
+        "stop": 42,
+        "take": 95
+      },
+      "ai_actions": {
+        "pass": 302,
+        "take": 286,
+        "touch": 2,
+        "stop": 2
+      }
+    },
+    "448": {
+      "actions": {
+        "pass": 537,
+        "excluded": 1026,
+        "stop": 77,
+        "take": 81
+      },
+      "ai_actions": {
+        "pass": 330,
+        "take": 353,
+        "stop": 9,
+        "touch": 2
+      }
+    },
+    "504": {
+      "actions": {
+        "excluded": 220,
+        "take": 28,
+        "pass": 293,
+        "stop": 10
+      },
+      "ai_actions": {
+        "take": 136,
+        "pass": 188,
+        "stop": 3,
+        "touch": 3
+      }
+    },
+    "449": {
+      "actions": {
+        "excluded": 186,
+        "take": 16,
+        "pass": 28,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 29,
+        "pass": 15,
+        "stop": 1
+      }
+    },
+    "203": {
+      "actions": {
+        "pass": 43,
+        "excluded": 45,
+        "take": 8,
+        "stop": 1
+      },
+      "ai_actions": {
+        "pass": 25,
+        "take": 26,
+        "touch": 1
+      }
+    },
+    "3B7": {
+      "actions": {
+        "pass": 83,
+        "take": 20,
+        "excluded": 65,
+        "stop": 11
+      },
+      "ai_actions": {
+        "take": 62,
+        "pass": 50
+      }
+    },
+    "38C": {
+      "actions": {
+        "excluded": 265,
+        "stop": 48,
+        "pass": 33,
+        "take": 1
+      },
+      "ai_actions": {
+        "take": 74,
+        "touch": 5,
+        "stop": 3
+      }
+    },
+    "49E": {
+      "actions": {
+        "excluded": 338,
+        "pass": 1
+      },
+      "ai_actions": {
+        "pass": 1
+      }
+    },
+    "2D0": {
+      "actions": {
+        "pass": 221,
+        "take": 38,
+        "excluded": 22,
+        "stop": 46
+      },
+      "ai_actions": {
+        "take": 197,
+        "pass": 98,
+        "touch": 3,
+        "stop": 10,
+        "not_engage": 2
+      }
+    },
+    "44C": {
+      "actions": {
+        "take": 132,
+        "pass": 205,
+        "stop": 4,
+        "excluded": 7
+      },
+      "ai_actions": {
+        "take": 166,
+        "pass": 173,
+        "stop": 1
+      }
+    },
+    "3AE": {
+      "actions": {
+        "pass": 109,
+        "take": 26,
+        "stop": 6
+      },
+      "ai_actions": {
+        "take": 86,
+        "pass": 52,
+        "stop": 3
+      }
+    },
+    "40C": {
+      "actions": {
+        "pass": 410,
+        "take": 161,
+        "excluded": 8,
+        "stop": 2
+      },
+      "ai_actions": {
+        "pass": 198,
+        "take": 369,
+        "touch": 1,
+        "stop": 3
+      }
+    },
+    "3B5": {
+      "actions": {
+        "pass": 104,
+        "take": 40,
+        "excluded": 6,
+        "stop": 12
+      },
+      "ai_actions": {
+        "take": 82,
+        "pass": 69,
+        "touch": 4,
+        "stop": 1
+      }
+    },
+    "45C": {
+      "actions": {
+        "take": 217,
+        "pass": 133,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 349,
+        "pass": 1
+      }
+    },
+    "30E": {
+      "actions": {
+        "excluded": 15,
+        "pass": 5
+      },
+      "ai_actions": {
+        "take": 5
+      }
+    },
+    "2A0": {
+      "actions": {
+        "pass": 533,
+        "take": 299,
+        "stop": 49
+      },
+      "ai_actions": {
+        "take": 652,
+        "pass": 163,
+        "stop": 61,
+        "touch": 5
+      }
+    },
+    "402": {
+      "actions": {
+        "excluded": 180,
+        "pass": 28,
+        "take": 20,
+        "stop": 5
+      },
+      "ai_actions": {
+        "take": 47,
+        "pass": 6
+      }
+    },
+    "3E8": {
+      "actions": {
+        "take": 9,
+        "excluded": 154,
+        "pass": 17
+      },
+      "ai_actions": {
+        "take": 18,
+        "touch": 2,
+        "pass": 5
+      }
+    },
+    "51A": {
+      "actions": {
+        "take": 15,
+        "pass": 16
+      },
+      "ai_actions": {
+        "take": 23,
+        "pass": 8
+      }
+    },
+    "27F": {
+      "actions": {
+        "pass": 22,
+        "take": 11,
+        "stop": 3
+      },
+      "ai_actions": {
+        "take": 27,
+        "pass": 9
+      }
+    },
+    "33F": {
+      "actions": {
+        "pass": 364,
+        "stop": 32,
+        "take": 78,
+        "excluded": 2
+      },
+      "ai_actions": {
+        "take": 253,
+        "pass": 179,
+        "stop": 39,
+        "touch": 3
+      }
+    },
+    "539": {
+      "actions": {
+        "take": 47,
+        "pass": 35,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 65,
+        "pass": 18
+      }
+    },
+    "46B": {
+      "actions": {
+        "pass": 131,
+        "take": 75,
+        "stop": 3
+      },
+      "ai_actions": {
+        "pass": 50,
+        "take": 152,
+        "stop": 5,
+        "touch": 2
+      }
+    },
+    "4AD": {
+      "actions": {
+        "take": 38,
+        "pass": 17
+      },
+      "ai_actions": {
+        "take": 51,
+        "pass": 4
+      }
+    },
+    "47D": {
+      "actions": {
+        "pass": 76,
+        "stop": 3,
+        "take": 63
+      },
+      "ai_actions": {
+        "pass": 42,
+        "take": 98,
+        "stop": 1,
+        "touch": 1
+      }
+    },
+    "251": {
+      "actions": {
+        "take": 64,
+        "pass": 115,
+        "stop": 9,
+        "excluded": 13
+      },
+      "ai_actions": {
+        "take": 171,
+        "pass": 9,
+        "stop": 8
+      }
+    },
+    "31C": {
+      "actions": {
+        "pass": 860,
+        "take": 541,
+        "excluded": 20,
+        "stop": 94
+      },
+      "ai_actions": {
+        "pass": 195,
+        "take": 1194,
+        "stop": 86,
+        "touch": 17
+      }
+    },
+    "434": {
+      "actions": {
+        "pass": 102,
+        "stop": 10,
+        "take": 87,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "pass": 25,
+        "take": 162,
+        "stop": 8,
+        "touch": 4
+      }
+    },
+    "367": {
+      "actions": {
+        "pass": 245,
+        "take": 120,
+        "stop": 16,
+        "excluded": 5
+      },
+      "ai_actions": {
+        "take": 241,
+        "pass": 99,
+        "stop": 37,
+        "touch": 4
+      }
+    },
+    "4DB": {
+      "actions": {
+        "pass": 569,
+        "excluded": 26,
+        "take": 186,
+        "stop": 50
+      },
+      "ai_actions": {
+        "pass": 468,
+        "take": 317,
+        "touch": 10,
+        "stop": 3
+      }
+    },
+    "478": {
+      "actions": {
+        "pass": 477,
+        "excluded": 331,
+        "stop": 32,
+        "take": 30
+      },
+      "ai_actions": {
+        "pass": 311,
+        "take": 215,
+        "stop": 6,
+        "touch": 4
+      }
+    },
+    "175": {
+      "actions": {
+        "pass": 610,
+        "take": 423,
+        "excluded": 8,
+        "stop": 28
+      },
+      "ai_actions": {
+        "pass": 143,
+        "take": 862,
+        "stop": 46,
+        "touch": 16
+      }
+    },
+    "372": {
+      "actions": {
+        "take": 137,
+        "pass": 173,
+        "excluded": 7,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 270,
+        "pass": 39,
+        "stop": 2
+      }
+    },
+    "373": {
+      "actions": {
+        "pass": 235,
+        "excluded": 27,
+        "take": 161,
+        "stop": 6
+      },
+      "ai_actions": {
+        "take": 343,
+        "stop": 9,
+        "pass": 57,
+        "touch": 1
+      }
+    },
+    "371": {
+      "actions": {
+        "pass": 38,
+        "take": 42,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 70,
+        "pass": 9,
+        "stop": 1
+      }
+    },
+    "34E": {
+      "actions": {
+        "pass": 105,
+        "stop": 261,
+        "take": 31,
+        "excluded": 3
+      },
+      "ai_actions": {
+        "take": 129,
+        "pass": 8,
+        "stop": 251,
+        "touch": 2
+      }
+    },
+    "330": {
+      "actions": {
+        "pass": 60,
+        "take": 19,
+        "stop": 4
+      },
+      "ai_actions": {
+        "take": 68,
+        "touch": 1,
+        "pass": 2,
+        "stop": 11
+      }
+    },
+    "47F": {
+      "actions": {
+        "take": 44,
+        "pass": 46,
+        "stop": 5
+      },
+      "ai_actions": {
+        "take": 77,
+        "pass": 17,
+        "stop": 1
+      }
+    },
+    "3D6": {
+      "actions": {
+        "pass": 199,
+        "take": 64,
+        "stop": 20,
+        "excluded": 5
+      },
+      "ai_actions": {
+        "take": 178,
+        "pass": 87,
+        "stop": 15,
+        "touch": 3
+      }
+    },
+    "231": {
+      "actions": {
+        "take": 25,
+        "pass": 37,
+        "stop": 11
+      },
+      "ai_actions": {
+        "take": 45,
+        "stop": 24,
+        "touch": 1,
+        "pass": 3
+      }
+    },
+    "4DA": {
+      "actions": {
+        "pass": 80,
+        "excluded": 334,
+        "take": 12,
+        "stop": 2
+      },
+      "ai_actions": {
+        "take": 56,
+        "stop": 3,
+        "pass": 26,
+        "touch": 3
+      }
+    },
+    "41E": {
+      "actions": {
+        "excluded": 311,
+        "take": 37,
+        "pass": 81,
+        "stop": 14
+      },
+      "ai_actions": {
+        "take": 104,
+        "pass": 27,
+        "stop": 1
+      }
+    },
+    "341": {
+      "actions": {
+        "pass": 75,
+        "take": 16
+      },
+      "ai_actions": {
+        "take": 67,
+        "pass": 21,
+        "stop": 2,
+        "touch": 1
+      }
+    },
+    "369": {
+      "actions": {
+        "take": 20,
+        "pass": 68,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 67,
+        "stop": 1,
+        "pass": 21
+      }
+    },
+    "477": {
+      "actions": {
+        "pass": 182,
+        "take": 39,
+        "stop": 15,
+        "excluded": 3
+      },
+      "ai_actions": {
+        "pass": 59,
+        "take": 168,
+        "touch": 5,
+        "stop": 3
+      }
+    },
+    "2A4": {
+      "actions": {
+        "pass": 169,
+        "take": 55,
+        "stop": 4
+      },
+      "ai_actions": {
+        "take": 202,
+        "pass": 11,
+        "stop": 15
+      }
+    },
+    "2A5": {
+      "actions": {
+        "pass": 596,
+        "take": 207,
+        "stop": 6
+      },
+      "ai_actions": {
+        "take": 709,
+        "stop": 37,
+        "pass": 63
+      }
+    },
+    "473": {
+      "actions": {
+        "pass": 172,
+        "take": 41,
+        "stop": 34,
+        "excluded": 348
+      },
+      "ai_actions": {
+        "take": 169,
+        "touch": 10,
+        "pass": 52,
+        "stop": 15
+      }
+    },
+    "46F": {
+      "actions": {
+        "pass": 108,
+        "take": 48,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 149,
+        "pass": 5,
+        "stop": 2
+      }
+    },
+    "319": {
+      "actions": {
+        "pass": 150,
+        "take": 58,
+        "stop": 9,
+        "excluded": 2
+      },
+      "ai_actions": {
+        "take": 161,
+        "pass": 26,
+        "stop": 28,
+        "touch": 2
+      }
+    },
+    "348": {
+      "actions": {
+        "excluded": 16,
+        "pass": 8,
+        "take": 5,
+        "stop": 5
+      },
+      "ai_actions": {
+        "take": 18
+      }
+    },
+    "38B": {
+      "actions": {
+        "excluded": 68,
+        "take": 1,
+        "pass": 1
+      },
+      "ai_actions": {
+        "take": 2
+      }
+    },
+    "436": {
+      "actions": {
+        "take": 33,
+        "pass": 46,
+        "stop": 2
+      },
+      "ai_actions": {
+        "take": 50,
+        "pass": 27,
+        "stop": 4
+      }
+    },
+    "20B": {
+      "actions": {
+        "take": 43,
+        "pass": 151,
+        "excluded": 205,
+        "stop": 83
+      },
+      "ai_actions": {
+        "take": 221,
+        "stop": 12,
+        "pass": 40
+      }
+    },
+    "1D2": {
+      "actions": {
+        "take": 175,
+        "pass": 348,
+        "excluded": 87,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 421,
+        "stop": 12,
+        "pass": 105,
+        "touch": 3
+      }
+    },
+    "344": {
+      "actions": {
+        "excluded": 87,
+        "take": 15,
+        "pass": 56
+      },
+      "ai_actions": {
+        "take": 45,
+        "pass": 25,
+        "stop": 1
+      }
+    },
+    "4E2": {
+      "actions": {
+        "pass": 371,
+        "excluded": 268,
+        "take": 100,
+        "stop": 101
+      },
+      "ai_actions": {
+        "take": 309,
+        "pass": 226,
+        "touch": 47,
+        "stop": 8
+      }
+    },
+    "25A": {
+      "actions": {
+        "pass": 60,
+        "take": 15
+      },
+      "ai_actions": {
+        "take": 71,
+        "pass": 3,
+        "stop": 1
+      }
+    },
+    "34A": {
+      "actions": {
+        "pass": 33,
+        "take": 21
+      },
+      "ai_actions": {
+        "take": 50,
+        "pass": 4
+      }
+    },
+    "432": {
+      "actions": {
+        "take": 63,
+        "pass": 115,
+        "stop": 49
+      },
+      "ai_actions": {
+        "take": 172,
+        "pass": 41,
+        "stop": 13,
+        "touch": 1
+      }
+    },
+    "280": {
+      "actions": {
+        "take": 3,
+        "pass": 8,
+        "stop": 2
+      },
+      "ai_actions": {
+        "take": 9,
+        "pass": 4
+      }
+    },
+    "1AB": {
+      "actions": {
+        "take": 56,
+        "pass": 140,
+        "stop": 25
+      },
+      "ai_actions": {
+        "take": 217,
+        "pass": 3,
+        "stop": 1
+      }
+    },
+    "2B2": {
+      "actions": {
+        "pass": 204,
+        "take": 43,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 220,
+        "stop": 12,
+        "pass": 12
+      }
+    },
+    "34C": {
+      "actions": {
+        "excluded": 122,
+        "take": 50,
+        "pass": 76
+      },
+      "ai_actions": {
+        "take": 112,
+        "pass": 12,
+        "touch": 1
+      }
+    },
+    "416": {
+      "actions": {
+        "take": 94,
+        "pass": 135,
+        "stop": 45,
+        "excluded": 2
+      },
+      "ai_actions": {
+        "take": 231,
+        "pass": 31,
+        "touch": 6,
+        "stop": 8
+      }
+    },
+    "4D2": {
+      "actions": {
+        "pass": 29,
+        "stop": 6,
+        "take": 23,
+        "excluded": 8
+      },
+      "ai_actions": {
+        "pass": 17,
+        "touch": 6,
+        "take": 34
+      }
+    },
+    "240": {
+      "actions": {
+        "take": 36,
+        "pass": 81,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 95,
+        "pass": 6,
+        "stop": 17
+      }
+    },
+    "335": {
+      "actions": {
+        "pass": 41,
+        "take": 3,
+        "excluded": 6,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 28,
+        "pass": 3,
+        "stop": 14
+      }
+    },
+    "24D": {
+      "actions": {
+        "pass": 14,
+        "take": 5
+      },
+      "ai_actions": {
+        "take": 19
+      }
+    },
+    "323": {
+      "actions": {
+        "pass": 64,
+        "take": 30,
+        "stop": 10
+      },
+      "ai_actions": {
+        "take": 62,
+        "pass": 28,
+        "stop": 14
+      }
+    },
+    "234": {
+      "actions": {
+        "pass": 69,
+        "take": 61,
+        "stop": 5
+      },
+      "ai_actions": {
+        "take": 112,
+        "pass": 7,
+        "stop": 16
+      }
+    },
+    "350": {
+      "actions": {
+        "take": 13,
+        "pass": 26
+      },
+      "ai_actions": {
+        "take": 36,
+        "pass": 3
+      }
+    },
+    "2C8": {
+      "actions": {
+        "pass": 408,
+        "stop": 196,
+        "take": 262,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "pass": 146,
+        "take": 712,
+        "stop": 5,
+        "touch": 1
+      }
+    },
+    "2DC": {
+      "actions": {
+        "pass": 80,
+        "excluded": 7,
+        "take": 49,
+        "stop": 2
+      },
+      "ai_actions": {
+        "take": 94,
+        "stop": 3,
+        "pass": 32,
+        "touch": 2
+      }
+    },
+    "2C7": {
+      "actions": {
+        "pass": 398,
+        "take": 200,
+        "stop": 186
+      },
+      "ai_actions": {
+        "pass": 156,
+        "take": 622,
+        "stop": 5,
+        "touch": 1
+      }
+    },
+    "2A3": {
+      "actions": {
+        "pass": 175,
+        "take": 49
+      },
+      "ai_actions": {
+        "take": 217,
+        "pass": 6
+      }
+    },
+    "331": {
+      "actions": {
+        "pass": 14,
+        "take": 18,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 30,
+        "pass": 1,
+        "stop": 2
+      }
+    },
+    "500": {
+      "actions": {
+        "excluded": 22,
+        "pass": 9,
+        "take": 14
+      },
+      "ai_actions": {
+        "take": 23
+      }
+    },
+    "368": {
+      "actions": {
+        "take": 38,
+        "pass": 66,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 83,
+        "pass": 21,
+        "stop": 1
+      }
+    },
+    "25F": {
+      "actions": {
+        "stop": 8,
+        "pass": 16,
+        "take": 16
+      },
+      "ai_actions": {
+        "take": 35,
+        "pass": 2,
+        "stop": 2,
+        "touch": 1
+      }
+    },
+    "2B8": {
+      "actions": {
+        "pass": 107,
+        "take": 112,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "pass": 17,
+        "take": 203
+      }
+    },
+    "34F": {
+      "actions": {
+        "pass": 141,
+        "take": 55,
+        "stop": 2,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 170,
+        "pass": 21,
+        "stop": 3
+      }
+    },
+    "25C": {
+      "actions": {
+        "pass": 30,
+        "take": 24,
+        "stop": 22
+      },
+      "ai_actions": {
+        "take": 65,
+        "pass": 8,
+        "touch": 3
+      }
+    },
+    "342": {
+      "actions": {
+        "pass": 22,
+        "take": 16,
+        "excluded": 10
+      },
+      "ai_actions": {
+        "take": 32,
+        "pass": 6
+      }
+    },
+    "340": {
+      "actions": {
+        "pass": 427,
+        "take": 111,
+        "excluded": 3,
+        "stop": 2
+      },
+      "ai_actions": {
+        "pass": 231,
+        "take": 302,
+        "touch": 4,
+        "stop": 3
+      }
+    },
+    "2C6": {
+      "actions": {
+        "pass": 289,
+        "take": 152,
+        "stop": 121
+      },
+      "ai_actions": {
+        "take": 456,
+        "pass": 98,
+        "stop": 7,
+        "touch": 1
+      }
+    },
+    "2E0": {
+      "actions": {
+        "pass": 240,
+        "take": 182,
+        "excluded": 2,
+        "stop": 2
+      },
+      "ai_actions": {
+        "take": 381,
+        "pass": 40,
+        "touch": 1,
+        "stop": 1
+      }
+    },
+    "218": {
+      "actions": {
+        "excluded": 22,
+        "take": 1
+      },
+      "ai_actions": {
+        "take": 1
+      }
+    },
+    "2E1": {
+      "actions": {
+        "take": 223,
+        "pass": 201,
+        "excluded": 2,
+        "stop": 2
+      },
+      "ai_actions": {
+        "take": 347,
+        "pass": 75,
+        "stop": 2
+      }
+    },
+    "21C": {
+      "actions": {
+        "pass": 132,
+        "take": 97,
+        "excluded": 5,
+        "stop": 16
+      },
+      "ai_actions": {
+        "take": 172,
+        "pass": 37,
+        "touch": 2,
+        "stop": 33
+      }
+    },
+    "407": {
+      "actions": {
+        "take": 123,
+        "pass": 93,
+        "excluded": 10,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 188,
+        "pass": 28,
+        "touch": 1
+      }
+    },
+    "404": {
+      "actions": {
+        "take": 90,
+        "pass": 62,
+        "excluded": 4,
+        "stop": 3
+      },
+      "ai_actions": {
+        "take": 136,
+        "pass": 16,
+        "stop": 2,
+        "touch": 1
+      }
+    },
+    "379": {
+      "actions": {
+        "take": 78,
+        "pass": 112,
+        "excluded": 22,
+        "stop": 5
+      },
+      "ai_actions": {
+        "take": 145,
+        "pass": 42,
+        "stop": 2,
+        "touch": 6
+      }
+    },
+    "375": {
+      "actions": {
+        "pass": 35,
+        "take": 5,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 31,
+        "pass": 5,
+        "stop": 4,
+        "touch": 1
+      }
+    },
+    "385": {
+      "actions": {
+        "pass": 116,
+        "take": 75,
+        "stop": 15
+      },
+      "ai_actions": {
+        "take": 174,
+        "stop": 31,
+        "pass": 1
+      }
+    },
+    "527": {
+      "actions": {
+        "pass": 149,
+        "take": 91,
+        "stop": 5
+      },
+      "ai_actions": {
+        "pass": 67,
+        "take": 167,
+        "touch": 8,
+        "stop": 3
+      }
+    },
+    "281": {
+      "actions": {
+        "take": 36,
+        "pass": 32,
+        "stop": 2,
+        "excluded": 9
+      },
+      "ai_actions": {
+        "take": 64,
+        "pass": 6
+      }
+    },
+    "549": {
+      "actions": {
+        "pass": 36,
+        "stop": 20,
+        "take": 30,
+        "excluded": 3
+      },
+      "ai_actions": {
+        "pass": 7,
+        "take": 65,
+        "touch": 4,
+        "stop": 10
+      }
+    },
+    "417": {
+      "actions": {
+        "pass": 159,
+        "excluded": 9,
+        "take": 90,
+        "stop": 28
+      },
+      "ai_actions": {
+        "take": 244,
+        "pass": 31,
+        "touch": 1,
+        "stop": 1
+      }
+    },
+    "3F6": {
+      "actions": {
+        "pass": 61,
+        "take": 50,
+        "stop": 53,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 147,
+        "pass": 14,
+        "touch": 1,
+        "stop": 2
+      }
+    },
+    "524": {
+      "actions": {
+        "pass": 93,
+        "take": 66,
+        "excluded": 11,
+        "stop": 2
+      },
+      "ai_actions": {
+        "take": 117,
+        "pass": 37,
+        "touch": 6,
+        "stop": 1
+      }
+    },
+    "4F7": {
+      "actions": {
+        "pass": 69,
+        "take": 71,
+        "stop": 10,
+        "excluded": 4
+      },
+      "ai_actions": {
+        "take": 138,
+        "stop": 10,
+        "pass": 2
+      }
+    },
+    "32D": {
+      "actions": {
+        "pass": 141,
+        "take": 48,
+        "excluded": 4,
+        "stop": 4
+      },
+      "ai_actions": {
+        "take": 123,
+        "stop": 17,
+        "pass": 53
+      }
+    },
+    "2CB": {
+      "actions": {
+        "take": 67,
+        "excluded": 4,
+        "pass": 163,
+        "stop": 39
+      },
+      "ai_actions": {
+        "take": 200,
+        "pass": 68,
+        "stop": 3,
+        "touch": 2
+      }
+    },
+    "54A": {
+      "actions": {
+        "pass": 36,
+        "stop": 34,
+        "take": 18,
+        "excluded": 4
+      },
+      "ai_actions": {
+        "take": 73,
+        "pass": 13,
+        "touch": 1,
+        "stop": 1
+      }
+    },
+    "2F3": {
+      "actions": {
+        "excluded": 9,
+        "pass": 33,
+        "take": 4
+      },
+      "ai_actions": {
+        "take": 38,
+        "not_engage": 1,
+        "pass": 1,
+        "stop": 6
+      }
+    },
+    "351": {
+      "actions": {
+        "pass": 39,
+        "take": 30,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 66,
+        "pass": 3,
+        "stop": 1
+      }
+    },
+    "207": {
+      "actions": {
+        "pass": 27,
+        "stop": 23,
+        "take": 5
+      },
+      "ai_actions": {
+        "take": 19,
+        "pass": 8,
+        "stop": 28
+      }
+    },
+    "2B1": {
+      "actions": {
+        "take": 28,
+        "pass": 90,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 98,
+        "pass": 14,
+        "stop": 7
+      }
+    },
+    "2CD": {
+      "actions": {
+        "pass": 156,
+        "excluded": 9,
+        "take": 77,
+        "stop": 24
+      },
+      "ai_actions": {
+        "pass": 65,
+        "take": 189,
+        "touch": 7,
+        "not_engage": 1,
+        "stop": 3
+      }
+    },
+    "339": {
+      "actions": {
+        "excluded": 262,
+        "pass": 27,
+        "stop": 9,
+        "take": 5
+      },
+      "ai_actions": {
+        "pass": 12,
+        "touch": 3,
+        "take": 26
+      }
+    },
+    "34D": {
+      "actions": {
+        "take": 46,
+        "pass": 104,
+        "excluded": 4,
+        "stop": 8
+      },
+      "ai_actions": {
+        "take": 119,
+        "stop": 19,
+        "pass": 18,
+        "touch": 1
+      }
+    },
+    "332": {
+      "actions": {
+        "pass": 52,
+        "take": 21,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 59,
+        "pass": 10,
+        "touch": 1,
+        "stop": 4
+      }
+    },
+    "2AF": {
+      "actions": {
+        "take": 20,
+        "pass": 23,
+        "stop": 3
+      },
+      "ai_actions": {
+        "take": 37,
+        "stop": 5,
+        "pass": 4
+      }
+    },
+    "388": {
+      "actions": {
+        "pass": 153,
+        "take": 104,
+        "stop": 27
+      },
+      "ai_actions": {
+        "take": 256,
+        "touch": 1,
+        "pass": 22,
+        "stop": 5
+      }
+    },
+    "36A": {
+      "actions": {
+        "pass": 35,
+        "take": 4
+      },
+      "ai_actions": {
+        "take": 31,
+        "pass": 6,
+        "touch": 1,
+        "stop": 1
+      }
+    },
+    "2BD": {
+      "actions": {
+        "pass": 345,
+        "stop": 7,
+        "excluded": 21,
+        "take": 48
+      },
+      "ai_actions": {
+        "take": 205,
+        "pass": 183,
+        "stop": 9,
+        "touch": 3
+      }
+    },
+    "37A": {
+      "actions": {
+        "stop": 7,
+        "take": 61,
+        "pass": 133
+      },
+      "ai_actions": {
+        "touch": 10,
+        "take": 136,
+        "pass": 53,
+        "stop": 2
+      }
+    },
+    "349": {
+      "actions": {
+        "take": 9,
+        "pass": 23,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 28,
+        "pass": 4,
+        "stop": 1
+      }
+    },
+    "356": {
+      "actions": {
+        "excluded": 22
+      },
+      "ai_actions": {}
+    },
+    "352": {
+      "actions": {
+        "pass": 79,
+        "take": 46,
+        "excluded": 1,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 108,
+        "pass": 17,
+        "stop": 1
+      }
+    },
+    "446": {
+      "actions": {
+        "pass": 75,
+        "take": 21,
+        "excluded": 2,
+        "stop": 4
+      },
+      "ai_actions": {
+        "pass": 35,
+        "take": 63,
+        "stop": 2
+      }
+    },
+    "4A9": {
+      "actions": {
+        "pass": 83,
+        "take": 43,
+        "stop": 11,
+        "excluded": 3
+      },
+      "ai_actions": {
+        "pass": 22,
+        "take": 111,
+        "touch": 3,
+        "stop": 1
+      }
+    },
+    "376": {
+      "actions": {
+        "pass": 11,
+        "take": 8
+      },
+      "ai_actions": {
+        "pass": 1,
+        "take": 18
+      }
+    },
+    "2DD": {
+      "actions": {
+        "pass": 80,
+        "take": 61,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 104,
+        "pass": 36,
+        "touch": 2
+      }
+    },
+    "37B": {
+      "actions": {
+        "take": 94,
+        "excluded": 73,
+        "pass": 131,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 169,
+        "pass": 51,
+        "touch": 5,
+        "stop": 1
+      }
+    },
+    "525": {
+      "actions": {
+        "pass": 95,
+        "take": 42,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 84,
+        "pass": 51,
+        "stop": 1,
+        "touch": 2
+      }
+    },
+    "2B3": {
+      "actions": {
+        "pass": 59,
+        "take": 9,
+        "stop": 1
+      },
+      "ai_actions": {
+        "stop": 6,
+        "take": 59,
+        "pass": 4
+      }
+    },
+    "386": {
+      "actions": {
+        "excluded": 7,
+        "take": 30,
+        "pass": 72,
+        "stop": 4
+      },
+      "ai_actions": {
+        "take": 106
+      }
+    },
+    "2A6": {
+      "actions": {
+        "take": 70,
+        "pass": 334,
+        "stop": 28
+      },
+      "ai_actions": {
+        "take": 350,
+        "stop": 47,
+        "pass": 35
+      }
+    },
+    "2BF": {
+      "actions": {
+        "take": 48,
+        "pass": 162,
+        "excluded": 5
+      },
+      "ai_actions": {
+        "take": 152,
+        "pass": 45,
+        "stop": 10,
+        "touch": 2
+      }
+    },
+    "3A8": {
+      "actions": {
+        "excluded": 23,
+        "pass": 16,
+        "take": 2
+      },
+      "ai_actions": {
+        "take": 11,
+        "pass": 6
+      }
+    },
+    "305": {
+      "actions": {
+        "pass": 54,
+        "take": 17,
+        "stop": 2
+      },
+      "ai_actions": {
+        "pass": 19,
+        "take": 50,
+        "stop": 1,
+        "touch": 3
+      }
+    },
+    "4A8": {
+      "actions": {
+        "pass": 113,
+        "stop": 28,
+        "take": 18,
+        "excluded": 9
+      },
+      "ai_actions": {
+        "take": 135,
+        "pass": 28,
+        "stop": 1
+      }
+    },
+    "4C1": {
+      "actions": {
+        "excluded": 275,
+        "pass": 94,
+        "take": 7
+      },
+      "ai_actions": {
+        "take": 60,
+        "pass": 41
+      }
+    },
+    "353": {
+      "actions": {
+        "take": 57,
+        "pass": 101,
+        "stop": 1,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 130,
+        "pass": 26,
+        "touch": 1,
+        "stop": 2
+      }
+    },
+    "2FF": {
+      "actions": {
+        "pass": 30,
+        "take": 19
+      },
+      "ai_actions": {
+        "take": 36,
+        "pass": 13
+      }
+    },
+    "37E": {
+      "actions": {
+        "excluded": 199,
+        "pass": 144,
+        "take": 97
+      },
+      "ai_actions": {
+        "take": 225,
+        "pass": 14,
+        "touch": 1,
+        "stop": 1
+      }
+    },
+    "293": {
+      "actions": {
+        "stop": 7,
+        "pass": 26,
+        "take": 17,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 47,
+        "pass": 2
+      }
+    },
+    "408": {
+      "actions": {
+        "take": 156,
+        "pass": 136,
+        "excluded": 26,
+        "stop": 2
+      },
+      "ai_actions": {
+        "take": 233,
+        "pass": 55,
+        "stop": 5
+      }
+    },
+    "3EA": {
+      "actions": {
+        "take": 40,
+        "pass": 92,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 110,
+        "pass": 17,
+        "touch": 1,
+        "stop": 4
+      }
+    },
+    "387": {
+      "actions": {
+        "excluded": 10,
+        "pass": 90,
+        "take": 28,
+        "stop": 20
+      },
+      "ai_actions": {
+        "take": 138
+      }
+    },
+    "38E": {
+      "actions": {
+        "excluded": 160,
+        "pass": 34,
+        "take": 29
+      },
+      "ai_actions": {
+        "take": 60,
+        "pass": 3
+      }
+    },
+    "36F": {
+      "actions": {
+        "stop": 14,
+        "take": 13,
+        "pass": 10,
+        "excluded": 4
+      },
+      "ai_actions": {
+        "stop": 18,
+        "take": 22,
+        "touch": 1
+      }
+    },
+    "377": {
+      "actions": {
+        "pass": 35,
+        "take": 13,
+        "excluded": 35
+      },
+      "ai_actions": {
+        "take": 48
+      }
+    },
+    "414": {
+      "actions": {
+        "pass": 165,
+        "take": 141,
+        "stop": 40,
+        "excluded": 6
+      },
+      "ai_actions": {
+        "take": 277,
+        "pass": 59,
+        "touch": 5,
+        "stop": 11
+      }
+    },
+    "1CA": {
+      "actions": {
+        "pass": 55,
+        "stop": 30,
+        "excluded": 17,
+        "take": 1
+      },
+      "ai_actions": {
+        "stop": 29,
+        "take": 69,
+        "pass": 5
+      }
+    },
+    "384": {
+      "actions": {
+        "take": 30,
+        "pass": 97,
+        "stop": 76
+      },
+      "ai_actions": {
+        "take": 41,
+        "stop": 159,
+        "pass": 3
+      }
+    },
+    "304": {
+      "actions": {
+        "pass": 49,
+        "take": 16
+      },
+      "ai_actions": {
+        "take": 43,
+        "pass": 19,
+        "touch": 2,
+        "stop": 1
+      }
+    },
+    "2C0": {
+      "actions": {
+        "pass": 126,
+        "stop": 11,
+        "take": 58
+      },
+      "ai_actions": {
+        "take": 147,
+        "pass": 42,
+        "stop": 5,
+        "touch": 1
+      }
+    },
+    "2C1": {
+      "actions": {
+        "stop": 35,
+        "take": 81,
+        "pass": 182
+      },
+      "ai_actions": {
+        "take": 230,
+        "pass": 64,
+        "touch": 2,
+        "stop": 2
+      }
+    },
+    "521": {
+      "actions": {
+        "pass": 15,
+        "excluded": 9
+      },
+      "ai_actions": {
+        "take": 16,
+        "pass": 1,
+        "stop": 6,
+        "touch": 1
+      }
+    },
+    "2F5": {
+      "actions": {
+        "excluded": 16,
+        "pass": 6,
+        "take": 3
+      },
+      "ai_actions": {
+        "stop": 8,
+        "take": 11,
+        "pass": 6
+      }
+    },
+    "505": {
+      "actions": {
+        "pass": 141,
+        "stop": 6,
+        "excluded": 14,
+        "take": 6
+      },
+      "ai_actions": {
+        "pass": 90,
+        "take": 72,
+        "stop": 1,
+        "touch": 1
+      }
+    },
+    "1E6": {
+      "actions": {
+        "pass": 72,
+        "take": 62,
+        "stop": 5,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 116,
+        "pass": 19,
+        "stop": 4
+      }
+    },
+    "374": {
+      "actions": {
+        "pass": 10,
+        "take": 5
+      },
+      "ai_actions": {
+        "take": 13,
+        "pass": 1,
+        "stop": 1
+      }
+    },
+    "391": {
+      "actions": {
+        "pass": 82,
+        "take": 47
+      },
+      "ai_actions": {
+        "take": 108,
+        "pass": 21
+      }
+    },
+    "2B5": {
+      "actions": {
+        "pass": 26,
+        "take": 3
+      },
+      "ai_actions": {
+        "take": 26,
+        "stop": 3
+      }
+    },
+    "390": {
+      "actions": {
+        "pass": 107,
+        "take": 79
+      },
+      "ai_actions": {
+        "take": 161,
+        "pass": 24,
+        "touch": 1
+      }
+    },
+    "474": {
+      "actions": {
+        "pass": 25,
+        "take": 31,
+        "excluded": 26
+      },
+      "ai_actions": {
+        "take": 52,
+        "pass": 3,
+        "stop": 1
+      }
+    },
+    "389": {
+      "actions": {
+        "pass": 52,
+        "take": 30,
+        "stop": 7
+      },
+      "ai_actions": {
+        "take": 75,
+        "pass": 9,
+        "touch": 1,
+        "stop": 3
+      }
+    },
+    "22D": {
+      "actions": {
+        "pass": 38,
+        "stop": 5,
+        "take": 11
+      },
+      "ai_actions": {
+        "stop": 10,
+        "take": 24,
+        "pass": 20
+      }
+    },
+    "2F6": {
+      "actions": {
+        "take": 3,
+        "pass": 3,
+        "excluded": 5
+      },
+      "ai_actions": {
+        "take": 8,
+        "pass": 2,
+        "touch": 1
+      }
+    },
+    "220": {
+      "actions": {
+        "excluded": 45,
+        "pass": 42,
+        "take": 8
+      },
+      "ai_actions": {
+        "pass": 14,
+        "take": 33
+      }
+    },
+    "403": {
+      "actions": {
+        "pass": 35,
+        "take": 29,
+        "excluded": 21,
+        "stop": 4
+      },
+      "ai_actions": {
+        "take": 55,
+        "pass": 10,
+        "stop": 2,
+        "touch": 1
+      }
+    },
+    "242": {
+      "actions": {
+        "take": 96,
+        "pass": 95,
+        "stop": 27
+      },
+      "ai_actions": {
+        "take": 161,
+        "pass": 8,
+        "stop": 49
+      }
+    },
+    "241": {
+      "actions": {
+        "take": 31,
+        "pass": 26,
+        "stop": 5
+      },
+      "ai_actions": {
+        "take": 48,
+        "stop": 13,
+        "pass": 1
+      }
+    },
+    "54F": {
+      "actions": {
+        "pass": 36,
+        "take": 23,
+        "stop": 5
+      },
+      "ai_actions": {
+        "take": 56,
+        "pass": 8
+      }
+    },
+    "3A6": {
+      "actions": {
+        "pass": 40,
+        "stop": 1,
+        "take": 11,
+        "excluded": 3
+      },
+      "ai_actions": {
+        "take": 34,
+        "pass": 15,
+        "touch": 2,
+        "stop": 1
+      }
+    },
+    "431": {
+      "actions": {
+        "pass": 105,
+        "take": 70,
+        "stop": 32,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 161,
+        "pass": 37,
+        "stop": 9
+      }
+    },
+    "3A4": {
+      "actions": {
+        "pass": 16,
+        "take": 31,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 43,
+        "pass": 3,
+        "touch": 1
+      }
+    },
+    "3A3": {
+      "actions": {
+        "pass": 4,
+        "take": 3
+      },
+      "ai_actions": {
+        "take": 6,
+        "pass": 1
+      }
+    },
+    "396": {
+      "actions": {
+        "pass": 45,
+        "take": 37,
+        "stop": 1,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 74,
+        "pass": 7,
+        "touch": 1,
+        "stop": 1
+      }
+    },
+    "393": {
+      "actions": {
+        "pass": 48,
+        "take": 19
+      },
+      "ai_actions": {
+        "take": 53,
+        "pass": 14
+      }
+    },
+    "392": {
+      "actions": {
+        "pass": 80,
+        "take": 49
+      },
+      "ai_actions": {
+        "take": 107,
+        "pass": 21,
+        "stop": 1
+      }
+    },
+    "2EE": {
+      "actions": {
+        "excluded": 32,
+        "pass": 14,
+        "take": 5,
+        "stop": 2
+      },
+      "ai_actions": {
+        "take": 23,
+        "stop": 26,
+        "pass": 3
+      }
+    },
+    "354": {
+      "actions": {
+        "take": 67,
+        "pass": 172,
+        "stop": 6
+      },
+      "ai_actions": {
+        "take": 153,
+        "pass": 85,
+        "stop": 3,
+        "touch": 4
+      }
+    },
+    "289": {
+      "actions": {
+        "pass": 10,
+        "take": 5
+      },
+      "ai_actions": {
+        "take": 14,
+        "stop": 1
+      }
+    },
+    "370": {
+      "actions": {
+        "pass": 23,
+        "take": 15,
+        "stop": 2
+      },
+      "ai_actions": {
+        "take": 35,
+        "stop": 2,
+        "pass": 3
+      }
+    },
+    "459": {
+      "actions": {
+        "pass": 86,
+        "take": 71
+      },
+      "ai_actions": {
+        "take": 135,
+        "pass": 21,
+        "stop": 1
+      }
+    },
+    "245": {
+      "actions": {
+        "take": 92,
+        "pass": 162,
+        "excluded": 55,
+        "stop": 8
+      },
+      "ai_actions": {
+        "take": 195,
+        "pass": 61,
+        "stop": 6
+      }
+    },
+    "503": {
+      "actions": {
+        "excluded": 73,
+        "take": 15,
+        "pass": 40
+      },
+      "ai_actions": {
+        "take": 31,
+        "pass": 21
+      }
+    },
+    "303": {
+      "actions": {
+        "take": 52,
+        "pass": 81,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 106,
+        "pass": 24,
+        "touch": 3,
+        "stop": 1
+      }
+    },
+    "397": {
+      "actions": {
+        "pass": 23,
+        "take": 15,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 37,
+        "stop": 1,
+        "pass": 1
+      }
+    },
+    "3D0": {
+      "actions": {
+        "pass": 129,
+        "take": 98,
+        "stop": 9
+      },
+      "ai_actions": {
+        "take": 172,
+        "pass": 58,
+        "touch": 5,
+        "stop": 1
+      }
+    },
+    "3AA": {
+      "actions": {
+        "take": 31,
+        "pass": 33,
+        "excluded": 6
+      },
+      "ai_actions": {
+        "take": 54,
+        "pass": 10
+      }
+    },
+    "3AF": {
+      "actions": {
+        "stop": 12,
+        "pass": 108,
+        "take": 34
+      },
+      "ai_actions": {
+        "take": 96,
+        "pass": 56,
+        "touch": 1,
+        "stop": 1
+      }
+    },
+    "2FD": {
+      "actions": {
+        "pass": 120,
+        "excluded": 3,
+        "take": 41,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 119,
+        "pass": 42,
+        "touch": 2,
+        "stop": 2
+      }
+    },
+    "513": {
+      "actions": {
+        "take": 28,
+        "pass": 32,
+        "excluded": 7
+      },
+      "ai_actions": {
+        "take": 52,
+        "pass": 8
+      }
+    },
+    "45F": {
+      "actions": {
+        "pass": 32,
+        "take": 13,
+        "excluded": 4,
+        "stop": 7
+      },
+      "ai_actions": {
+        "take": 25,
+        "stop": 26,
+        "pass": 1
+      }
+    },
+    "3C8": {
+      "actions": {
+        "excluded": 178,
+        "take": 19,
+        "pass": 23,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 31,
+        "pass": 11,
+        "stop": 1
+      }
+    },
+    "3C9": {
+      "actions": {
+        "pass": 46,
+        "excluded": 152,
+        "take": 37,
+        "stop": 1
+      },
+      "ai_actions": {
+        "pass": 17,
+        "take": 65,
+        "stop": 2
+      }
+    },
+    "39C": {
+      "actions": {
+        "pass": 68,
+        "take": 80,
+        "excluded": 3
+      },
+      "ai_actions": {
+        "take": 143,
+        "pass": 4,
+        "touch": 1
+      }
+    },
+    "318": {
+      "actions": {
+        "excluded": 32,
+        "pass": 29,
+        "take": 4
+      },
+      "ai_actions": {
+        "take": 30,
+        "pass": 3
+      }
+    },
+    "3D3": {
+      "actions": {
+        "pass": 124,
+        "take": 80,
+        "stop": 14
+      },
+      "ai_actions": {
+        "pass": 40,
+        "take": 164,
+        "stop": 9,
+        "touch": 5
+      }
+    },
+    "395": {
+      "actions": {
+        "pass": 23,
+        "take": 32,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 49,
+        "pass": 6
+      }
+    },
+    "3D1": {
+      "actions": {
+        "pass": 177,
+        "take": 117,
+        "stop": 8
+      },
+      "ai_actions": {
+        "pass": 65,
+        "take": 227,
+        "touch": 5,
+        "stop": 5
+      }
+    },
+    "38D": {
+      "actions": {
+        "take": 49,
+        "pass": 54
+      },
+      "ai_actions": {
+        "take": 103
+      }
+    },
+    "249": {
+      "actions": {
+        "pass": 22,
+        "take": 2
+      },
+      "ai_actions": {
+        "take": 24
+      }
+    },
+    "3D5": {
+      "actions": {
+        "pass": 131,
+        "take": 59,
+        "stop": 5
+      },
+      "ai_actions": {
+        "take": 128,
+        "pass": 57,
+        "stop": 8,
+        "touch": 2
+      }
+    },
+    "3D4": {
+      "actions": {
+        "pass": 132,
+        "take": 62,
+        "stop": 24
+      },
+      "ai_actions": {
+        "take": 155,
+        "pass": 57,
+        "stop": 4,
+        "touch": 2
+      }
+    },
+    "4BF": {
+      "actions": {
+        "pass": 51,
+        "take": 25,
+        "stop": 28,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 98,
+        "stop": 4,
+        "pass": 2
+      }
+    },
+    "4B9": {
+      "actions": {
+        "take": 14,
+        "pass": 31,
+        "stop": 4
+      },
+      "ai_actions": {
+        "take": 39,
+        "pass": 9,
+        "touch": 1
+      }
+    },
+    "3BB": {
+      "actions": {
+        "take": 29,
+        "pass": 19,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 44,
+        "pass": 5
+      }
+    },
+    "4FD": {
+      "actions": {
+        "pass": 8,
+        "take": 7,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 14,
+        "stop": 1,
+        "pass": 1
+      }
+    },
+    "45A": {
+      "actions": {
+        "pass": 34,
+        "take": 34,
+        "stop": 7,
+        "excluded": 2
+      },
+      "ai_actions": {
+        "take": 61,
+        "pass": 4,
+        "stop": 10
+      }
+    },
+    "256": {
+      "actions": {
+        "take": 14,
+        "pass": 10
+      },
+      "ai_actions": {
+        "take": 20,
+        "pass": 4
+      }
+    },
+    "2F2": {
+      "actions": {
+        "excluded": 39,
+        "pass": 7,
+        "take": 1
+      },
+      "ai_actions": {
+        "pass": 2,
+        "take": 6,
+        "stop": 3
+      }
+    },
+    "3CA": {
+      "actions": {
+        "pass": 91,
+        "excluded": 8,
+        "take": 48,
+        "stop": 5
+      },
+      "ai_actions": {
+        "pass": 61,
+        "take": 77,
+        "stop": 5
+      }
+    },
+    "27E": {
+      "actions": {
+        "stop": 5,
+        "take": 5,
+        "pass": 15
+      },
+      "ai_actions": {
+        "take": 21,
+        "pass": 3,
+        "touch": 1
+      }
+    },
+    "3D7": {
+      "actions": {
+        "excluded": 120,
+        "pass": 143,
+        "take": 95,
+        "stop": 26
+      },
+      "ai_actions": {
+        "take": 206,
+        "pass": 51,
+        "stop": 5,
+        "touch": 2
+      }
+    },
+    "236": {
+      "actions": {
+        "pass": 45,
+        "take": 34,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 74,
+        "pass": 4,
+        "stop": 2
+      }
+    },
+    "4F9": {
+      "actions": {
+        "take": 6,
+        "pass": 7
+      },
+      "ai_actions": {
+        "take": 11,
+        "pass": 2
+      }
+    },
+    "3BF": {
+      "actions": {
+        "take": 28,
+        "pass": 50,
+        "excluded": 3
+      },
+      "ai_actions": {
+        "take": 61,
+        "pass": 17
+      }
+    },
+    "3C1": {
+      "actions": {
+        "take": 40,
+        "pass": 47,
+        "excluded": 71,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 65,
+        "pass": 22,
+        "stop": 1
+      }
+    },
+    "425": {
+      "actions": {
+        "pass": 62,
+        "take": 49,
+        "stop": 22
+      },
+      "ai_actions": {
+        "take": 114,
+        "stop": 10,
+        "pass": 9
+      }
+    },
+    "426": {
+      "actions": {
+        "pass": 41,
+        "take": 6,
+        "stop": 35
+      },
+      "ai_actions": {
+        "pass": 11,
+        "take": 60,
+        "stop": 11
+      }
+    },
+    "324": {
+      "actions": {
+        "pass": 49,
+        "excluded": 12,
+        "take": 12,
+        "stop": 4
+      },
+      "ai_actions": {
+        "pass": 11,
+        "not_engage": 2,
+        "take": 59,
+        "stop": 4
+      }
+    },
+    "4BD": {
+      "actions": {
+        "pass": 20,
+        "take": 13
+      },
+      "ai_actions": {
+        "take": 30,
+        "pass": 2,
+        "stop": 1
+      }
+    },
+    "255": {
+      "actions": {
+        "take": 19,
+        "pass": 29,
+        "stop": 9
+      },
+      "ai_actions": {
+        "take": 44,
+        "pass": 12,
+        "stop": 1
+      }
+    },
+    "429": {
+      "actions": {
+        "excluded": 28,
+        "pass": 11,
+        "take": 3,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 9,
+        "pass": 5,
+        "stop": 1
+      }
+    },
+    "3D2": {
+      "actions": {
+        "take": 101,
+        "pass": 134,
+        "stop": 11
+      },
+      "ai_actions": {
+        "take": 173,
+        "pass": 60,
+        "stop": 8,
+        "touch": 5
+      }
+    },
+    "4BC": {
+      "actions": {
+        "take": 2,
+        "pass": 5
+      },
+      "ai_actions": {
+        "take": 6,
+        "pass": 1
+      }
+    },
+    "239": {
+      "actions": {
+        "pass": 43,
+        "stop": 22,
+        "take": 10,
+        "excluded": 17
+      },
+      "ai_actions": {
+        "take": 59,
+        "stop": 3,
+        "pass": 11,
+        "touch": 2
+      }
+    },
+    "22A": {
+      "actions": {
+        "take": 13,
+        "pass": 51,
+        "stop": 2
+      },
+      "ai_actions": {
+        "take": 24,
+        "pass": 36,
+        "stop": 5
+      }
+    },
+    "2F1": {
+      "actions": {
+        "excluded": 9,
+        "pass": 6,
+        "take": 2
+      },
+      "ai_actions": {
+        "take": 8,
+        "stop": 4,
+        "pass": 1
+      }
+    },
+    "3DC": {
+      "actions": {
+        "pass": 94,
+        "take": 12,
+        "stop": 34,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 116,
+        "pass": 20,
+        "stop": 1,
+        "touch": 1
+      }
+    },
+    "507": {
+      "actions": {
+        "pass": 9,
+        "take": 10,
+        "stop": 3
+      },
+      "ai_actions": {
+        "take": 20,
+        "pass": 1,
+        "stop": 1
+      }
+    },
+    "2DA": {
+      "actions": {
+        "pass": 4,
+        "take": 3,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 8
+      }
+    },
+    "3E3": {
+      "actions": {
+        "take": 8,
+        "pass": 21
+      },
+      "ai_actions": {
+        "take": 28,
+        "pass": 1
+      }
+    },
+    "47B": {
+      "actions": {
+        "take": 14,
+        "pass": 25,
+        "excluded": 3
+      },
+      "ai_actions": {
+        "take": 21,
+        "pass": 17,
+        "stop": 1
+      }
+    },
+    "43C": {
+      "actions": {
+        "pass": 60,
+        "take": 54,
+        "stop": 6
+      },
+      "ai_actions": {
+        "pass": 22,
+        "take": 88,
+        "stop": 10
+      }
+    },
+    "3C7": {
+      "actions": {
+        "pass": 22,
+        "excluded": 38,
+        "take": 10,
+        "stop": 2
+      },
+      "ai_actions": {
+        "pass": 13,
+        "take": 19,
+        "stop": 2
+      }
+    },
+    "27A": {
+      "actions": {
+        "take": 3,
+        "pass": 3,
+        "stop": 5
+      },
+      "ai_actions": {
+        "take": 9,
+        "pass": 2
+      }
+    },
+    "3A9": {
+      "actions": {
+        "pass": 15,
+        "excluded": 14,
+        "take": 6
+      },
+      "ai_actions": {
+        "pass": 8,
+        "take": 13
+      }
+    },
+    "22C": {
+      "actions": {
+        "pass": 100,
+        "take": 72,
+        "stop": 10,
+        "excluded": 2
+      },
+      "ai_actions": {
+        "pass": 56,
+        "take": 110,
+        "stop": 13
+      }
+    },
+    "25B": {
+      "actions": {
+        "take": 15,
+        "stop": 6,
+        "pass": 50
+      },
+      "ai_actions": {
+        "take": 60,
+        "pass": 11
+      }
+    },
+    "279": {
+      "actions": {
+        "pass": 7,
+        "take": 11,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 16,
+        "pass": 2,
+        "stop": 1
+      }
+    },
+    "22F": {
+      "actions": {
+        "pass": 13,
+        "take": 13
+      },
+      "ai_actions": {
+        "take": 24,
+        "pass": 2
+      }
+    },
+    "44A": {
+      "actions": {
+        "pass": 8,
+        "take": 7
+      },
+      "ai_actions": {
+        "take": 15
+      }
+    },
+    "27D": {
+      "actions": {
+        "take": 10,
+        "pass": 17,
+        "stop": 4
+      },
+      "ai_actions": {
+        "take": 24,
+        "pass": 5,
+        "stop": 2
+      }
+    },
+    "308": {
+      "actions": {
+        "excluded": 24,
+        "take": 2
+      },
+      "ai_actions": {
+        "take": 2
+      }
+    },
+    "300": {
+      "actions": {
+        "take": 21,
+        "pass": 20,
+        "excluded": 3
+      },
+      "ai_actions": {
+        "take": 38,
+        "pass": 3
+      }
+    },
+    "21D": {
+      "actions": {
+        "take": 73,
+        "pass": 115,
+        "excluded": 9,
+        "stop": 25
+      },
+      "ai_actions": {
+        "take": 148,
+        "pass": 12,
+        "stop": 52,
+        "touch": 1
+      }
+    },
+    "383": {
+      "actions": {
+        "pass": 44,
+        "take": 46,
+        "stop": 2,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 87,
+        "stop": 3,
+        "pass": 3
+      }
+    },
+    "54B": {
+      "actions": {
+        "pass": 8,
+        "take": 3,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 9,
+        "pass": 3
+      }
+    },
+    "24B": {
+      "actions": {
+        "take": 10,
+        "pass": 35
+      },
+      "ai_actions": {
+        "take": 45
+      }
+    },
+    "51B": {
+      "actions": {
+        "pass": 31,
+        "stop": 1,
+        "take": 14
+      },
+      "ai_actions": {
+        "take": 37,
+        "stop": 2,
+        "pass": 7
+      }
+    },
+    "3BA": {
+      "actions": {
+        "pass": 14,
+        "take": 21,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 28,
+        "pass": 7,
+        "stop": 1
+      }
+    },
+    "317": {
+      "actions": {
+        "excluded": 28,
+        "pass": 14,
+        "take": 1,
+        "stop": 1
+      },
+      "ai_actions": {
+        "pass": 7,
+        "take": 8,
+        "touch": 1
+      }
+    },
+    "50F": {
+      "actions": {
+        "take": 9,
+        "pass": 4
+      },
+      "ai_actions": {
+        "take": 13
+      }
+    },
+    "267": {
+      "actions": {
+        "pass": 7,
+        "take": 6,
+        "excluded": 43,
+        "stop": 3
+      },
+      "ai_actions": {
+        "take": 14,
+        "stop": 1,
+        "pass": 1
+      }
+    },
+    "4D3": {
+      "actions": {
+        "pass": 7,
+        "stop": 13
+      },
+      "ai_actions": {
+        "take": 18,
+        "stop": 1,
+        "pass": 1
+      }
+    },
+    "54D": {
+      "actions": {
+        "pass": 2
+      },
+      "ai_actions": {
+        "take": 2
+      }
+    },
+    "3C6": {
+      "actions": {
+        "pass": 8,
+        "take": 3,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 7,
+        "pass": 4
+      }
+    },
+    "3CC": {
+      "actions": {
+        "take": 11,
+        "pass": 32,
+        "stop": 5
+      },
+      "ai_actions": {
+        "take": 35,
+        "pass": 3,
+        "stop": 9,
+        "touch": 1
+      }
+    },
+    "4A4": {
+      "actions": {
+        "stop": 8,
+        "excluded": 28,
+        "take": 14,
+        "pass": 28
+      },
+      "ai_actions": {
+        "take": 38,
+        "pass": 12,
+        "touch": 1
+      }
+    },
+    "3BD": {
+      "actions": {
+        "pass": 29,
+        "take": 16
+      },
+      "ai_actions": {
+        "pass": 11,
+        "take": 34
+      }
+    },
+    "394": {
+      "actions": {
+        "pass": 49,
+        "take": 25
+      },
+      "ai_actions": {
+        "take": 59,
+        "pass": 14,
+        "touch": 1
+      }
+    },
+    "2F0": {
+      "actions": {
+        "excluded": 17,
+        "pass": 8,
+        "take": 2,
+        "stop": 1
+      },
+      "ai_actions": {
+        "stop": 12,
+        "take": 13,
+        "pass": 1,
+        "touch": 2
+      }
+    },
+    "334": {
+      "actions": {
+        "pass": 3
+      },
+      "ai_actions": {
+        "take": 2,
+        "stop": 1
+      }
+    },
+    "21F": {
+      "actions": {
+        "pass": 29,
+        "excluded": 9,
+        "take": 3
+      },
+      "ai_actions": {
+        "take": 28,
+        "pass": 4
+      }
+    },
+    "380": {
+      "actions": {
+        "pass": 15,
+        "take": 5,
+        "excluded": 3
+      },
+      "ai_actions": {
+        "take": 20
+      }
+    },
+    "381": {
+      "actions": {
+        "pass": 19,
+        "take": 8,
+        "stop": 2
+      },
+      "ai_actions": {
+        "take": 27,
+        "pass": 1,
+        "stop": 1
+      }
+    },
+    "2F7": {
+      "actions": {
+        "pass": 5,
+        "stop": 1,
+        "take": 1
+      },
+      "ai_actions": {
+        "take": 6,
+        "stop": 1
+      }
+    },
+    "28A": {
+      "actions": {
+        "pass": 18,
+        "take": 6,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 22,
+        "pass": 2
+      }
+    },
+    "3A7": {
+      "actions": {
+        "excluded": 16,
+        "take": 2
+      },
+      "ai_actions": {
+        "take": 2
+      }
+    },
+    "382": {
+      "actions": {
+        "pass": 29,
+        "take": 7
+      },
+      "ai_actions": {
+        "pass": 5,
+        "take": 31
+      }
+    },
+    "2FA": {
+      "actions": {
+        "take": 4,
+        "pass": 6
+      },
+      "ai_actions": {
+        "take": 7,
+        "pass": 2,
+        "stop": 1
+      }
+    },
+    "327": {
+      "actions": {
+        "excluded": 12
+      },
+      "ai_actions": {}
+    },
+    "1C6": {
+      "actions": {
+        "pass": 38,
+        "stop": 7,
+        "excluded": 7,
+        "take": 6
+      },
+      "ai_actions": {
+        "pass": 4,
+        "take": 45,
+        "stop": 9
+      }
+    },
+    "204": {
+      "actions": {
+        "pass": 5,
+        "stop": 1
+      },
+      "ai_actions": {
+        "pass": 1,
+        "take": 5
+      }
+    },
+    "1FE": {
+      "actions": {
+        "take": 2,
+        "pass": 2
+      },
+      "ai_actions": {
+        "take": 4
+      }
+    },
+    "2BC": {
+      "actions": {
+        "pass": 12,
+        "take": 6
+      },
+      "ai_actions": {
+        "pass": 4,
+        "take": 14
+      }
+    },
+    "45B": {
+      "actions": {
+        "take": 2,
+        "pass": 5
+      },
+      "ai_actions": {
+        "take": 6,
+        "pass": 1
+      }
+    },
+    "24C": {
+      "actions": {
+        "pass": 5,
+        "take": 1
+      },
+      "ai_actions": {
+        "take": 6
+      }
+    },
+    "27C": {
+      "actions": {
+        "pass": 7,
+        "stop": 5,
+        "take": 2
+      },
+      "ai_actions": {
+        "pass": 4,
+        "take": 10
+      }
+    },
+    "278": {
+      "actions": {
+        "pass": 1,
+        "take": 3
+      },
+      "ai_actions": {
+        "take": 4
+      }
+    },
+    "253": {
+      "actions": {
+        "take": 2
+      },
+      "ai_actions": {
+        "take": 2
+      }
+    },
+    "3A5": {
+      "actions": {
+        "take": 30,
+        "pass": 44,
+        "excluded": 14
+      },
+      "ai_actions": {
+        "take": 66,
+        "pass": 7,
+        "touch": 1
+      }
+    },
+    "1CE": {
+      "actions": {
+        "pass": 2,
+        "excluded": 2,
+        "stop": 2
+      },
+      "ai_actions": {
+        "take": 6
+      }
+    },
+    "277": {
+      "actions": {
+        "pass": 1,
+        "stop": 2,
+        "take": 1
+      },
+      "ai_actions": {
+        "take": 4
+      }
+    },
+    "3C5": {
+      "actions": {
+        "take": 4,
+        "pass": 4
+      },
+      "ai_actions": {
+        "take": 8
+      }
+    },
+    "3E6": {
+      "actions": {
+        "take": 3,
+        "pass": 18,
+        "stop": 4
+      },
+      "ai_actions": {
+        "take": 20,
+        "pass": 4
+      }
+    },
+    "201": {
+      "actions": {
+        "excluded": 1
+      },
+      "ai_actions": {}
+    },
+    "216": {
+      "actions": {
+        "pass": 13,
+        "take": 1
+      },
+      "ai_actions": {
+        "take": 12,
+        "pass": 2
+      }
+    },
+    "534": {
+      "actions": {
+        "stop": 2,
+        "pass": 1
+      },
+      "ai_actions": {
+        "touch": 1,
+        "take": 2
+      }
+    },
+    "2D8": {
+      "actions": {
+        "stop": 1
+      },
+      "ai_actions": {
+        "stop": 1
+      }
+    },
+    "518": {
+      "actions": {
+        "pass": 8,
+        "excluded": 1,
+        "take": 8,
+        "stop": 3
+      },
+      "ai_actions": {
+        "take": 14,
+        "pass": 1,
+        "touch": 4
+      }
+    },
+    "541": {
+      "actions": {
+        "excluded": 2
+      },
+      "ai_actions": {}
+    },
+    "4B6": {
+      "actions": {
+        "take": 4,
+        "stop": 5,
+        "pass": 3
+      },
+      "ai_actions": {
+        "take": 6,
+        "touch": 5,
+        "pass": 1
+      }
+    },
+    "1FF": {
+      "actions": {
+        "take": 4,
+        "pass": 6,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 9,
+        "pass": 1,
+        "stop": 1
+      }
+    },
+    "326": {
+      "actions": {
+        "pass": 4,
+        "take": 1
+      },
+      "ai_actions": {
+        "pass": 3,
+        "take": 2
+      }
+    },
+    "506": {
+      "actions": {
+        "pass": 36,
+        "take": 14,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 42,
+        "pass": 7,
+        "touch": 2
+      }
+    },
+    "38A": {
+      "actions": {
+        "pass": 9,
+        "take": 11
+      },
+      "ai_actions": {
+        "take": 19,
+        "pass": 1
+      }
+    },
+    "526": {
+      "actions": {
+        "pass": 16,
+        "take": 7
+      },
+      "ai_actions": {
+        "take": 22,
+        "pass": 1
+      }
+    },
+    "2EF": {
+      "actions": {
+        "pass": 9,
+        "excluded": 8,
+        "stop": 1,
+        "take": 1
+      },
+      "ai_actions": {
+        "take": 9,
+        "stop": 8,
+        "pass": 2
+      }
+    },
+    "24A": {
+      "actions": {
+        "take": 2,
+        "pass": 3
+      },
+      "ai_actions": {
+        "take": 5
+      }
+    },
+    "37F": {
+      "actions": {
+        "pass": 10,
+        "take": 1
+      },
+      "ai_actions": {
+        "take": 11
+      }
+    },
+    "50B": {
+      "actions": {
+        "pass": 2,
+        "take": 2
+      },
+      "ai_actions": {
+        "take": 4
+      }
+    },
+    "3C4": {
+      "actions": {
+        "take": 7,
+        "pass": 7
+      },
+      "ai_actions": {
+        "take": 12,
+        "pass": 2
+      }
+    },
+    "36E": {
+      "actions": {
+        "take": 41,
+        "pass": 52,
+        "stop": 26,
+        "excluded": 3
+      },
+      "ai_actions": {
+        "take": 64,
+        "stop": 53,
+        "pass": 2
+      }
+    },
+    "228": {
+      "actions": {
+        "pass": 7,
+        "take": 1
+      },
+      "ai_actions": {
+        "pass": 2,
+        "take": 6
+      }
+    },
+    "2ED": {
+      "actions": {
+        "excluded": 7,
+        "pass": 9,
+        "take": 4,
+        "stop": 1
+      },
+      "ai_actions": {
+        "stop": 6,
+        "take": 14,
+        "pass": 1
+      }
+    },
+    "345": {
+      "actions": {
+        "pass": 1
+      },
+      "ai_actions": {
+        "take": 1
+      }
+    },
+    "2D2": {
+      "actions": {
+        "pass": 1
+      },
+      "ai_actions": {
+        "take": 1
+      }
+    },
+    "254": {
+      "actions": {
+        "pass": 4,
+        "take": 2
+      },
+      "ai_actions": {
+        "pass": 1,
+        "take": 5
+      }
+    },
+    "306": {
+      "actions": {
+        "pass": 2,
+        "take": 1,
+        "excluded": 1
+      },
+      "ai_actions": {
+        "take": 3
+      }
+    },
+    "23A": {
+      "actions": {
+        "take": 2
+      },
+      "ai_actions": {
+        "take": 2
+      }
+    },
+    "2AE": {
+      "actions": {
+        "pass": 1,
+        "take": 2
+      },
+      "ai_actions": {
+        "take": 3
+      }
+    },
+    "219": {
+      "actions": {
+        "excluded": 6,
+        "pass": 1
+      },
+      "ai_actions": {
+        "pass": 1
+      }
+    },
+    "53B": {
+      "actions": {
+        "take": 1,
+        "pass": 3
+      },
+      "ai_actions": {
+        "take": 4
+      }
+    },
+    "3E2": {
+      "actions": {
+        "pass": 3,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 4
+      }
+    },
+    "310": {
+      "actions": {
+        "pass": 1,
+        "excluded": 2
+      },
+      "ai_actions": {
+        "take": 1,
+        "stop": 1
+      }
+    },
+    "206": {
+      "actions": {
+        "take": 3,
+        "stop": 1
+      },
+      "ai_actions": {
+        "take": 3,
+        "stop": 1
+      }
+    },
+    "299": {
+      "actions": {
+        "pass": 1
+      },
+      "ai_actions": {
+        "pass": 1
+      }
+    },
+    "1EE": {
+      "actions": {
+        "pass": 3,
+        "take": 1
+      },
+      "ai_actions": {
+        "take": 4
+      }
+    },
+    "355": {
+      "actions": {
+        "excluded": 4
+      },
+      "ai_actions": {}
+    },
+    "3E1": {
+      "actions": {
+        "take": 1,
+        "pass": 3
+      },
+      "ai_actions": {
+        "take": 4
+      }
+    },
+    "536": {
+      "actions": {
+        "excluded": 2,
+        "stop": 2,
+        "pass": 1
+      },
+      "ai_actions": {
+        "take": 3
+      }
+    },
+    "53C": {
+      "actions": {
+        "take": 2
+      },
+      "ai_actions": {
+        "take": 2
+      }
+    },
+    "1EF": {
+      "actions": {
+        "pass": 4
+      },
+      "ai_actions": {
+        "take": 4
+      }
+    },
+    "30F": {
+      "actions": {
+        "excluded": 1
+      },
+      "ai_actions": {}
+    },
+    "346": {
+      "actions": {
+        "pass": 2,
+        "excluded": 2
+      },
+      "ai_actions": {
+        "take": 2
+      }
+    },
+    "51E": {
+      "actions": {
+        "pass": 2
+      },
+      "ai_actions": {
+        "take": 2
+      }
+    },
+    "2A2": {
+      "actions": {
+        "excluded": 1
+      },
+      "ai_actions": {}
+    },
+    "309": {
+      "actions": {
+        "excluded": 1
+      },
+      "ai_actions": {}
+    },
+    "4FE": {
+      "actions": {
+        "pass": 1
+      },
+      "ai_actions": {
+        "take": 1
+      }
+    },
+    "537": {
+      "actions": {
+        "excluded": 2
+      },
+      "ai_actions": {}
+    },
+    "290": {
+      "actions": {
+        "excluded": 3
+      },
+      "ai_actions": {}
+    },
+    "1A8": {
+      "actions": {
+        "pass": 1
+      },
+      "ai_actions": {
+        "take": 1
+      }
+    },
+    "4B4": {
+      "actions": {
+        "pass": 1,
+        "take": 1
+      },
+      "ai_actions": {
+        "take": 2
+      }
+    },
+    "2BA": {
+      "actions": {
+        "pass": 1
+      },
+      "ai_actions": {
+        "take": 1
+      }
+    },
+    "24E": {
+      "actions": {
+        "pass": 3
+      },
+      "ai_actions": {
+        "take": 3
+      }
+    },
+    "283": {
+      "actions": {
+        "excluded": 1
+      },
+      "ai_actions": {}
+    },
+    "3E0": {
+      "actions": {
+        "take": 1
+      },
+      "ai_actions": {
+        "take": 1
+      }
+    },
+    "39D": {
+      "actions": {
+        "pass": 3
+      },
+      "ai_actions": {
+        "take": 3
+      }
+    },
+    "511": {
+      "actions": {
+        "take": 3
+      },
+      "ai_actions": {
+        "take": 3
+      }
+    },
+    "22E": {
+      "actions": {
+        "take": 1
+      },
+      "ai_actions": {
+        "take": 1
+      }
+    },
+    "276": {
+      "actions": {
+        "pass": 1
+      },
+      "ai_actions": {
+        "take": 1
+      }
+    }
+  },
   "area_summary": {
     "Supermarket": {
       "total_events": 519844,
@@ -1212,6 +12305,6 @@
       "area": "Fresh Area"
     }
   },
-  "processed_at": "2026-10-21T09:51:54Z",
-  "duration_seconds": 12.91
+  "processed_at": "2026-10-21T10:43:33Z",
+  "duration_seconds": 13.96
 }

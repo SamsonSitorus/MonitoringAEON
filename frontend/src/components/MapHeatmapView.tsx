@@ -53,6 +53,7 @@ export const MapHeatmapView: React.FC<MapHeatmapViewProps> = () => {
   const [mousePos, setMousePos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [filterArea, setFilterArea] = useState<string>('ALL');
   const [activeTab, setActiveTab] = useState<'map' | 'rankings' | 'areas' | 'audit'>('map');
+  const [shelfActionTab, setShelfActionTab] = useState<'actions' | 'ai'>('actions');
 
   const svgContainerRef = useRef<HTMLDivElement>(null);
 
@@ -939,13 +940,22 @@ export const MapHeatmapView: React.FC<MapHeatmapViewProps> = () => {
 
           {/* 6A. Selected Shelf Detail Panel */}
           {selectedShelf && (
-            <div className="card" style={{ padding: '1.25rem', position: 'sticky', top: '5rem', background: 'var(--bg-card)', border: '1px solid var(--accent-cyan)' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.85rem' }}>
+            <div className="card" style={{ 
+              padding: '1.25rem', 
+              position: 'sticky', 
+              top: '4.5rem', 
+              background: 'var(--bg-card)', 
+              border: '1px solid var(--accent-cyan)',
+              maxHeight: 'calc(100vh - 5.5rem)',
+              overflowY: 'auto',
+              boxShadow: '0 8px 32px rgba(0,0,0,0.36)'
+            }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.75rem' }}>
                 <div>
                   <span className="user-badge" style={{ background: 'rgba(56, 189, 248, 0.15)', color: 'var(--accent-cyan)', fontSize: '0.7rem' }}>
                     DETAIL SHELF TERPILIH
                   </span>
-                  <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--text-main)', marginTop: '0.35rem' }}>
+                  <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--text-main)', marginTop: '0.25rem' }}>
                     {selectedShelf.name}
                   </h3>
                 </div>
@@ -958,25 +968,27 @@ export const MapHeatmapView: React.FC<MapHeatmapViewProps> = () => {
                 </button>
               </div>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', fontSize: '0.85rem' }}>
-                <div style={{ padding: '0.6rem 0.8rem', background: 'var(--bg-input)', borderRadius: 'var(--radius-sm)' }}>
-                  <div style={{ color: 'var(--text-dim)', fontSize: '0.75rem' }}>Area Induk:</div>
-                  <div style={{ color: 'var(--text-main)', fontWeight: 600, marginTop: '2px' }}>
-                    {selectedShelf.area}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem', fontSize: '0.85rem' }}>
+                {/* Compact Area & Isle info */}
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
+                  <div style={{ padding: '0.5rem 0.65rem', background: 'var(--bg-input)', borderRadius: 'var(--radius-sm)' }}>
+                    <div style={{ color: 'var(--text-dim)', fontSize: '0.7rem' }}>Area Induk:</div>
+                    <div style={{ color: 'var(--text-main)', fontWeight: 600, marginTop: '2px', fontSize: '0.8rem' }}>
+                      {selectedShelf.area}
+                    </div>
+                  </div>
+                  <div style={{ padding: '0.5rem 0.65rem', background: 'var(--bg-input)', borderRadius: 'var(--radius-sm)' }}>
+                    <div style={{ color: 'var(--text-dim)', fontSize: '0.7rem' }}>ID (Handle CAD):</div>
+                    <div style={{ color: 'var(--accent-cyan)', fontFamily: 'var(--font-mono)', fontWeight: 600, marginTop: '2px', fontSize: '0.8rem' }}>
+                      {selectedShelf.id}
+                    </div>
                   </div>
                 </div>
 
-                <div style={{ padding: '0.6rem 0.8rem', background: 'var(--bg-input)', borderRadius: 'var(--radius-sm)' }}>
-                  <div style={{ color: 'var(--text-dim)', fontSize: '0.75rem' }}>Isle Induk:</div>
-                  <div style={{ color: 'var(--text-main)', fontWeight: 600, marginTop: '2px' }}>
+                <div style={{ padding: '0.5rem 0.65rem', background: 'var(--bg-input)', borderRadius: 'var(--radius-sm)' }}>
+                  <div style={{ color: 'var(--text-dim)', fontSize: '0.7rem' }}>Isle Induk:</div>
+                  <div style={{ color: 'var(--text-main)', fontWeight: 600, marginTop: '2px', fontSize: '0.8rem' }}>
                     {selectedShelf.isle}
-                  </div>
-                </div>
-
-                <div style={{ padding: '0.6rem 0.8rem', background: 'var(--bg-input)', borderRadius: 'var(--radius-sm)' }}>
-                  <div style={{ color: 'var(--text-dim)', fontSize: '0.75rem' }}>ID Shelf (Handle CAD):</div>
-                  <div style={{ color: 'var(--accent-cyan)', fontFamily: 'var(--font-mono)', fontWeight: 600, marginTop: '2px' }}>
-                    {selectedShelf.id}
                   </div>
                 </div>
 
@@ -989,6 +1001,164 @@ export const MapHeatmapView: React.FC<MapHeatmapViewProps> = () => {
                     Kontribusi: <strong style={{ color: '#fff' }}>{selectedShelf.percentage.toFixed(3)}%</strong> dari total event harian
                   </div>
                 </div>
+
+                {/* Komposisi Klasifikasi Event (Action Breakdown) */}
+                {selectedShelf.event_count > 0 && dailyData?.shelf_actions?.[selectedShelf.id] && (() => {
+                  const shelfAction = dailyData.shelf_actions[selectedShelf.id];
+                  const totalShelfEvents = selectedShelf.event_count;
+
+                  const actionLabels: Record<string, { label: string; desc: string; color: string; icon: string }> = {
+                    take: { label: 'Ambil Produk (Take)', desc: 'Pengunjung mengambil barang dari rak', color: '#10b981', icon: '🛒' },
+                    stop: { label: 'Berhenti / Dwell (Stop)', desc: 'Pengunjung berhenti mengamati & memilih produk', color: '#f59e0b', icon: '⏱️' },
+                    pass: { label: 'Melintas (Pass)', desc: 'Pengunjung berjalan melewati lorong rak', color: '#6366f1', icon: '🚶' },
+                    excluded: { label: 'Tepi Sensor (Excluded)', desc: 'Lintasan di batas jangkauan deteksi rak', color: '#64748b', icon: '📐' },
+                  };
+
+                  const aiActionLabels: Record<string, { label: string; desc: string; color: string; icon: string }> = {
+                    take: { label: 'Ambil Barang (Take)', desc: 'Deteksi gesture tangan mengambil item', color: '#10b981', icon: '📦' },
+                    touch: { label: 'Sentuh / Pegang (Touch)', desc: 'Deteksi tangan menyentuh atau memeriksa produk', color: '#06b6d4', icon: '✋' },
+                    stop: { label: 'Fokus / Berhenti (Stop)', desc: 'Deteksi tatapan fokus ke produk di rak', color: '#f59e0b', icon: '👀' },
+                    pass: { label: 'Berjalan Lewat (Pass)', desc: 'Deteksi tubuh melintas di koridor rak', color: '#8b5cf6', icon: '🚶' },
+                    not_engage: { label: 'Tanpa Interaksi', desc: 'Gerakan tanpa interaksi rak', color: '#94a3b8', icon: '⚪' },
+                  };
+
+                  const rawActions = shelfAction.actions || {};
+                  const sortedActions = Object.entries(rawActions).sort((a, b) => b[1] - a[1]);
+
+                  const rawAiActions = shelfAction.ai_actions || {};
+                  const sortedAiActions = Object.entries(rawAiActions).sort((a, b) => b[1] - a[1]);
+                  const totalAiEvents = Object.values(rawAiActions).reduce((a, b) => a + b, 0);
+
+                  return (
+                    <div style={{
+                      background: 'rgba(255, 255, 255, 0.02)',
+                      border: '1px solid var(--border-subtle)',
+                      borderRadius: 'var(--radius-sm)',
+                      padding: '0.75rem',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '0.65rem'
+                    }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-main)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                          Komposisi Event Rak
+                        </div>
+                        <div style={{ display: 'flex', background: 'var(--bg-input)', borderRadius: '4px', padding: '2px', gap: '2px' }}>
+                          <button
+                            onClick={() => setShelfActionTab('actions')}
+                            style={{
+                              background: shelfActionTab === 'actions' ? 'var(--primary)' : 'transparent',
+                              color: shelfActionTab === 'actions' ? '#fff' : 'var(--text-muted)',
+                              border: 'none',
+                              borderRadius: '3px',
+                              padding: '2px 6px',
+                              fontSize: '0.68rem',
+                              fontWeight: 600,
+                              cursor: 'pointer'
+                            }}
+                          >
+                            Status Aksi
+                          </button>
+                          <button
+                            onClick={() => setShelfActionTab('ai')}
+                            style={{
+                              background: shelfActionTab === 'ai' ? 'var(--primary)' : 'transparent',
+                              color: shelfActionTab === 'ai' ? '#fff' : 'var(--text-muted)',
+                              border: 'none',
+                              borderRadius: '3px',
+                              padding: '2px 6px',
+                              fontSize: '0.68rem',
+                              fontWeight: 600,
+                              cursor: 'pointer'
+                            }}
+                          >
+                            Deteksi AI ({fmtNumber(totalAiEvents)})
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Tab 1: System Action Codes */}
+                      {shelfActionTab === 'actions' && (
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.55rem' }}>
+                          {sortedActions.map(([code, count]) => {
+                            const meta = actionLabels[code.toLowerCase()] || {
+                              label: code.toUpperCase(),
+                              desc: 'Klasifikasi sistem',
+                              color: '#94a3b8',
+                              icon: '🔹'
+                            };
+                            const pct = totalShelfEvents > 0 ? (count / totalShelfEvents) * 100 : 0;
+
+                            return (
+                              <div key={code} style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.75rem' }}>
+                                  <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                    <span style={{ fontSize: '0.85rem' }}>{meta.icon}</span>
+                                    <span style={{ fontWeight: 600, color: 'var(--text-main)' }}>{meta.label}</span>
+                                  </div>
+                                  <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px' }}>
+                                    <strong style={{ color: meta.color }}>{fmtNumber(count)}</strong>
+                                    <span style={{ fontSize: '0.7rem', color: 'var(--text-dim)' }}>({pct.toFixed(2)}%)</span>
+                                  </div>
+                                </div>
+                                {/* Progress bar */}
+                                <div style={{ height: '5px', background: 'rgba(255,255,255,0.06)', borderRadius: '3px', overflow: 'hidden' }}>
+                                  <div style={{ height: '100%', width: `${pct}%`, background: meta.color, borderRadius: '3px', transition: 'width 0.3s ease' }} />
+                                </div>
+                                <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>
+                                  {meta.desc}
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
+
+                      {/* Tab 2: AI Gesture Actions */}
+                      {shelfActionTab === 'ai' && (
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.55rem' }}>
+                          {totalAiEvents === 0 ? (
+                            <div style={{ fontSize: '0.75rem', color: 'var(--text-dim)', textAlign: 'center', padding: '0.5rem' }}>
+                              Tidak ada gesture AI khusus yang terklasifikasi pada rak ini
+                            </div>
+                          ) : (
+                            sortedAiActions.map(([code, count]) => {
+                              const meta = aiActionLabels[code.toLowerCase()] || {
+                                label: code.toUpperCase(),
+                                desc: 'Deteksi gesture AI',
+                                color: '#94a3b8',
+                                icon: '🔹'
+                              };
+                              const pctOfTotal = totalShelfEvents > 0 ? (count / totalShelfEvents) * 100 : 0;
+                              const pctOfAi = totalAiEvents > 0 ? (count / totalAiEvents) * 100 : 0;
+
+                              return (
+                                <div key={code} style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
+                                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.75rem' }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                      <span style={{ fontSize: '0.85rem' }}>{meta.icon}</span>
+                                      <span style={{ fontWeight: 600, color: 'var(--text-main)' }}>{meta.label}</span>
+                                    </div>
+                                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px' }}>
+                                      <strong style={{ color: meta.color }}>{fmtNumber(count)}</strong>
+                                      <span style={{ fontSize: '0.7rem', color: 'var(--text-dim)' }}>({pctOfTotal.toFixed(2)}%)</span>
+                                    </div>
+                                  </div>
+                                  <div style={{ height: '5px', background: 'rgba(255,255,255,0.06)', borderRadius: '3px', overflow: 'hidden' }}>
+                                    <div style={{ height: '100%', width: `${pctOfAi}%`, background: meta.color, borderRadius: '3px', transition: 'width 0.3s ease' }} />
+                                  </div>
+                                  <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>
+                                    {meta.desc} &bull; <span style={{ color: 'var(--text-main)' }}>{pctOfAi.toFixed(1)}%</span> dari gesture AI
+                                  </div>
+                                </div>
+                              );
+                            })
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })()}
 
                 <div style={{ padding: '0.6rem 0.8rem', background: 'var(--bg-input)', borderRadius: 'var(--radius-sm)', fontSize: '0.78rem', color: 'var(--text-dim)' }}>
                   <div>Tanggal Analisis: <strong style={{ color: 'var(--text-main)' }}>{selectedDate}</strong></div>

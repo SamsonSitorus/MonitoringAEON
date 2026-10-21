@@ -245,6 +245,11 @@ export interface IsleStat {
   area: string;
 }
 
+export interface ShelfActionBreakdown {
+  actions: Record<string, number>;
+  ai_actions?: Record<string, number>;
+}
+
 export interface DailyHeatmap {
   date: string;
   total_events: number;
@@ -258,6 +263,7 @@ export interface DailyHeatmap {
   top_shelf: TopShelfInfo | null;
   action_breakdown?: Record<string, number>;
   shelf_counts: Record<string, number>;
+  shelf_actions?: Record<string, ShelfActionBreakdown>;
   area_summary: Record<string, AreaStat>;
   isle_summary: Record<string, IsleStat>;
   processed_at?: string;
