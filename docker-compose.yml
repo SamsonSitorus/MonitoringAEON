@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: camtrack_backend
+    restart: always
+    environment:
+      - PORT=8080
+      - APP_ENV=production
+      - DATABASE_URL=postgresql://neondb_owner:npg_Zj87klREtscS@ep-still-shadow-b4s8inpb-pooler.c-6.us-east-2.aws.neon.tech/neondb?sslmode=require
+      - JWT_SECRET=camtrack-super-secure-jwt-key-2026
+    ports:
+      - "8080:8080"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: camtrack_frontend
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
