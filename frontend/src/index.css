@@ -36,6 +36,21 @@
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.35);
   --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.5);
   --shadow-glow: 0 0 20px rgba(56, 189, 248, 0.2);
+  
+  color-scheme: dark;
+}
+
+/* Global Form Select & Option Styling for Dark Mode */
+select, .form-select {
+  color-scheme: dark !important;
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
+}
+
+select option, .form-select option {
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
+  padding: 6px 10px;
 }
 
 * {
