@@ -554,12 +554,12 @@ body {
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(4, 7, 14, 0.8);
+  background: rgba(4, 7, 14, 0.85);
   backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 99;
+  z-index: 1100;
   padding: 1.5rem;
 }
 
