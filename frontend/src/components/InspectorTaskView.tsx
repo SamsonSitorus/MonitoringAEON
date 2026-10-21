@@ -462,17 +462,13 @@ export const InspectorTaskView: React.FC<InspectorTaskViewProps> = ({ currentUse
                           display: 'flex',
                           alignItems: 'center',
                           gap: '6px',
-                          fontSize: '0.78rem',
+                          fontSize: '0.82rem',
                           color: '#38bdf8',
                           fontWeight: 700,
-                          fontFamily: 'var(--font-mono)',
                         }}
                       >
-                        <div className="camera-rec-dot" />
-                        CCTV TARGET REPLAY FEED
-                      </div>
-                      <div style={{ fontSize: '0.75rem', color: 'var(--text-dim)', fontFamily: 'var(--font-mono)' }}>
-                        {liveTimestamp}
+                        <Camera size={15} color="#38bdf8" />
+                        Detail Target Pemutaran CCTV
                       </div>
                     </div>
 

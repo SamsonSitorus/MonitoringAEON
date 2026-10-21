@@ -410,7 +410,7 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
 
         <div className="card" style={{ padding: '1rem', borderLeft: '4px solid #64748b' }}>
           <div style={{ fontSize: '0.78rem', color: 'var(--text-dim)', marginBottom: '4px', display: 'flex', alignItems: 'center', gap: '5px' }}>
-            <EyeOff size={13} color="#94a3b8" /> Slot Blindspot (Tanpa Jadwal)
+            <EyeOff size={13} color="#94a3b8" /> Belum Dilakukan Pengecekan
           </div>
           <div style={{ fontSize: '1.6rem', fontWeight: 700, color: '#cbd5e1' }}>{totalBlindspotSlots}</div>
           <div style={{ fontSize: '0.75rem', color: 'var(--text-dim)', marginTop: '4px' }}>Titik belum terjadwal</div>
@@ -506,7 +506,7 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
               <AlertTriangle size={12} color="#f43f5e" /> Belum Mulai (0%)
             </span>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', color: '#94a3b8' }}>
-              <EyeOff size={12} color="#94a3b8" /> Blindspot (Tanpa Jadwal)
+              <EyeOff size={12} color="#94a3b8" /> Belum Dilakukan Pengecekan
             </span>
           </div>
         </div>
@@ -568,7 +568,7 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
                 <option value="DONE">✓ Ada Slot Selesai (100%)</option>
                 <option value="IN_PROGRESS">⏳ Sedang Dalam Pengerjaan</option>
                 <option value="NOT_STARTED">⚠️ Ada Tugas Belum Mulai</option>
-                <option value="BLINDSPOT">👁️ Area Blindspot (Ada Hari Kosong)</option>
+                <option value="BLINDSPOT">👁️ Belum Dilakukan Pengecekan (Ada Hari Kosong)</option>
                 <option value="REVISION">🔄 Ada Permintaan Revisi</option>
               </select>
             </div>
@@ -731,9 +731,9 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
                             alignItems: 'center',
                             gap: '3px',
                           }}
-                          title="Kamera offline (Blindspot)"
+                          title="Kamera offline / belum dilakukan pengecekan"
                         >
-                          <EyeOff size={9} /> Blindspot
+                          <EyeOff size={9} /> Belum Dicek
                         </span>
                       )}
                     </div>
@@ -807,7 +807,7 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
                             }}
                           >
                             <EyeOff size={11} color="var(--text-dim)" />
-                            <span>Blindspot</span>
+                            <span>Belum Dicek</span>
                           </div>
                         ) : hasRevision ? (
                           <div
@@ -1048,7 +1048,7 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
                   <div style={{ width: '52px', height: '52px', borderRadius: '50%', background: 'rgba(244, 63, 94, 0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 0.85rem', border: '1px solid rgba(244, 63, 94, 0.3)' }}>
                     <EyeOff size={26} color="#fb7185" />
                   </div>
-                  <div style={{ fontWeight: 700, color: '#ffffff', fontSize: '0.98rem' }}>Titik Blindspot (Belum Ada Jadwal)</div>
+                  <div style={{ fontWeight: 700, color: '#ffffff', fontSize: '0.98rem' }}>Belum Dilakukan Pengecekan (Belum Ada Jadwal)</div>
                   <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginTop: '6px', maxWidth: '360px', margin: '6px auto 0', lineHeight: 1.5 }}>
                     Kamera ini belum memiliki penugasan observasi untuk tanggal <strong>{selectedCell.day.fullDateLabel}</strong>. Segera jadwalkan slot tugas agar tidak terjadi kekosongan pengawasan.
                   </p>

@@ -326,10 +326,10 @@ export const CameraManagementView: React.FC = () => {
                   alignItems: 'center',
                   gap: '4px',
                 }}
-                title="Kamera offline / blindspot tidak tertangkap gambar"
+                title="Kamera offline / belum dilakukan pengecekan"
               >
                 <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#f43f5e' }} />
-                Blindspot / Offline ({offlineCount})
+                Belum Dilakukan Pengecekan ({offlineCount})
               </button>
               <button
                 type="button"
@@ -542,7 +542,7 @@ export const CameraManagementView: React.FC = () => {
                           </span>
                           {cam.status === 'offline' && (
                             <span style={{ fontSize: '0.7rem', color: '#fb7185', background: 'rgba(244, 63, 94, 0.14)', padding: '1px 6px', borderRadius: '4px', fontWeight: 600 }}>
-                              Blindspot Aktif
+                              Belum Dilakukan Pengecekan
                             </span>
                           )}
                         </div>
@@ -616,10 +616,10 @@ export const CameraManagementView: React.FC = () => {
                             gap: '5px',
                             boxShadow: '0 0 10px rgba(244, 63, 94, 0.2)',
                           }}
-                          title="Titik buta (Offline)"
+                          title="Belum dilakukan pengecekan (Offline)"
                         >
                           <EyeOff size={11} color="#fb7185" />
-                          BLINDSPOT
+                          BELUM DILAKUKAN PENGECEKAN
                         </span>
                       ) : (
                         <span
@@ -757,10 +757,10 @@ export const CameraManagementView: React.FC = () => {
                         gap: '5px',
                         boxShadow: '0 0 10px rgba(244, 63, 94, 0.2)',
                       }}
-                      title="Kamera offline membentuk titik buta (Blindspot)"
+                      title="Kamera offline / belum dilakukan pengecekan"
                     >
                       <EyeOff size={11} color="#fb7185" />
-                      BLINDSPOT (OFFLINE)
+                      BELUM DILAKUKAN PENGECEKAN
                     </span>
                   ) : (
                     <span
@@ -809,7 +809,7 @@ export const CameraManagementView: React.FC = () => {
                     }}
                   >
                     <EyeOff size={13} color="#f43f5e" />
-                    <span>Titik buta aktif: Kamera terputus dari jaringan CCTV.</span>
+                    <span>Kamera terputus atau belum dilakukan pengecekan.</span>
                   </div>
                 )}
 
