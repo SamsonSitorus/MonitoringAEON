@@ -248,13 +248,23 @@ func (h *TaskHandler) BatchCreateTasks(c echo.Context) error {
 	}
 	defer tx.Rollback(context.Background())
 
+	defaultDraft := `{"samples": [
+		{"sample_number": 1, "is_completed": false, "traffic": 0, "actions": [], "dominant_age": "", "male_count": 0, "female_count": 0, "notes": ""},
+		{"sample_number": 2, "is_completed": false, "traffic": 0, "actions": [], "dominant_age": "", "male_count": 0, "female_count": 0, "notes": ""},
+		{"sample_number": 3, "is_completed": false, "traffic": 0, "actions": [], "dominant_age": "", "male_count": 0, "female_count": 0, "notes": ""}
+	]}`
+
 	createdTasks := make([]string, 0)
 	for _, camID := range req.CameraIDs {
 		for _, slot := range slots {
 			taskID := "tsk-" + uuid.New().String()[:8]
-			draftData := "{}"
+			draftData := defaultDraft
 			if slot != "" {
-				draftData = fmt.Sprintf(`{"observation_time_slot": "%s"}`, slot)
+				draftData = fmt.Sprintf(`{"observation_time_slot": "%s", "samples": [
+					{"sample_number": 1, "is_completed": false, "traffic": 0, "actions": [], "dominant_age": "", "male_count": 0, "female_count": 0, "notes": ""},
+					{"sample_number": 2, "is_completed": false, "traffic": 0, "actions": [], "dominant_age": "", "male_count": 0, "female_count": 0, "notes": ""},
+					{"sample_number": 3, "is_completed": false, "traffic": 0, "actions": [], "dominant_age": "", "male_count": 0, "female_count": 0, "notes": ""}
+				]}`, slot)
 			}
 			_, err := tx.Exec(context.Background(),
 				`INSERT INTO inspection_tasks (id, camera_id, assigned_user_id, template_version_id, status, target_date, target_time_slot, draft_data, due_date)
@@ -367,6 +377,44 @@ func (h *TaskHandler) SubmitTask(c echo.Context) error {
 	if err := json.Unmarshal(schemaBytes, &schema); err == nil {
 		var answers map[string]any
 		if err := json.Unmarshal(req.Payload, &answers); err == nil {
+			// Auto aggregate sample values if samples array is provided
+			if samplesRaw, ok := answers["samples"].([]any); ok && len(samplesRaw) > 0 {
+				var totTraffic, totMale, totFemale int
+				actionsMap := make(map[string]bool)
+				for _, sRaw := range samplesRaw {
+					if sMap, ok := sRaw.(map[string]any); ok {
+						if tr, ok := sMap["traffic"].(float64); ok {
+							totTraffic += int(tr)
+						}
+						if m, ok := sMap["male_count"].(float64); ok {
+							totMale += int(m)
+						}
+						if f, ok := sMap["female_count"].(float64); ok {
+							totFemale += int(f)
+						}
+						if acts, ok := sMap["actions"].([]any); ok {
+							for _, a := range acts {
+								if aStr, ok := a.(string); ok && aStr != "" {
+									actionsMap[aStr] = true
+								}
+							}
+						}
+					}
+				}
+				answers["total_people"] = totTraffic
+				answers["total_traffic"] = totTraffic
+				answers["male_count"] = totMale
+				answers["female_count"] = totFemale
+				actionsList := make([]string, 0, len(actionsMap))
+				for act := range actionsMap {
+					actionsList = append(actionsList, act)
+				}
+				answers["all_actions"] = actionsList
+				if updatedPayload, err := json.Marshal(answers); err == nil {
+					req.Payload = updatedPayload
+				}
+			}
+
 			// Lock designated slot from task if task has a target_time_slot
 			if task.TargetTimeSlot != "" {
 				answers["observation_time_slot"] = task.TargetTimeSlot
@@ -375,17 +423,23 @@ func (h *TaskHandler) SubmitTask(c echo.Context) error {
 				}
 			}
 
-			for _, field := range schema.Fields {
-				val, exists := answers[field.Key]
-				if field.Required && (!exists || val == nil || val == "") {
-					// Check conditional visibility rule before flagging as missing
-					if field.ShowIf != nil {
-						condVal := answers[field.ShowIf.FieldKey]
-						if condVal != field.ShowIf.Value {
-							continue // skipped because condition not met
-						}
+			// Validate fields only if not using sample-based evaluation
+			if _, hasSamples := answers["samples"]; !hasSamples {
+				for _, field := range schema.Fields {
+					if field.Key == "observation_time_slot" {
+						continue // Hour selection is optional/removed
 					}
-					return echo.NewHTTPError(http.StatusBadRequest, fmt.Sprintf("Field '%s' (%s) wajib diisi", field.Label, field.Key))
+					val, exists := answers[field.Key]
+					if field.Required && (!exists || val == nil || val == "") {
+						// Check conditional visibility rule before flagging as missing
+						if field.ShowIf != nil {
+							condVal := answers[field.ShowIf.FieldKey]
+							if condVal != field.ShowIf.Value {
+								continue // skipped because condition not met
+							}
+						}
+						return echo.NewHTTPError(http.StatusBadRequest, fmt.Sprintf("Field '%s' (%s) wajib diisi", field.Label, field.Key))
+					}
 				}
 			}
 		}

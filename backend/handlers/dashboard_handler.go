@@ -47,6 +47,8 @@ func (h *DashboardHandler) GetStats(c echo.Context) error {
 
 	// 2. Per-user progress (scoped to target_date if provided)
 	// Order by:
+	// 2. Per-user progress (scoped to target_date if provided)
+	// Order by:
 	// 1. Users with active assignments first
 	// 2. Users with lowest progress first (attention first)
 	// 3. User name alphabetically
@@ -57,9 +59,12 @@ func (h *DashboardHandler) GetStats(c echo.Context) error {
 			COUNT(t.id) FILTER (WHERE t.status = 'DONE') as done_count,
 			COUNT(t.id) FILTER (WHERE t.status = 'IN_PROGRESS') as in_progress_count,
 			COUNT(t.id) FILTER (WHERE t.status = 'NOT_STARTED') as not_started_count,
-			COUNT(t.id) FILTER (WHERE t.status = 'REVISION_NEEDED') as revision_count
+			COUNT(t.id) FILTER (WHERE t.status = 'REVISION_NEEDED') as revision_count,
+			COALESCE(ARRAY_AGG(DISTINCT c.name) FILTER (WHERE t.id IS NOT NULL), '{}') as assigned_cameras,
+			COALESCE(ARRAY_AGG(DISTINCT c.name) FILTER (WHERE t.status = 'DONE'), '{}') as done_cameras
 		FROM users u
 		LEFT JOIN inspection_tasks t ON u.id = t.assigned_user_id AND ($1 = '' OR t.target_date::text = $1)
+		LEFT JOIN cameras c ON t.camera_id = c.id
 		WHERE u.role = 'inspector'
 		GROUP BY u.id, u.name, u.email, u.role
 		ORDER BY 
@@ -79,6 +84,7 @@ func (h *DashboardHandler) GetStats(c echo.Context) error {
 		if err := rows.Scan(
 			&u.UserID, &u.UserName, &u.UserEmail, &u.Role,
 			&u.TotalAssigned, &u.DoneCount, &u.InProgressCount, &u.NotStartedCount, &u.RevisionCount,
+			&u.AssignedCameras, &u.DoneCameras,
 		); err != nil {
 			return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
 		}
@@ -124,6 +130,8 @@ func (h *DashboardHandler) GetResultsSummary(c echo.Context) error {
 
 	summary := models.ResultsSummary{
 		CategoryBreakdown: make(map[string]int),
+		ActionsBreakdown:  make(map[string]int),
+		AgeBreakdown:      make(map[string]int),
 	}
 
 	for rows.Next() {
@@ -138,14 +146,44 @@ func (h *DashboardHandler) GetResultsSummary(c echo.Context) error {
 			continue
 		}
 
-		if m, ok := data["male_count"].(float64); ok {
-			summary.TotalMalesCounted += int(m)
-		}
-		if f, ok := data["female_count"].(float64); ok {
-			summary.TotalFemalesCounted += int(f)
-		}
-		if tot, ok := data["total_people"].(float64); ok {
-			summary.TotalPeopleCounted += int(tot)
+		// Handle samples structure if available
+		if samplesRaw, ok := data["samples"].([]any); ok && len(samplesRaw) > 0 {
+			for _, sRaw := range samplesRaw {
+				if sMap, ok := sRaw.(map[string]any); ok {
+					if tr, ok := sMap["traffic"].(float64); ok {
+						summary.TotalPeopleCounted += int(tr)
+					}
+					if m, ok := sMap["male_count"].(float64); ok {
+						summary.TotalMalesCounted += int(m)
+					}
+					if f, ok := sMap["female_count"].(float64); ok {
+						summary.TotalFemalesCounted += int(f)
+					}
+					if acts, ok := sMap["actions"].([]any); ok {
+						for _, a := range acts {
+							if actStr, ok := a.(string); ok && actStr != "" {
+								summary.ActionsBreakdown[actStr]++
+							}
+						}
+					}
+					if age, ok := sMap["dominant_age"].(string); ok && age != "" {
+						summary.AgeBreakdown[age]++
+					}
+				}
+			}
+		} else {
+			// Legacy/flat structure
+			if m, ok := data["male_count"].(float64); ok {
+				summary.TotalMalesCounted += int(m)
+			}
+			if f, ok := data["female_count"].(float64); ok {
+				summary.TotalFemalesCounted += int(f)
+			}
+			if tot, ok := data["total_people"].(float64); ok {
+				summary.TotalPeopleCounted += int(tot)
+			} else if tot, ok := data["total_traffic"].(float64); ok {
+				summary.TotalPeopleCounted += int(tot)
+			}
 		}
 
 		if issue, ok := data["has_issue"].(bool); ok && issue {

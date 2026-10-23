@@ -143,16 +143,18 @@ type InspectionRecord struct {
 }
 
 type UserProgressStat struct {
-	UserID          string  `json:"user_id"`
-	UserName        string  `json:"user_name"`
-	UserEmail       string  `json:"user_email"`
-	Role            string  `json:"role"`
-	TotalAssigned   int     `json:"total_assigned"`
-	DoneCount       int     `json:"done_count"`
-	InProgressCount int     `json:"in_progress_count"`
-	NotStartedCount int     `json:"not_started_count"`
-	RevisionCount   int     `json:"revision_count"`
-	ProgressPct     float64 `json:"progress_pct"`
+	UserID          string   `json:"user_id"`
+	UserName        string   `json:"user_name"`
+	UserEmail       string   `json:"user_email"`
+	Role            string   `json:"role"`
+	TotalAssigned   int      `json:"total_assigned"`
+	DoneCount       int      `json:"done_count"`
+	InProgressCount int      `json:"in_progress_count"`
+	NotStartedCount int      `json:"not_started_count"`
+	RevisionCount   int      `json:"revision_count"`
+	ProgressPct     float64  `json:"progress_pct"`
+	AssignedCameras []string `json:"assigned_cameras,omitempty"`
+	DoneCameras     []string `json:"done_cameras,omitempty"`
 }
 
 type DashboardStats struct {
@@ -167,12 +169,14 @@ type DashboardStats struct {
 }
 
 type ResultsSummary struct {
-	TotalInspections   int            `json:"total_inspections"`
-	TotalPeopleCounted int            `json:"total_people_counted"`
-	TotalMalesCounted  int            `json:"total_males_counted"`
-	TotalFemalesCounted int           `json:"total_females_counted"`
-	TotalIssuesFound   int            `json:"total_issues_found"`
-	CategoryBreakdown  map[string]int `json:"category_breakdown"`
+	TotalInspections    int            `json:"total_inspections"`
+	TotalPeopleCounted  int            `json:"total_people_counted"`
+	TotalMalesCounted   int            `json:"total_males_counted"`
+	TotalFemalesCounted int            `json:"total_females_counted"`
+	TotalIssuesFound    int            `json:"total_issues_found"`
+	CategoryBreakdown   map[string]int `json:"category_breakdown"`
+	ActionsBreakdown    map[string]int `json:"actions_breakdown,omitempty"`
+	AgeBreakdown        map[string]int `json:"age_breakdown,omitempty"`
 }
 
 // Map Heatmap Models
@@ -201,6 +205,7 @@ type StoreAreaInfo struct {
 	Description string `json:"description"`
 	ShelfCount  int    `json:"shelf_count"`
 	ZoneCount   int    `json:"zone_count"`
+	CameraCount int    `json:"camera_count,omitempty"`
 	Color       string `json:"color"`
 }
 
@@ -217,17 +222,50 @@ type ZoneMetadata struct {
 	CadCentroid []float64 `json:"cad_centroid,omitempty"`
 }
 
+type CameraMapItem struct {
+	ID              string    `json:"id"`
+	Label           string    `json:"label"`
+	RawPos          []float64 `json:"raw_pos"`
+	SVGPos          []float64 `json:"svg_pos"`
+	CadPos          []float64 `json:"cad_pos"`
+	HeadingDeg      float64   `json:"heading_deg"`
+	FOVDeg          float64   `json:"fov_deg"`
+	RangeM          float64   `json:"range_m"`
+	RangeSVG        float64   `json:"range_svg"`
+	ReviewStatus    string    `json:"review_status"`
+	IsPlanned       bool      `json:"is_planned"`
+	Area            string    `json:"area"`
+	AreaID          string    `json:"area_id"`
+	NearestZone     string    `json:"nearest_zone,omitempty"`
+	NearestShelf    string    `json:"nearest_shelf,omitempty"`
+	Note            string    `json:"note,omitempty"`
+	VideoCount      int       `json:"video_count"`
+	HasHomography   bool      `json:"has_homography"`
+	HomographyPairs int       `json:"homography_pairs"`
+	FOVPath         string    `json:"fov_path"`
+}
+
+type CameraMapSummary struct {
+	Total    int            `json:"total"`
+	Verified int            `json:"verified"`
+	Planned  int            `json:"planned"`
+	ByArea   map[string]int `json:"by_area"`
+}
+
 type MapLayout struct {
-	ViewboxFull    string          `json:"viewbox_full"`
-	ViewboxFocused string          `json:"viewbox_focused"`
-	ViewboxDelica  string          `json:"viewbox_delica,omitempty"`
-	StoreBoundary  string          `json:"store_boundary,omitempty"`
-	Areas          []StoreAreaInfo `json:"areas,omitempty"`
-	MajorLabels    []MajorLabel    `json:"major_labels,omitempty"`
-	TotalShelves   int             `json:"total_shelves"`
-	TotalZones     int             `json:"total_zones"`
-	Shelves        []ShelfMetadata `json:"shelves"`
-	Zones          []ZoneMetadata  `json:"zones"`
+	ViewboxFull    string            `json:"viewbox_full"`
+	ViewboxFocused string            `json:"viewbox_focused"`
+	ViewboxDelica  string            `json:"viewbox_delica,omitempty"`
+	StoreBoundary  string            `json:"store_boundary,omitempty"`
+	Areas          []StoreAreaInfo   `json:"areas,omitempty"`
+	MajorLabels    []MajorLabel      `json:"major_labels,omitempty"`
+	TotalShelves   int               `json:"total_shelves"`
+	TotalZones     int               `json:"total_zones"`
+	TotalCameras   int               `json:"total_cameras,omitempty"`
+	CamerasSummary *CameraMapSummary `json:"cameras_summary,omitempty"`
+	Shelves        []ShelfMetadata   `json:"shelves"`
+	Zones          []ZoneMetadata    `json:"zones"`
+	Cameras        []CameraMapItem   `json:"cameras,omitempty"`
 }
 
 type TopShelfInfo struct {

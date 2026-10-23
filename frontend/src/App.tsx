@@ -112,7 +112,7 @@ export const App: React.FC = () => {
               )}
               {activeTab === 'map-heatmap' && <MapHeatmapView currentUser={currentUser} />}
               {activeTab === 'users' && <UserManagementView />}
-              {activeTab === 'cameras' && <CameraManagementView />}
+              {activeTab === 'cameras' && <CameraManagementView onNavigateToMap={() => setActiveTab('map-heatmap')} />}
               {activeTab === 'form-builder' && <FormBuilderView />}
               {activeTab === 'task-management' && (
                 <TaskManagementView initialSearch={taskSearchParam} />

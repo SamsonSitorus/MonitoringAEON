@@ -45,22 +45,33 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentUser, activeTab, onSele
         {/* Admin Menu */}
         {role === 'admin' && (
           <>
-            <div className="nav-section-title">ADMINISTRASI & SETUP</div>
+            <div className="nav-section-title">EVALUASI & MONITORING</div>
             <nav className="nav-menu">
-              <button
-                className={`nav-item ${activeTab === 'dashboard' ? 'active' : ''}`}
-                onClick={() => onSelectTab('dashboard')}
-              >
-                <LayoutDashboard size={18} />
-                <span>Dashboard Monitoring</span>
-              </button>
               <button
                 className={`nav-item ${activeTab === 'progress-matrix' ? 'active' : ''}`}
                 onClick={() => onSelectTab('progress-matrix')}
               >
                 <CalendarDays size={18} />
-                <span>Matriks Progres CCTV</span>
+                <span>Checklist 61 Kamera (7 Hari)</span>
               </button>
+              <button
+                className={`nav-item ${activeTab === 'dashboard' ? 'active' : ''}`}
+                onClick={() => onSelectTab('dashboard')}
+              >
+                <LayoutDashboard size={18} />
+                <span>Dashboard & Tracking User</span>
+              </button>
+              <button
+                className={`nav-item ${activeTab === 'task-management' ? 'active' : ''}`}
+                onClick={() => onSelectTab('task-management')}
+              >
+                <CheckSquare size={18} />
+                <span>Penugasan Kamera</span>
+              </button>
+            </nav>
+
+            <div className="nav-section-title" style={{ marginTop: '1.25rem' }}>MASTER & LAPORAN</div>
+            <nav className="nav-menu">
               <button
                 className={`nav-item ${activeTab === 'map-heatmap' ? 'active' : ''}`}
                 onClick={() => onSelectTab('map-heatmap')}
@@ -69,32 +80,18 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentUser, activeTab, onSele
                 <span>Map Heatmap</span>
               </button>
               <button
+                className={`nav-item ${activeTab === 'cameras' ? 'active' : ''}`}
+                onClick={() => onSelectTab('cameras')}
+              >
+                <Camera size={18} />
+                <span>Master Kamera (61 Unit)</span>
+              </button>
+              <button
                 className={`nav-item ${activeTab === 'users' ? 'active' : ''}`}
                 onClick={() => onSelectTab('users')}
               >
                 <Users size={18} />
                 <span>Manajemen Akun</span>
-              </button>
-              <button
-                className={`nav-item ${activeTab === 'cameras' ? 'active' : ''}`}
-                onClick={() => onSelectTab('cameras')}
-              >
-                <Camera size={18} />
-                <span>Master Kamera</span>
-              </button>
-              <button
-                className={`nav-item ${activeTab === 'form-builder' ? 'active' : ''}`}
-                onClick={() => onSelectTab('form-builder')}
-              >
-                <Sliders size={18} />
-                <span>Form Builder Dinamis</span>
-              </button>
-              <button
-                className={`nav-item ${activeTab === 'task-management' ? 'active' : ''}`}
-                onClick={() => onSelectTab('task-management')}
-              >
-                <CheckSquare size={18} />
-                <span>Penugasan (Task)</span>
               </button>
               <button
                 className={`nav-item ${activeTab === 'reports' ? 'active' : ''}`}
@@ -110,14 +107,14 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentUser, activeTab, onSele
         {/* Inspector Menu */}
         {role === 'inspector' && (
           <>
-            <div className="nav-section-title">TUGAS SAYA</div>
+            <div className="nav-section-title">TUGAS EVALUASI SAYA</div>
             <nav className="nav-menu">
               <button
                 className={`nav-item ${activeTab === 'inspector-tasks' ? 'active' : ''}`}
                 onClick={() => onSelectTab('inspector-tasks')}
               >
                 <ClipboardList size={18} />
-                <span>Daftar Pengecekan</span>
+                <span>Pengecekan Sample Kamera</span>
               </button>
               <button
                 className={`nav-item ${activeTab === 'reports' ? 'active' : ''}`}
@@ -133,21 +130,28 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentUser, activeTab, onSele
         {/* Supervisor Menu */}
         {role === 'supervisor' && (
           <>
-            <div className="nav-section-title">PENGAWASAN & REVIEW</div>
+            <div className="nav-section-title">EVALUASI & PENGAWASAN</div>
             <nav className="nav-menu">
-              <button
-                className={`nav-item ${activeTab === 'dashboard' ? 'active' : ''}`}
-                onClick={() => onSelectTab('dashboard')}
-              >
-                <LayoutDashboard size={18} />
-                <span>Monitoring Progress</span>
-              </button>
               <button
                 className={`nav-item ${activeTab === 'progress-matrix' ? 'active' : ''}`}
                 onClick={() => onSelectTab('progress-matrix')}
               >
                 <CalendarDays size={18} />
-                <span>Matriks Progres CCTV</span>
+                <span>Checklist 61 Kamera (7 Hari)</span>
+              </button>
+              <button
+                className={`nav-item ${activeTab === 'dashboard' ? 'active' : ''}`}
+                onClick={() => onSelectTab('dashboard')}
+              >
+                <LayoutDashboard size={18} />
+                <span>Dashboard & Tracking User</span>
+              </button>
+              <button
+                className={`nav-item ${activeTab === 'supervisor-reviews' ? 'active' : ''}`}
+                onClick={() => onSelectTab('supervisor-reviews')}
+              >
+                <ShieldCheck size={18} />
+                <span>Review Hasil Evaluasi</span>
               </button>
               <button
                 className={`nav-item ${activeTab === 'map-heatmap' ? 'active' : ''}`}
@@ -155,13 +159,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentUser, activeTab, onSele
               >
                 <MapPin size={18} />
                 <span>Map Heatmap</span>
-              </button>
-              <button
-                className={`nav-item ${activeTab === 'supervisor-reviews' ? 'active' : ''}`}
-                onClick={() => onSelectTab('supervisor-reviews')}
-              >
-                <ShieldCheck size={18} />
-                <span>Review Hasil Inspeksi</span>
               </button>
               <button
                 className={`nav-item ${activeTab === 'reports' ? 'active' : ''}`}

@@ -15,7 +15,9 @@ import {
   X, 
   CheckCircle2,
   List,
-  LayoutGrid
+  LayoutGrid,
+  Compass,
+  MapPin
 } from 'lucide-react';
 import { api } from '../services/api';
 import { Camera as CameraType, CameraSystem } from '../types';
@@ -26,7 +28,11 @@ const NVR_PRESETS: Record<CameraSystem, string[]> = {
   AEON: ['NVR AEON.10.123.32.20'],
 };
 
-export const CameraManagementView: React.FC = () => {
+interface CameraManagementViewProps {
+  onNavigateToMap?: () => void;
+}
+
+export const CameraManagementView: React.FC<CameraManagementViewProps> = ({ onNavigateToMap }) => {
   const [cameras, setCameras] = useState<CameraType[]>([]);
   const [loading, setLoading] = useState(true);
   const [showAddModal, setShowAddModal] = useState(false);
@@ -163,6 +169,25 @@ export const CameraManagementView: React.FC = () => {
           <p>Konfigurasi pemetaan kamera berdasarkan Sistem (InaAI / AEON), NVR, dan Nomor Channel fisik.</p>
         </div>
         <div className="header-actions">
+          {onNavigateToMap && (
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={onNavigateToMap}
+              style={{
+                background: 'rgba(14, 165, 233, 0.15)',
+                color: '#38bdf8',
+                borderColor: 'rgba(14, 165, 233, 0.4)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                fontWeight: 600
+              }}
+              title="Buka Denah Spasial Kamera CCTV (112 Titik)"
+            >
+              <Compass size={16} color="#38bdf8" /> Denah Spasial (112 Titik)
+            </button>
+          )}
           <button className="btn btn-secondary" onClick={loadCameras}>
             <RefreshCw size={16} /> Perbarui
           </button>

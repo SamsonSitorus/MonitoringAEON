@@ -133,6 +133,29 @@ export interface InspectionRecord {
   reviewer_name?: string;
 }
 
+export interface SampleItem {
+  sample_number: number;
+  is_completed: boolean;
+  traffic: number;
+  actions: string[];
+  dominant_age?: string;
+  male_count: number;
+  female_count: number;
+  notes?: string;
+}
+
+export interface CameraEvaluationPayload {
+  samples: SampleItem[];
+  total_traffic: number;
+  total_male: number;
+  total_female: number;
+  all_actions: string[];
+  total_people?: number;
+  male_count?: number;
+  female_count?: number;
+  notes?: string;
+}
+
 export interface UserProgressStat {
   user_id: string;
   user_name: string;
@@ -144,6 +167,8 @@ export interface UserProgressStat {
   not_started_count: number;
   revision_count: number;
   progress_pct: number;
+  assigned_cameras?: string[];
+  done_cameras?: string[];
 }
 
 export interface DashboardStats {
@@ -164,6 +189,8 @@ export interface ResultsSummary {
   total_females_counted: number;
   total_issues_found: number;
   category_breakdown: Record<string, number>;
+  actions_breakdown?: Record<string, number>;
+  age_breakdown?: Record<string, number>;
 }
 
 // Map Heatmap Types
@@ -192,6 +219,7 @@ export interface StoreAreaInfo {
   description: string;
   shelf_count: number;
   zone_count: number;
+  camera_count?: number;
   color: string;
 }
 
@@ -208,6 +236,36 @@ export interface ZoneMetadata {
   cad_centroid?: [number, number];
 }
 
+export interface CameraMapItem {
+  id: string;
+  label: string;
+  raw_pos: [number, number];
+  svg_pos: [number, number];
+  cad_pos: [number, number];
+  heading_deg: number;
+  fov_deg: number;
+  range_m: number;
+  range_svg: number;
+  review_status: 'verified' | 'planned' | string;
+  is_planned: boolean;
+  area: string;
+  area_id: string;
+  nearest_zone?: string;
+  nearest_shelf?: string;
+  note?: string;
+  video_count: number;
+  has_homography: boolean;
+  homography_pairs: number;
+  fov_path: string;
+}
+
+export interface CameraMapSummary {
+  total: number;
+  verified: number;
+  planned: number;
+  by_area: Record<string, number>;
+}
+
 export interface MapLayout {
   viewbox_full: string;
   viewbox_focused: string;
@@ -217,8 +275,11 @@ export interface MapLayout {
   major_labels?: MajorLabel[];
   total_shelves: number;
   total_zones: number;
+  total_cameras?: number;
+  cameras_summary?: CameraMapSummary;
   shelves: ShelfMetadata[];
   zones: ZoneMetadata[];
+  cameras?: CameraMapItem[];
 }
 
 export interface TopShelfInfo {

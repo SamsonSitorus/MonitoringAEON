@@ -133,6 +133,12 @@ func RunMigrations(ctx context.Context) error {
 		`ALTER TABLE cameras DROP COLUMN IF EXISTS location;`,
 		`ALTER TABLE cameras DROP COLUMN IF EXISTS stream_url;`,
 		`ALTER TABLE cameras DROP COLUMN IF EXISTS snapshot_url;`,
+		`INSERT INTO form_templates (id, name, code, description, is_active) 
+		 VALUES ('tmpl-eval-01', 'Formulir Evaluasi 3 Sample (Traffic, Actions, Demografi)', 'FORM-EVALUATION', 'Format standar evaluasi kamera: verifikasi 3 sample terarah mencakup Traffic (jumlah orang), Actions, Age, dan Gender.', TRUE)
+		 ON CONFLICT (id) DO NOTHING;`,
+		`INSERT INTO form_template_versions (id, template_id, version_number, schema_json, created_by)
+		 VALUES ('ver-eval-01', 'tmpl-eval-01', 1, '{"name": "Evaluasi 3 Sample", "description": "Formulir standar pengecekan 3 sample per kamera", "fields": []}'::jsonb, 'usr-admin-01')
+		 ON CONFLICT (id) DO NOTHING;`,
 	}
 
 	for _, query := range queries {

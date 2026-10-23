@@ -10,24 +10,18 @@ import {
   AlertTriangle, 
   X, 
   Layers, 
-  Server, 
-  MapPin, 
   User as UserIcon, 
   Search, 
-  Filter,
-  Check,
-  Send,
-  Trash2,
-  Plus,
-  ShieldCheck,
-  Eye,
-  EyeOff,
-  Camera as CameraIcon,
+  Check, 
+  Trash2, 
+  Plus, 
+  EyeOff, 
   CalendarDays,
-  Percent
+  Activity,
+  Users
 } from 'lucide-react';
 import { api } from '../services/api';
-import { Camera, CameraSystem, InspectionRecord, InspectionTask, User } from '../types';
+import { Camera, CameraSystem, InspectionRecord, InspectionTask, User, SampleItem } from '../types';
 
 interface WeeklyProgressMatrixViewProps {
   currentUser: User;
@@ -52,11 +46,10 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
   // Filters
   const [systemFilter, setSystemFilter] = useState<'ALL' | CameraSystem>('ALL');
   const [nvrFilter, setNvrFilter] = useState<string>('ALL');
-  const [progressFilter, setProgressFilter] = useState<'ALL' | 'DONE' | 'IN_PROGRESS' | 'NOT_STARTED' | 'BLINDSPOT' | 'REVISION'>('ALL');
+  const [progressFilter, setProgressFilter] = useState<'ALL' | 'DONE' | 'IN_PROGRESS' | 'NOT_STARTED' | 'UNASSIGNED' | 'REVISION'>('ALL');
   const [search, setSearch] = useState('');
 
   // Weekly Date Navigation state
-  // Helper: compute Monday of current date
   const getMonday = (d: Date): Date => {
     const date = new Date(d);
     const day = date.getDay();
@@ -74,6 +67,10 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
     day: DayInfo;
     tasks: InspectionTask[];
   } | null>(null);
+
+  // Quick Assign inside Drawer
+  const [drawerAssignUserId, setDrawerAssignUserId] = useState<string>('');
+  const [assigningDrawer, setAssigningDrawer] = useState(false);
 
   // Review action inside Drawer (for Supervisor)
   const [reviewingTaskId, setReviewingTaskId] = useState<string | null>(null);
@@ -104,6 +101,11 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
       setTasks(ts);
       setRecords(recs);
       setInspectors(usrs);
+
+      if (usrs.length > 0 && !drawerAssignUserId) {
+        setDrawerAssignUserId(usrs[0].id);
+      }
+
       // Keep open drawer synchronized with latest tasks
       setSelectedCell((prev) => {
         if (!prev) return null;
@@ -188,7 +190,7 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
   // Available NVRs for filter
   const availableNvrs = Array.from(new Set(cameras.map((c) => c.nvr).filter(Boolean)));
 
-  // Filter cameras with search, system, NVR, and progress/blindspot filter
+  // Filter cameras
   const filteredCameras = cameras.filter((c) => {
     if (systemFilter !== 'ALL' && c.system !== systemFilter) return false;
     if (nvrFilter !== 'ALL' && c.nvr !== nvrFilter) return false;
@@ -210,10 +212,9 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
       } else if (progressFilter === 'NOT_STARTED') {
         const hasNotStarted = camWeekTasks.some((cell) => cell.length > 0 && cell.every((t) => t.status === 'NOT_STARTED'));
         if (!hasNotStarted) return false;
-      } else if (progressFilter === 'BLINDSPOT') {
-        // Blindspot: Camera has at least one day without any task scheduled
-        const hasBlindspot = camWeekTasks.some((cell) => cell.length === 0);
-        if (!hasBlindspot) return false;
+      } else if (progressFilter === 'UNASSIGNED') {
+        const hasUnassigned = camWeekTasks.some((cell) => cell.length === 0);
+        if (!hasUnassigned) return false;
       } else if (progressFilter === 'REVISION') {
         const hasRevision = camWeekTasks.some((cell) => cell.some((t) => t.status === 'REVISION_NEEDED'));
         if (!hasRevision) return false;
@@ -232,13 +233,13 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
   const revisionWeekTasks = weekTasks.filter((t) => t.status === 'REVISION_NEEDED').length;
   const completionRate = totalWeekTasks > 0 ? Math.round((doneWeekTasks / totalWeekTasks) * 100) : 0;
 
-  // Count total blindspot days (camera x day with 0 tasks scheduled)
-  let totalBlindspotSlots = 0;
+  // Unassigned slots: cameras x 7 days with 0 tasks
+  let totalUnassignedSlots = 0;
   cameras.forEach((c) => {
     weekDays.forEach((d) => {
       const key = `${c.id}_${d.dateStr}`;
       const cellTasks = tasksByCamAndDate.get(key) || [];
-      if (cellTasks.length === 0) totalBlindspotSlots++;
+      if (cellTasks.length === 0) totalUnassignedSlots++;
     });
   });
 
@@ -251,7 +252,6 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
     setSearch('');
   };
 
-  // Handle cell click
   const handleCellClick = (cam: Camera, day: DayInfo) => {
     const key = `${cam.id}_${day.dateStr}`;
     const cellTasks = tasksByCamAndDate.get(key) || [];
@@ -260,17 +260,28 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
       day,
       tasks: cellTasks,
     });
+    setReviewingTaskId(null);
+    setReassigningTaskId(null);
   };
 
-  // Re-sync selectedCell tasks when tasks state updates
-  const refreshSelectedCell = (camId: string, dateStr: string, currentTasks: InspectionTask[]) => {
-    const key = `${camId}_${dateStr}`;
-    const cellTasks = currentTasks.filter((t) => t.camera_id === camId && t.target_date === dateStr);
-    if (selectedCell) {
-      setSelectedCell({
-        ...selectedCell,
-        tasks: cellTasks,
+  // Quick Assign from Drawer
+  const handleQuickAssign = async () => {
+    if (!selectedCell || !drawerAssignUserId) return;
+    try {
+      setAssigningDrawer(true);
+      await api.batchCreateTasks({
+        camera_ids: [selectedCell.camera.id],
+        assigned_user_id: drawerAssignUserId,
+        template_version_id: 'ver-eval-01',
+        target_date: selectedCell.day.dateStr,
+        target_time_slots: [], // No hour selection! 1 task with 3 sample target
       });
+      setToast({ text: `Kamera ${selectedCell.camera.name} berhasil ditugaskan untuk tanggal ${selectedCell.day.displayDate}!`, type: 'success' });
+      await loadAllData();
+    } catch (err: any) {
+      setToast({ text: err.message || 'Gagal menugaskan kamera', type: 'error' });
+    } finally {
+      setAssigningDrawer(false);
     }
   };
 
@@ -281,7 +292,7 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
       setSubmittingReview(true);
       await api.reviewRecord(recordId, status, reviewNotes);
       setToast({
-        text: status === 'APPROVED' ? 'Hasil inspeksi disetujui (Approved)' : 'Permintaan revisi berhasil dikirim',
+        text: status === 'APPROVED' ? 'Hasil evaluasi kamera disetujui (Approved)' : 'Permintaan revisi berhasil dikirim',
         type: 'success',
       });
       setReviewingTaskId(null);
@@ -310,14 +321,30 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
 
   // Admin Delete Task
   const handleDeleteTask = async (taskId: string) => {
-    if (!window.confirm('Yakin ingin membatalkan slot tugas ini?')) return;
+    if (!window.confirm('Yakin ingin membatalkan penugasan kamera ini?')) return;
     try {
       await api.deleteTask(taskId);
-      setToast({ text: 'Slot tugas berhasil dibatalkan', type: 'success' });
+      setToast({ text: 'Penugasan kamera berhasil dibatalkan', type: 'success' });
       await loadAllData();
     } catch (err: any) {
       setToast({ text: err.message || 'Gagal menghapus tugas', type: 'error' });
     }
+  };
+
+  // Helper to extract sample progress
+  const getSampleInfo = (task: InspectionTask) => {
+    if (task.status === 'DONE') {
+      return { completed: 3, total: 3, label: '3/3 Selesai' };
+    }
+    const samples = task.draft_data?.samples;
+    if (Array.isArray(samples)) {
+      const c = samples.filter((s: any) => s.is_completed).length;
+      return { completed: c, total: 3, label: `${c}/3 Sample` };
+    }
+    if (task.status === 'IN_PROGRESS') {
+      return { completed: 1, total: 3, label: 'Sedang Dicek' };
+    }
+    return { completed: 0, total: 3, label: '0/3 Sample' };
   };
 
   return (
@@ -325,12 +352,12 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
       {/* HEADER */}
       <div className="page-header">
         <div className="page-title-group">
-          <h2>Matriks Pemantauan Progress CCTV (Weekly Inspection Board)</h2>
-          <p>Pantau ketercapaian inspeksi rekaman seluruh kamera CCTV per hari dan slot jam dalam siklus mingguan.</p>
+          <h2>Checklist Kamera & Tanggal (61 Kamera / 7 Hari)</h2>
+          <p>Pantau ketercapaian evaluasi 3 sample untuk seluruh 61 kamera CCTV per hari dalam siklus 7 hari mingguan.</p>
         </div>
         <div className="header-actions">
           <button className="btn btn-secondary" onClick={loadAllData}>
-            <RefreshCw size={16} /> Perbarui
+            <RefreshCw size={16} /> Perbarui Data
           </button>
         </div>
       </div>
@@ -368,36 +395,36 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
 
         <div className="card" style={{ padding: '1rem', borderLeft: '4px solid #10b981' }}>
           <div style={{ fontSize: '0.78rem', color: 'var(--text-dim)', marginBottom: '4px', display: 'flex', alignItems: 'center', gap: '5px' }}>
-            <CheckCircle2 size={13} color="#10b981" /> Tingkat Penyelesaian
+            <CheckCircle2 size={13} color="#10b981" /> Selesai Dievaluasi
           </div>
           <div style={{ fontSize: '1.6rem', fontWeight: 700, color: '#34d399' }}>{completionRate}%</div>
           <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '4px' }}>
-            {doneWeekTasks} dari {totalWeekTasks} slot selesai
+            {doneWeekTasks} dari {totalWeekTasks} tugas tuntas
           </div>
         </div>
 
         <div className="card" style={{ padding: '1rem', borderLeft: '4px solid #f59e0b' }}>
           <div style={{ fontSize: '0.78rem', color: 'var(--text-dim)', marginBottom: '4px', display: 'flex', alignItems: 'center', gap: '5px' }}>
-            <Clock size={13} color="#f59e0b" /> Dalam Pengerjaan (Draft)
+            <Clock size={13} color="#f59e0b" /> Sedang Dikerjakan
           </div>
           <div style={{ fontSize: '1.6rem', fontWeight: 700, color: '#fbbf24' }}>{inProgressWeekTasks}</div>
-          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '4px' }}>Sedang diobservasi</div>
-        </div>
-
-        <div className="card" style={{ padding: '1rem', borderLeft: '4px solid #f43f5e' }}>
-          <div style={{ fontSize: '0.78rem', color: 'var(--text-dim)', marginBottom: '4px', display: 'flex', alignItems: 'center', gap: '5px' }}>
-            <AlertCircle size={13} color="#f43f5e" /> Belum Dikerjakan
-          </div>
-          <div style={{ fontSize: '1.6rem', fontWeight: 700, color: '#fca5a5' }}>{notStartedWeekTasks}</div>
-          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '4px' }}>Menunggu petugas</div>
+          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '4px' }}>Draft sample tersimpan</div>
         </div>
 
         <div className="card" style={{ padding: '1rem', borderLeft: '4px solid #64748b' }}>
           <div style={{ fontSize: '0.78rem', color: 'var(--text-dim)', marginBottom: '4px', display: 'flex', alignItems: 'center', gap: '5px' }}>
-            <EyeOff size={13} color="#94a3b8" /> Belum Dilakukan Pengecekan
+            <AlertCircle size={13} color="#94a3b8" /> Belum Mulai
           </div>
-          <div style={{ fontSize: '1.6rem', fontWeight: 700, color: '#cbd5e1' }}>{totalBlindspotSlots}</div>
-          <div style={{ fontSize: '0.75rem', color: 'var(--text-dim)', marginTop: '4px' }}>Titik belum terjadwal</div>
+          <div style={{ fontSize: '1.6rem', fontWeight: 700, color: '#cbd5e1' }}>{notStartedWeekTasks}</div>
+          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '4px' }}>Sudah di-assign</div>
+        </div>
+
+        <div className="card" style={{ padding: '1rem', borderLeft: '4px solid #475569' }}>
+          <div style={{ fontSize: '0.78rem', color: 'var(--text-dim)', marginBottom: '4px', display: 'flex', alignItems: 'center', gap: '5px' }}>
+            <EyeOff size={13} color="#94a3b8" /> Belum Ditugaskan
+          </div>
+          <div style={{ fontSize: '1.6rem', fontWeight: 700, color: '#94a3b8' }}>{totalUnassignedSlots}</div>
+          <div style={{ fontSize: '0.75rem', color: 'var(--text-dim)', marginTop: '4px' }}>Titik belum ada jadwal</div>
         </div>
 
         {revisionWeekTasks > 0 && (
@@ -411,9 +438,9 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
         )}
       </div>
 
-      {/* TWO-TIER CONTROLS: WEEK NAVIGATION & REFINED FILTER TOOLBAR */}
+      {/* WEEK NAVIGATION & REFINED FILTER TOOLBAR */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '1.5rem' }}>
-        {/* Tier 1: Weekly Navigation Bar with Visual Legend */}
+        {/* Tier 1: Weekly Navigation Bar */}
         <div
           style={{
             background: 'var(--bg-card)',
@@ -427,14 +454,13 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
             gap: '1rem',
           }}
         >
-          {/* Week Navigation Buttons */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <button
               type="button"
               className="btn btn-secondary"
               style={{ padding: '0.45rem 0.85rem', display: 'flex', alignItems: 'center', gap: '5px', fontSize: '0.82rem' }}
               onClick={handlePrevWeek}
-              title="Lihat Minggu Sebelumnya"
+              title="Minggu Sebelumnya"
             >
               <ChevronLeft size={16} /> Minggu Sebelumnya
             </button>
@@ -462,7 +488,7 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
               className="btn btn-secondary"
               style={{ padding: '0.45rem 0.85rem', display: 'flex', alignItems: 'center', gap: '5px', fontSize: '0.82rem' }}
               onClick={handleNextWeek}
-              title="Lihat Minggu Berikutnya"
+              title="Minggu Berikutnya"
             >
               Minggu Berikutnya <ChevronRight size={16} />
             </button>
@@ -470,148 +496,123 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
             <button
               type="button"
               className="btn btn-secondary"
-              style={{ padding: '0.45rem 0.75rem', fontSize: '0.8rem', fontWeight: 600 }}
+              style={{ padding: '0.45rem 0.85rem', fontSize: '0.82rem' }}
               onClick={handleTodayWeek}
+              title="Kembali ke Minggu Ini"
             >
               Minggu Ini
             </button>
           </div>
 
-          {/* Quick Legend of Matrix Status Icons & Colors */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap', fontSize: '0.74rem' }}>
-            <span style={{ color: 'var(--text-dim)', fontWeight: 600 }}>LEGENDA STATUS:</span>
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', color: '#34d399' }}>
-              <CheckCircle2 size={12} color="#10b981" /> Selesai (100%)
+          {/* Visual Legend */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap', fontSize: '0.75rem' }}>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#34d399' }}>
+              <span style={{ width: '8px', height: '8px', borderRadius: '2px', background: '#10b981' }} />
+              3/3 Selesai
             </span>
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', color: '#fbbf24' }}>
-              <Clock size={12} color="#f59e0b" /> In Progress
+            <span style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#fbbf24' }}>
+              <span style={{ width: '8px', height: '8px', borderRadius: '2px', background: '#f59e0b' }} />
+              Sedang Dicek
             </span>
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', color: '#f87171' }}>
-              <AlertTriangle size={12} color="#f43f5e" /> Belum Mulai (0%)
+            <span style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#38bdf8' }}>
+              <span style={{ width: '8px', height: '8px', borderRadius: '2px', background: '#0ea5e9' }} />
+              Belum Mulai
             </span>
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', color: '#94a3b8' }}>
-              <EyeOff size={12} color="#94a3b8" /> Belum Dilakukan Pengecekan
+            <span style={{ display: 'flex', alignItems: 'center', gap: '4px', color: 'var(--text-dim)' }}>
+              <span style={{ width: '8px', height: '8px', borderRadius: '2px', background: 'rgba(255, 255, 255, 0.2)' }} />
+              Belum Dicek
             </span>
           </div>
         </div>
 
-        {/* Tier 2: Refined Filter Toolbar */}
+        {/* Tier 2: Filter Toolbar */}
         <div
           style={{
             background: 'var(--bg-card)',
             border: '1px solid var(--border-subtle)',
             borderRadius: '10px',
-            padding: '0.85rem 1.25rem',
+            padding: '0.75rem 1.25rem',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
             flexWrap: 'wrap',
-            gap: '0.85rem',
+            gap: '1rem',
           }}
         >
-          {/* Filters: System, Status, NVR, Search */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap', flex: 1 }}>
-            {/* System Segmented Pills */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', background: 'rgba(255, 255, 255, 0.04)', padding: '3px', borderRadius: '6px', border: '1px solid var(--border-subtle)' }}>
-              {(['ALL', 'InaAI', 'AEON'] as const).map((sys) => {
-                const count = sys === 'ALL' ? cameras.length : cameras.filter((c) => c.system === sys).length;
-                const isActive = systemFilter === sys;
-                return (
-                  <button
-                    key={sys}
-                    type="button"
-                    style={{
-                      background: isActive ? (sys === 'InaAI' ? '#0ea5e9' : sys === 'AEON' ? '#8b5cf6' : 'var(--primary)') : 'transparent',
-                      color: isActive ? '#ffffff' : 'var(--text-muted)',
-                      border: 'none',
-                      borderRadius: '4px',
-                      padding: '4px 10px',
-                      fontSize: '0.78rem',
-                      fontWeight: 600,
-                      cursor: 'pointer',
-                      transition: 'all 0.15s ease',
-                    }}
-                    onClick={() => setSystemFilter(sys)}
-                  >
-                    {sys === 'ALL' ? 'Semua Sistem' : sys} ({count})
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Matrix Status Filter */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+            {/* System Filter */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <Filter size={14} color="#38bdf8" />
+              <span style={{ fontSize: '0.78rem', color: 'var(--text-dim)' }}>Sistem:</span>
               <select
                 className="form-select"
-                value={progressFilter}
-                onChange={(e) => setProgressFilter(e.target.value as any)}
-                style={{ padding: '0.4rem 0.75rem', fontSize: '0.8rem', width: 'auto', minWidth: '170px' }}
+                value={systemFilter}
+                onChange={(e) => setSystemFilter(e.target.value as any)}
+                style={{ padding: '0.35rem 0.65rem', fontSize: '0.78rem', width: 'auto' }}
               >
-                <option value="ALL">Semua Kondisi Matriks</option>
-                <option value="DONE">✓ Ada Slot Selesai (100%)</option>
-                <option value="IN_PROGRESS">⏳ Sedang Dalam Pengerjaan</option>
-                <option value="NOT_STARTED">⚠️ Ada Tugas Belum Mulai</option>
-                <option value="BLINDSPOT">👁️ Belum Dilakukan Pengecekan (Ada Hari Kosong)</option>
-                <option value="REVISION">🔄 Ada Permintaan Revisi</option>
+                <option value="ALL">Semua Sistem</option>
+                <option value="InaAI">InaAI (40 Cam)</option>
+                <option value="AEON">AEON (21 Cam)</option>
               </select>
             </div>
 
             {/* NVR Filter */}
+            {availableNvrs.length > 0 && (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <span style={{ fontSize: '0.78rem', color: 'var(--text-dim)' }}>NVR:</span>
+                <select
+                  className="form-select"
+                  value={nvrFilter}
+                  onChange={(e) => setNvrFilter(e.target.value)}
+                  style={{ padding: '0.35rem 0.65rem', fontSize: '0.78rem', width: 'auto' }}
+                >
+                  <option value="ALL">Semua NVR</option>
+                  {availableNvrs.map((nvr) => (
+                    <option key={nvr} value={nvr}>{nvr}</option>
+                  ))}
+                </select>
+              </div>
+            )}
+
+            {/* Progress Status Filter */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <Server size={14} color="#818cf8" />
+              <span style={{ fontSize: '0.78rem', color: 'var(--text-dim)' }}>Status:</span>
               <select
                 className="form-select"
-                value={nvrFilter}
-                onChange={(e) => setNvrFilter(e.target.value)}
-                style={{ padding: '0.4rem 0.75rem', fontSize: '0.8rem', width: 'auto', minWidth: '140px' }}
+                value={progressFilter}
+                onChange={(e) => setProgressFilter(e.target.value as any)}
+                style={{ padding: '0.35rem 0.65rem', fontSize: '0.78rem', width: 'auto' }}
               >
-                <option value="ALL">Semua NVR ({availableNvrs.length})</option>
-                {availableNvrs.map((nvr) => (
-                  <option key={nvr} value={nvr}>
-                    {nvr}
-                  </option>
-                ))}
+                <option value="ALL">Semua Status</option>
+                <option value="DONE">Selesai (Done)</option>
+                <option value="IN_PROGRESS">Sedang Dikerjakan</option>
+                <option value="NOT_STARTED">Belum Mulai</option>
+                <option value="UNASSIGNED">Belum Ditugaskan</option>
+                <option value="REVISION">Perlu Revisi</option>
               </select>
             </div>
+          </div>
 
-            {/* Live Search Input */}
+          {/* Search Input */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <div style={{ position: 'relative', width: '220px' }}>
-              <Search size={14} style={{ position: 'absolute', left: 10, top: 11, color: 'var(--text-dim)' }} />
+              <Search size={14} style={{ position: 'absolute', left: 10, top: 10, color: 'var(--text-dim)' }} />
               <input
-                type="text"
                 className="form-input"
+                style={{ width: '100%', paddingLeft: '2.1rem', fontSize: '0.8rem', padding: '0.35rem 0.6rem 0.35rem 2.1rem' }}
+                placeholder="Cari 61 kamera..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder="Cari kamera / lokasi..."
-                style={{ padding: '0.4rem 2rem 0.4rem 2.2rem', fontSize: '0.8rem', width: '100%' }}
               />
               {search && (
                 <button
                   type="button"
                   onClick={() => setSearch('')}
-                  style={{
-                    position: 'absolute',
-                    right: 8,
-                    top: 8,
-                    background: 'transparent',
-                    border: 'none',
-                    color: 'var(--text-dim)',
-                    cursor: 'pointer',
-                  }}
+                  style={{ position: 'absolute', right: 8, top: 8, background: 'transparent', border: 'none', color: 'var(--text-dim)', cursor: 'pointer' }}
                 >
-                  <X size={13} />
+                  <X size={12} />
                 </button>
               )}
             </div>
-          </div>
-
-          {/* Right: Counter & Reset */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <span style={{ fontSize: '0.8rem', color: 'var(--text-dim)' }}>
-              Menampilkan <strong style={{ color: '#ffffff' }}>{filteredCameras.length}</strong> dari{' '}
-              <strong>{cameras.length}</strong> kamera
-            </span>
 
             {isFiltering && (
               <button
@@ -620,24 +621,25 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
                 onClick={resetFilters}
                 style={{ padding: '0.35rem 0.65rem', fontSize: '0.78rem' }}
               >
-                <X size={13} /> Reset Filter
+                Reset
               </button>
             )}
+
+            <span style={{ fontSize: '0.78rem', color: 'var(--text-dim)' }}>
+              Total: <strong>{filteredCameras.length}</strong> / {cameras.length} Kamera
+            </span>
           </div>
         </div>
       </div>
 
-      {/* MATRIX TABLE BOARD */}
+      {/* MATRIX TABLE: 61 CAMERAS x 7 DAYS */}
       <div className="card" style={{ padding: 0, overflowX: 'auto' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '950px' }}>
+        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '920px' }}>
           <thead>
             <tr style={{ background: 'rgba(255, 255, 255, 0.03)', borderBottom: '1px solid var(--border-subtle)' }}>
-              {/* Camera Column Header */}
-              <th style={{ padding: '1rem', width: '280px', color: 'var(--text-dim)', fontSize: '0.8rem', fontWeight: 700 }}>
-                TITIK KAMERA & NVR
+              <th style={{ padding: '1rem', width: '280px', color: 'var(--text-dim)', fontSize: '0.82rem', fontWeight: 700, textTransform: 'uppercase' }}>
+                KAMERA CCTV (61 UNIT)
               </th>
-
-              {/* 7 Days Column Headers */}
               {weekDays.map((d) => (
                 <th
                   key={d.dateStr}
@@ -648,14 +650,14 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
                     background: d.isToday ? 'rgba(56, 189, 248, 0.08)' : 'transparent',
                   }}
                 >
-                  <div style={{ fontSize: '0.78rem', color: d.isToday ? 'var(--accent-cyan)' : 'var(--text-dim)', textTransform: 'uppercase' }}>
+                  <div style={{ fontSize: '0.75rem', color: d.isToday ? 'var(--accent-cyan)' : 'var(--text-dim)', textTransform: 'uppercase' }}>
                     {d.dayName}
                   </div>
-                  <div style={{ fontSize: '0.92rem', fontWeight: 700, color: d.isToday ? '#ffffff' : 'var(--text-main)' }}>
+                  <div style={{ fontSize: '0.88rem', fontWeight: 700, color: d.isToday ? '#ffffff' : 'var(--text-main)' }}>
                     {d.displayDate}
                   </div>
                   {d.isToday && (
-                    <span style={{ fontSize: '0.65rem', background: 'var(--accent-cyan)', color: '#000', padding: '1px 6px', borderRadius: '3px', fontWeight: 700 }}>
+                    <span style={{ fontSize: '0.62rem', background: 'var(--accent-cyan)', color: '#000', padding: '1px 5px', borderRadius: '3px', fontWeight: 800 }}>
                       HARI INI
                     </span>
                   )}
@@ -668,13 +670,13 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
             {loading ? (
               <tr>
                 <td colSpan={8} style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-dim)' }}>
-                  Memuat data matriks progress CCTV...
+                  Memuat matriks progress 61 kamera...
                 </td>
               </tr>
             ) : filteredCameras.length === 0 ? (
               <tr>
                 <td colSpan={8} style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-dim)' }}>
-                  Tidak ada kamera yang cocok dengan filter saat ini.
+                  Tidak ada kamera yang cocok dengan kriteria filter.
                 </td>
               </tr>
             ) : (
@@ -682,7 +684,7 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
                 <tr key={cam.id} style={{ borderBottom: '1px solid var(--border-subtle)' }}>
                   {/* Camera Row Header */}
                   <td style={{ padding: '0.85rem 1rem', verticalAlign: 'middle' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '4px', flexWrap: 'wrap' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '3px', flexWrap: 'wrap' }}>
                       <span
                         style={{
                           fontSize: '0.68rem',
@@ -701,46 +703,9 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
                           {cam.nvr} (Ch {cam.channel_no || 1})
                         </span>
                       )}
-                      {cam.status === 'offline' && (
-                        <span
-                          style={{
-                            fontSize: '0.65rem',
-                            background: 'rgba(244, 63, 94, 0.18)',
-                            color: '#fb7185',
-                            border: '1px solid rgba(244, 63, 94, 0.4)',
-                            padding: '1px 5px',
-                            borderRadius: '3px',
-                            fontWeight: 700,
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            gap: '3px',
-                          }}
-                          title="Kamera offline / belum dilakukan pengecekan"
-                        >
-                          <EyeOff size={9} /> Belum Dicek
-                        </span>
-                      )}
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                      <span
-                        style={{
-                          width: '7px',
-                          height: '7px',
-                          borderRadius: '50%',
-                          background: cam.status === 'online' ? '#10b981' : cam.status === 'offline' ? '#f43f5e' : '#f59e0b',
-                          boxShadow:
-                            cam.status === 'online'
-                              ? '0 0 6px rgba(16, 185, 129, 0.7)'
-                              : cam.status === 'offline'
-                              ? '0 0 6px rgba(244, 63, 94, 0.7)'
-                              : '0 0 6px rgba(245, 158, 11, 0.7)',
-                          flexShrink: 0,
-                        }}
-                        title={`Status: ${cam.status}`}
-                      />
-                      <div style={{ fontWeight: 700, color: '#ffffff', fontSize: '0.88rem' }}>{cam.name}</div>
-                    </div>
-                    <div style={{ fontSize: '0.75rem', color: 'var(--text-dim)', marginTop: '2px', fontFamily: 'var(--font-mono)' }}>
+                    <div style={{ fontWeight: 700, color: '#ffffff', fontSize: '0.88rem' }}>{cam.name}</div>
+                    <div style={{ fontSize: '0.74rem', color: 'var(--text-dim)', marginTop: '2px', fontFamily: 'var(--font-mono)' }}>
                       {cam.code}
                     </div>
                   </td>
@@ -749,17 +714,16 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
                   {weekDays.map((d) => {
                     const key = `${cam.id}_${d.dateStr}`;
                     const cellTasks = tasksByCamAndDate.get(key) || [];
-                    const total = cellTasks.length;
-                    const done = cellTasks.filter((t) => t.status === 'DONE').length;
+                    const firstTask = cellTasks[0];
+                    const sampleInfo = firstTask ? getSampleInfo(firstTask) : null;
                     const hasRevision = cellTasks.some((t) => t.status === 'REVISION_NEEDED');
-                    const hasProgress = cellTasks.some((t) => t.status === 'IN_PROGRESS');
 
                     return (
                       <td
                         key={d.dateStr}
                         onClick={() => handleCellClick(cam, d)}
                         style={{
-                          padding: '0.75rem 0.4rem',
+                          padding: '0.65rem 0.4rem',
                           textAlign: 'center',
                           verticalAlign: 'middle',
                           borderLeft: '1px solid var(--border-subtle)',
@@ -773,9 +737,9 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
                         onMouseLeave={(e) => {
                           e.currentTarget.style.backgroundColor = d.isToday ? 'rgba(56, 189, 248, 0.03)' : 'transparent';
                         }}
-                        title={`Klik untuk melihat detail ${cam.name} pada ${d.fullDateLabel}`}
+                        title={`Klik untuk melihat detail atau menugaskan ${cam.name} pada ${d.fullDateLabel}`}
                       >
-                        {total === 0 ? (
+                        {cellTasks.length === 0 ? (
                           <div
                             style={{
                               display: 'inline-flex',
@@ -794,84 +758,96 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
                             <span>Belum Dicek</span>
                           </div>
                         ) : hasRevision ? (
-                          <div
-                            style={{
-                              background: 'rgba(244, 63, 94, 0.16)',
-                              border: '1px solid rgba(244, 63, 94, 0.4)',
-                              color: '#fb7185',
-                              padding: '4px 8px',
-                              borderRadius: '6px',
-                              fontSize: '0.74rem',
-                              fontWeight: 700,
-                              display: 'inline-flex',
-                              alignItems: 'center',
-                              gap: '4px',
-                              minWidth: '85px',
-                              justifyContent: 'center',
-                            }}
-                          >
-                            <RefreshCw size={11} />
-                            <span>Revisi ({cellTasks.filter((t) => t.status === 'REVISION_NEEDED').length})</span>
+                          <div>
+                            <div
+                              style={{
+                                background: 'rgba(244, 63, 94, 0.16)',
+                                border: '1px solid rgba(244, 63, 94, 0.4)',
+                                color: '#fb7185',
+                                padding: '3px 8px',
+                                borderRadius: '6px',
+                                fontSize: '0.74rem',
+                                fontWeight: 700,
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '4px',
+                              }}
+                            >
+                              <RefreshCw size={11} />
+                              <span>Revisi</span>
+                            </div>
+                            <div style={{ fontSize: '0.68rem', color: 'var(--text-dim)', marginTop: '2px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '95px', margin: '2px auto 0' }}>
+                              {firstTask.assigned_user_name}
+                            </div>
                           </div>
-                        ) : done === total ? (
-                          <div
-                            style={{
-                              background: 'rgba(16, 185, 129, 0.16)',
-                              border: '1px solid rgba(16, 185, 129, 0.4)',
-                              color: '#34d399',
-                              padding: '4px 8px',
-                              borderRadius: '6px',
-                              fontSize: '0.74rem',
-                              fontWeight: 700,
-                              display: 'inline-flex',
-                              alignItems: 'center',
-                              gap: '4px',
-                              minWidth: '85px',
-                              justifyContent: 'center',
-                            }}
-                          >
-                            <CheckCircle2 size={12} color="#34d399" />
-                            <span>{done}/{total} Selesai</span>
+                        ) : firstTask.status === 'DONE' ? (
+                          <div>
+                            <div
+                              style={{
+                                background: 'rgba(16, 185, 129, 0.16)',
+                                border: '1px solid rgba(16, 185, 129, 0.4)',
+                                color: '#34d399',
+                                padding: '3px 8px',
+                                borderRadius: '6px',
+                                fontSize: '0.74rem',
+                                fontWeight: 700,
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '4px',
+                              }}
+                            >
+                              <CheckCircle2 size={12} color="#34d399" />
+                              <span>3/3 Selesai</span>
+                            </div>
+                            <div style={{ fontSize: '0.68rem', color: '#94a3b8', marginTop: '2px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '95px', margin: '2px auto 0' }}>
+                              {firstTask.assigned_user_name}
+                            </div>
                           </div>
-                        ) : done > 0 || hasProgress ? (
-                          <div
-                            style={{
-                              background: 'rgba(245, 158, 11, 0.16)',
-                              border: '1px solid rgba(245, 158, 11, 0.4)',
-                              color: '#fbbf24',
-                              padding: '4px 8px',
-                              borderRadius: '6px',
-                              fontSize: '0.74rem',
-                              fontWeight: 700,
-                              display: 'inline-flex',
-                              alignItems: 'center',
-                              gap: '4px',
-                              minWidth: '85px',
-                              justifyContent: 'center',
-                            }}
-                          >
-                            <Clock size={11} color="#fbbf24" />
-                            <span>{done}/{total} Slot</span>
+                        ) : firstTask.status === 'IN_PROGRESS' ? (
+                          <div>
+                            <div
+                              style={{
+                                background: 'rgba(245, 158, 11, 0.16)',
+                                border: '1px solid rgba(245, 158, 11, 0.4)',
+                                color: '#fbbf24',
+                                padding: '3px 8px',
+                                borderRadius: '6px',
+                                fontSize: '0.74rem',
+                                fontWeight: 700,
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '4px',
+                              }}
+                            >
+                              <Clock size={11} color="#fbbf24" />
+                              <span>{sampleInfo?.label || 'Sedang Dicek'}</span>
+                            </div>
+                            <div style={{ fontSize: '0.68rem', color: '#94a3b8', marginTop: '2px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '95px', margin: '2px auto 0' }}>
+                              {firstTask.assigned_user_name}
+                            </div>
                           </div>
                         ) : (
-                          <div
-                            style={{
-                              background: 'rgba(239, 68, 68, 0.16)',
-                              border: '1px solid rgba(239, 68, 68, 0.4)',
-                              color: '#f87171',
-                              padding: '4px 8px',
-                              borderRadius: '6px',
-                              fontSize: '0.74rem',
-                              fontWeight: 700,
-                              display: 'inline-flex',
-                              alignItems: 'center',
-                              gap: '4px',
-                              minWidth: '85px',
-                              justifyContent: 'center',
-                            }}
-                          >
-                            <AlertTriangle size={11} color="#f87171" />
-                            <span>0/{total} Mulai</span>
+                          <div>
+                            <div
+                              style={{
+                                background: 'rgba(56, 189, 248, 0.15)',
+                                border: '1px solid rgba(56, 189, 248, 0.35)',
+                                color: '#38bdf8',
+                                padding: '3px 8px',
+                                borderRadius: '6px',
+                                fontSize: '0.74rem',
+                                fontWeight: 700,
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '4px',
+                              }}
+                            >
+                              <AlertCircle size={11} color="#38bdf8" />
+                              <span>0/3 Sample</span>
+                            </div>
+                            <div style={{ fontSize: '0.68rem', color: '#94a3b8', marginTop: '2px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '95px', margin: '2px auto 0' }}>
+                              {firstTask.assigned_user_name}
+                            </div>
                           </div>
                         )}
                       </td>
@@ -884,7 +860,7 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
         </table>
       </div>
 
-      {/* SLIDE-OVER RIGHT DRAWER (DETAIL INSPEKSI HARIAN) */}
+      {/* SLIDE-OVER RIGHT DRAWER (DETAIL INSPEKSI & EVALUASI 3 SAMPLE) */}
       {selectedCell && (
         <div
           style={{
@@ -904,7 +880,7 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
           <div
             style={{
               width: '100%',
-              maxWidth: '560px',
+              maxWidth: '580px',
               height: '100%',
               background: '#0d1527',
               borderLeft: '1px solid rgba(56, 189, 248, 0.3)',
@@ -979,190 +955,135 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
               </button>
             </div>
 
-            {/* Daily Progress Bar */}
-            <div style={{ padding: '1rem 1.5rem', background: 'rgba(255, 255, 255, 0.01)', borderBottom: '1px solid var(--border-subtle)' }}>
-              {(() => {
-                const total = selectedCell.tasks.length;
-                const done = selectedCell.tasks.filter((t) => t.status === 'DONE').length;
-                const pct = total > 0 ? Math.round((done / total) * 100) : 0;
-                return (
-                  <div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.82rem', marginBottom: '6px' }}>
-                      <span style={{ color: 'var(--text-dim)' }}>Progress Pengecekan Hari Ini:</span>
-                      <strong style={{ color: done === total && total > 0 ? '#34d399' : '#38bdf8' }}>
-                        {done} dari {total} Slot Selesai ({pct}%)
-                      </strong>
-                    </div>
-                    <div style={{ height: '6px', width: '100%', background: 'rgba(255, 255, 255, 0.08)', borderRadius: '3px', overflow: 'hidden' }}>
-                      <div
-                        style={{
-                          height: '100%',
-                          width: `${pct}%`,
-                          background: done === total && total > 0 ? '#10b981' : 'linear-gradient(90deg, #0ea5e9, #8b5cf6)',
-                          transition: 'width 0.3s ease',
-                        }}
-                      />
-                    </div>
-                  </div>
-                );
-              })()}
-            </div>
-
-            {/* Drawer Body: Tasks Timeline */}
+            {/* Drawer Body */}
             <div style={{ padding: '1.25rem 1.5rem', flex: 1, overflowY: 'auto' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                <h4 style={{ fontSize: '0.92rem', fontWeight: 700, color: '#ffffff', margin: 0, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                  Daftar Slot Jam Pengamatan ({selectedCell.tasks.length})
-                </h4>
-
-                {currentUser.role === 'admin' && (
-                  <button
-                    type="button"
-                    className="btn btn-primary"
-                    style={{ padding: '0.4rem 0.85rem', fontSize: '0.78rem', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
-                    onClick={() => {
-                      setSelectedCell(null);
-                      if (onNavigateToTasks) {
-                        onNavigateToTasks(selectedCell.camera.name);
-                      }
-                    }}
-                  >
-                    <Plus size={14} /> Ke Manajemen Tugas
-                  </button>
-                )}
-              </div>
-
               {selectedCell.tasks.length === 0 ? (
-                <div style={{ textAlign: 'center', padding: '2.5rem 1.5rem', background: 'rgba(255, 255, 255, 0.02)', border: '1px dashed rgba(244, 63, 94, 0.35)', borderRadius: '10px' }}>
-                  <div style={{ width: '52px', height: '52px', borderRadius: '50%', background: 'rgba(244, 63, 94, 0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 0.85rem', border: '1px solid rgba(244, 63, 94, 0.3)' }}>
-                    <EyeOff size={26} color="#fb7185" />
+                /* Unassigned State: Show Quick Assign Form */
+                <div>
+                  <div style={{ textAlign: 'center', padding: '2rem 1rem', background: 'rgba(255, 255, 255, 0.02)', border: '1px dashed rgba(255, 255, 255, 0.2)', borderRadius: '10px', marginBottom: '1.25rem' }}>
+                    <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: 'rgba(244, 63, 94, 0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 0.75rem', border: '1px solid rgba(244, 63, 94, 0.3)' }}>
+                      <EyeOff size={24} color="#fb7185" />
+                    </div>
+                    <div style={{ fontWeight: 700, color: '#ffffff', fontSize: '0.98rem' }}>Kamera Belum Ditugaskan</div>
+                    <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginTop: '4px', maxWidth: '380px', margin: '4px auto 0' }}>
+                      Belum ada personil yang ditugaskan memeriksa kamera ini pada tanggal {selectedCell.day.displayDate}.
+                    </p>
                   </div>
-                  <div style={{ fontWeight: 700, color: '#ffffff', fontSize: '0.98rem' }}>Belum Dilakukan Pengecekan (Belum Ada Jadwal)</div>
-                  <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginTop: '6px', maxWidth: '380px', margin: '6px auto 0', lineHeight: 1.5 }}>
-                    Kamera ini belum memiliki penugasan observasi untuk tanggal <strong>{selectedCell.day.fullDateLabel}</strong>. Buka Manajemen Penugasan untuk menjadwalkan tugas.
-                  </p>
+
                   {currentUser.role === 'admin' && (
-                    <button
-                      type="button"
-                      className="btn btn-primary"
-                      style={{ marginTop: '1.25rem', padding: '0.55rem 1.25rem', fontSize: '0.84rem', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
-                      onClick={() => {
-                        setSelectedCell(null);
-                        if (onNavigateToTasks) {
-                          onNavigateToTasks(selectedCell.camera.name);
-                        }
-                      }}
-                    >
-                      <Plus size={15} /> Buka Halaman Manajemen Tugas
-                    </button>
+                    <div style={{ background: 'rgba(56, 189, 248, 0.06)', border: '1px solid rgba(56, 189, 248, 0.25)', borderRadius: '8px', padding: '1.25rem' }}>
+                      <h4 style={{ fontSize: '0.92rem', fontWeight: 700, color: '#38bdf8', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <Plus size={16} /> Tugaskan Kamera Ini Sekarang
+                      </h4>
+                      <p style={{ fontSize: '0.78rem', color: 'var(--text-dim)', marginBottom: '0.75rem' }}>
+                        Petugas yang dipilih akan menerima tugas memeriksa 3 sample pada kamera ini (Traffic, Actions, Age, Gender).
+                      </p>
+
+                      <div className="form-group" style={{ marginBottom: '1rem' }}>
+                        <label className="form-label">Pilih Petugas (Inspector):</label>
+                        <select
+                          className="form-select"
+                          value={drawerAssignUserId}
+                          onChange={(e) => setDrawerAssignUserId(e.target.value)}
+                        >
+                          {inspectors.map((u) => (
+                            <option key={u.id} value={u.id}>{u.name} ({u.email})</option>
+                          ))}
+                        </select>
+                      </div>
+
+                      <button
+                        type="button"
+                        className="btn btn-primary"
+                        onClick={handleQuickAssign}
+                        disabled={assigningDrawer || !drawerAssignUserId}
+                        style={{ width: '100%', justifyContent: 'center' }}
+                      >
+                        {assigningDrawer ? 'Menugaskan...' : 'Tugaskan Kamera Ini (Target: 3 Sample)'}
+                      </button>
+                    </div>
                   )}
                 </div>
               ) : (
+                /* Assigned Task Details & 3 Samples Breakdown */
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                  {selectedCell.tasks.map((task, idx) => {
+                  {selectedCell.tasks.map((task) => {
                     const record = recordsByTaskId.get(task.id);
-                    const p = record?.payload || {};
+                    const p = record?.payload || task.draft_data || {};
+                    const samplesArr: SampleItem[] = Array.isArray(p.samples)
+                      ? p.samples
+                      : [
+                          { sample_number: 1, is_completed: task.status === 'DONE', traffic: p.traffic || p.total_people || 0, actions: p.actions || [], male_count: p.male_count || 0, female_count: p.female_count || 0 },
+                          { sample_number: 2, is_completed: task.status === 'DONE', traffic: 0, actions: [], male_count: 0, female_count: 0 },
+                          { sample_number: 3, is_completed: task.status === 'DONE', traffic: 0, actions: [], male_count: 0, female_count: 0 },
+                        ];
+                    const doneCount = samplesArr.filter((s) => s.is_completed).length;
 
                     return (
                       <div
                         key={task.id}
                         style={{
                           background: 'rgba(255, 255, 255, 0.02)',
-                          border: `1px solid ${
-                            task.status === 'DONE'
-                              ? 'rgba(16, 185, 129, 0.3)'
-                              : task.status === 'REVISION_NEEDED'
-                              ? 'rgba(244, 63, 94, 0.3)'
-                              : task.status === 'IN_PROGRESS'
-                              ? 'rgba(245, 158, 11, 0.3)'
-                              : 'var(--border-subtle)'
-                          }`,
+                          border: '1px solid var(--border-subtle)',
                           borderRadius: '8px',
-                          padding: '1rem',
+                          padding: '1.25rem',
                         }}
                       >
-                        {/* Task Card Header */}
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.65rem' }}>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <span
-                              style={{
-                                width: '22px',
-                                height: '22px',
-                                borderRadius: '50%',
-                                background: 'rgba(255, 255, 255, 0.08)',
-                                display: 'inline-flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                fontSize: '0.72rem',
-                                fontWeight: 700,
-                              }}
-                            >
-                              {idx + 1}
-                            </span>
-                            <div style={{ fontWeight: 700, color: '#ffffff', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                              <Clock size={13} color="#818cf8" /> {task.target_time_slot || 'Semua Jam'}
+                        {/* Task Header */}
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.85rem', paddingBottom: '0.75rem', borderBottom: '1px solid rgba(255, 255, 255, 0.07)' }}>
+                          <div>
+                            <div style={{ fontSize: '0.75rem', color: 'var(--text-dim)' }}>Petugas yang Ditugaskan:</div>
+                            <div style={{ fontWeight: 700, color: '#ffffff', fontSize: '1rem', display: 'flex', alignItems: 'center', gap: '6px', marginTop: '2px' }}>
+                              <UserIcon size={15} color="var(--accent-cyan)" /> {task.assigned_user_name}
                             </div>
                           </div>
 
-                          {/* Status badge */}
                           <div>
                             {task.status === 'DONE' && (
-                              <span className="status-pill status-done" style={{ fontSize: '0.72rem' }}>
-                                <CheckCircle2 size={12} /> Selesai
-                              </span>
+                              <span className="status-pill status-done"><CheckCircle2 size={12} /> 3/3 Selesai</span>
                             )}
                             {task.status === 'IN_PROGRESS' && (
-                              <span className="status-pill status-in-progress" style={{ fontSize: '0.72rem' }}>
-                                <Clock size={12} /> Draft
-                              </span>
+                              <span className="status-pill status-in-progress"><Clock size={12} /> {doneCount}/3 Sample</span>
                             )}
                             {task.status === 'NOT_STARTED' && (
-                              <span className="status-pill status-not-started" style={{ fontSize: '0.72rem' }}>
-                                <AlertCircle size={12} /> Belum Mulai
-                              </span>
+                              <span className="status-pill status-not-started"><AlertCircle size={12} /> Belum Mulai</span>
                             )}
                             {task.status === 'REVISION_NEEDED' && (
-                              <span className="status-pill status-revision" style={{ fontSize: '0.72rem' }}>
-                                <AlertTriangle size={12} /> Revisi Diminta
-                              </span>
+                              <span className="status-pill status-revision"><AlertTriangle size={12} /> Revisi Diminta</span>
                             )}
                           </div>
                         </div>
 
-                        {/* Inspector Assigned */}
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.8rem', color: 'var(--text-dim)', marginBottom: '0.75rem' }}>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                            <UserIcon size={13} color="var(--accent-cyan)" />
-                            <span>Petugas: <strong style={{ color: 'var(--text-main)' }}>{task.assigned_user_name}</strong></span>
-                          </div>
-
-                          {currentUser.role === 'admin' && task.status !== 'DONE' && (
+                        {/* Admin Action: Reassign or Delete */}
+                        {currentUser.role === 'admin' && task.status !== 'DONE' && (
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', fontSize: '0.78rem' }}>
                             <button
                               type="button"
-                              style={{
-                                background: 'transparent',
-                                border: 'none',
-                                color: '#38bdf8',
-                                fontSize: '0.75rem',
-                                cursor: 'pointer',
-                                textDecoration: 'underline',
-                              }}
                               onClick={() => {
                                 setReassigningTaskId(reassigningTaskId === task.id ? null : task.id);
                                 setNewInspectorId(task.assigned_user_id);
                               }}
+                              style={{ background: 'transparent', border: 'none', color: '#38bdf8', cursor: 'pointer', textDecoration: 'underline', padding: 0 }}
                             >
-                              Ganti Petugas
+                              Ganti Petugas...
                             </button>
-                          )}
-                        </div>
 
-                        {/* Reassign inline dropdown */}
+                            <button
+                              type="button"
+                              onClick={() => handleDeleteTask(task.id)}
+                              style={{ background: 'transparent', border: 'none', color: '#fb7185', cursor: 'pointer', textDecoration: 'underline', padding: 0 }}
+                            >
+                              Batalkan Penugasan
+                            </button>
+                          </div>
+                        )}
+
+                        {/* Inline Reassign Box */}
                         {reassigningTaskId === task.id && (
-                          <div style={{ background: 'rgba(56, 189, 248, 0.08)', border: '1px solid rgba(56, 189, 248, 0.25)', borderRadius: '6px', padding: '0.65rem', marginBottom: '0.75rem' }}>
-                            <label style={{ fontSize: '0.75rem', color: '#38bdf8', fontWeight: 600, display: 'block', marginBottom: '4px' }}>
+                          <div style={{ background: 'rgba(56, 189, 248, 0.08)', border: '1px solid rgba(56, 189, 248, 0.25)', borderRadius: '6px', padding: '0.75rem', marginBottom: '1rem' }}>
+                            <div style={{ fontSize: '0.75rem', color: '#38bdf8', fontWeight: 600, marginBottom: '6px' }}>
                               Alihkan Tugas ke Petugas Lain:
-                            </label>
+                            </div>
                             <div style={{ display: 'flex', gap: '6px' }}>
                               <select
                                 className="form-select"
@@ -1171,9 +1092,7 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
                                 style={{ fontSize: '0.8rem', padding: '0.35rem 0.65rem' }}
                               >
                                 {inspectors.map((ins) => (
-                                  <option key={ins.id} value={ins.id}>
-                                    {ins.name} ({ins.email})
-                                  </option>
+                                  <option key={ins.id} value={ins.id}>{ins.name} ({ins.email})</option>
                                 ))}
                               </select>
                               <button
@@ -1188,155 +1107,148 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
                           </div>
                         )}
 
-                        {/* Observational Payload Box if task is DONE */}
-                        {task.status === 'DONE' && record && (
-                          <div style={{ background: 'rgba(0, 0, 0, 0.3)', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '6px', padding: '0.75rem', marginBottom: '0.75rem' }}>
-                            <div style={{ fontSize: '0.75rem', color: '#38bdf8', fontWeight: 600, marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                              📊 Hasil Observasi Visual (Formulir {record.template_name || 'Penghitungan Orang'}):
-                            </div>
+                        {/* 3 SAMPLES BREAKDOWN */}
+                        <div>
+                          <div style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--accent-cyan)', marginBottom: '0.65rem', textTransform: 'uppercase' }}>
+                            Detail 3 Sample Evaluasi:
+                          </div>
 
-                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px', fontSize: '0.8rem', marginBottom: '6px' }}>
-                              <div style={{ background: 'rgba(255, 255, 255, 0.03)', padding: '5px 8px', borderRadius: '4px' }}>
-                                <span style={{ color: 'var(--text-dim)' }}>Laki-laki:</span> <strong>{p.male_count ?? 0}</strong>
-                              </div>
-                              <div style={{ background: 'rgba(255, 255, 255, 0.03)', padding: '5px 8px', borderRadius: '4px' }}>
-                                <span style={{ color: 'var(--text-dim)' }}>Perempuan:</span> <strong>{p.female_count ?? 0}</strong>
-                              </div>
-                              <div style={{ background: 'rgba(255, 255, 255, 0.03)', padding: '5px 8px', borderRadius: '4px', gridColumn: 'span 2' }}>
-                                <span style={{ color: 'var(--text-dim)' }}>Total Terhitung:</span> <strong style={{ color: '#34d399' }}>{p.total_people ?? 0} Orang</strong>
-                              </div>
-                            </div>
-
-                            {p.density_level && (
-                              <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginBottom: '4px' }}>
-                                <strong>Kepadatan:</strong> {p.density_level}
-                              </div>
-                            )}
-
-                            {record.notes && (
-                              <div style={{ fontSize: '0.78rem', color: 'var(--text-dim)', fontStyle: 'italic', marginTop: '4px' }}>
-                                "{record.notes}"
-                              </div>
-                            )}
-
-                            <div style={{ fontSize: '0.7rem', color: 'var(--text-dim)', marginTop: '6px', borderTop: '1px solid rgba(255, 255, 255, 0.05)', paddingTop: '4px' }}>
-                              Disubmit pada: {new Date(record.submitted_at).toLocaleString('id-ID')}
-                            </div>
-
-                            {/* Supervisor Review Status & Action Box */}
-                            <div style={{ marginTop: '0.75rem', paddingTop: '0.65rem', borderTop: '1px solid rgba(255, 255, 255, 0.08)' }}>
-                              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                <span style={{ fontSize: '0.75rem', color: 'var(--text-dim)' }}>Status Verifikasi Supervisor:</span>
-                                <span
-                                  style={{
-                                    fontSize: '0.72rem',
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+                            {samplesArr.map((sample, sIdx) => (
+                              <div
+                                key={sIdx}
+                                style={{
+                                  background: 'rgba(0, 0, 0, 0.25)',
+                                  border: `1px solid ${sample.is_completed ? 'rgba(16, 185, 129, 0.3)' : 'rgba(255, 255, 255, 0.08)'}`,
+                                  borderRadius: '6px',
+                                  padding: '0.75rem',
+                                }}
+                              >
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                                  <div style={{ fontWeight: 700, fontSize: '0.85rem', color: '#ffffff' }}>
+                                    Sample {sample.sample_number || sIdx + 1}
+                                  </div>
+                                  <span style={{
+                                    fontSize: '0.7rem',
+                                    padding: '1px 6px',
+                                    borderRadius: '3px',
                                     fontWeight: 700,
-                                    padding: '2px 8px',
-                                    borderRadius: '4px',
-                                    background:
-                                      record.review_status === 'APPROVED'
-                                        ? 'rgba(16, 185, 129, 0.15)'
-                                        : record.review_status === 'REVISION_REQUESTED'
-                                        ? 'rgba(244, 63, 94, 0.15)'
-                                        : 'rgba(245, 158, 11, 0.15)',
-                                    color:
-                                      record.review_status === 'APPROVED'
-                                        ? '#34d399'
-                                        : record.review_status === 'REVISION_REQUESTED'
-                                        ? '#fb7185'
-                                        : '#fbbf24',
-                                  }}
-                                >
-                                  {record.review_status === 'APPROVED'
-                                    ? '✓ DISETUJUI (APPROVED)'
-                                    : record.review_status === 'REVISION_REQUESTED'
-                                    ? '🔄 REVISI DIMINTA'
-                                    : '⏳ MENUNGGU VERIFIKASI'}
-                                </span>
-                              </div>
+                                    background: sample.is_completed ? 'rgba(16, 185, 129, 0.2)' : 'rgba(255, 255, 255, 0.05)',
+                                    color: sample.is_completed ? '#34d399' : 'var(--text-dim)',
+                                  }}>
+                                    {sample.is_completed ? '✓ Selesai Diceklis' : 'Belum Diceklis'}
+                                  </span>
+                                </div>
 
-                              {/* Supervisor Review Buttons */}
-                              {currentUser.role === 'supervisor' && (
-                                <div style={{ marginTop: '0.65rem' }}>
-                                  {reviewingTaskId !== task.id ? (
+                                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '6px', fontSize: '0.78rem' }}>
+                                  <div style={{ background: 'rgba(255, 255, 255, 0.02)', padding: '4px 6px', borderRadius: '4px' }}>
+                                    <span style={{ color: 'var(--text-dim)' }}>Traffic: </span>
+                                    <strong style={{ color: '#38bdf8' }}>{sample.traffic || 0} Orang</strong>
+                                  </div>
+
+                                  <div style={{ background: 'rgba(255, 255, 255, 0.02)', padding: '4px 6px', borderRadius: '4px' }}>
+                                    <span style={{ color: 'var(--text-dim)' }}>Gender: </span>
+                                    <span>P: {sample.male_count || 0} / W: {sample.female_count || 0}</span>
+                                  </div>
+
+                                  <div style={{ background: 'rgba(255, 255, 255, 0.02)', padding: '4px 6px', borderRadius: '4px', gridColumn: 'span 2' }}>
+                                    <span style={{ color: 'var(--text-dim)' }}>Usia (Age): </span>
+                                    <strong style={{ color: '#fbbf24' }}>{sample.dominant_age || 'Dewasa'}</strong>
+                                  </div>
+                                </div>
+
+                                {sample.actions && sample.actions.length > 0 && (
+                                  <div style={{ marginTop: '6px', display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
+                                    {sample.actions.map((act) => (
+                                      <span key={act} style={{ padding: '1px 6px', borderRadius: '3px', fontSize: '0.68rem', background: 'rgba(168, 85, 247, 0.15)', color: '#d8b4fe', border: '1px solid rgba(168, 85, 247, 0.3)' }}>
+                                        {act}
+                                      </span>
+                                    ))}
+                                  </div>
+                                )}
+
+                                {sample.notes && (
+                                  <div style={{ fontSize: '0.72rem', color: 'var(--text-dim)', fontStyle: 'italic', marginTop: '4px' }}>
+                                    "{sample.notes}"
+                                  </div>
+                                )}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Supervisor Review Action Box */}
+                        {task.status === 'DONE' && record && (
+                          <div style={{ marginTop: '1rem', paddingTop: '0.85rem', borderTop: '1px solid rgba(255, 255, 255, 0.08)' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+                              <span style={{ fontSize: '0.78rem', color: 'var(--text-dim)' }}>Verifikasi Supervisor:</span>
+                              <span style={{
+                                fontSize: '0.72rem',
+                                fontWeight: 700,
+                                padding: '2px 8px',
+                                borderRadius: '4px',
+                                background: record.review_status === 'APPROVED' ? 'rgba(16, 185, 129, 0.15)' : record.review_status === 'REVISION_REQUESTED' ? 'rgba(244, 63, 94, 0.15)' : 'rgba(245, 158, 11, 0.15)',
+                                color: record.review_status === 'APPROVED' ? '#34d399' : record.review_status === 'REVISION_REQUESTED' ? '#fb7185' : '#fbbf24',
+                              }}>
+                                {record.review_status === 'APPROVED' ? '✓ APPROVED' : record.review_status === 'REVISION_REQUESTED' ? '🔄 REVISI DIMINTA' : 'MENUNGGU REVIEW'}
+                              </span>
+                            </div>
+
+                            {currentUser.role === 'supervisor' && (
+                              <div>
+                                {reviewingTaskId !== task.id ? (
+                                  <div style={{ display: 'flex', gap: '6px' }}>
+                                    <button
+                                      type="button"
+                                      className="btn btn-primary"
+                                      style={{ padding: '0.35rem 0.75rem', fontSize: '0.75rem', background: '#10b981', borderColor: '#10b981' }}
+                                      onClick={() => handleReview(record.id, 'APPROVED')}
+                                      disabled={submittingReview}
+                                    >
+                                      <Check size={12} /> Setujui
+                                    </button>
+                                    <button
+                                      type="button"
+                                      className="btn btn-secondary"
+                                      style={{ padding: '0.35rem 0.75rem', fontSize: '0.75rem', color: '#fb7185', borderColor: 'rgba(244, 63, 94, 0.4)' }}
+                                      onClick={() => setReviewingTaskId(task.id)}
+                                    >
+                                      Minta Revisi...
+                                    </button>
+                                  </div>
+                                ) : (
+                                  <div style={{ background: 'rgba(244, 63, 94, 0.08)', padding: '0.65rem', borderRadius: '6px', border: '1px solid rgba(244, 63, 94, 0.25)' }}>
+                                    <textarea
+                                      className="form-input"
+                                      rows={2}
+                                      value={reviewNotes}
+                                      onChange={(e) => setReviewNotes(e.target.value)}
+                                      placeholder="Catatan alasan revisi ke petugas..."
+                                      style={{ fontSize: '0.78rem', marginBottom: '6px' }}
+                                    />
                                     <div style={{ display: 'flex', gap: '6px' }}>
                                       <button
                                         type="button"
                                         className="btn btn-primary"
-                                        style={{ padding: '0.35rem 0.75rem', fontSize: '0.75rem', background: '#10b981', borderColor: '#10b981' }}
-                                        onClick={() => handleReview(record.id, 'APPROVED')}
+                                        style={{ padding: '0.35rem 0.75rem', fontSize: '0.75rem', background: '#f43f5e', borderColor: '#f43f5e' }}
+                                        onClick={() => handleReview(record.id, 'REVISION_REQUESTED')}
                                         disabled={submittingReview}
                                       >
-                                        <Check size={12} /> Setujui
+                                        Kirim Revisi
                                       </button>
                                       <button
                                         type="button"
                                         className="btn btn-secondary"
-                                        style={{ padding: '0.35rem 0.75rem', fontSize: '0.75rem', color: '#fb7185', borderColor: 'rgba(244, 63, 94, 0.4)' }}
-                                        onClick={() => setReviewingTaskId(task.id)}
+                                        style={{ padding: '0.35rem 0.75rem', fontSize: '0.75rem' }}
+                                        onClick={() => setReviewingTaskId(null)}
                                       >
-                                        Minta Revisi...
+                                        Batal
                                       </button>
                                     </div>
-                                  ) : (
-                                    <div style={{ background: 'rgba(244, 63, 94, 0.08)', padding: '0.65rem', borderRadius: '6px', border: '1px solid rgba(244, 63, 94, 0.25)' }}>
-                                      <label style={{ fontSize: '0.75rem', color: '#fb7185', fontWeight: 600, display: 'block', marginBottom: '4px' }}>
-                                        Catatan Revisi untuk Petugas:
-                                      </label>
-                                      <textarea
-                                        className="form-input"
-                                        rows={2}
-                                        value={reviewNotes}
-                                        onChange={(e) => setReviewNotes(e.target.value)}
-                                        placeholder="Contoh: Tolong hitung ulang bagian perempuan di menit ke-15..."
-                                        style={{ fontSize: '0.8rem', marginBottom: '6px' }}
-                                      />
-                                      <div style={{ display: 'flex', gap: '6px' }}>
-                                        <button
-                                          type="button"
-                                          className="btn btn-primary"
-                                          style={{ padding: '0.35rem 0.75rem', fontSize: '0.75rem', background: '#f43f5e', borderColor: '#f43f5e' }}
-                                          onClick={() => handleReview(record.id, 'REVISION_REQUESTED')}
-                                          disabled={submittingReview}
-                                        >
-                                          Kirim Revisi
-                                        </button>
-                                        <button
-                                          type="button"
-                                          className="btn btn-secondary"
-                                          style={{ padding: '0.35rem 0.75rem', fontSize: '0.75rem' }}
-                                          onClick={() => setReviewingTaskId(null)}
-                                        >
-                                          Batal
-                                        </button>
-                                      </div>
-                                    </div>
-                                  )}
-                                </div>
-                              )}
-                            </div>
-                          </div>
-                        )}
-
-                        {/* Admin Action: Delete this slot if not started */}
-                        {currentUser.role === 'admin' && task.status !== 'DONE' && (
-                          <div style={{ display: 'flex', justifyContent: 'flex-end', borderTop: '1px solid rgba(255, 255, 255, 0.04)', paddingTop: '0.5rem', marginTop: '0.5rem' }}>
-                            <button
-                              type="button"
-                              style={{
-                                background: 'transparent',
-                                border: 'none',
-                                color: '#fb7185',
-                                fontSize: '0.72rem',
-                                cursor: 'pointer',
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '4px',
-                              }}
-                              onClick={() => handleDeleteTask(task.id)}
-                            >
-                              <Trash2 size={12} /> Batalkan Slot Ini
-                            </button>
+                                  </div>
+                                )}
+                              </div>
+                            )}
                           </div>
                         )}
                       </div>
@@ -1348,33 +1260,8 @@ export const WeeklyProgressMatrixView: React.FC<WeeklyProgressMatrixViewProps> =
 
             {/* Drawer Footer */}
             <div style={{ padding: '1rem 1.5rem', borderTop: '1px solid var(--border-subtle)', background: 'rgba(255, 255, 255, 0.02)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <span style={{ fontSize: '0.75rem', color: 'var(--text-dim)' }}>
-                  {selectedCell.camera.code} · {selectedCell.day.dateStr}
-                </span>
-                {currentUser.role === 'admin' && onNavigateToTasks && (
-                  <button
-                    type="button"
-                    style={{
-                      background: 'transparent',
-                      border: 'none',
-                      color: '#38bdf8',
-                      fontSize: '0.76rem',
-                      cursor: 'pointer',
-                      textDecoration: 'underline',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '4px',
-                      padding: 0,
-                    }}
-                    onClick={() => {
-                      setSelectedCell(null);
-                      onNavigateToTasks(selectedCell.camera.name);
-                    }}
-                  >
-                    Buka di Manajemen Tugas →
-                  </button>
-                )}
+              <div style={{ fontSize: '0.75rem', color: 'var(--text-dim)' }}>
+                {selectedCell.camera.code} · {selectedCell.day.dateStr}
               </div>
               <button
                 type="button"

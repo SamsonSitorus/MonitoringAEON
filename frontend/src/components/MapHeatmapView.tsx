@@ -14,7 +14,14 @@ import {
   X, 
   Filter,
   Eye,
-  Loader2
+  Loader2,
+  Camera,
+  Compass,
+  Video,
+  ShieldCheck,
+  Search,
+  SlidersHorizontal,
+  MapPin
 } from 'lucide-react';
 import { api } from '../services/api';
 import { 
@@ -23,6 +30,7 @@ import {
   HeatmapManifest, 
   ShelfMetadata, 
   ZoneMetadata,
+  CameraMapItem,
   User 
 } from '../types';
 
@@ -52,8 +60,16 @@ export const MapHeatmapView: React.FC<MapHeatmapViewProps> = () => {
   const [hoveredZone, setHoveredZone] = useState<ZoneMetadata | null>(null);
   const [mousePos, setMousePos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [filterArea, setFilterArea] = useState<string>('ALL');
-  const [activeTab, setActiveTab] = useState<'map' | 'rankings' | 'areas' | 'audit'>('map');
+  const [activeTab, setActiveTab] = useState<'map' | 'cameras' | 'rankings' | 'areas' | 'audit'>('map');
   const [shelfActionTab, setShelfActionTab] = useState<'actions' | 'ai'>('actions');
+
+  // Camera Map states
+  const [showCameras, setShowCameras] = useState<boolean>(true);
+  const [showCones, setShowCones] = useState<boolean>(true);
+  const [cameraStatusFilter, setCameraStatusFilter] = useState<'ALL' | 'verified' | 'planned'>('ALL');
+  const [cameraSearch, setCameraSearch] = useState<string>('');
+  const [selectedCameraId, setSelectedCameraId] = useState<string | null>(null);
+  const [hoveredCamera, setHoveredCamera] = useState<CameraMapItem | null>(null);
 
   const svgContainerRef = useRef<HTMLDivElement>(null);
 
@@ -163,6 +179,41 @@ export const MapHeatmapView: React.FC<MapHeatmapViewProps> = () => {
     if (!selectedZoneId || !layout) return null;
     return layout.zones.find((z) => z.id === selectedZoneId) || null;
   }, [selectedZoneId, layout]);
+
+  // Currently selected camera details
+  const selectedCamera = useMemo(() => {
+    if (!selectedCameraId || !layout || !layout.cameras) return null;
+    return layout.cameras.find((c) => c.id === selectedCameraId) || null;
+  }, [selectedCameraId, layout]);
+
+  // Filtered visible cameras
+  const visibleCameras = useMemo(() => {
+    if (!layout || !layout.cameras) return [];
+    return layout.cameras.filter((c) => {
+      if (filterArea !== 'ALL' && c.area !== filterArea) return false;
+      if (cameraStatusFilter !== 'ALL' && c.review_status !== cameraStatusFilter) return false;
+      if (cameraSearch.trim()) {
+        const q = cameraSearch.toLowerCase();
+        const mId = c.id.toLowerCase().includes(q);
+        const mLabel = c.label.toLowerCase().includes(q);
+        const mNote = c.note?.toLowerCase().includes(q);
+        const mArea = c.area.toLowerCase().includes(q);
+        const mZone = c.nearest_zone?.toLowerCase().includes(q);
+        if (!mId && !mLabel && !mNote && !mArea && !mZone) return false;
+      }
+      return true;
+    });
+  }, [layout, filterArea, cameraStatusFilter, cameraSearch]);
+
+  const verifiedCameraCount = useMemo(() => {
+    if (!layout?.cameras) return 0;
+    return layout.cameras.filter((c) => c.review_status === 'verified').length;
+  }, [layout]);
+
+  const plannedCameraCount = useMemo(() => {
+    if (!layout?.cameras) return 0;
+    return layout.cameras.filter((c) => c.review_status === 'planned').length;
+  }, [layout]);
 
   // Ranked Shelves for Top List
   const rankedShelves = useMemo(() => {
@@ -299,6 +350,22 @@ export const MapHeatmapView: React.FC<MapHeatmapViewProps> = () => {
           >
             <Layers size={15} />
             <span>Denah Visual Heatmap</span>
+          </button>
+          <button 
+            className={`btn ${activeTab === 'cameras' ? 'btn-primary' : 'btn-secondary'}`}
+            onClick={() => {
+              setActiveTab('cameras');
+              setShowCameras(true);
+              setShowCones(true);
+            }}
+            style={{ 
+              fontSize: '0.85rem',
+              background: activeTab === 'cameras' ? '#0ea5e9' : undefined,
+              borderColor: activeTab === 'cameras' ? '#0284c7' : undefined
+            }}
+          >
+            <Camera size={15} />
+            <span>Map Kamera CCTV ({layout?.total_cameras || 112})</span>
           </button>
           <button 
             className={`btn ${activeTab === 'rankings' ? 'btn-primary' : 'btn-secondary'}`}
@@ -508,9 +575,62 @@ export const MapHeatmapView: React.FC<MapHeatmapViewProps> = () => {
         </div>
       </div>
 
-      {/* 4. Main Heatmap Tab */}
-      {activeTab === 'map' && (
-        <div style={{ display: 'grid', gridTemplateColumns: (selectedShelf || selectedZone) ? '1fr 350px' : '1fr', gap: '1.25rem', alignItems: 'start' }}>
+      {/* 3B. Camera Map KPI Cards when activeTab === 'cameras' */}
+      {activeTab === 'cameras' && (
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
+          <div className="card" style={{ padding: '1rem 1.25rem', borderLeft: '4px solid #38bdf8' }}>
+            <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              Total Titik Kamera CCTV
+            </div>
+            <div style={{ fontSize: '1.7rem', fontWeight: 800, color: 'var(--text-main)', marginTop: '0.25rem' }}>
+              {layout?.total_cameras || 112} Titik
+            </div>
+            <div style={{ fontSize: '0.78rem', color: 'var(--text-dim)', marginTop: '0.2rem' }}>
+              Sumber: Konfigurasi cameras_export.json
+            </div>
+          </div>
+
+          <div className="card" style={{ padding: '1rem 1.25rem', borderLeft: '4px solid #10b981' }}>
+            <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              Kamera Terverifikasi
+            </div>
+            <div style={{ fontSize: '1.7rem', fontWeight: 800, color: '#34d399', marginTop: '0.25rem' }}>
+              {verifiedCameraCount} Titik
+            </div>
+            <div style={{ fontSize: '0.78rem', color: 'var(--text-dim)', marginTop: '0.2rem' }}>
+              Rekaman NVR & Homografi 2D Siap
+            </div>
+          </div>
+
+          <div className="card" style={{ padding: '1rem 1.25rem', borderLeft: '4px solid #f59e0b' }}>
+            <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              Kamera Terencana (Planning)
+            </div>
+            <div style={{ fontSize: '1.7rem', fontWeight: 800, color: '#fbbf24', marginTop: '0.25rem' }}>
+              {plannedCameraCount} Titik
+            </div>
+            <div style={{ fontSize: '0.78rem', color: 'var(--text-dim)', marginTop: '0.2rem' }}>
+              Area Mayora, Gondola Bawah & Tengah
+            </div>
+          </div>
+
+          <div className="card" style={{ padding: '1rem 1.25rem', borderLeft: '4px solid #8b5cf6' }}>
+            <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              Kalibrasi Homografi 2D
+            </div>
+            <div style={{ fontSize: '1.7rem', fontWeight: 800, color: '#c084fc', marginTop: '0.25rem' }}>
+              {layout?.cameras?.filter(c => c.has_homography).length || 59} Kamera
+            </div>
+            <div style={{ fontSize: '0.78rem', color: 'var(--text-dim)', marginTop: '0.2rem' }}>
+              Presisi Koordinat Piksel ke Denah Toko
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 4. Main Heatmap & Camera Map Tabs */}
+      {(activeTab === 'map' || activeTab === 'cameras') && (
+        <div style={{ display: 'grid', gridTemplateColumns: (selectedShelf || selectedZone || selectedCamera || activeTab === 'cameras') ? '1fr 360px' : '1fr', gap: '1.25rem', alignItems: 'start' }}>
           {/* Floor Map Interactive Canvas Container */}
           <div className="card" style={{ padding: '1.25rem', position: 'relative', overflow: 'hidden', minHeight: '640px', display: 'flex', flexDirection: 'column' }}>
             {/* Top Toolbar inside Canvas */}
@@ -599,6 +719,71 @@ export const MapHeatmapView: React.FC<MapHeatmapViewProps> = () => {
                   <option value="Supermarket">Area Supermarket (847 Shelf)</option>
                   <option value="Fresh Area">Area Fresh & Sayur/Buah (102 Shelf)</option>
                   <option value="Delica Area">Area Delica & Bakery (13 Zona)</option>
+                </select>
+              </div>
+
+              {/* Camera Layer Toggles */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', background: 'rgba(255, 255, 255, 0.03)', padding: '2px 6px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-subtle)' }}>
+                <button
+                  type="button"
+                  onClick={() => setShowCameras(!showCameras)}
+                  title="Tampilkan / Sembunyikan Titik Kamera CCTV"
+                  style={{
+                    background: showCameras ? 'rgba(14, 165, 233, 0.2)' : 'transparent',
+                    color: showCameras ? '#38bdf8' : 'var(--text-muted)',
+                    border: 'none',
+                    borderRadius: '4px',
+                    padding: '0.25rem 0.55rem',
+                    fontSize: '0.76rem',
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px',
+                  }}
+                >
+                  <Camera size={13} />
+                  <span>Kamera ({visibleCameras.length})</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setShowCones(!showCones)}
+                  title="Tampilkan / Sembunyikan Bidang Pandang (FOV Cone)"
+                  style={{
+                    background: showCones ? 'rgba(16, 185, 129, 0.2)' : 'transparent',
+                    color: showCones ? '#34d399' : 'var(--text-muted)',
+                    border: 'none',
+                    borderRadius: '4px',
+                    padding: '0.25rem 0.55rem',
+                    fontSize: '0.76rem',
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px',
+                  }}
+                >
+                  <Compass size={13} />
+                  <span>FOV Cone</span>
+                </button>
+
+                {/* Camera Status Quick Filter */}
+                <select
+                  value={cameraStatusFilter}
+                  onChange={(e) => setCameraStatusFilter(e.target.value as any)}
+                  style={{
+                    background: 'transparent',
+                    color: 'var(--text-main)',
+                    border: 'none',
+                    fontSize: '0.74rem',
+                    cursor: 'pointer',
+                    outline: 'none',
+                    padding: '0.2rem 0.3rem',
+                  }}
+                >
+                  <option value="ALL">Semua ({layout?.total_cameras || 112})</option>
+                  <option value="verified">Terverifikasi ({verifiedCameraCount})</option>
+                  <option value="planned">Terencana ({plannedCameraCount})</option>
                 </select>
               </div>
 
@@ -757,6 +942,136 @@ export const MapHeatmapView: React.FC<MapHeatmapViewProps> = () => {
                     })}
                   </g>
 
+                  {/* Layer 2.5: Camera FOV Cones (Visual Coverage) */}
+                  {(showCones || activeTab === 'cameras') && (
+                    <g id="layer-camera-fovs" style={{ pointerEvents: 'none' }}>
+                      {visibleCameras.map((cam) => {
+                        const isSelected = selectedCameraId === cam.id;
+                        const isHovered = hoveredCamera?.id === cam.id;
+                        const isVerified = cam.review_status === 'verified';
+                        
+                        const fillColor = isVerified
+                          ? (isSelected || isHovered ? 'rgba(16, 185, 129, 0.35)' : 'rgba(16, 185, 129, 0.14)')
+                          : (isSelected || isHovered ? 'rgba(245, 158, 11, 0.35)' : 'rgba(245, 158, 11, 0.11)');
+                        
+                        const strokeColor = isVerified
+                          ? (isSelected || isHovered ? '#34d399' : 'rgba(52, 211, 153, 0.65)')
+                          : (isSelected || isHovered ? '#fbbf24' : 'rgba(251, 191, 36, 0.55)');
+
+                        return (
+                          <path
+                            key={`fov-${cam.id}`}
+                            d={cam.fov_path}
+                            fill={fillColor}
+                            stroke={strokeColor}
+                            strokeWidth={isSelected ? 3.5 : isHovered ? 2.5 : 1}
+                            strokeDasharray={isVerified ? 'none' : '4 3'}
+                            style={{ transition: 'all 0.15s ease' }}
+                          />
+                        );
+                      })}
+                    </g>
+                  )}
+
+                  {/* Layer 2.6: CCTV Camera Pins & Direction Vectors */}
+                  {(showCameras || activeTab === 'cameras') && (
+                    <g id="layer-camera-pins">
+                      {visibleCameras.map((cam) => {
+                        const isSelected = selectedCameraId === cam.id;
+                        const isHovered = hoveredCamera?.id === cam.id;
+                        const isVerified = cam.review_status === 'verified';
+                        const pinColor = isVerified ? '#10b981' : '#f59e0b';
+                        const sx = cam.svg_pos[0];
+                        const sy = cam.svg_pos[1];
+                        
+                        // Vector arrow for heading direction
+                        const rad = (cam.heading_deg * Math.PI) / 180;
+                        const arrowLen = isSelected ? 22 : 16;
+                        const ax = sx + arrowLen * Math.cos(rad);
+                        const ay = sy + arrowLen * Math.sin(rad);
+
+                        return (
+                          <g
+                            key={`cam-${cam.id}`}
+                            style={{ cursor: 'pointer' }}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setSelectedCameraId(cam.id);
+                              setSelectedShelfId(null);
+                              setSelectedZoneId(null);
+                            }}
+                            onMouseEnter={() => setHoveredCamera(cam)}
+                            onMouseLeave={() => setHoveredCamera(null)}
+                          >
+                            {/* Direction Pointer Line */}
+                            <line
+                              x1={sx}
+                              y1={sy}
+                              x2={ax}
+                              y2={ay}
+                              stroke={pinColor}
+                              strokeWidth={isSelected ? 3.5 : 2.2}
+                              strokeLinecap="round"
+                            />
+                            <circle
+                              cx={ax}
+                              cy={ay}
+                              r={isSelected ? 3.5 : 2.5}
+                              fill={pinColor}
+                            />
+
+                            {/* Halo Ring when hovered or selected */}
+                            {(isSelected || isHovered) && (
+                              <circle
+                                cx={sx}
+                                cy={sy}
+                                r={18}
+                                fill={isVerified ? 'rgba(16, 185, 129, 0.25)' : 'rgba(245, 158, 11, 0.25)'}
+                                stroke={pinColor}
+                                strokeWidth={2}
+                              />
+                            )}
+
+                            {/* Main Camera Pin Circle */}
+                            <circle
+                              cx={sx}
+                              cy={sy}
+                              r={isSelected ? 8.5 : 6}
+                              fill={pinColor}
+                              stroke="#ffffff"
+                              strokeWidth={1.5}
+                            />
+                            <circle
+                              cx={sx}
+                              cy={sy}
+                              r={2}
+                              fill="#ffffff"
+                            />
+
+                            {/* Camera Tag Label */}
+                            {(zoomLevel >= 1.3 || isSelected || isHovered || activeTab === 'cameras') && (
+                              <text
+                                x={sx}
+                                y={sy - 10}
+                                textAnchor="middle"
+                                fill="#ffffff"
+                                fontSize={isSelected ? 11 : 9}
+                                fontWeight={800}
+                                style={{
+                                  textShadow: '0 1px 4px rgba(0,0,0,0.95), 0 0 2px #000',
+                                  pointerEvents: 'none',
+                                  fontFamily: 'var(--font-mono, monospace)',
+                                }}
+                              >
+                                {cam.id.length > 15 ? cam.id.slice(0, 14) + '..' : cam.id}
+                              </text>
+                            )}
+                          </g>
+                        );
+                      })}
+                    </g>
+                  )}
+
                   {/* Layer 3: Selected Shelf Glow Pin */}
                   {selectedShelf && (
                     <g id="selected-shelf-indicator">
@@ -891,6 +1206,52 @@ export const MapHeatmapView: React.FC<MapHeatmapViewProps> = () => {
                   </div>
                   <div style={{ fontSize: '0.75rem', color: 'var(--text-dim)' }}>
                     Luas: {hoveredZone.area} m² • Klik untuk melihat detail zona
+                  </div>
+                </div>
+              )}
+
+              {/* Floating Tooltip when hovering over a CCTV Camera */}
+              {hoveredCamera && (
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: mousePos.y + 15,
+                    left: mousePos.x + 15,
+                    background: 'rgba(15, 23, 42, 0.96)',
+                    border: `1px solid ${hoveredCamera.review_status === 'verified' ? '#10b981' : '#f59e0b'}`,
+                    boxShadow: '0 8px 24px rgba(0,0,0,0.65)',
+                    backdropFilter: 'blur(8px)',
+                    padding: '0.65rem 0.9rem',
+                    borderRadius: 'var(--radius-sm)',
+                    pointerEvents: 'none',
+                    zIndex: 60,
+                    maxWidth: '280px',
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px', marginBottom: '4px' }}>
+                    <span style={{ fontSize: '0.82rem', color: '#ffffff', fontWeight: 700 }}>
+                      📷 {hoveredCamera.label}
+                    </span>
+                    <span
+                      style={{
+                        fontSize: '0.68rem',
+                        fontWeight: 700,
+                        padding: '2px 6px',
+                        borderRadius: '4px',
+                        background: hoveredCamera.review_status === 'verified' ? 'rgba(16, 185, 129, 0.2)' : 'rgba(245, 158, 11, 0.2)',
+                        color: hoveredCamera.review_status === 'verified' ? '#34d399' : '#fbbf24',
+                      }}
+                    >
+                      {hoveredCamera.review_status === 'verified' ? 'TERVERIFIKASI' : 'TERENCANA'}
+                    </span>
+                  </div>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                    {hoveredCamera.area} • {hoveredCamera.nearest_zone}
+                  </div>
+                  <div style={{ fontSize: '0.73rem', color: 'var(--text-dim)', marginTop: '4px', display: 'flex', gap: '8px' }}>
+                    <span>Arah: <strong>{hoveredCamera.heading_deg}°</strong></span>
+                    <span>FOV: <strong>{hoveredCamera.fov_deg}°</strong></span>
+                    <span>Jangkauan: <strong>{hoveredCamera.range_m}m</strong></span>
                   </div>
                 </div>
               )}
@@ -1221,6 +1582,264 @@ export const MapHeatmapView: React.FC<MapHeatmapViewProps> = () => {
                     Pada dataset Parquet acuan 1–17 Oktober 2026, kamera CCTV AI berfokus pada deteksi interaksi shopper di 949 gondola rak (Supermarket & Fresh Area).
                   </div>
                 </div>
+              </div>
+            </div>
+          )}
+
+          {/* 6C. Selected CCTV Camera Detail Panel */}
+          {selectedCamera && !selectedShelf && !selectedZone && (
+            <div className="card" style={{ padding: '1.25rem', position: 'sticky', top: '5rem', background: 'var(--bg-card)', border: `1px solid ${selectedCamera.review_status === 'verified' ? '#10b981' : '#f59e0b'}` }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.85rem' }}>
+                <div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <span
+                      style={{
+                        padding: '2px 8px',
+                        borderRadius: '4px',
+                        fontSize: '0.7rem',
+                        fontWeight: 700,
+                        background: selectedCamera.review_status === 'verified' ? 'rgba(16, 185, 129, 0.2)' : 'rgba(245, 158, 11, 0.2)',
+                        color: selectedCamera.review_status === 'verified' ? '#34d399' : '#fbbf24',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '4px',
+                      }}
+                    >
+                      {selectedCamera.review_status === 'verified' ? <ShieldCheck size={12} /> : <Compass size={12} />}
+                      {selectedCamera.review_status === 'verified' ? 'CCTV TERVERIFIKASI' : 'CCTV TERENCANA'}
+                    </span>
+                    <span style={{ fontSize: '0.72rem', color: 'var(--text-dim)' }}>
+                      {selectedCamera.area}
+                    </span>
+                  </div>
+                  <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-main)', marginTop: '0.4rem', marginBottom: '0.2rem' }}>
+                    {selectedCamera.label}
+                  </h3>
+                  <div style={{ fontSize: '0.78rem', color: 'var(--accent-cyan)', fontFamily: 'var(--font-mono)' }}>
+                    ID: {selectedCamera.id}
+                  </div>
+                </div>
+                <button
+                  className="btn btn-secondary"
+                  onClick={() => setSelectedCameraId(null)}
+                  style={{ padding: '0.25rem 0.5rem', fontSize: '0.75rem' }}
+                >
+                  <X size={14} />
+                </button>
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+                {/* Location Specs */}
+                <div style={{ padding: '0.75rem', background: 'var(--bg-input)', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-subtle)' }}>
+                  <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600, marginBottom: '6px' }}>
+                    Lokasi Fisik Denah
+                  </div>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', fontSize: '0.78rem' }}>
+                    <div>
+                      <span style={{ color: 'var(--text-dim)' }}>Zona Terdekat:</span>
+                      <div style={{ fontWeight: 600, color: '#ffffff' }}>{selectedCamera.nearest_zone || '-'}</div>
+                    </div>
+                    <div>
+                      <span style={{ color: 'var(--text-dim)' }}>Rak Terdekat:</span>
+                      <div style={{ fontWeight: 600, color: '#ffffff' }}>{selectedCamera.nearest_shelf || '-'}</div>
+                    </div>
+                    <div>
+                      <span style={{ color: 'var(--text-dim)' }}>Koordinat CAD:</span>
+                      <div style={{ fontFamily: 'var(--font-mono)', color: 'var(--accent-cyan)' }}>
+                        X: {selectedCamera.cad_pos[0]}m, Y: {selectedCamera.cad_pos[1]}m
+                      </div>
+                    </div>
+                    <div>
+                      <span style={{ color: 'var(--text-dim)' }}>Pixel Denah:</span>
+                      <div style={{ fontFamily: 'var(--font-mono)', color: 'var(--text-muted)' }}>
+                        [{selectedCamera.raw_pos[0]}, {selectedCamera.raw_pos[1]}]
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Optics & Lens Specs */}
+                <div style={{ padding: '0.75rem', background: 'var(--bg-input)', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-subtle)' }}>
+                  <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600, marginBottom: '6px' }}>
+                    Spesifikasi Lensa & Cakupan FOV
+                  </div>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', fontSize: '0.78rem' }}>
+                    <div>
+                      <span style={{ color: 'var(--text-dim)' }}>Arah Hadap (Heading):</span>
+                      <div style={{ fontWeight: 700, color: '#ffffff', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                        <Compass size={14} color="#38bdf8" />
+                        {selectedCamera.heading_deg}°
+                      </div>
+                    </div>
+                    <div>
+                      <span style={{ color: 'var(--text-dim)' }}>Sudut Pandang (FOV):</span>
+                      <div style={{ fontWeight: 700, color: '#ffffff' }}>{selectedCamera.fov_deg}°</div>
+                    </div>
+                    <div>
+                      <span style={{ color: 'var(--text-dim)' }}>Jangkauan Efektif:</span>
+                      <div style={{ fontWeight: 700, color: '#34d399' }}>{selectedCamera.range_m} meter</div>
+                    </div>
+                    <div>
+                      <span style={{ color: 'var(--text-dim)' }}>Radius SVG:</span>
+                      <div style={{ fontFamily: 'var(--font-mono)', color: 'var(--text-muted)' }}>{selectedCamera.range_svg} px</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* NVR Note & Recording */}
+                {selectedCamera.note && (
+                  <div style={{ padding: '0.65rem 0.75rem', background: 'rgba(56, 189, 248, 0.08)', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(56, 189, 248, 0.25)', fontSize: '0.76rem', color: 'var(--text-muted)' }}>
+                    <div style={{ fontWeight: 600, color: '#38bdf8', marginBottom: '2px' }}>Koneksi NVR:</div>
+                    {selectedCamera.note}
+                  </div>
+                )}
+
+                {/* Homography & Video Stats */}
+                <div style={{ display: 'flex', gap: '8px' }}>
+                  <div style={{ flex: 1, padding: '0.6rem', background: 'var(--bg-input)', borderRadius: 'var(--radius-sm)', textAlign: 'center' }}>
+                    <div style={{ fontSize: '0.7rem', color: 'var(--text-dim)' }}>Video CCTV</div>
+                    <div style={{ fontSize: '1.1rem', fontWeight: 800, color: '#ffffff', marginTop: '2px' }}>
+                      {selectedCamera.video_count} File
+                    </div>
+                  </div>
+                  <div style={{ flex: 1, padding: '0.6rem', background: 'var(--bg-input)', borderRadius: 'var(--radius-sm)', textAlign: 'center' }}>
+                    <div style={{ fontSize: '0.7rem', color: 'var(--text-dim)' }}>Homografi 2D</div>
+                    <div style={{ fontSize: '1.1rem', fontWeight: 800, color: selectedCamera.has_homography ? '#34d399' : '#94a3b8', marginTop: '2px' }}>
+                      {selectedCamera.has_homography ? `${selectedCamera.homography_pairs} Pasang` : 'Belum'}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Quick Action Button: Center camera */}
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={() => {
+                    const canvasW = 2400;
+                    const canvasH = 2160;
+                    const cx = selectedCamera.svg_pos[0];
+                    const cy = selectedCamera.svg_pos[1];
+                    setZoomLevel(2.2);
+                    setPanOffset({
+                      x: -(cx - canvasW / 2) * 2.2,
+                      y: -(cy - canvasH / 2) * 2.2,
+                    });
+                  }}
+                  style={{ width: '100%', padding: '0.55rem', fontSize: '0.82rem', fontWeight: 700 }}
+                >
+                  <MapPin size={14} /> Pusatkan Kamera di Denah
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* 6D. Camera Directory List (when activeTab === 'cameras' and no camera is selected) */}
+          {activeTab === 'cameras' && !selectedCamera && !selectedShelf && !selectedZone && (
+            <div className="card" style={{ padding: '1.25rem', position: 'sticky', top: '5rem', background: 'var(--bg-card)', border: '1px solid var(--border-subtle)', maxHeight: 'calc(100vh - 7rem)', display: 'flex', flexDirection: 'column' }}>
+              <div style={{ marginBottom: '1rem' }}>
+                <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--text-main)', margin: '0 0 0.35rem 0' }}>
+                  Direktori Titik Kamera CCTV
+                </h3>
+                <p style={{ fontSize: '0.76rem', color: 'var(--text-muted)', margin: 0 }}>
+                  Menampilkan {visibleCameras.length} dari {layout?.total_cameras || 112} kamera. Klik kamera untuk menyorot di denah.
+                </p>
+              </div>
+
+              {/* Search input in directory */}
+              <div style={{ position: 'relative', marginBottom: '0.85rem' }}>
+                <Search size={14} style={{ position: 'absolute', left: 10, top: 10, color: 'var(--text-dim)' }} />
+                <input
+                  type="text"
+                  placeholder="Cari ID, nama rak, NVR..."
+                  value={cameraSearch}
+                  onChange={(e) => setCameraSearch(e.target.value)}
+                  style={{
+                    width: '100%',
+                    background: 'var(--bg-input)',
+                    border: '1px solid var(--border-subtle)',
+                    borderRadius: 'var(--radius-sm)',
+                    padding: '0.45rem 2rem 0.45rem 2rem',
+                    fontSize: '0.8rem',
+                    color: 'var(--text-main)',
+                    outline: 'none',
+                  }}
+                />
+                {cameraSearch && (
+                  <button
+                    onClick={() => setCameraSearch('')}
+                    style={{ position: 'absolute', right: 8, top: 8, background: 'transparent', border: 'none', color: 'var(--text-dim)', cursor: 'pointer' }}
+                  >
+                    <X size={14} />
+                  </button>
+                )}
+              </div>
+
+              {/* Scrollable list */}
+              <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '6px', paddingRight: '4px' }}>
+                {visibleCameras.map((cam) => {
+                  const isVer = cam.review_status === 'verified';
+                  return (
+                    <div
+                      key={`dir-cam-${cam.id}`}
+                      onClick={() => {
+                        setSelectedCameraId(cam.id);
+                        const canvasW = 2400;
+                        const canvasH = 2160;
+                        const cx = cam.svg_pos[0];
+                        const cy = cam.svg_pos[1];
+                        setZoomLevel(2.0);
+                        setPanOffset({
+                          x: -(cx - canvasW / 2) * 2.0,
+                          y: -(cy - canvasH / 2) * 2.0,
+                        });
+                      }}
+                      style={{
+                        padding: '0.6rem 0.75rem',
+                        borderRadius: 'var(--radius-sm)',
+                        background: 'var(--bg-card-subtle)',
+                        border: '1px solid var(--border-subtle)',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        gap: '8px',
+                        transition: 'all 0.15s ease',
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.borderColor = isVer ? '#10b981' : '#f59e0b';
+                        e.currentTarget.style.background = isVer ? 'rgba(16, 185, 129, 0.08)' : 'rgba(245, 158, 11, 0.08)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.borderColor = 'var(--border-subtle)';
+                        e.currentTarget.style.background = 'var(--bg-card-subtle)';
+                      }}
+                    >
+                      <div style={{ overflow: 'hidden' }}>
+                        <div style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-main)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                          {cam.label}
+                        </div>
+                        <div style={{ fontSize: '0.72rem', color: 'var(--text-dim)', display: 'flex', gap: '6px', marginTop: '2px' }}>
+                          <span>{cam.area}</span>
+                          <span>•</span>
+                          <span>FOV {cam.fov_deg}° ({cam.range_m}m)</span>
+                        </div>
+                      </div>
+                      <span
+                        style={{
+                          fontSize: '0.68rem',
+                          fontWeight: 700,
+                          padding: '2px 6px',
+                          borderRadius: '4px',
+                          background: isVer ? 'rgba(16, 185, 129, 0.2)' : 'rgba(245, 158, 11, 0.2)',
+                          color: isVer ? '#34d399' : '#fbbf24',
+                          whiteSpace: 'nowrap',
+                        }}
+                      >
+                        {isVer ? 'ONLINE' : 'PLAN'}
+                      </span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           )}
